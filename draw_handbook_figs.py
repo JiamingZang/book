@@ -1135,6 +1135,60 @@ def fig_theta_decay():
     savefig(fig, "fig_p10_theta.png")
 
 
+# ---------------------------------------------------------------- v4：10.4 希腊字母 Delta/Gamma
+import math as _math
+
+
+def _norm_cdf(x):
+    return 0.5 * (1 + _math.erf(x / _math.sqrt(2)))
+
+
+def _norm_pdf(x):
+    return _math.exp(-x * x / 2) / _math.sqrt(2 * _math.pi)
+
+
+def fig_greek_curves():
+    """10.4 希腊字母直觉：Call Delta 的 S 曲线 + Gamma 钟形（平值附近最剧烈）"""
+    K, sigma, T = 100.0, 0.30, 30.0 / 365.0
+    s = np.linspace(80, 120, 300)
+    d1 = (np.log(s / K) + 0.5 * sigma * sigma * T) / (sigma * _math.sqrt(T))
+    delta = np.array([_norm_cdf(x) for x in d1])
+    gamma = np.array([_norm_pdf(x) for x in d1]) / (s * sigma * _math.sqrt(T))
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12.5, 5.4))
+    # 左：Delta S 曲线
+    ax1.plot(s, delta, color=TEAL, lw=2.4)
+    ax1.axhline(0.5, color=GRAY, ls=":", lw=1.0)
+    ax1.axvline(K, color=GRAY, ls=":", lw=1.0)
+    ax1.annotate("平值：Delta ≈ 0.5\n（约等于持有半单位标的）", xy=(K, 0.5), xytext=(86, 0.62),
+                 fontsize=9.5, color=DARK, arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.0))
+    ax1.annotate("深度实值：Delta → 1\n（越来越像直接持有标的）", xy=(118, delta[-1]), xytext=(108, 0.82),
+                 fontsize=9.5, color=UP, arrowprops=dict(arrowstyle="->", color=UP, lw=1.0))
+    ax1.annotate("深度虚值：Delta → 0\n（方向几乎不影响它）", xy=(82, delta[0]), xytext=(83, 0.16),
+                 fontsize=9.5, color=DOWN, arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.0))
+    ax1.set_title("Delta：我的方向敞口有多大\n——标的每动 1 点，期权动多少", fontsize=12, color=DARK)
+    ax1.set_xlabel("标的价格")
+    ax1.set_ylabel("Delta")
+    ax1.set_xlim(80, 120)
+    ax1.set_ylim(0, 1.05)
+    ax1.grid(alpha=0.3)
+    # 右：Gamma 钟形
+    ax2.plot(s, gamma, color=ORANGE, lw=2.4)
+    ax2.axvline(K, color=GRAY, ls=":", lw=1.0)
+    ax2.annotate("平值附近：Gamma 最大\n——Delta 变化最剧烈：\n方向对赚得快，方向错亏得快", xy=(K, gamma.max()), xytext=(93, gamma.max() * 0.62),
+                 fontsize=9.5, color=DARK, arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.0))
+    ax2.annotate("深实值 / 深虚值：Gamma ≈ 0\n（Delta 几乎不再变化）", xy=(118, gamma[-1]), xytext=(104, gamma.max() * 0.25),
+                 fontsize=9.5, color=GRAY, arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.0))
+    ax2.set_title("Gamma：Delta 变得有多快\n——敞口变化的加速度", fontsize=12, color=DARK)
+    ax2.set_xlabel("标的价格")
+    ax2.set_ylabel("Gamma")
+    ax2.set_xlim(80, 120)
+    ax2.grid(alpha=0.3)
+    fig.suptitle("希腊字母的直觉：Delta 回答“方向敞口多大”，Gamma 回答“它变得多快”——两者都在平值附近最敏感",
+                 fontsize=12.5, color=DARK, y=1.0)
+    savefig(fig, "fig_p10_greek.png")
+
+
 # ---------------------------------------------------------------- 图 1-2（太妃 L01A）
 def fig_p1_equilibrium():
     """1.1 均衡价位理论：市场目的=找到公平价格、促成最多成交；<20%时刻处于突破"""
@@ -1431,6 +1485,7 @@ def main():
     fig_risk_curve()
     fig_call_put()
     fig_theta_decay()
+    fig_greek_curves()
     # ---------- v5 新增（第1/3/4/7章补图 + 太妃PPT概念） ----------
     fig_p1_equilibrium()
     fig_p1_leverage()
