@@ -1451,6 +1451,7 @@ def main():
     fig_p4_channel_types()
     fig_p4_ff_20gb()
     fig_p4_state_tree()
+    fig_p4_channel_evolve()
     print("全部完成")
 
 
@@ -1597,6 +1598,54 @@ def fig_p4_state_tree():
     style_ax(ax, xlim=(0, 18.6), ylim=(0, 9.5))
     ax.set_title("状态判定树：通道与区间的唯一入口——每一步都有硬条件，斜率/视觉宽度只作辅助", fontsize=12.5, color=DARK)
     savefig(fig, "fig_p4_state_tree.png")
+
+
+# ---------------------------------------------------------------- 图 4-11（PA_Agent 通道生命周期 + 画线四方法）
+def fig_p4_channel_evolve():
+    """4.21 通道演变五阶段 + 通道线四种画法"""
+    fig, axes = plt.subplots(1, 2, figsize=(15.5, 6.4))
+    # 左：上涨通道五阶段演变
+    ax = axes[0]
+    k = [(0, 100, 102, 99.5, 101.5), (1, 101.5, 104, 101, 103.5), (2, 103.5, 106, 103, 105.5), (3, 105.5, 108, 105, 107.5),  # ①尖峰
+         (4, 107.5, 109.5, 105.8, 108.6), (5, 108.6, 111, 107.2, 110.2), (6, 110.2, 112.5, 108.6, 111.8), (7, 111.8, 114, 110.5, 113.4),  # ②扩展
+         (8, 113.4, 116.5, 112.8, 115.8), (9, 115.8, 117.5, 113.4, 114.5), (10, 114.5, 118.5, 113.9, 117.8), (11, 117.8, 119.5, 115.8, 116.8), (12, 116.8, 121, 116.2, 120.2),  # ③台阶
+         (13, 120.2, 122.3, 119.2, 121.5), (14, 121.5, 123.2, 120.5, 122.6), (15, 122.6, 124, 121.8, 123.5), (16, 123.5, 124.7, 122.6, 124),  # ④收缩
+         (17, 124, 125, 121.8, 122.3), (18, 122.3, 123.8, 121.5, 123.2), (19, 123.2, 124.2, 120.9, 121.4), (20, 121.4, 122.6, 120.2, 120.8)]  # ⑤区间
+    for x, o, h, l, c in k:
+        candle(ax, x, o, h, l, c)
+    ax.plot([3, 18], [105, 105 + 1.56 * 15], color=GRAY, ls="--", lw=1.2)  # 趋势线（经过 x3/x8 低点）
+    ax.plot([10, 13], [117.8, 120.2], color=ORANGE, lw=1.0)  # 通道线上段示意
+    mark(ax, 1.6, 109.5, "① 窄通道/尖峰\n连续大阳、几乎不回撤", color=UP, fs=9, box=True)
+    mark(ax, 5.6, 115.6, "② 通道扩展\n回撤加大", color=UP, fs=9, box=True)
+    mark(ax, 10.4, 123.5, "③ 宽通道/台阶\n多空更均衡", color=ORANGE, fs=9, box=True)
+    mark(ax, 15, 126.5, "④ 收缩台阶\n推力递减=动能衰退", color=DOWN, fs=9, box=True)
+    mark(ax, 19.4, 118, "⑤ 区间\n跌破趋势线", color=DOWN, fs=9, box=True)
+    mark(ax, 10.5, 101.5, "趋势线（动态支撑）\n刺穿后重画：新线更水平=动能衰减\n连续两次重画=即将突破", color=GRAY, fs=8.5, box=True, va="top")
+    mark(ax, 11, 130.5, "上边界=空头建仓区（仅诊断，不逆势）", color=DOWN, fs=9.5, box=True)
+    style_ax(ax, xlim=(-0.8, 21.5), ylim=(95, 133))
+    ax.set_title("① 上涨通道演变五阶段：尖峰 → 扩展 → 台阶 → 收缩 → 区间", fontsize=11.5, color=DARK)
+    # 右：通道线四种画法
+    ax = axes[1]
+    hx = [1, 3, 5, 7, 9, 11, 13]
+    hy = [10.5, 13, 15.2, 17, 18.4, 19.4, 20]
+    lx = [0, 2, 4, 6, 8, 10, 12]
+    ly = [8, 10.3, 12.4, 14.3, 15.9, 17.2, 18.2]
+    ax.plot(lx, ly, color=GRAY, lw=1.6)
+    ax.plot(hx, hy, color=DARK, lw=0.8, ls=":")
+    ax.plot(hx, hy, "o", color=DARK, ms=4.5, zorder=5)
+    ax.plot(lx, ly, "s", color=GRAY, ms=3.5, zorder=5)
+    ax.plot([0, 13], [8.95, 20], color=TEAL, lw=1.8, label="① 平行线法（候选期首选）")
+    ax.plot([0, 13], [16.1, 20], color=ORANGE, lw=1.8, ls="--", label="② 波段点法（扩张期）")
+    ax.plot([0, 13], [11.7, 20.8], color="#9c27b0", lw=1.8, ls="-.", label="③ 最佳拟合线法（成熟期）")
+    ax.plot([0, 13], [10.95, 21.0], color=DOWN, lw=1.8, ls=":", label="④ 平行投影法（异常刺穿）")
+    mark(ax, 10.4, 21.9, "末端高点走平 →\n平行线法失灵，切换画法", color=DARK, fs=9, box=True, ha="left")
+    mark(ax, 6.7, 7.1, "趋势线（低点连线）", color=GRAY, fs=9)
+    mark(ax, 8.2, 14.2, "离趋势线最远高点\n（平行投影基准）", color=DOWN, fs=8, ha="left")
+    ax.legend(fontsize=8.5, loc="lower left", framealpha=0.9)
+    style_ax(ax, xlim=(-0.6, 15), ylim=(5.5, 24))
+    ax.set_title("② 通道线四种画法：随通道阶段演进切换（避免主观性）", fontsize=11.5, color=DARK)
+    fig.suptitle("通道生命周期与画线方法（Al Brooks）：通道=倾斜交易区间；上涨通道=空头旗形——上边界逆势仅诊断，顺势只做回撤；画法随阶段演进，多画法交叉验证", fontsize=12, color=DARK, y=0.99)
+    savefig(fig, "fig_p4_channel_evolve.png")
 
 
 # ---------------------------------------------------------------- 图 3-11（PA_Agent 文件14 楔形回撤 vs 楔形反转）
