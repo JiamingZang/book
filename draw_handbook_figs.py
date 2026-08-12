@@ -1444,11 +1444,13 @@ def main():
     # ---------- v6 新增（第2章 K线信号字典 + 铁丝网，PA_Agent 提示词库） ----------
     fig_p2_signal_bars()
     fig_p2_barbwire()
+    fig_p2_checklist()
     fig_p3_wedge_contrast()
     fig_p3_h1h2()
     fig_p4_mm_four()
     fig_p4_channel_types()
     fig_p4_ff_20gb()
+    fig_p4_state_tree()
     print("全部完成")
 
 
@@ -1533,6 +1535,68 @@ def fig_p2_barbwire():
     mark(ax, 16.4, 102.6, "自检咒语：\n紧凑横向整理？\n来回穿梭？\n边界几乎重叠？", color=DARK, fs=9.5, box=True, ha="left")
     mark(ax, 3, 97.6, "机会在铁丝网之后：突破失败（失败的失败）\n极值附近短 K 线刮头皮（仅边界）\n铁丝网后尖峰级突破 + 跟随", color=UP, fs=9.5, box=True, va="top", ha="left")
     savefig(fig, "fig_p2_barbwire.png")
+
+
+# ---------------------------------------------------------------- 图 2-9（PA_Agent 逐棒检查单）
+def fig_p2_checklist():
+    """2.9 逐棒检查单：五步流程 + 六条口诀"""
+    fig, axes = plt.subplots(1, 2, figsize=(13.5, 5.8))
+    # 左：每根 K 线收盘后的五步流程
+    ax = axes[0]
+    steps = ["① 分类：趋势棒/十字星/内包/外包？",
+             "② 角色：结构/信号/入场/确认棒？",
+             "③ 上下文：趋势/通道/区间/突破后/反转？",
+             "④ 跟随：后 1-2 根同向推进？",
+             "⑤ 更新计划：顺势/等二次/等测试/放弃/不做"]
+    ys = [8.35, 6.65, 4.95, 3.25, 1.55]
+    for i, (t, y) in enumerate(zip(steps, ys)):
+        draw_box(ax, 0.8, y, 8.2, 1.25, t, ec=DARK, fs=10.5)
+        if i < 4:
+            flow_arrow(ax, 4.9, y, 4.9, ys[i + 1] + 1.25, color=TEAL)
+    mark(ax, 4.9, 9.75, "每根 K 线收盘后（10 秒内跑完）", color=TEAL, fs=11, box=True)
+    style_ax(ax, xlim=(0, 10), ylim=(0, 10.8))
+    ax.set_title("① 五步固定流程", fontsize=11.5, color=DARK)
+    # 右：六条口诀
+    ax = axes[1]
+    tips = [("① 先上下文，再形态", 0.4, 7.9), ("② 先信号质量，再入场计划", 5.2, 7.9),
+            ("③ 先二次入场，再评估反转", 0.4, 5.7), ("④ 先跟随，再确认可交易", 5.2, 5.7),
+            ("⑤ 先惯性，再逆势", 0.4, 3.5), ("⑥ 看不懂，就等下一根", 5.2, 3.5)]
+    for t, x, y in tips:
+        draw_box(ax, x, y, 4.4, 1.6, t, ec=TEAL, fs=11)
+    mark(ax, 4.9, 1.5, "没有跟随的信号，不能当成高概率机会", color=DARK, fs=10, box=True)
+    style_ax(ax, xlim=(0, 10), ylim=(0, 10.8))
+    ax.set_title("② 六条口诀（每次看图默念）", fontsize=11.5, color=DARK)
+    fig.suptitle("逐棒检查单（Al Brooks）：先上下文再形态、先信号质量再计划、先二次入场再反转、先跟随再确认、先惯性再逆势、看不懂就等下一根", fontsize=12, color=DARK, y=0.99)
+    savefig(fig, "fig_p2_checklist.png")
+
+
+# ---------------------------------------------------------------- 图 4-10（PA_Agent 市场诊断框架 状态判定树）
+def fig_p4_state_tree():
+    """4.6 状态判定树：通道与区间的唯一入口"""
+    fig, ax = plt.subplots(figsize=(15.5, 8.2))
+    draw_box(ax, 5.2, 7.6, 4.6, 1.4, "是否存在有序波段序列？\n（≥2 组 HH+HL / LL+LH）", ec=DARK, fs=11)
+    draw_box(ax, 1.0, 5.0, 4.8, 1.4, "序列 ≥3 组且可画\n平行趋势线？", ec=TEAL, fs=11)
+    draw_box(ax, 9.2, 5.0, 4.8, 1.4, "清晰上下边界？\n（各 ≥2 次测试）", ec=TEAL, fs=11)
+    draw_box(ax, 0.4, 2.4, 4.6, 1.7, "按最近回撤分类：\n<30% 窄 / 30-50% 常规\n50-78.6% 宽通道（4.21）", ec=UP, fs=10)
+    draw_box(ax, 5.6, 2.4, 4.6, 1.7, "trending_tr\n趋势型区间（仅 2 组）\n同框架、置信度更低", ec=GRAY, fs=10)
+    draw_box(ax, 9.2, 2.4, 4.6, 1.7, "trading_range\n普通交易区间\n（区间策略，4.3）", ec=DOWN, fs=10)
+    draw_box(ax, 14.4, 2.4, 3.9, 1.7, "extreme_tr\n极端区间\n期望值为负，不做", ec=GRAY, fs=10)
+    flow_arrow(ax, 6.0, 7.6, 3.2, 6.4, color=DARK, rad=-0.15)
+    flow_arrow(ax, 9.0, 7.6, 11.4, 6.4, color=DARK, rad=0.15)
+    flow_arrow(ax, 3.4, 5.0, 3.4, 4.1, color=TEAL)
+    flow_arrow(ax, 5.8, 5.0, 7.8, 4.1, color=TEAL, rad=-0.2)
+    flow_arrow(ax, 11.5, 5.0, 11.5, 4.1, color=TEAL)
+    flow_arrow(ax, 13.8, 5.0, 15.6, 4.1, color=TEAL, rad=0.25)
+    mark(ax, 4.3, 7.25, "是", color=DARK, fs=10)
+    mark(ax, 10.6, 7.25, "否", color=DARK, fs=10)
+    mark(ax, 3.9, 4.62, "是", color=TEAL, fs=10)
+    mark(ax, 6.9, 4.62, "否", color=TEAL, fs=10)
+    mark(ax, 11.9, 4.62, "是", color=TEAL, fs=10)
+    mark(ax, 14.9, 4.62, "否", color=TEAL, fs=10)
+    mark(ax, 7.6, 0.35, "最新波段出现 LL（涨）/ HH（跌）→ 立即重估是否转区间；状态转换期降级处理（弱信号不做，目标保守）", color=DARK, fs=10, box=True)
+    style_ax(ax, xlim=(0, 18.6), ylim=(0, 9.5))
+    ax.set_title("状态判定树：通道与区间的唯一入口——每一步都有硬条件，斜率/视觉宽度只作辅助", fontsize=12.5, color=DARK)
+    savefig(fig, "fig_p4_state_tree.png")
 
 
 # ---------------------------------------------------------------- 图 3-11（PA_Agent 文件14 楔形回撤 vs 楔形反转）
