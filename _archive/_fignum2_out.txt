@@ -1,0 +1,13 @@
+﻿python : C:\Users\18315\Desktop\新建文件夹\_fignum_audit.py:2: SyntaxWarning: "\[" is an invalid escape sequence. Such seque
+nces will not work in the future. Did you mean "\\["? A raw string is also an option.
+所在位置 行:1 字符: 34
++ cd c:\Users\18315\Desktop\新建文件夹; python _fignum_audit.py 2>&1 | Out-F ...
++                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C:\Users\18315\...also an option.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  """图编号审计 v2：只统计图片行（^!\[图 X-Y），合成图应连续无重复；
+03 真实图: 3-5R
+04 真实图: 4-1R, 4-3R, 4-6R, 4-10R, 4-11R
+10 真实图: 10-3R
+OK

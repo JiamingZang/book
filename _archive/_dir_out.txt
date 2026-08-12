@@ -1,0 +1,113 @@
+2084 KB  2025雷神导师计划.pdf
+19814 KB  5分钟价格行为策略-南桥.pptx
+9785 KB  AL Brooks 知识体系（18版视频结构）.pdf
+26995 KB  AL brooks第一卷趋势篇.pdf
+35231 KB  AL brooks第三卷反转.pdf
+23341 KB  AL brooks第二卷区间.pdf
+30197 KB  Al Brooks & Axia Integrated Market Behavior Analysis and Intraday Trading.pdf
+471734 KB  Al Brooks Price Action 2018 图表.pdf
+707824 KB  Al brooks 图表百科-v1.pdf
+5367 KB  GRANDMA策略-Rose.pdf
+6646 KB  How to trade price action manual-机翻版.pdf
+2300 KB  How to trade price action manual.pdf
+1539 KB  PA学习笔记.pdf
+53730 KB  Reading Price Charts Bar by Bar The Technical Analysis of Price Action for the Serious Trader (Al Brooks) (机翻版).pdf
+2796 KB  Rose的策略（本人笔记）.pdf
+0 KB  _fix_log.txt
+32 KB  _inventory_out.txt
+38 KB  _micro_base.txt
+1 KB  _names.txt
+0 KB  _names2.txt
+[DIR]  _ref_clean
+[DIR]  _ref_texts
+30 KB  draw_handbook_figs.py
+9 KB  extract_markdown.py
+1 KB  extract_ref_texts.py
+1 KB  fix_ref_encoding.py
+[DIR]  handbook
+0 KB  inventory_refs.py
+109737 KB  ninetrans_book.pdf
+2999 KB  trading-handbook.pdf
+[DIR]  太妃ppt
+29689 KB  威科夫2_0+市场结构、成交量分布与订单流.pdf
+81931 KB  日本蜡烛图交易技术分析  详细解读价格行为模式,（美）艾尔·布鲁克斯著；张雯译,北京：地震出版社_14128154.pdf
+3535 KB  洛氏霍克交易法.pdf
+20435 KB  突破做单后续.pdf
+1994 KB  突破白皮书研究（整理）.pdf
+1483 KB  突破附件【群内福利非卖品】_加水印.pdf
+20386 KB  笑傲股市 (（美）威廉·欧奈尔著) (z-library.sk, 1lib.sk, z-lib.sk) (1).pdf
+[DIR]  英文著作 4本
+7887 KB  阿布10种最佳价格行为交易模式.pdf
+232740 KB  阿布价格行为学（基础篇）_01-36.pdf
+188158 KB  阿布价格行为学（进阶篇）_37-52.pdf
+31441 KB  阿布缩写翻译及解释.pdf
+1971 KB  高概率微通道交易系统基础，值得反复学习【10,000Trades_Ali_舒服学_笔记(1).pdf
+4010 KB  高概率微通道交易系统核心：如何入场_平仓_管理订单【10,000Trades_舒_笔记(2)(1).pdf
+[FOUND] 5分钟价格行为策略-南桥.pptx  (19814 KB)
+[FOUND] 太妃ppt\L01A__20250417083148.pptx  (662 KB)
+[FOUND] 太妃ppt\L01B__20250417180513.pptx  (943 KB)
+[FOUND] 太妃ppt\L01C__20250417180522.pptx  (486 KB)
+[FOUND] 太妃ppt\L02A__20250417180547.pptx  (1134 KB)
+[FOUND] 太妃ppt\L02B__20250417180555.pptx  (878 KB)
+[FOUND] 太妃ppt\L03A__20250419085414.pptx  (555 KB)
+[FOUND] 太妃ppt\L03B__20250419085440.pptx  (687 KB)
+[FOUND] 太妃ppt\L04A__20250419085500.pptx  (592 KB)
+[FOUND] 太妃ppt\L04B__20250419085522.pptx  (609 KB)
+[FOUND] 太妃ppt\L05A__20250419085618.pptx  (598 KB)
+[FOUND] 太妃ppt\L05B__20250417083325.pptx  (824 KB)
+[FOUND] 太妃ppt\L06A__20250419085638.pptx  (1261 KB)
+[FOUND] 太妃ppt\L07A__20250419085650.pptx  (892 KB)
+[FOUND] 太妃ppt\L07B__20250422055816.pptx  (962 KB)
+[FOUND] 太妃ppt\L08A__20250419085810.pptx  (831 KB)
+[FOUND] 太妃ppt\L09A__20250419085839.pptx  (468 KB)
+[FOUND] 太妃ppt\L09B__20250419085905.pptx  (676 KB)
+[FOUND] 太妃ppt\L10A__20250420075555.pptx  (1091 KB)
+[FOUND] 太妃ppt\L10B__20250420075618.pptx  (843 KB)
+[FOUND] 太妃ppt\L11A__20250420075644.pptx  (826 KB)
+[FOUND] 太妃ppt\L11B__20250422055731.pptx  (708 KB)
+[FOUND] 太妃ppt\L12__20250417160230.pptx  (1750 KB)
+[FOUND] 太妃ppt\L13A__20250420075804.pptx  (944 KB)
+[FOUND] 太妃ppt\L13B__20250420075821.pptx  (756 KB)
+[FOUND] 太妃ppt\L14A__20250420075839.pptx  (930 KB)
+[FOUND] 太妃ppt\L14B__20250420075904.pptx  (1120 KB)
+[FOUND] 太妃ppt\L15A__20250420075912.pptx  (665 KB)
+[FOUND] 太妃ppt\L15B__20250420075919.pptx  (720 KB)
+[FOUND] 太妃ppt\L16A__20250421121333.pptx  (784 KB)
+[FOUND] 太妃ppt\L16B__20250421121340.pptx  (1244 KB)
+[FOUND] 太妃ppt\L17A__20250421121344.pptx  (892 KB)
+[FOUND] 太妃ppt\L17B__20250421121349.pptx  (994 KB)
+[FOUND] 太妃ppt\L18__20250421121354.pptx  (4341 KB)
+[FOUND] 太妃ppt\L19__20250421121400.pptx  (3518 KB)
+[FOUND] 太妃ppt\L20__20250421121405.pptx  (931 KB)
+[FOUND] 2025雷神导师计划.pdf  (2084 KB)
+[FOUND] Al Brooks & Axia Integrated Market Behavior Analysis and Intraday Trading.pdf  (30197 KB)
+[FOUND] Al Brooks Price Action 2018 图表.pdf  (471734 KB)
+[FOUND] Al brooks 图表百科-v1.pdf  (707824 KB)
+[FOUND] AL Brooks 知识体系（18版视频结构）.pdf  (9785 KB)
+[FOUND] AL brooks第一卷趋势篇.pdf  (26995 KB)
+[FOUND] AL brooks第三卷反转.pdf  (35231 KB)
+[FOUND] AL brooks第二卷区间.pdf  (23341 KB)
+[FOUND] GRANDMA策略-Rose.pdf  (5367 KB)
+[FOUND] How to trade price action manual-机翻版.pdf  (6646 KB)
+[FOUND] How to trade price action manual.pdf  (2300 KB)
+[FOUND] ninetrans_book.pdf  (109737 KB)
+[FOUND] PA学习笔记.pdf  (1539 KB)
+[FOUND] Reading Price Charts Bar by Bar The Technical Analysis of Price Action for the Serious Trader (Al Brooks) (机翻版).pdf  (53730 KB)
+[FOUND] Rose的策略（本人笔记）.pdf  (2796 KB)
+[FOUND] 威科夫2_0+市场结构、成交量分布与订单流.pdf  (29689 KB)
+[FOUND] 日本蜡烛图交易技术分析  详细解读价格行为模式,（美）艾尔·布鲁克斯著；张雯译,北京：地震出版社_14128154.pdf  (81931 KB)
+[FOUND] 洛氏霍克交易法.pdf  (3535 KB)
+[FOUND] 突破做单后续.pdf  (20435 KB)
+[FOUND] 突破白皮书研究（整理）.pdf  (1994 KB)
+[FOUND] 突破附件【群内福利非卖品】_加水印.pdf  (1483 KB)
+[FOUND] 笑傲股市 (（美）威廉·欧奈尔著) (z-library.sk, 1lib.sk, z-lib.sk) (1).pdf  (20386 KB)
+[FOUND] 阿布10种最佳价格行为交易模式.pdf  (7887 KB)
+[FOUND] 阿布价格行为学（基础篇）_01-36.pdf  (232740 KB)
+[FOUND] 阿布价格行为学（进阶篇）_37-52.pdf  (188158 KB)
+[FOUND] 阿布缩写翻译及解释.pdf  (31441 KB)
+[FOUND] 高概率微通道交易系统基础，值得反复学习【10,000Trades_Ali_舒服学_笔记(1).pdf  (1971 KB)
+[FOUND] 高概率微通道交易系统核心：如何入场_平仓_管理订单【10,000Trades_舒_笔记(2)(1).pdf  (4010 KB)
+[FOUND] 英文著作 4本\1. Trading Price Action_Trends价格行为交易之趋势篇.pdf  (52891 KB)
+[FOUND] 英文著作 4本\2. Trading Price Action_Ranges价格行为交易之区间篇.pdf  (67234 KB)
+[FOUND] 英文著作 4本\3. Trading Price Action_Reversals价格行为交易之反转篇.pdf  (78431 KB)
+[FOUND] 英文著作 4本\4. Reading Price Charts Bar by Bar.pdf  (37106 KB)

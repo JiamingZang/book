@@ -19,21 +19,9 @@ _pa_agent_ref/
 _ali_flashcards/
 _breakout_research/
 
-# ===== 日志与临时文件 =====
-_*.txt
-_*.log
-_*.png
+# ===== 日志与临时文件（仅根目录层，tools/ 与 _archive/ 下的不忽略）=====
+/_*.txt
+/_*.log
+/_*.png
 
-# ===== 素材处理脚本（不属于手册）=====
-_ocr_run.py
-_parse_ppt.py
-_ppt_ocr.py
-_render_pdf.py
-extract_markdown.py
-extract_ref_texts.py
-fix_ref_encoding.py
-inventory_refs.py
-_renumber.py
-_xref_audit.py
-_term_fix.py
-_src_fix.py
+# ===== 素材处理脚本（历史用途，已归档至 _archive/，不再忽略）=====
