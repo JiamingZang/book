@@ -32,3 +32,5 @@ extract_markdown.py
 extract_ref_texts.py
 fix_ref_encoding.py
 inventory_refs.py
+_renumber.py
+_xref_audit.py
