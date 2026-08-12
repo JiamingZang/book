@@ -13,6 +13,11 @@ _ref_clean/
 _ref_texts/
 __pycache__/
 
+# ===== 参考素材（PA_Agent提示词/Ali闪卡/突破研究）=====
+_pa_agent_ref/
+_ali_flashcards/
+_breakout_research/
+
 # ===== 日志与临时文件 =====
 _*.txt
 _*.log

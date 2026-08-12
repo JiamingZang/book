@@ -1356,9 +1356,9 @@ def fig_p7_loss_aversion():
     # 对比：+200 的快乐 vs −100 的痛苦
     ax.plot([100, 100], [0, -17.7], color=DOWN, ls=":", lw=1.2)
     ax.plot([200, 200], [0, 10], color=UP, ls=":", lw=1.2)
-    mark(ax, 200, 10.8, "赚 $200 的快乐\n（10 单位）", color=UP, fs=10, ha="center")
-    mark(ax, 100, -18.6, "亏 $100 的痛苦\n（−17.7 单位）", color=DOWN, fs=10, ha="center")
-    annotate_mark(ax, 130, -18.6, "亏 $100 的痛苦 ≈ 赚 $200 的快乐", 40, -21.5, color=DARK, fs=11)
+    mark(ax, 200, 10.8, "赚 200 的快乐\n（10 单位）", color=UP, fs=10, ha="center")
+    mark(ax, 100, -18.6, "亏 100 的痛苦\n（−17.7 单位）", color=DOWN, fs=10, ha="center")
+    annotate_mark(ax, 130, -18.6, "亏 100 的痛苦 ≈ 赚 200 的快乐", 40, -21.5, color=DARK, fs=11)
     mark(ax, 160, -4.5, "亏损区：凸函数\n→ 死扛不止损（风险寻求）", color=DOWN, fs=10)
     mark(ax, -160, 12, "盈利区：凹函数\n→ 赚一点就跑（风险回避）", color=UP, fs=10)
     ax.set_title("损失厌恶（Kahneman & Tversky, 1979）：失去的痛，约为得到的快乐的两倍", fontsize=12.5, color=DARK)
@@ -1441,7 +1441,93 @@ def main():
     fig_p7_style()
     fig_p7_loss_aversion()
     fig_p7_three_stages()
+    # ---------- v6 新增（第2章 K线信号字典 + 铁丝网，PA_Agent 提示词库） ----------
+    fig_p2_signal_bars()
+    fig_p2_barbwire()
     print("全部完成")
+
+
+# ---------------------------------------------------------------- 图 2-2（PA_Agent 文件16 K线信号字典）
+def fig_p2_signal_bars():
+    """2.1 K 线信号字典：信号棒→入场棒→确认棒、内包/外包、ioi、2BR、MDB"""
+    fig, axes = plt.subplots(2, 2, figsize=(13, 8.6))
+    # (a) 信号棒→入场棒→确认棒
+    ax = axes[0][0]
+    for x, o, h, l, c in [(0, 98, 105.8, 97.2, 105.2), (1, 104.2, 107.2, 103.4, 106.8), (2, 106.2, 109.2, 105.4, 108.6)]:
+        candle(ax, x, o, h, l, c)
+    hl_line(ax, -0.4, 0.45, 105.8, color=UP, ls=":", lw=1.2)
+    hl_line(ax, -0.4, 3.3, 106.8, color=GRAY, ls=":", lw=1.0)
+    mark(ax, 0, 110.5, "①信号棒", color=DARK, fs=10.5, box=True)
+    mark(ax, 0, 110.5, "收盘近高点、实体大\n不超过平均 1.5 倍", dy=-1.9, color=DARK, fs=8.5)
+    mark(ax, 1, 112.6, "②入场棒：突破信号棒高点触发", color=UP, fs=10, box=True)
+    mark(ax, 2, 115, "③确认棒：继续创新高", color=UP, fs=10, box=True)
+    mark(ax, 1.65, 107.9, "突破触发", color=GRAY, fs=8.5)
+    style_ax(ax, xlim=(-0.6, 3.4), ylim=(95.5, 116.5))
+    ax.set_title("(a) 一次入场三段式：信号→入场→确认", fontsize=11, color=DARK)
+    # (b) 内包 vs 外包
+    ax = axes[0][1]
+    candle(ax, 0, 100, 105, 99, 104)
+    candle(ax, 1, 102.6, 104, 101.6, 103.4)
+    mark(ax, 1, 105.6, "IB 内包：收缩\n单根不单独交易", color=GRAY, fs=9.5, box=True)
+    candle(ax, 3.6, 100, 105, 99, 104)
+    candle(ax, 4.6, 103.2, 107.2, 97.8, 106.4)
+    mark(ax, 4.6, 108.6, "OB 外包：扩张\n不是突破信号", color=ORANGE, fs=9.5, box=True)
+    style_ax(ax, xlim=(-0.6, 5.8), ylim=(95.5, 112))
+    ax.set_title("(b) 内包棒（波动收缩）vs 外包棒（波动扩张）", fontsize=11, color=DARK)
+    # (c) ioi 模式
+    ax = axes[1][0]
+    candle(ax, 0, 100, 105, 99, 104)
+    candle(ax, 1, 102.6, 104, 101.6, 103.4)
+    candle(ax, 2, 102, 107.6, 100.4, 106.8)
+    candle(ax, 3, 105.6, 106.9, 104.5, 106.2)
+    mark(ax, 1, 108.8, "① 内包：犹豫", color=GRAY, fs=9.5)
+    mark(ax, 2, 111, "② 外包：选择方向（突破）", color=UP, fs=9.5)
+    mark(ax, 3, 108.8, "③ 内包：蓄力", color=GRAY, fs=9.5)
+    mark(ax, 1.9, 96.5, "ioi = 突破模式：等第三根内包后的触发，方向由背景决定", color=DARK, fs=9.5, box=True, va="top")
+    style_ax(ax, xlim=(-0.6, 4.3), ylim=(94.5, 113))
+    ax.set_title("(c) ioi 组合：内包→外包→内包", fontsize=11, color=DARK)
+    # (d) 2BR + MDB
+    ax = axes[1][1]
+    candle(ax, 0, 105, 106.8, 103.2, 104.4)
+    candle(ax, 1, 104.4, 108, 103.8, 107.6)
+    mark(ax, 0.5, 109.6, "2BR 双棒反转：第二根实体≥第一根50%\n胜率仅 50-55%，须在关键位读", color=DOWN, fs=9.5, box=True)
+    candle(ax, 3.4, 103.6, 105.6, 103, 105.2)
+    candle(ax, 4.4, 103.8, 106.4, 103, 106)
+    hl_line(ax, 3.2, 4.8, 103, color=UP, ls=":", lw=1.2)
+    mark(ax, 3.9, 108.4, "MDB 微双底：两根棒低点差<2跳\n卖方两次突破失败", color=UP, fs=9.5, box=True)
+    style_ax(ax, xlim=(-0.6, 5.6), ylim=(101, 112))
+    ax.set_title("(d) 2BR 双棒反转 与 MDB 微双底", fontsize=11, color=DARK)
+    fig.suptitle("K 线信号字典：先上下文，再形态；没有跟随的信号不能当成高概率机会", fontsize=13, color=DARK, y=0.99)
+    savefig(fig, "fig_p2_signal_bars.png")
+
+
+# ---------------------------------------------------------------- 图 2-8（PA_Agent 文件21 铁丝网）
+def fig_p2_barbwire():
+    """2.8 铁丝网 Barbwire：紧凑重叠、绕 EMA 穿梭——大部分信号忽略"""
+    fig, ax = plt.subplots(figsize=(13, 6.3))
+    style_ax(ax, xlim=(-1, 17), ylim=(96.2, 104.4))
+    # EMA20 平坦线
+    ax.plot([-1, 17], [100, 100], color=ORANGE, lw=1.8, zorder=1)
+    mark(ax, 15.8, 100.35, "EMA20（平坦纠缠）", color=ORANGE, fs=9.5)
+    # 铁丝网K线：绕100穿梭、小实体、重叠、十字星
+    k = [(0, 99.8, 100.9, 99.3, 100.6), (1, 100.5, 101.1, 99.7, 100.2), (2, 100.1, 100.7, 99.4, 99.9),
+         (3, 99.8, 100.5, 99.2, 100.3), (4, 100.2, 100.9, 99.6, 99.8), (5, 99.7, 100.4, 99.3, 100.1),
+         (6, 100, 100.6, 99.4, 99.7), (7, 99.6, 100.2, 99.1, 100), (8, 99.9, 100.6, 99.3, 99.6),
+         (9, 99.6, 100.1, 99, 99.9), (10, 99.8, 100.4, 99.2, 99.7), (11, 99.6, 100.2, 99.1, 100.1),
+         (12, 100, 100.8, 99.5, 100.4), (13, 100.3, 101, 99.7, 100), (14, 99.9, 100.5, 99.4, 100.2)]
+    for x, o, h, l, c in k:
+        candle(ax, x, o, h, l, c, width=0.52)
+    # 区间上下沿
+    hl_line(ax, -0.8, 15.6, 101.0, color=GRAY, ls=":", lw=1.1)
+    hl_line(ax, -0.8, 15.6, 99.0, color=GRAY, ls=":", lw=1.1)
+    ax.annotate("", xy=(15.6, 99.0), xytext=(15.6, 101.0),
+                arrowprops=dict(arrowstyle="<->", color=GRAY, lw=1.3), zorder=2)
+    mark(ax, 15.55, 100, "区间宽度 ÷ 平均波段高度 < 25%\n（紧凑度）", dy=0, color=GRAY, fs=9, ha="right")
+    mark(ax, 7.5, 103.6, "铁丝网 Barbwire：紧凑重叠、绕 EMA 穿梭\n十字星/内包棒频繁但方向不明", color=DOWN, fs=11.5, box=True)
+    mark(ax, 7.5, 96.9, "大部分信号忽略；最危险 = 高点上方买、低点下方卖的普通突破（大概率假突破）", color=DOWN, fs=10.5, box=True, va="top")
+    mark(ax, 16.4, 102.6, "自检咒语：\n紧凑横向整理？\n来回穿梭？\n边界几乎重叠？", color=DARK, fs=9.5, box=True, ha="left")
+    mark(ax, 3, 97.6, "机会在铁丝网之后：突破失败（失败的失败）\n极值附近短 K 线刮头皮（仅边界）\n铁丝网后尖峰级突破 + 跟随", color=UP, fs=9.5, box=True, va="top", ha="left")
+    savefig(fig, "fig_p2_barbwire.png")
 
 
 if __name__ == "__main__":
