@@ -2050,6 +2050,66 @@ def fig_p2_volume_rules():
     savefig(fig, "fig_p2_volume_rules.png")
 
 
+# ---------------------------------------------------------------- v9：8.9 绩效归因
+
+def fig_p8_attribution():
+    """8.9 绩效归因：左=资金曲线（100 笔，含一段连亏回撤与恢复）；右=setup 归因条形图"""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14.5, 6.0), gridspec_kw={"width_ratios": [1.5, 1]})
+    # ---- 面板 A：资金曲线（100 笔，确定性序列：0-35 缓涨 → 36-42 连亏急跌 → 恢复缓涨） ----
+    t = np.arange(100)
+    rets = np.full(100, 0.14)
+    rets[:35] += 0.02 * np.sin(np.arange(35) / 8.0)
+    rets[35:42] = -0.5
+    rets[42:] += 0.25 * np.sin((np.arange(58) + 8) / 6.0)
+    eq = np.cumsum(rets)
+    x = np.arange(1, 101)
+    ax1.plot(x, eq, color=UP, lw=2.0, zorder=4)
+    ax1.fill_between(x, eq, 0, color=UP, alpha=0.06, zorder=2)
+    # 最大回撤区间标注（36-42 连亏：峰 35 → 谷 42，全局最大回撤）
+    peak, valley = eq[34], eq[41]
+    ax1.plot([35, 35], [0, peak], color=GRAY, ls=":", lw=1.0, zorder=3)
+    ax1.plot([42, 42], [0, valley], color=GRAY, ls=":", lw=1.0, zorder=3)
+    ax1.fill_between(x[34:42], eq[34:42], peak, color=DOWN, alpha=0.18, zorder=2)
+    ax1.annotate("连亏 6 笔 → 回撤 %.1f%%\n（峰 %.1f%% → 谷 %.1f%%）" % (peak - valley, peak, valley),
+                 xy=(38.5, valley + 0.3), xytext=(45, peak - 3.2), fontsize=10, color=DOWN,
+                 arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.2))
+    ax1.annotate("恢复：约 2-3 周回到前高——\n回撤能恢复的前提是仓位没爆（6.1）",
+                 xy=(53, eq[52] + 0.2), xytext=(58, peak + 4.6), fontsize=9.5, color=DARK,
+                 arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.1))
+    ax1.text(2, 11.6, "100 笔 × 每笔期望 +0.14%% → 累计约 %+.1f%%\n单笔风险 0.5%%，最大回撤 %.1f%%（理论可控）" % (eq[-1], peak - valley),
+             fontsize=9.5, color=GRAY, va="top")
+    ax1.set_xlim(0, 101)
+    ax1.set_ylim(-3.5, 12.5)
+    ax1.set_xlabel("交易笔数（按月复盘，连亏段对照 6.3 理论预期）", fontsize=11)
+    ax1.set_ylabel("账户累计收益 %", fontsize=11)
+    ax1.grid(alpha=0.3)
+    ax1.set_title("资金曲线：稳步向上 + 一次可控回撤——看恢复速度，不看单日波动", fontsize=11.5, color=DARK)
+    # ---- 面板 B：setup 归因条形图 ----
+    setups = ["突破", "ORB", "区间边界", "趋势回调"]
+    total_r = [-1.4, 0.9, 3.1, 8.2]
+    counts = [15, 15, 28, 42]
+    cols = [DOWN, ORANGE, UP, UP]
+    bars = ax2.barh(setups, total_r, color=cols, height=0.55, zorder=3)
+    for i, (v, c) in enumerate(zip(total_r, counts)):
+        if v > 0:
+            ax2.text(v + 0.25, i, "+%.1fR\n(%d 笔)" % (v, c), va="center", ha="left", fontsize=9.5, color=DARK)
+        else:
+            ax2.text(v - 0.25, i, "%.1fR\n(%d 笔)" % (v, c), va="center", ha="right", fontsize=9.5, color=DOWN)
+    ax2.axvline(0, color=DARK, lw=1.0, zorder=2)
+    ax2.annotate("负贡献 setup：\n砍掉它，系统质量\n立刻上一个台阶",
+                 xy=(-1.4, 0), xytext=(2.6, 0.0), fontsize=10, color=DOWN, va="center",
+                 arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.2))
+    ax2.text(0.15, 3.52, "合计 100 笔 +10.8R：\n趋势回调贡献 76% 的利润（呼应 7.1 的 80/20）",
+             fontsize=9.5, color=DARK, va="bottom")
+    ax2.set_xlim(-3.4, 11.6)
+    ax2.set_ylim(-0.7, 4.0)
+    ax2.grid(alpha=0.3, axis="x")
+    ax2.set_title("按 setup 归因：钱具体是哪个系统赚的", fontsize=11.5, color=DARK)
+    fig.suptitle("绩效归因（8.9）：SQN 说“系统整体行不行”，归因说“钱从哪来”——说不清上个月的钱是哪个 setup 赚的，验证就没闭环",
+                 fontsize=13, color=DARK, y=0.985)
+    savefig(fig, "fig_p8_attribution.png")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     fig_kline_structure()
@@ -2102,7 +2162,8 @@ def main():
     fig_p6_risk_budget()
     fig_p9_progress()
     fig_p2_volume_rules()
-    # ---------- v4 新增（9/10 章无图章节） ----------
+    # ---------- v9 新增（8.9 绩效归因） ----------
+    fig_p8_attribution()
     fig_prop_flow()
     fig_risk_curve()
     fig_call_put()
