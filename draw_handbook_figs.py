@@ -1330,6 +1330,61 @@ def fig_opt_strategies():
     savefig(fig, "fig_p10_strategies.png")
 
 
+# ---------------------------------------------------------------- v7：1.17 资产配置两条腿
+
+def fig_p1_asset_allocation():
+    """1.17 资产配置：总资产分两条腿（交易/配置）+ 配置账户 60/40 再平衡"""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14.5, 5.6))
+    # 左：总资产分层
+    segs1 = [(0, 15, UP, "交易账户 15%\n进攻：小资金、高纪律、正期望值\n亏光不影响生活（≤10-20%）"),
+             (15, 100, DARK, "配置账户 85%\n防守：指数基金为主、不盯盘\n长期复利 = “输得起”的底气")]
+    for x0, x1, c, lab in segs1:
+        ax1.barh(0, x1 - x0, left=x0, color=c, height=0.62, alpha=0.9)
+        if c == UP:
+            ax1.text(x0 + 7.5, 0.12, lab.split("\n")[0], fontsize=11, color="white", ha="center", va="center", fontweight="bold")
+            ax1.text(x0 + 7.5, -0.30, "\n".join(lab.split("\n")[1:]), fontsize=8.5, color=DARK, ha="center", va="top")
+        else:
+            ax1.text(x0 + (x1 - x0) / 2, 0.12, lab.split("\n")[0], fontsize=11, color="white", ha="center", va="center", fontweight="bold")
+            ax1.text(x0 + (x1 - x0) / 2, -0.30, "\n".join(lab.split("\n")[1:]), fontsize=8.5, color=DARK, ha="center", va="top")
+    ax1.axvline(15, color="white", lw=2.0)
+    ax1.set_xlim(-4, 104)
+    ax1.set_ylim(-1.1, 1.0)
+    ax1.set_xticks([0, 15, 50, 85, 100])
+    ax1.set_xticklabels(["0%", "15%", "50%", "85%", "100%"], fontsize=9)
+    ax1.set_yticks([])
+    ax1.set_xlabel("总资产（百分比）", fontsize=10.5)
+    for s in ax1.spines.values():
+        s.set_visible(False)
+    ax1.set_title("两条腿：交易账户进攻，配置账户防守", fontsize=12, color=DARK)
+    # 右：配置账户内部 60/40
+    segs2 = [(0, 60, TEAL, "60% 股票指数基金\n（沪深 300 等）\n长期增长引擎"),
+             (60, 90, ORANGE, "30% 债券/货币基金\n压舱石\n（回撤缓冲）"),
+             (90, 100, GRAY, "10% 现金\n应急缓冲")]
+    for x0, x1, c, lab in segs2:
+        ax2.barh(0, x1 - x0, left=x0, color=c, height=0.62, alpha=0.9)
+        ax2.text(x0 + (x1 - x0) / 2, 0.12, lab.split("\n")[0], fontsize=10, color="white",
+                 ha="center", va="center", fontweight="bold")
+        ax2.text(x0 + (x1 - x0) / 2, -0.30, "\n".join(lab.split("\n")[1:]), fontsize=8.5,
+                 color=DARK, ha="center", va="top")
+    ax2.set_xlim(-4, 104)
+    ax2.set_ylim(-1.5, 1.35)
+    ax2.set_xticks([0, 60, 90, 100])
+    ax2.set_xticklabels(["0%", "60%", "90%", "100%"], fontsize=9)
+    ax2.set_yticks([])
+    ax2.set_xlabel("配置账户内部（百分比）", fontsize=10.5)
+    for s in ax2.spines.values():
+        s.set_visible(False)
+    ax2.annotate("60/40 再平衡：每 1-2 年调回比例\n（卖涨的、买跌的）——强制低买高卖",
+                 xy=(30, 0.4), xytext=(12, 1.25),
+                 fontsize=9.5, color=DARK, va="center", ha="center",
+                 arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.0))
+    ax2.set_title("配置账户内部：60/40 再平衡（编者示例比例）", fontsize=12, color=DARK)
+    fig.subplots_adjust(wspace=0.3, left=0.04, right=0.985, top=0.85, bottom=0.14)
+    fig.suptitle("资产配置：先保证“输得起”，再谈“赢”——交易账户只是资产的一小部分",
+                 fontsize=12.5, color=DARK)
+    savefig(fig, "fig_p1_asset_allocation.png")
+
+
 # ---------------------------------------------------------------- v4：9.1 考核三段式流程
 def fig_prop_flow():
     """9.1 Prop 考核三段式：Phase 1 → Phase 2 → Funded，各带盈利目标与回撤约束"""
@@ -1797,6 +1852,7 @@ def main():
     fig_p8_footprint()
     fig_p4_orb()
     fig_opt_strategies()
+    fig_p1_asset_allocation()
     # ---------- v4 新增（9/10 章无图章节） ----------
     fig_prop_flow()
     fig_risk_curve()
