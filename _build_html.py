@@ -76,7 +76,30 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
 #toc a.lv3 { padding-left: 30px; font-size: 0.92em; color: #78909c; }
 #toc a.active { background: var(--teal); color: #fff; }
 #toc a.h1 { font-weight: bold; color: var(--dark); }
+#toc .tocclose { display: none; }
 @media (min-width: 1380px) { #toc { display: block; } }
+/* ---- v3 移动端：抽屉式目录 + 悬浮按钮 ---- */
+#tocbtn {
+  position: fixed; right: 16px; bottom: 76px; z-index: 1001; display: none;
+  background: var(--teal); color: #fff; border: none; border-radius: 20px;
+  padding: 9px 16px; font-size: 13px; cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.28); font-family: inherit;
+}
+#tocbtn:hover { background: #00897b; }
+@media (max-width: 1379px) {
+  #tocbtn { display: block; }
+  #toc {
+    display: block; position: fixed; left: 0; top: 0; bottom: 0;
+    width: 78%; max-width: 320px; max-height: 100vh; border-radius: 0 10px 10px 0;
+    transform: translateX(-105%); transition: transform 0.25s ease;
+    z-index: 1002; box-shadow: 2px 0 14px rgba(0,0,0,0.18);
+  }
+  #toc.open { transform: translateX(0); }
+  #toc .tocclose {
+    display: block; float: right; background: none; border: none;
+    color: var(--gray); font-size: 16px; cursor: pointer; padding: 0 4px;
+  }
+}
 #backtop {
   position: fixed; right: 20px; bottom: 24px; width: 40px; height: 40px;
   border-radius: 50%; background: var(--teal); color: #fff; border: none;
@@ -126,6 +149,15 @@ JS = """
       if (show) document.getElementById(hid).scrollIntoView({ behavior: 'smooth' });
     });
   });
+  // v3 移动端：悬浮按钮开合抽屉；点链接或关闭钮收起
+  var tocbtn = document.getElementById('tocbtn');
+  var toc = document.getElementById('toc');
+  if (tocbtn && toc) {
+    tocbtn.addEventListener('click', function () { toc.classList.toggle('open'); });
+    toc.querySelectorAll('a, .tocclose').forEach(function (el) {
+      el.addEventListener('click', function () { toc.classList.remove('open'); });
+    });
+  }
 })();
 </script>
 """
@@ -166,7 +198,7 @@ def main():
         parts.append(html)
 
     # 生成 TOC HTML（h1 默认展开，h2/h3 挂在 h1 下并默认折叠）
-    toc_html = ['<div id="toc"><b>目录</b>']
+    toc_html = ['<div id="toc"><b>目录<button class="tocclose" title="收起">×</button></b>']
     for level, title, hid, parent in toc_entries:
         if level == 1:
             cls = "lv1 h1"
@@ -194,6 +226,7 @@ def main():
 <div id="progress"></div>
 {"".join(toc_html)}
 <button id="backtop" title="返回顶部">↑</button>
+<button id="tocbtn">☰ 目录</button>
 {body}
 <p style="margin-top:60px;color:#90a4ae;font-size:0.85em;text-align:center;">
 本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。
