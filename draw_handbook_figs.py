@@ -2334,6 +2334,39 @@ def fig_p9_fail():
     savefig(fig, "fig_p9_fail.png")
 
 
+# ---------------------------------------------------------------- v12：5.7 完整 SMC 交易流程
+
+def fig_p5_smc_flow():
+    """5.7 完整 SMC 交易流程：多级别背景 + 五步执行 + 与第 4 章系统的对照"""
+    fig, ax = plt.subplots(figsize=(14.5, 6.4))
+    style_ax(ax, xlim=(0, 14), ylim=(0, 6.6))
+    # ---- 顶部背景框：多级别过滤 ----
+    draw_box(ax, 0.4, 5.15, 13.2, 1.25, "背景（多级别过滤）：日线上升趋势 → 4H CHoCH 警告 → 1H 等做多回调",
+             ec=GRAY, fs=11, tc=DARK)
+    flow_arrow(ax, 1.7, 5.12, 1.7, 4.95, color=GRAY)
+    # ---- 五步流程框 ----
+    steps = [
+        (0.6, "① 画结构\nswing 高低点\nBSL / SSL 池\n看涨 OB、FVG\n→ 2.4 / 5.2-5.6", TEAL),
+        (3.2, "② 等 sweep\n插破前低 SSL\n快速收回 / 长影\n→ 3.2 / 5.3", ORANGE),
+        (5.8, "③ 找入场区\nFVG / OB 区域\n15m 锤子 / 内包\n→ 4.3 / 5.5-5.6", TEAL),
+        (8.4, "④ 执行\nOB 入场 + 确认\n止损 sweep 低点下\n→ 4.2 / 5.5", ORANGE),
+        (11.0, "⑤ 管理\n1R 移保本\n跑向 BSL / 2R\n→ 4.4 / 4.13", TEAL),
+    ]
+    for i, (x, txt, col) in enumerate(steps):
+        draw_box(ax, x, 2.7, 2.2, 2.2, txt, ec=col, fs=10, tc=DARK)
+        if i < 4:
+            flow_arrow(ax, x + 2.2, 3.8, x + 2.6, 3.8)
+    # ---- 底部关键认知框 ----
+    draw_box(ax, 0.4, 0.35, 13.2, 1.95,
+             "关键认知：这套流程 = 第 4 章趋势回调系统的 SMC 翻译版——语言不同，数学一样。\n"
+             "画结构=趋势判断（2.4）｜等 sweep=假突破确认（3.2）｜FVG/OB=回调入场区（4.3）\n"
+             "止损 SSL 外=结构止损（4.2）｜目标 BSL=前高目标（4.13）",
+             ec=TEAL, fs=10.5, tc=DARK)
+    fig.suptitle("完整 SMC 交易流程（5.7）：多级别背景 → 五步执行 → 本质是第 4 章趋势回调系统的翻译版",
+                 fontsize=13, color=DARK, y=0.985)
+    savefig(fig, "fig_p5_smc_flow.png")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     fig_kline_structure()
@@ -2396,6 +2429,8 @@ def main():
     fig_p1_quotes()
     fig_p7_streaks()
     fig_p9_fail()
+    # ---------- v12 新增（5.7 完整 SMC 交易流程） ----------
+    fig_p5_smc_flow()
     fig_prop_flow()
     fig_risk_curve()
     fig_call_put()
