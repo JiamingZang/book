@@ -1018,6 +1018,103 @@ def fig_r_dist():
     savefig(fig, "fig_p8_r_dist.png")
 
 
+# ---------------------------------------------------------------- v7：8.12 订单流三件套
+import random as _random
+
+
+def fig_p8_orderflow():
+    """8.12 订单流三件套：DOM 静态地图 / 逐笔动态新闻 / Delta 记分牌（合成示意）"""
+    _random.seed(11)
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(16.5, 5.8))
+    # ---- 面板 1：DOM 盘口（当前挂单分布，静态） ----
+    levels = [99.6, 99.7, 99.8, 99.9, 100.0, 100.1, 100.2, 100.3, 100.4, 100.5]
+    qty = [16, 24, 450, 28, 35, 12, 15, 22, 30, 400]  # 下 5 档买单，上 5 档卖单
+    y = np.arange(len(levels))
+    colors = [UP] * 5 + [DOWN] * 5
+    ax1.barh(y, qty, color=colors, alpha=0.85, height=0.62, zorder=3)
+    ax1.set_yticks(y)
+    ax1.set_yticklabels([f"{v:.1f}" for v in levels], fontsize=8.5)
+    ax1.axhline(4.5, color=GRAY, ls="--", lw=0.9)
+    ax1.text(8, 4.9, "卖盘（报价 100.1~100.5）", fontsize=9, color=DOWN, va="bottom")
+    ax1.text(8, 4.15, "买盘（报价 99.6~100.0）", fontsize=9, color=UP, va="top")
+    ax1.annotate("买墙 450：\n真实支撑（吃不完）", xy=(450, 2), xytext=(300, 2.6),
+                 fontsize=9.5, color=UP, ha="center", va="bottom",
+                 arrowprops=dict(arrowstyle="->", color=UP, lw=1.1))
+    ax1.annotate("卖墙 400：\n幌骗风险——\n可能瞬间撤单", xy=(400, 9), xytext=(240, 7.2),
+                 fontsize=9.5, color=DOWN, ha="center", va="bottom",
+                 arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.1))
+    ax1.annotate("价差 1 tick", xy=(21, 4.5), xytext=(120, 4.9),
+                 fontsize=8.5, color=GRAY, ha="center", va="bottom",
+                 arrowprops=dict(arrowstyle="->", color=GRAY, lw=0.9))
+    ax1.set_xlabel("挂单量（手）", fontsize=10)
+    ax1.set_ylim(-0.6, 9.6)
+    ax1.set_title("① DOM：静态地图\n“现在谁在挂单”", fontsize=11.5, color=DARK)
+    ax1.grid(axis="x", alpha=0.25)
+    # ---- 面板 2：逐笔 tape（成交流，动态） ----
+    n = 26
+    t = np.arange(n)
+    base = 100.05
+    drift = np.array([0, 0.02, -0.01, 0.03, 0.01, -0.02, 0.04, 0.02, 0.0, -0.03,
+                      -0.01, 0.02, 0.03, 0.05, 0.02, 0.0, -0.02, 0.01, 0.04, 0.06,
+                      0.03, 0.01, -0.02, 0.05, 0.08, 0.10])
+    vol = [12, 30, 8, 45, 15, 22, 60, 18, 25, 10, 14, 38, 52, 20, 9, 16, 40, 12,
+           28, 70, 24, 15, 18, 46, 80, 55]
+    side = [1, -1, 1, -1, 1, 1, -1, 1, 1, -1, -1, 1, -1, 1, -1, 1, -1, 1, 1, -1,
+            1, -1, -1, 1, -1, 1]
+    for i in range(n):
+        c = UP if side[i] > 0 else DOWN
+        ax2.scatter(t[i], base + drift[i], s=vol[i] * 2.2, c=c, alpha=0.8,
+                    marker="^" if side[i] > 0 else "v", zorder=4, linewidths=0)
+    ax2.plot(t, base + drift, color=GRAY, lw=1.0, ls=":", zorder=2)
+    ax2.axhline(base, color=GRAY, ls="--", lw=0.9)
+    ax2.text(-0.8, base - 0.055, "成交价 100.00", fontsize=8.5, color=GRAY)
+    ax2.annotate("主动买：市价单吃卖盘\n（点越大量越大）", xy=(24, base + 0.10), xytext=(13.5, base + 0.13),
+                 fontsize=9.5, color=UP, ha="center", va="bottom",
+                 arrowprops=dict(arrowstyle="->", color=UP, lw=1.1))
+    ax2.annotate("主动卖：市价单砸买盘", xy=(6, base + 0.04), xytext=(1.2, base + 0.125),
+                 fontsize=9.5, color=DOWN, ha="center", va="bottom",
+                 arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.1))
+    ax2.text(12.6, base - 0.075, "冰山单陷阱：逐笔只见拆出的碎单\n（大单未必是“大单”）", fontsize=9, color=ORANGE,
+             ha="center", va="top", bbox=dict(boxstyle="round,pad=0.25", fc="white", ec=ORANGE, lw=0.8))
+    ax2.set_xlim(-1.2, 26.5)
+    ax2.set_ylim(base - 0.13, base + 0.155)
+    ax2.set_xlabel("时间顺序（一笔一标记）", fontsize=10)
+    ax2.set_title("② 逐笔 Time & Sales：动态新闻\n“现在谁在成交”", fontsize=11.5, color=DARK)
+    ax2.grid(alpha=0.25)
+    # ---- 面板 3：Delta 柱（主动买 − 主动卖，累积） ----
+    x = np.arange(40)
+    # 震荡段(0-12) → 突破但 delta 萎缩(13-18) → 回踩缩量(19-27) → 反弹放量(28-39)
+    delta = np.concatenate([
+        np.array([8, -12, 15, -20, 6, -8, 10, -5, -14, 9, 7, -11, 4]),
+        np.array([18, 14, 9, 5, -2, -6]),
+        np.array([-8, -11, -6, -13, -5, -9, -7, -4, -10]),
+        np.array([22, 30, 18, 26, 42, 34, 50, 38, 28, 35, 24, 30])])
+    ax3.bar(x, delta, color=[UP if d >= 0 else DOWN for d in delta], alpha=0.85, width=0.8)
+    ax3.axhline(0, color=GRAY, lw=1.0)
+    ax3.axvspan(12.5, 18.5, color=ORANGE, alpha=0.12)
+    ax3.axvspan(27.5, 40, color=UP, alpha=0.08)
+    ax3.annotate("突破前高，但 delta 不跟进\n（买卖差不放大）→ 假突破", xy=(15, 14), xytext=(15.5, 34),
+                 fontsize=9, color=ORANGE, ha="center", va="bottom",
+                 arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.1))
+    ax3.annotate("回踩：负 delta 缩量\n（无人恐慌）", xy=(23, -7), xytext=(23, -34),
+                 fontsize=9, color=GRAY, ha="center", va="top",
+                 arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.1))
+    ax3.annotate("反弹：正 delta 放大\n（真金白银推）→ 趋势健康", xy=(33, 35), xytext=(26.5, 56),
+                 fontsize=9, color=UP, ha="center", va="bottom",
+                 arrowprops=dict(arrowstyle="->", color=UP, lw=1.1))
+    ax3.text(6, 44, "震荡：多空拉锯\n净 delta 来回摆", fontsize=9, color=GRAY, ha="center")
+    ax3.set_xlabel("时间（按 K 线累计）", fontsize=10)
+    ax3.set_ylabel("Delta（主动买 − 主动卖）", fontsize=10)
+    ax3.set_xlim(-1, 40)
+    ax3.set_ylim(-48, 62)
+    ax3.set_title("③ Delta：记分牌\n“净方向压力”", fontsize=11.5, color=DARK)
+    ax3.grid(axis="y", alpha=0.25)
+    fig.subplots_adjust(wspace=0.24, left=0.055, right=0.975, top=0.78, bottom=0.13)
+    fig.suptitle("订单流三件套（合成示意）：DOM 是静态地图、逐笔是动态新闻、Delta 是记分牌\n互证规则：三者共振才信——只有大墙（可能幌骗）或只有 delta（单根噪音）都不下结论",
+                 fontsize=12.5, color=DARK)
+    savefig(fig, "fig_p8_orderflow.png")
+
+
 # ---------------------------------------------------------------- v4：9.1 考核三段式流程
 def fig_prop_flow():
     """9.1 Prop 考核三段式：Phase 1 → Phase 2 → Funded，各带盈利目标与回撤约束"""
@@ -1480,6 +1577,7 @@ def main():
     fig_drawdown_prob()
     fig_verify_loop()
     fig_r_dist()
+    fig_p8_orderflow()
     # ---------- v4 新增（9/10 章无图章节） ----------
     fig_prop_flow()
     fig_risk_curve()
