@@ -1,5 +1,6 @@
 # ===== 素材文件（版权资料，不推送）=====
 *.pdf
+!handbook/trading-handbook.pdf
 *.pptx
 太妃ppt/
 英文原版 4本/
