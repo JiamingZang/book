@@ -2110,6 +2110,107 @@ def fig_p8_attribution():
     savefig(fig, "fig_p8_attribution.png")
 
 
+# ---------------------------------------------------------------- v10：6.7 凯利 / 6.8 破产概率 / 6.9 复利
+
+def fig_p6_kelly():
+    """6.7 凯利公式：左=f* vs 胜率（b=1/2/3 曲线族）；右=对数增长率 vs 仓位曲线"""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14.5, 5.8))
+    # 左：f* = p - (1-p)/b
+    p = np.linspace(0.05, 0.65, 200)
+    for b, col, lab in [(1, GRAY, "盈亏比 b=1"), (2, UP, "盈亏比 b=2"), (3, ORANGE, "盈亏比 b=3")]:
+        f = p - (1 - p) / b
+        ax1.plot(p, f, color=col, lw=2.0, label=lab)
+    ax1.plot([0.4], [0.1], "o", color=UP, ms=8, zorder=5)
+    ax1.annotate("胜率 40%、盈亏比 2\n→ 理论最优 f* = 10%", xy=(0.4, 0.1), xytext=(0.14, 0.30),
+                 fontsize=10, color=UP, arrowprops=dict(arrowstyle="->", color=UP, lw=1.2))
+    ax1.axhline(0.005, color=DOWN, ls=":", lw=1.3)
+    ax1.text(0.052, 0.008, "本书单笔风险 0.5%：远低于任何凯利值\n考核期要的是生存，不是增长", fontsize=9.5, color=DOWN)
+    ax1.set_xlim(0.05, 0.65)
+    ax1.set_ylim(-0.02, 0.62)
+    ax1.set_xlabel("胜率 p", fontsize=11)
+    ax1.set_ylabel("凯利仓位 f*", fontsize=11)
+    ax1.legend(fontsize=9.5, loc="upper left")
+    ax1.grid(alpha=0.3)
+    ax1.set_title("左：理论最优仓位 f* = p − (1−p)/b——胜率越高、盈亏比越大，上限越高", fontsize=11.5, color=DARK)
+    # 右：对数增长率 g(f) = p·ln(1+f·b) + q·ln(1−f)
+    f = np.linspace(0.001, 0.35, 300)
+    b, p_ = 2.0, 0.4
+    g = p_ * np.log(1 + f * b) + (1 - p_) * np.log(1 - f)
+    ax2.plot(f, g, color=DARK, lw=2.2)
+    ax2.axvline(0.1, color=UP, ls="--", lw=1.2)
+    ax2.text(0.103, g.max() * 0.5, "满凯利 f*=10%\n（增长率最高点）", fontsize=9.5, color=UP)
+    ax2.axvline(0.05, color=ORANGE, ls="--", lw=1.2)
+    ax2.text(0.053, g.max() * 0.78, "半凯利 5%：\n增长损失很小，\n回撤大幅缩小", fontsize=9.5, color=ORANGE)
+    ax2.axvline(0.005, color=DOWN, ls=":", lw=1.2)
+    ax2.text(0.008, g.max() * 0.12, "本书 0.5%：\n生存优先", fontsize=9.5, color=DOWN)
+    ax2.set_xlim(-0.005, 0.36)
+    ax2.set_xlabel("实际使用的仓位 f", fontsize=11)
+    ax2.set_ylabel("对数增长率 g(f)", fontsize=11)
+    ax2.grid(alpha=0.3)
+    ax2.set_title("右：增长率曲线——满凯利是尖峰，在 f/2~f/4 处损失极小（用 20% 波动换 80% 增长）", fontsize=11.5, color=DARK)
+    fig.suptitle("凯利公式（6.7）：f* 是仓位的理论上限，不是目标——输入不准 + 回撤极深，实用取半凯利或四分之一凯利",
+                 fontsize=13, color=DARK, y=0.985)
+    savefig(fig, "fig_p6_kelly.png")
+
+
+def fig_p6_ruin():
+    """6.8 破产概率：左=100 笔中至少出现一段 k 连亏的概率；右=犯错预算对比"""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14.5, 5.6), gridspec_kw={"width_ratios": [1.6, 1]})
+    # 左：P(至少一段 k 连亏) = 1 - (1 - q^k)^(N-k+1)，N=100, p=0.4
+    N, p_, q = 100, 0.4, 0.6
+    ks = np.arange(3, 16)
+    probs = [1 - (1 - q ** k) ** (N - k + 1) for k in ks]
+    ax1.bar(ks, probs, color=UP, alpha=0.85, width=0.62)
+    for k, pr in zip(ks, probs):
+        ax1.text(k, pr + 0.02, "%.0f%%" % (pr * 100), ha="center", fontsize=9, color=DARK)
+    ax1.annotate("5 连亏 ≈ 100%：几乎必现\n→ 2% 风险（5 次预算）≈ 必爆", xy=(5, probs[2]), xytext=(6.8, 0.52),
+                 fontsize=9.5, color=DOWN, arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.1))
+    ax1.annotate("10 连亏仍 ≈ 42%：风险翻 4 倍的人\n平均两轮考核就爆一次", xy=(10, probs[7]), xytext=(11.4, 0.66),
+                 fontsize=9.5, color=ORANGE, arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.1))
+    ax1.annotate("20 连亏仅 ≈ 0.3%：0.5% 风险\n几乎不可破（4 段 5 连亏叠加）", xy=(15, probs[12]), xytext=(10.2, 0.06),
+                 fontsize=9.5, color=UP, arrowprops=dict(arrowstyle="->", color=UP, lw=1.1))
+    ax1.set_xlim(2.5, 16.5)
+    ax1.set_ylim(0, 1.08)
+    ax1.set_xlabel("连亏 k 笔（100 笔中至少出现一段）", fontsize=11)
+    ax1.set_ylabel("概率", fontsize=11)
+    ax1.grid(alpha=0.3, axis="y")
+    ax1.set_title("胜率 40% 的系统：连亏长度分布——连亏无法避免，但可以让它“不致命”", fontsize=11.5, color=DARK)
+    # 右：犯错预算对比
+    ax2.barh(["2% 风险", "0.5% 风险"], [5, 20], color=[DOWN, UP], height=0.5)
+    ax2.text(5.4, 0, "5 次\n（2% × 5 = 10% 回撤线）", fontsize=10, color=DOWN, va="center")
+    ax2.text(20.5, 1, "20 次\n（0.5% × 20 = 10% 回撤线）", fontsize=10, color=UP, va="center")
+    ax2.set_xlim(0, 22.5)
+    ax2.set_ylim(-0.6, 1.6)
+    ax2.grid(alpha=0.3, axis="x")
+    ax2.set_title("犯错预算：风险减半 → 存活率数量级提升", fontsize=11.5, color=DARK)
+    fig.suptitle("破产概率（6.8）：风险百分比与存活率是指数关系——0.5% 风险 + 10% 回撤线 = 20 次犯错预算",
+                 fontsize=13, color=DARK, y=0.985)
+    savefig(fig, "fig_p6_ruin.png")
+
+
+def fig_p6_compound():
+    """6.9 复利与规模化：36 个月复利 vs 单利对比"""
+    fig, ax = plt.subplots(figsize=(10.5, 5.6))
+    t = np.arange(0, 37)
+    comp = 1.04 ** t
+    linear = 1 + 0.04 * t
+    ax.plot(t, comp, color=UP, lw=2.4, label="复利：月 +4%（1.04^t）")
+    ax.plot(t, linear, color=GRAY, lw=2.0, ls="--", label="单利：月 +4%（1 + 0.04t）")
+    ax.fill_between(t, linear, comp, color=UP, alpha=0.08)
+    ax.annotate("36 个月：复利 ≈ 4.1 倍 vs 单利 2.4 倍\n差距 1.7 倍全部来自“利滚利”", xy=(36, comp[-1]),
+                 xytext=(19, comp[-1] * 0.58), fontsize=10.5, color=UP,
+                 arrowprops=dict(arrowstyle="->", color=UP, lw=1.3))
+    ax.text(1.5, 4.35, "权益增长后，同样 0.5% 风险对应的\n绝对金额自动变大——仓位自己长大\n（不要手动加风险）", fontsize=10, color=DARK, va="top")
+    ax.set_xlim(0, 37)
+    ax.set_ylim(1, 4.7)
+    ax.set_xlabel("月份", fontsize=11)
+    ax.set_ylabel("账户倍数", fontsize=11)
+    ax.legend(fontsize=10.5, loc="upper left")
+    ax.grid(alpha=0.3)
+    ax.set_title("复利的引擎是“权益增长”，不是“你变大胆”", fontsize=12, color=DARK)
+    savefig(fig, "fig_p6_compound.png")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     fig_kline_structure()
@@ -2164,6 +2265,10 @@ def main():
     fig_p2_volume_rules()
     # ---------- v9 新增（8.9 绩效归因） ----------
     fig_p8_attribution()
+    # ---------- v10 新增（6.7 凯利 / 6.8 破产概率 / 6.9 复利） ----------
+    fig_p6_kelly()
+    fig_p6_ruin()
+    fig_p6_compound()
     fig_prop_flow()
     fig_risk_curve()
     fig_call_put()
