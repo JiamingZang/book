@@ -2012,6 +2012,44 @@ def fig_p9_progress():
     savefig(fig, "fig_p9_progress.png")
 
 
+# ---------------------------------------------------------------- v8：2.5 量价四规则
+
+def fig_p2_volume_rules():
+    """2.5 量价四规则：放量上涨/缩量回调/放量不新高/缩量新高（2×2 对照）"""
+    fig, axes = plt.subplots(2, 2, figsize=(13.5, 8.8))
+    data = [
+        ([(0, 96.6, 97.9, 96.2, 97.7), (1, 97.5, 98.7, 97.1, 98.5), (2, 98.3, 99.7, 98.0, 99.5)],
+         [0.8, 1.5, 2.4], "(a) 放量上涨 = 健康", "价格步步新高 + 量同步放大\n真金白银在推，不是虚拉", None, None),
+        ([(0, 97.8, 99.1, 97.5, 98.9), (1, 98.9, 99.2, 98.4, 98.6), (2, 98.6, 98.9, 98.1, 98.3)],
+         [2.0, 0.9, 0.6], "(b) 缩量回调 = 洗盘", "回调时没什么人真在卖（缩量）\n持仓者没跑，趋势大概率延续", None, None),
+        ([(0, 97.6, 98.5, 97.3, 98.3), (1, 98.3, 99.8, 98.1, 99.7), (2, 99.5, 99.75, 98.8, 99.0)],
+         [0.9, 2.0, 2.6], "(c) 放量不新高 = 危险", "巨量却没打出新成果（虚线未破）\n多方在耗尽——变天的早期信号", 99.8, "前高"),
+        ([(0, 97.6, 98.4, 97.4, 98.2), (1, 98.2, 99.0, 98.0, 98.8), (2, 98.8, 99.9, 98.6, 99.7)],
+         [1.8, 0.7, 0.4], "(d) 缩量新高 = 虚弱", "价格新高却没什么人跟（缩量）\n强弩之末，警惕假突破 FBO", 99.7, "新高"),
+    ]
+    for ax, (bars, vols, title, note, hl, hl_label) in zip(axes.flat, data):
+        for x, o, h, l, c in bars:
+            up = candle(ax, x, o, h, l, c)
+            col = ORANGE if vols[x] >= 2.4 else (UP if up else DOWN)
+            if title.startswith("(d)") and vols[x] <= 0.8:
+                col = GRAY
+            ax.add_patch(Rectangle((x - 0.18, 0.7), 0.36, 0.5 + vols[x] * 1.25,
+                                   facecolor=col, alpha=0.7, zorder=3))
+        if hl:
+            hl_line(ax, -0.6, 2.9, hl, color=GRAY, ls=":", lw=1.3)
+            ax.text(2.75, hl + 0.12, hl_label, fontsize=8.5, color=GRAY, ha="right")
+        ax.set_title(title, fontsize=12, color=DARK)
+        mark(ax, 1.5, 100.45, note, fs=8.5, color=DARK, ha="center")
+        ax.set_xlim(-0.7, 3.7)
+        ax.set_ylim(0.2, 102.0)
+        ax.set_facecolor("white")
+        for s in ax.spines.values():
+            s.set_visible(False)
+    fig.suptitle("量价四规则（2.5）：量是价格的“参与度验证”——放量要配得上价格成果，缩量要看清是洗盘还是没人跟",
+                 fontsize=13, color=DARK, y=0.985)
+    savefig(fig, "fig_p2_volume_rules.png")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     fig_kline_structure()
@@ -2060,9 +2098,10 @@ def main():
     fig_p1_asset_allocation()
     fig_p3_combo_bars()
     fig_p3_mtr()
-    # ---------- v8 新增（6.13 风险预算制 / 9.8 考核进度阶梯） ----------
+    # ---------- v8 新增（6.13 风险预算制 / 9.8 考核进度阶梯 / 2.5 量价四规则） ----------
     fig_p6_risk_budget()
     fig_p9_progress()
+    fig_p2_volume_rules()
     # ---------- v4 新增（9/10 章无图章节） ----------
     fig_prop_flow()
     fig_risk_curve()
