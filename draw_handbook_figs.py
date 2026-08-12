@@ -2367,6 +2367,82 @@ def fig_p5_smc_flow():
     savefig(fig, "fig_p5_smc_flow.png")
 
 
+# ---------------------------------------------------------------- v13：10.3 期权价格构成 / 8.8 复盘体系
+
+def fig_p10_price_breakdown():
+    """10.3 期权价格构成：左=到期时只剩内在价值；右=到期前=内在价值+时间价值"""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14.5, 5.6))
+    K = 5050.0
+    s = np.linspace(4950, 5150, 400)
+    intrinsic = np.maximum(s - K, 0)
+    tv = 22 * np.exp(-((s - K) / 112.0) ** 2)  # 以 ATM 为中心的“时间价值帽”
+    # ---- 左：到期日 ----
+    ax1.plot(s, intrinsic, color=UP, lw=2.4)
+    ax1.axvline(K, color=GRAY, ls=":", lw=1.2)
+    ax1.text(K, -13, "行权价 5050", ha="center", fontsize=10, color=GRAY)
+    ax1.fill_between(s, 0, intrinsic, color=UP, alpha=0.15)
+    ax1.text(5112, 62, "到期时：价格 = 内在价值\n时间价值归零", ha="center", fontsize=10.5, color=UP)
+    ax1.text(4985, 16, "S ≤ K：内在价值 = 0\n（期权作废，损失全部权利金）", fontsize=9.5, color=GRAY)
+    ax1.set_xlim(4950, 5150)
+    ax1.set_ylim(-20, 140)
+    ax1.set_xlabel("标的价 S（ES 例子：行权价 5050 的 Call）", fontsize=11)
+    ax1.set_ylabel("期权价格（点）", fontsize=11)
+    ax1.grid(alpha=0.3)
+    ax1.set_title("(a) 到期日：只剩内在价值，时间价值 = 0", fontsize=11.5, color=DARK)
+    # ---- 右：到期前 ----
+    price = intrinsic + tv
+    ax2.plot(s, intrinsic, color=GRAY, ls="--", lw=1.6)
+    ax2.plot(s, price, color=TEAL, lw=2.4)
+    ax2.fill_between(s, intrinsic, price, color=ORANGE, alpha=0.30)
+    ax2.fill_between(s, 0, intrinsic, color=UP, alpha=0.15)
+    ax2.axvline(K, color=GRAY, ls=":", lw=1.2)
+    ax2.axvline(5150, color=DARK, ls=":", lw=1.0)
+    ax2.annotate("S=5150 例子：价格 110 = 内在价值 100 + 时间价值 10",
+                 xy=(5150, 110), xytext=(5062, 122),
+                 arrowprops=dict(arrowstyle="->", color=DARK), fontsize=10, color=DARK)
+    ax2.text(5050, 10, "时间价值\n（ATM 最高）", ha="center", fontsize=9.5, color=ORANGE)
+    ax2.text(5105, 86, "越接近行权价，\n“可能发生好事”的空间越大", fontsize=9.5, color=GRAY)
+    ax2.text(5126, 30, "内在价值\n（立刻行权能赚的钱）", fontsize=9.5, color=UP)
+    ax2.text(4968, 8, "OTM：只有时间价值", fontsize=9, color=GRAY)
+    ax2.set_xlim(4950, 5150)
+    ax2.set_ylim(-20, 140)
+    ax2.set_xlabel("标的价 S", fontsize=11)
+    ax2.grid(alpha=0.3)
+    ax2.set_title("(b) 到期前：价格 = 内在价值 + 时间价值（溢价帽）", fontsize=11.5, color=DARK)
+    fig.suptitle("期权价格构成（10.3）：内在价值是“地板”，时间价值是“帽子”——到期日帽子消失",
+                 fontsize=13, color=DARK, y=0.985)
+    savefig(fig, "fig_p10_price_breakdown.png")
+
+
+def fig_p8_review_flow():
+    """8.8 复盘体系：日/周/月三层节奏 + 决策反馈循环"""
+    fig, ax = plt.subplots(figsize=(14.5, 6.2))
+    style_ax(ax, xlim=(0, 14), ylim=(0, 6.4))
+    # ---- 顶部核心认知框 ----
+    draw_box(ax, 0.5, 5.15, 13.0, 0.9,
+             "复盘的核心不是“自责”，是“收集数据”——每笔交易无论对错，都是下一个决策的依据",
+             ec=GRAY, fs=11, tc=DARK)
+    # ---- 三层复盘盒子 ----
+    boxes = [
+        (0.5, "日复盘（15 分钟）\n记录每笔（含心理状态）\n算当天执行率\n深入复盘 1 笔典型单", TEAL),
+        (5.1, "周复盘（1 小时）\n胜率 / 盈亏比 / 期望 / 执行率\n对比上周：执行率↓？计划外？\n权益曲线是否接近警戒线\n这周盈亏是系统还是运气？", ORANGE),
+        (9.7, "月复盘（半天）\n100+ 笔重算期望值\n砍掉持续亏损的 setup\n审视心理模式（7.5 高危画像）\n决定：继续 / 优化 / 暂停", GRAY),
+    ]
+    for i, (x, txt, col) in enumerate(boxes):
+        draw_box(ax, x, 2.3, 3.9, 2.45, txt, ec=col, fs=10, tc=DARK)
+        if i < 2:
+            flow_arrow(ax, x + 3.9, 3.52, x + 4.6, 3.52)
+    # ---- 底部反馈框 + 循环箭头 ----
+    draw_box(ax, 0.5, 0.35, 13.0, 1.05,
+             "决策反馈：继续 / 优化 / 暂停——把结论带回下一个日复盘（修正规则或坚持规则）",
+             ec=TEAL, fs=10.5, tc=DARK)
+    flow_arrow(ax, 11.65, 2.3, 11.65, 1.4, color=DARK)
+    flow_arrow(ax, 2.45, 1.4, 2.45, 2.3, color=DARK)
+    fig.suptitle("复盘体系（8.8）：日→周→月三层节奏，结论反馈回系统——复盘是持续验证的引擎",
+                 fontsize=13, color=DARK, y=0.985)
+    savefig(fig, "fig_p8_review_flow.png")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     fig_kline_structure()
@@ -2431,6 +2507,9 @@ def main():
     fig_p9_fail()
     # ---------- v12 新增（5.7 完整 SMC 交易流程） ----------
     fig_p5_smc_flow()
+    # ---------- v13 新增（10.3 期权价格构成 / 8.8 复盘体系） ----------
+    fig_p10_price_breakdown()
+    fig_p8_review_flow()
     fig_prop_flow()
     fig_risk_curve()
     fig_call_put()
