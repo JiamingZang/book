@@ -2211,6 +2211,129 @@ def fig_p6_compound():
     savefig(fig, "fig_p6_compound.png")
 
 
+# ---------------------------------------------------------------- v11：1.6 点差滑点 / 7.4 连亏连赚 / 9.4 失败归因
+
+def fig_p1_quotes():
+    """1.6 价格形成：左=买卖盘与点差结构；右=滑点（跳空穿过止损）示意"""
+    fig = plt.figure(figsize=(14.5, 5.8))
+    gs = fig.add_gridspec(1, 2, width_ratios=[1, 1.35], wspace=0.16)
+    ax1 = fig.add_subplot(gs[0])
+    ax2 = fig.add_subplot(gs[1])
+    # ---- 左：买卖盘与点差 ----
+    price_levels = [99.90, 99.94, 99.98, 100.02, 100.06, 100.10]
+    depths = [3.2, 5.1, 7.8, 6.4, 4.2, 2.6]  # 各价位挂单量
+    colors = [UP, UP, UP, DOWN, DOWN, DOWN]
+    ax1.barh(price_levels, depths, color=colors, height=0.03, alpha=0.75, zorder=3)
+    ax1.axhline(100.00, color=GRAY, lw=0.8, ls="--")
+    ax1.fill_betweenx([99.98, 100.02], 0, 9.2, color=ORANGE, alpha=0.14, zorder=1)
+    ax1.text(9.35, 100.00, "点差 = Ask − Bid\n(进出一次的成本)", fontsize=9.5, color=DARK, va="center", ha="left")
+    ax1.annotate("卖价 Ask（你买入的价格）", xy=(7.8, 100.02), xytext=(2.0, 100.09),
+                 fontsize=10, color=DOWN, arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.2))
+    ax1.annotate("买价 Bid（你卖出的价格）", xy=(7.8, 99.98), xytext=(2.0, 99.87),
+                 fontsize=10, color=UP, arrowprops=dict(arrowstyle="->", color=UP, lw=1.2))
+    ax1.text(0.2, 99.70, "挂单量（流动性）——深度越厚，点差越窄\n伦敦时段窄 / 亚盘宽 / 数据瞬间放大数倍", fontsize=9.5, color=GRAY, va="top")
+    ax1.set_xlim(0, 13)
+    ax1.set_ylim(99.66, 100.20)
+    ax1.set_xlabel("挂单量（示意）", fontsize=11)
+    ax1.set_ylabel("价格", fontsize=11)
+    ax1.grid(alpha=0.3, axis="x")
+    ax1.set_title("买卖盘结构：你买用 Ask、卖用 Bid——一进一出天然亏一个点差", fontsize=11.5, color=DARK)
+    # ---- 右：滑点 ----
+    ax2.plot([0, 4], [100.00, 100.00], color=DARK, lw=2.0)
+    ax2.plot([4, 4.05], [100.00, 99.80], color=DOWN, lw=2.0)  # 跳空
+    ax2.plot([4.05, 10], [99.80, 99.80], color=DOWN, lw=2.0)
+    ax2.axhline(99.95, color=GRAY, ls=":", lw=1.4)
+    ax2.text(5.4, 99.955, "止损挂 99.95", fontsize=9, color=GRAY)
+    ax2.annotate("实际成交 99.80\n（多亏 15 点——价位没人接单）", xy=(4.5, 99.80), xytext=(5.0, 99.62),
+                 fontsize=9.5, color=DOWN, arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.2))
+    ax2.text(0.2, 100.02, "周末开盘 / 数据瞬间 / 低流动性：止损单只能追跳空价\n一句话记牢：市价单和止损单会滑点，限价单不会",
+             fontsize=9.5, color=DARK, va="bottom")
+    ax2.set_xlim(0, 10.4)
+    ax2.set_ylim(99.52, 100.10)
+    ax2.set_xticks([])
+    ax2.set_yticks([99.60, 99.80, 100.00])
+    ax2.grid(alpha=0.3, axis="y")
+    ax2.set_title("滑点：价格跳空穿过你的止损——不是平台坑你，是没人在那个价位接单", fontsize=11.5, color=DARK)
+    fig.suptitle("价格怎么形成（1.6）：点差是固定成本，滑点高发在跳空——插针不是每次都是机构扫止损，有时只是没人接单（第 5 章 sweep 清单）",
+                 fontsize=13, color=DARK, y=0.985)
+    savefig(fig, "fig_p1_quotes.png")
+
+
+def fig_p7_streaks():
+    """7.4 连亏与连赚：两个螺旋的危险信号逐级升级；应对框在底部"""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14.5, 5.6))
+    stages1 = ["正常连亏\n（都符合计划）", "怀疑系统", "想改规则", "想加倍回本", "报复交易"]
+    risk1 = [0.15, 0.35, 0.55, 0.78, 1.0]
+    ax1.bar(range(5), risk1, color=[UP, ORANGE, ORANGE, ORANGE, DOWN], alpha=0.85, zorder=3)
+    for i, (r, s) in enumerate(zip(risk1, stages1)):
+        ax1.text(i, r + 0.03, s, ha="center", va="bottom", fontsize=9.5, color=DARK)
+    ax1.axhline(0.85, color=DOWN, ls="--", lw=1.3)
+    ax1.text(2.35, 0.87, "危险区：强制停手", fontsize=9.5, color=DOWN, va="bottom")
+    ax1.annotate("开始怀疑：第一个危险信号", xy=(1, 0.35), xytext=(0.2, 0.68),
+                 fontsize=9, color=GRAY, arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.0))
+    ax1.text(0.05, 1.12, "应对：降风险预算 0.5%→0.25% 继续做——不停手、不改系统、不加倍",
+             fontsize=10, color=DARK, va="top")
+    ax1.set_xlim(-0.5, 4.5)
+    ax1.set_ylim(0, 1.25)
+    ax1.set_xticks([])
+    ax1.set_ylabel("违规风险 →", fontsize=11)
+    ax1.grid(alpha=0.3, axis="y")
+    ax1.set_title("连亏螺旋：从“正常连亏”到“报复交易”是渐进的——\n在怀疑阶段就拦截，别等到危险区", fontsize=11.5, color=DARK)
+    stages2 = ["连赚", "过度自信\n（我悟了）", "想加仓位", "计划外交易", "回吐利润"]
+    risk2 = [0.15, 0.4, 0.62, 0.82, 1.0]
+    ax2.bar(range(5), risk2, color=[UP, ORANGE, ORANGE, DOWN, DOWN], alpha=0.85, zorder=3)
+    for i, (r, s) in enumerate(zip(risk2, stages2)):
+        ax2.text(i, r + 0.03, s, ha="center", va="bottom", fontsize=9.5, color=DARK)
+    ax2.axhline(0.85, color=DOWN, ls="--", lw=1.3)
+    ax2.text(2.35, 0.87, "危险区：连赚比连亏更危险", fontsize=9.5, color=DOWN, va="bottom")
+    ax2.annotate("“我悟了”是最危险的一句话", xy=(2, 0.62), xytext=(0.4, 0.95),
+                 fontsize=9, color=GRAY, arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.0))
+    ax2.text(0.05, 1.12, "应对：维持原仓位原风险——连赚是概率的馈赠，不是你变强了",
+             fontsize=10, color=DARK, va="top")
+    ax2.set_xlim(-0.5, 4.5)
+    ax2.set_ylim(0, 1.25)
+    ax2.set_xticks([])
+    ax2.grid(alpha=0.3, axis="y")
+    ax2.set_title("连赚螺旋：自满让你觉得规则“太保守”——\n计划外交易那一刻，利润开始回吐", fontsize=11.5, color=DARK)
+    fig.suptitle("两个危险时刻（7.4）：连亏考验纪律，连赚考验清醒——危险信号都是渐进出现的，关键是尽早识别并在早期拦截",
+                 fontsize=13, color=DARK, y=0.99)
+    savefig(fig, "fig_p7_streaks.png")
+
+
+def fig_p9_fail():
+    """9.4 常见失败原因：左=五类原因频率排序（示意）；右=方法×仓位×执行三角"""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14.5, 5.6), gridspec_kw={"width_ratios": [1.35, 1]})
+    causes = ["忽视一致性规则", "过度交易", "违规（持仓/新闻/锁仓）", "报复交易", "重仓冲刺"]
+    freq = [12, 16, 20, 24, 28]
+    cols = [GRAY, ORANGE, ORANGE, DOWN, DOWN]
+    ax1.barh(causes, freq, color=cols, height=0.55, zorder=3)
+    for i, v in enumerate(freq):
+        ax1.text(v + 0.6, i, "%d%%" % v, va="center", fontsize=10, color=DARK)
+    ax1.text(0.5, 4.6, "数值为相对频率示意（按 9.4 排序绘制，非平台官方统计）", fontsize=9, color=GRAY)
+    ax1.text(20, 3.1, "五条没有一条是“技术不行”——全在纪律层", fontsize=10.5, color=DOWN)
+    ax1.set_xlim(0, 34)
+    ax1.set_ylim(-0.6, 5.2)
+    ax1.set_xlabel("相对频率 %（示意）", fontsize=11)
+    ax1.grid(alpha=0.3, axis="x")
+    ax1.set_title("考核失败原因频率：方法、仓位都教过了，失败发生在执行层", fontsize=11.5, color=DARK)
+    # ---- 右：三角 ----
+    tri = [(0, 0), (4, 0), (2, 3.46), (0, 0)]
+    ax2.plot([p[0] for p in tri], [p[1] for p in tri], color=DARK, lw=2.2)
+    ax2.text(2, -0.55, "方法（第 2-5 章）", ha="center", fontsize=11, color=UP, fontweight="bold")
+    ax2.text(-0.4, 1.85, "仓位\n（第 6 章）", ha="right", fontsize=11, color=ORANGE, fontweight="bold")
+    ax2.text(4.4, 1.85, "执行\n（第 7 章）", ha="left", fontsize=11, color=DOWN, fontweight="bold")
+    ax2.plot([2], [1.15], "o", color=TEAL, ms=14, zorder=5)
+    ax2.text(2, 1.15, "考核\n通过", ha="center", va="center", fontsize=10.5, color="white", zorder=6, fontweight="bold")
+    ax2.text(2, -1.35, "三者缺一不可：重仓冲刺毁在仓位，\n报复交易毁在执行，违规毁在规则", fontsize=9.5, color=GRAY, ha="center")
+    ax2.set_xlim(-1.4, 5.4)
+    ax2.set_ylim(-1.9, 4.0)
+    ax2.axis("off")
+    ax2.set_title("考核期 = 方法 × 仓位 × 执行（9.4）", fontsize=11.5, color=DARK)
+    fig.suptitle("考核为什么失败（9.4）：五类原因全是纪律问题——先把执行层堵住，再谈技术优化",
+                 fontsize=13, color=DARK, y=0.985)
+    savefig(fig, "fig_p9_fail.png")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     fig_kline_structure()
@@ -2269,6 +2392,10 @@ def main():
     fig_p6_kelly()
     fig_p6_ruin()
     fig_p6_compound()
+    # ---------- v11 新增（1.6 点差滑点 / 7.4 连亏连赚 / 9.4 失败归因） ----------
+    fig_p1_quotes()
+    fig_p7_streaks()
+    fig_p9_fail()
     fig_prop_flow()
     fig_risk_curve()
     fig_call_put()
