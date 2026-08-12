@@ -1225,6 +1225,111 @@ def fig_p8_footprint():
     savefig(fig, "fig_p8_footprint.png")
 
 
+# ---------------------------------------------------------------- v7：4.26 ORB 开盘区间突破
+
+def fig_p4_orb():
+    """4.26 ORB：开盘区间 + 收盘突破 + 回测不破 + 顺势走高（六要素图形化）"""
+    fig, ax = plt.subplots(figsize=(13.5, 6.6))
+    k = [(0, 100.5, 101.5, 99.5, 101.0), (1, 101.0, 101.8, 100.2, 100.5), (2, 100.5, 102.0, 100.0, 101.8),
+         (3, 101.8, 103.0, 101.5, 102.8), (4, 102.8, 103.5, 102.2, 103.2),
+         (5, 103.2, 103.8, 102.1, 102.2), (6, 102.2, 103.5, 102.1, 103.3),
+         (7, 103.3, 104.5, 103.0, 104.2), (8, 104.2, 105.0, 103.8, 104.8), (9, 104.8, 106.0, 104.5, 105.8),
+         (10, 105.8, 106.5, 105.5, 106.3), (11, 106.3, 107.0, 106.0, 106.8)]
+    for x, o, h, l, c in k:
+        candle(ax, x, o, h, l, c, width=0.6)
+    orb_hi, orb_lo = 102.0, 99.5
+    ax.add_patch(Rectangle((-0.55, orb_lo), 3.6, orb_hi - orb_lo, facecolor=GRAY, alpha=0.14, zorder=1))
+    hl_line(ax, -0.6, 12.4, orb_hi, color=GRAY, ls=":", lw=1.2)
+    hl_line(ax, -0.6, 12.4, orb_lo, color=GRAY, ls=":", lw=1.2)
+    ax.text(12.2, orb_hi, "ORB 上沿 102.0", fontsize=9.5, color=GRAY, va="bottom", ha="right")
+    ax.text(12.2, orb_lo, "ORB 下沿 99.5", fontsize=9.5, color=GRAY, va="bottom", ha="right")
+    mark(ax, 1, 103.4, "开盘区间 ORB：\n前 N 根 K 线的高低点\n（N = 5/15/30 分钟）", fs=9.5, color=DARK, va="bottom")
+    ax.annotate("收盘突破上沿 → 顺势入场\n（等收盘确认，别追盘中插针）", xy=(3.5, 102.6), xytext=(2.0, 107.6),
+                fontsize=9.5, color=UP, arrowprops=dict(arrowstyle="->", color=UP, lw=1.1))
+    ax.annotate("回测上沿不破 = 高质量二次入场\n（突破→测试结构的时间版本）", xy=(5.5, 102.2), xytext=(6.6, 108.8),
+                fontsize=9.5, color=ORANGE, arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.1))
+    ax.annotate("止损 = 对侧边界外 1 tick\n（≈99.4，窄 ORB 止损紧凑）", xy=(3.5, 99.5), xytext=(7.0, 97.3),
+                fontsize=9.5, color=DOWN, va="top", ha="center",
+                arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.1))
+    ax.annotate("趋势日：移动止损吃全天\n（呼应 4.15）", xy=(10, 106.5), xytext=(8.6, 109.8),
+                fontsize=9.5, color=TEAL, arrowprops=dict(arrowstyle="->", color=TEAL, lw=1.1))
+    ax.set_xlabel("时间（开盘后 K 线）", fontsize=11)
+    ax.set_ylabel("价格", fontsize=11)
+    ax.set_xlim(-1.1, 13.2)
+    ax.set_ylim(96.2, 111.5)
+    ax.grid(alpha=0.3)
+    ax.set_title("ORB：开盘区间 = 隔夜信息定价战场——收盘突破、回测不破、趋势日单边（合成示意）",
+                 fontsize=12, color=DARK)
+    savefig(fig, "fig_p4_orb.png")
+
+
+# ---------------------------------------------------------------- v7：10.6 期权四策略损益
+
+def fig_opt_strategies():
+    """10.6 四策略到期损益：保护性 Put / 备兑 Call / 牛市价差 / 跨式（ES 例子）"""
+    fig, axes = plt.subplots(2, 2, figsize=(13.5, 9.6))
+    s = np.linspace(4940, 5210, 300)
+    S0, K, K2 = 5050, 5050, 5150
+    # ① 保护性 Put：多单 + 买 Put（prem 30）
+    pnl = (s - S0) + (np.maximum(K - s, 0) - 30)
+    ax = axes[0][0]
+    ax.plot(s, s - S0, color=UP, lw=1.4, alpha=0.5, ls="--", label="持有标的")
+    ax.plot(s, pnl, color=DARK, lw=2.4, label="+ 保护性 Put")
+    ax.axhline(0, color=GRAY, lw=0.8)
+    ax.annotate("暴跌时 Put 补损：\n最大回吐锁在保费 30", xy=(4980, -30), xytext=(4948, -85),
+                fontsize=9, color=DOWN, arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.0))
+    ax.annotate("上涨照常盈利\n（趋势继续拿）", xy=(5180, 130), xytext=(5100, 175),
+                fontsize=9, color=UP, arrowprops=dict(arrowstyle="->", color=UP, lw=1.0))
+    ax.set_title("① 保护性 Put：给浮盈多单买保险", fontsize=11.5, color=DARK)
+    ax.legend(fontsize=8.5, loc="lower right")
+    # ② 备兑 Call：多单 + 卖虚值 Call（收 15）
+    pnl = (s - S0) - (np.maximum(s - K2, 0) - 15)
+    ax = axes[0][1]
+    ax.plot(s, s - S0, color=UP, lw=1.4, alpha=0.5, ls="--", label="持有标的")
+    ax.plot(s, pnl, color=DARK, lw=2.4, label="+ 卖出虚值 Call")
+    ax.axhline(0, color=GRAY, lw=0.8)
+    ax.axvline(K2, color=GRAY, ls=":", lw=1.0)
+    ax.text(K2 + 3, -90, "行权价 5150", fontsize=8.5, color=GRAY)
+    ax.annotate("震荡期白收权利金 15\n（租金）", xy=(5050, 15), xytext=(5070, 60),
+                fontsize=9, color=UP, arrowprops=dict(arrowstyle="->", color=UP, lw=1.0))
+    ax.annotate("大涨被行权：\n盈利封顶 115（少赚不亏）", xy=(5170, 115), xytext=(5100, 150),
+                fontsize=9, color=ORANGE, arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.0))
+    ax.set_title("② 备兑 Call：震荡期收租金", fontsize=11.5, color=DARK)
+    ax.legend(fontsize=8.5, loc="lower right")
+    # ③ 牛市价差：买 5050 Call(30) + 卖 5150 Call(收15)
+    pnl = np.maximum(s - K, 0) - 30 - (np.maximum(s - K2, 0) - 15)
+    ax = axes[1][0]
+    ax.plot(s, pnl, color=DARK, lw=2.4)
+    ax.axhline(0, color=GRAY, lw=0.8)
+    ax.axvline(K, color=GRAY, ls=":", lw=1.0)
+    ax.axvline(K2, color=GRAY, ls=":", lw=1.0)
+    ax.annotate("最大亏损 = 净成本 15\n（下单即物理锁死）", xy=(4980, -15), xytext=(4948, -75),
+                fontsize=9, color=DOWN, arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.0))
+    ax.annotate("最大盈利封顶 85\n（我不赌超过 5150 的部分）", xy=(5170, 85), xytext=(5060, 140),
+                fontsize=9, color=UP, arrowprops=dict(arrowstyle="->", color=UP, lw=1.0))
+    ax.set_title("③ 牛市价差：定义风险的方向交易", fontsize=11.5, color=DARK)
+    # ④ 跨式：买 Call + 买 Put（各 25）
+    pnl = np.maximum(s - K, 0) + np.maximum(K - s, 0) - 50
+    ax = axes[1][1]
+    ax.plot(s, pnl, color=DARK, lw=2.4)
+    ax.axhline(0, color=GRAY, lw=0.8)
+    ax.annotate("最大亏损 = 双权利金 50\n（唯一风险是波动不够）", xy=(5050, -50), xytext=(4955, -85),
+                fontsize=9, color=DOWN, arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.0))
+    ax.annotate("大波动即盈利\n（涨跌都行）", xy=(5190, 90), xytext=(5100, 175),
+                fontsize=9, color=UP, arrowprops=dict(arrowstyle="->", color=UP, lw=1.0))
+    ax.text(4960, 160, "坑：事件前 IV 已被抬高，\n事件后 IV crush 两边一起贬值", fontsize=9, color=ORANGE, va="top")
+    ax.set_title("④ 跨式：赌大波动，不赌方向", fontsize=11.5, color=DARK)
+    for ax in axes.flat:
+        ax.set_xlabel("到期时 ES 价格")
+        ax.set_ylabel("盈亏（点）")
+        ax.set_ylim(-110, 210)
+        ax.grid(alpha=0.25)
+    fig.subplots_adjust(wspace=0.2, hspace=0.3, left=0.055, right=0.98, top=0.9, bottom=0.07)
+    fig.suptitle("四种策略 = 四种“你想干什么”：对冲 / 收租 / 方向 / 波动——损益形状一看就懂（ES 例子）",
+                 fontsize=12.5, color=DARK)
+    savefig(fig, "fig_p10_strategies.png")
+
+
 # ---------------------------------------------------------------- v4：9.1 考核三段式流程
 def fig_prop_flow():
     """9.1 Prop 考核三段式：Phase 1 → Phase 2 → Funded，各带盈利目标与回撤约束"""
@@ -1690,6 +1795,8 @@ def main():
     fig_p8_orderflow()
     fig_p5_volume_profile()
     fig_p8_footprint()
+    fig_p4_orb()
+    fig_opt_strategies()
     # ---------- v4 新增（9/10 章无图章节） ----------
     fig_prop_flow()
     fig_risk_curve()
