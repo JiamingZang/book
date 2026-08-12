@@ -1910,6 +1910,108 @@ def fig_p7_three_stages():
     savefig(fig, "fig_p7_three_stages.png")
 
 
+# ---------------------------------------------------------------- v8：6.13 风险预算制分配
+
+def fig_p6_risk_budget():
+    """6.13 多策略资金分配：总预算 $750 → 按策略权重切分 + 相关性修正合并 + 期权对冲"""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14.5, 6.2), gridspec_kw={"width_ratios": [1.15, 1]})
+    # ---- 面板 A：总预算 → 策略切分 ----
+    ax1.set_xlim(0, 10)
+    ax1.set_ylim(0, 10)
+    ax1.add_patch(Rectangle((0.5, 7.5), 9, 1.5, facecolor=DARK, alpha=0.9, zorder=3))
+    ax1.text(5, 8.25, "总风险预算 $750 = $50,000 × 1.5%（所有持仓名义风险之和）",
+             fontsize=10.5, color="white", ha="center", va="center", zorder=4)
+    segs = [(0.5, 3.6, 40, 300, "趋势回调（4.3）", UP),
+            (4.2, 2.7, 30, 225, "区间边界（4.4）", ORANGE),
+            (7.0, 2.7, 30, 225, "微通道（4.6）", TEAL)]
+    for x, w, pct, money, name, color in segs:
+        ax1.add_patch(Rectangle((x, 3.4), w, 2.2, facecolor=color, alpha=0.85, zorder=3))
+        ax1.text(x + w / 2, 4.85, name, fontsize=10, color="white", ha="center", va="center", zorder=4)
+        ax1.text(x + w / 2, 3.95, "%d%%  $%d" % (pct, money), fontsize=9, color="white", ha="center", va="center", zorder=4)
+    for cx in (2.3, 5.55, 8.35):
+        flow_arrow(ax1, cx, 7.5, cx, 5.6, color=GRAY)
+    ax1.add_patch(Rectangle((0.5, 1.0), 9, 1.8, facecolor="white", ec=DARK, lw=0.8, zorder=3))
+    ax1.text(5, 1.9, "单笔默认 0.5% = $250；预算制下可能被压小（$225/笔）——这是对的",
+             fontsize=9.5, color=DARK, ha="center", va="center", zorder=4)
+    ax1.text(5, 1.3, "保护的是“多个系统同向触发”的极端日子（趋势日三系统同向）",
+             fontsize=9, color=ORANGE, ha="center", va="center", zorder=4)
+    ax1.set_title("① 先封顶总风险，再按策略权重切分（$50,000 账户）", fontsize=12, color=DARK)
+    # ---- 面板 B：相关性修正 + 期权对冲 ----
+    ax2.set_xlim(0, 10)
+    ax2.set_ylim(0, 10)
+    ax2.text(5, 9.3, "相关性修正：同向高相关合并计算，不简单相加", fontsize=12, color=DARK, ha="center")
+    ax2.add_patch(Rectangle((0.5, 7.2), 2.8, 1.4, facecolor=UP, alpha=0.8, zorder=3))
+    ax2.text(1.9, 8.15, "EURUSD 多\n0.5%", fontsize=9.5, color="white", ha="center", va="center", zorder=4)
+    ax2.add_patch(Rectangle((3.6, 7.2), 2.8, 1.4, facecolor=UP, alpha=0.8, zorder=3))
+    ax2.text(5.0, 8.15, "GBPUSD 多\n0.5%", fontsize=9.5, color="white", ha="center", va="center", zorder=4)
+    ax2.add_patch(Rectangle((6.7, 7.2), 2.8, 1.4, facecolor=DOWN, alpha=0.8, zorder=3))
+    ax2.text(8.1, 8.15, "ES 空\n0.5%", fontsize=9.5, color="white", ha="center", va="center", zorder=4)
+    flow_arrow(ax2, 1.9, 7.2, 1.9, 5.0, color=UP, rad=0.15)
+    flow_arrow(ax2, 5.0, 7.2, 5.0, 5.0, color=UP, rad=-0.15)
+    ax2.add_patch(Rectangle((0.5, 3.6), 5.4, 1.4, facecolor="white", ec=UP, lw=1.2, zorder=3))
+    ax2.text(3.2, 4.3, "合并 = 1 笔“美元走弱”\n风险按 1% 算（不是 2 个 0.5%）",
+             fontsize=9.5, color=DARK, ha="center", va="center", zorder=4)
+    flow_arrow(ax2, 8.1, 7.2, 8.1, 5.0, color=DOWN, rad=0.15)
+    ax2.add_patch(Rectangle((6.7, 3.6), 2.8, 1.4, facecolor="white", ec=ORANGE, lw=1.2, zorder=3))
+    ax2.text(8.1, 4.3, "不同逻辑\n可同时持", fontsize=9.5, color=DARK, ha="center", va="center", zorder=4)
+    ax2.add_patch(Rectangle((0.5, 1.2), 9, 1.7, facecolor="white", ec=GRAY, lw=0.8, zorder=3))
+    ax2.text(5, 2.05, "组合层第 4 条安全带：期权对冲（10.6）——保护性 Put 的保费\n计入风险预算，专管持仓过夜的尾部风险（呼应 1.8 黑天鹅）",
+             fontsize=9, color=DARK, ha="center", va="center", zorder=4)
+    ax2.set_title("② 实际敞口开盘前算清：总敞口 ≤ 1.5% 才允许同时开仓", fontsize=12, color=DARK, y=0.02)
+    fig.suptitle("风险预算制（6.13）：封顶 → 切分 → 合并 → 对冲，四步把“多策略”变成“一个受控组合”",
+                 fontsize=13, color=DARK, y=0.985)
+    savefig(fig, "fig_p6_risk_budget.png")
+
+
+# ---------------------------------------------------------------- v8：9.8 考核进度阶梯
+
+def fig_p9_progress():
+    """9.8 完整考核过程：8 周 72 笔阶梯 +10%（红线一次不碰）+ Phase 2 / Funded 摘要"""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14.5, 6.2), gridspec_kw={"width_ratios": [1.5, 1]})
+    # ---- 面板 A：Phase 1 阶梯 ----
+    x = [0, 2, 4, 6, 8]
+    y = [0, 2.5, 5.0, 7.5, 10.0]
+    ax1.plot(x, y, drawstyle="steps-post", color=UP, lw=2.6, marker="o", ms=7, zorder=4)
+    ax1.axhline(10, color=UP, ls=":", lw=1.2)
+    ax1.text(8.35, 10.4, "Phase 1 目标 +10%", fontsize=10, color=UP)
+    ax1.axhline(-5, color=ORANGE, ls=":", lw=1.2)
+    ax1.text(8.35, -4.6, "日回撤线 -5%", fontsize=9.5, color=ORANGE)
+    ax1.axhline(-10, color=DOWN, ls=":", lw=1.2)
+    ax1.text(8.35, -9.6, "总回撤线 -10%", fontsize=9.5, color=DOWN)
+    for sx, sy in [(2, 2.5), (4, 5.0), (6, 7.5)]:
+        ax1.text(sx, sy + 0.55, "18 笔\n+2.5%", fontsize=9, color=DARK, ha="center")
+    ax1.annotate("第 8 周：72 笔累计 +10.0%\n→ Phase 1 通过（约 2 个月）",
+                 xy=(8, 10), xytext=(4.6, 11.4), fontsize=10, color=UP,
+                 arrowprops=dict(arrowstyle="->", color=UP, lw=1.2))
+    ax1.text(0.1, -12.9, "日回撤从日内高点起算；连亏 2 笔后休息一天——不让亏损段放大（红线一次不碰）",
+             fontsize=9, color=GRAY)
+    ax1.set_xlim(0, 8.6)
+    ax1.set_ylim(-14, 12.6)
+    ax1.set_xticks([0, 2, 4, 6, 8])
+    ax1.set_xlabel("考核周数", fontsize=11)
+    ax1.set_ylabel("账户累计收益 %", fontsize=11)
+    ax1.grid(alpha=0.3)
+    ax1.set_title("Phase 1：胜率 40% + 盈亏比 2.2 → 每笔期望 +0.14%，72 笔 × 0.14% ≈ 10%",
+                  fontsize=11.5, color=DARK)
+    # ---- 面板 B：Phase 2 + Funded 摘要 ----
+    ax2.set_xlim(0, 10)
+    ax2.set_ylim(0, 10)
+    ax2.add_patch(Rectangle((2.2, 7.0), 7.3, 1.5, facecolor=UP, alpha=0.85, zorder=3))
+    ax2.text(5.85, 7.75, "Phase 2：目标 +5%\n同样方法，约 1 个月通过", fontsize=10, color="white", ha="center", va="center", zorder=4)
+    ax2.text(0.3, 7.75, "阶段\n目标", fontsize=10, color=DARK, ha="left", va="center")
+    ax2.add_patch(Rectangle((2.2, 4.7), 7.3, 1.5, facecolor=ORANGE, alpha=0.85, zorder=3))
+    ax2.text(5.85, 5.45, "Funded 首月：+4%\n出金分成 80-90%（周期 14-30 天）", fontsize=10, color="white", ha="center", va="center", zorder=4)
+    ax2.add_patch(Rectangle((0.5, 2.0), 9, 1.6, facecolor="white", ec=DARK, lw=0.8, zorder=3))
+    ax2.text(5, 2.8, "纪律红线全程生效：单笔 ≤0.5%、总敞口 ≤1.5%、\n日回撤 ≤5%、周末/新闻/一致性规则全部遵守",
+             fontsize=9.5, color=DARK, ha="center", va="center", zorder=4)
+    ax2.text(5, 0.8, "关键：无重仓、无报复、无违规——“慢就是快”不是口号，是 72 笔的算数",
+             fontsize=10, color=DOWN, ha="center", va="center")
+    ax2.set_title("Phase 2 + Funded：纪律不变，奖励从过线变现金流", fontsize=12, color=DARK)
+    fig.suptitle("一次完整考核（FTMO 式 $100k，9.8）：8 周 72 笔稳稳 +10%，红线一次不碰——达标靠小优势 × 大样本",
+                 fontsize=13, color=DARK, y=0.985)
+    savefig(fig, "fig_p9_progress.png")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     fig_kline_structure()
@@ -1958,6 +2060,9 @@ def main():
     fig_p1_asset_allocation()
     fig_p3_combo_bars()
     fig_p3_mtr()
+    # ---------- v8 新增（6.13 风险预算制 / 9.8 考核进度阶梯） ----------
+    fig_p6_risk_budget()
+    fig_p9_progress()
     # ---------- v4 新增（9/10 章无图章节） ----------
     fig_prop_flow()
     fig_risk_curve()
