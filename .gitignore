@@ -1,0 +1,29 @@
+# ===== 素材文件（版权资料，不推送）=====
+*.pdf
+*.pptx
+太妃ppt/
+英文原版 4本/
+
+# ===== 中间产物 =====
+_ocr_out/
+_pdf_pages/
+_ppt_pics/
+_ppt_text/
+_ref_clean/
+_ref_texts/
+__pycache__/
+
+# ===== 日志与临时文件 =====
+_*.txt
+_*.log
+_*.png
+
+# ===== 素材处理脚本（不属于手册）=====
+_ocr_run.py
+_parse_ppt.py
+_ppt_ocr.py
+_render_pdf.py
+extract_markdown.py
+extract_ref_texts.py
+fix_ref_encoding.py
+inventory_refs.py
