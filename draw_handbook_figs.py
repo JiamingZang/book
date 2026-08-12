@@ -1430,6 +1430,64 @@ def fig_p3_combo_bars():
     savefig(fig, "fig_p3_combo_bars.png")
 
 
+# ---------------------------------------------------------------- v7：3.9 MTR 统一框架
+
+def fig_p3_mtr():
+    """3.9 反转形态统一框架：头肩顶 = HH MTR + LH MTR；双顶熊旗（Ali 细节）；MTR 四组件"""
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(17.5, 6.4), gridspec_kw={"width_ratios": [1.25, 1.25, 1]})
+    # 面板 A：头肩顶 = MTR 拼图
+    k = [(0, 100, 102, 99.5, 101.5), (1, 101.5, 103, 101, 102.5), (2, 102.5, 104.5, 102, 104),
+         (3, 104, 106, 103.5, 105.5), (4, 105.5, 107, 102, 102.5), (5, 102.5, 108, 102, 107.5),
+         (6, 107.5, 109, 106, 106.5), (7, 106.5, 110.5, 106, 110), (8, 110, 111, 102.5, 103),
+         (9, 103, 104, 102.5, 103.5), (10, 103.5, 106, 103, 105.5), (11, 105.5, 107.5, 105, 106),
+         (12, 106, 107, 104.5, 105), (13, 105, 105.5, 101.5, 102)]
+    for x, o, h, l, c in k:
+        candle(ax1, x, o, h, l, c, width=0.55)
+    ax1.plot([4, 10], [102, 102.4], color=GRAY, ls="--", lw=1.3, zorder=2)  # 颈线
+    ax1.annotate("左肩：HH MTR\n（多头没能延续）", xy=(5, 108.2), xytext=(1.2, 109.8),
+                 fontsize=9, color=TEAL, ha="center", arrowprops=dict(arrowstyle="->", color=TEAL, lw=1.0))
+    ax1.annotate("头：更高高点\n（最强冲击）", xy=(8, 111.2), xytext=(7.6, 114.6),
+                 fontsize=9, color=DARK, ha="center", arrowprops=dict(arrowstyle="->", color=DARK, lw=1.0))
+    ax1.annotate("右肩：LH\n多头没创新高 = 弱势\n（三次冲击一次比一次弱）", xy=(11, 107.7), xytext=(10.4, 114.6),
+                 fontsize=9, color=ORANGE, ha="center", arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.0))
+    ax1.annotate("跌破颈线 + 放量 → 确认\n目标 = 头高投射", xy=(13, 101.6), xytext=(10.6, 99.6),
+                 fontsize=9, color=DOWN, va="top", arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.0))
+    ax1.set_title("① 头肩顶 = HH MTR + LH MTR\n（所有反转都是双顶/双底变体）", fontsize=11, color=DARK)
+    # 面板 B：双顶熊旗（Ali 细节）
+    k = [(0, 100, 102, 99.5, 101.5), (1, 101.5, 104, 101, 103.5), (2, 103.5, 106, 103, 105.5),
+         (3, 105.5, 109, 105, 108.5), (4, 108.5, 110, 106, 106.5), (5, 106.5, 108, 105.5, 107),
+         (6, 107, 109.5, 106, 108.5), (7, 108.5, 110, 107.5, 108), (8, 108, 108.5, 105, 105.5),
+         (9, 105.5, 106, 103.5, 104), (10, 104, 106.5, 103.5, 105.5), (11, 105.5, 106, 101, 101.5)]
+    for x, o, h, l, c in k:
+        candle(ax2, x, o, h, l, c, width=0.55)
+    ax2.plot([-0.5, 11.5], [105, 105], color=GRAY, ls="--", lw=1.3, zorder=2)  # 颈线
+    ax2.annotate("顶① / 顶② 几乎等高\n（Ali：第二顶 = 相同或更低，不是更高）", xy=(7, 110.2), xytext=(3.2, 112.6),
+                 fontsize=9, color=DARK, ha="center", arrowprops=dict(arrowstyle="->", color=DARK, lw=1.0))
+    ax2.annotate("跌破前先出现隐含低点 103.5\n→ 颈线破位等低点确认，别提前抢空", xy=(9, 103.9), xytext=(8.2, 99.8),
+                 fontsize=9, color=ORANGE, va="top", ha="center",
+                 arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.0))
+    ax2.annotate("反抽颈线后真跌破 → 确认\n（目标 = 顶高投射）", xy=(11, 101.2), xytext=(8.4, 97.0),
+                 fontsize=9, color=DOWN, va="top", ha="center",
+                 arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.0))
+    ax2.set_title("② 双顶熊旗（Ali）：跌破前先有隐含低点", fontsize=11, color=DARK)
+    # 面板 C：MTR 四组件
+    style_ax(ax3, xlim=(0, 10.5), ylim=(0, 10.4))
+    draw_box(ax3, 0.4, 8.3, 9.7, 1.5, "① 原趋势存在\nHTF 清晰 HH+HL / LL+LH 序列", ec=TEAL, fs=9)
+    draw_box(ax3, 0.4, 6.0, 9.7, 1.5, "② 趋势线/通道突破\n收盘突破，不是单根毛刺", ec=TEAL, fs=9)
+    draw_box(ax3, 0.4, 3.7, 9.7, 1.5, "③ 趋势恢复失败\n无强跟随、未创新高/新低", ec=ORANGE, fs=9)
+    draw_box(ax3, 0.4, 1.4, 9.7, 1.5, "④ 前极点测试失败\n无法超越前高/前低 → 双顶底/更低高", ec=ORANGE, fs=9)
+    mark(ax3, 5.25, 0.55, "四组件缺一不可——单根反转棒只是“反转尝试”\n完整 MTR 首次成功率 35-40%：优先等 H2/L2 二次入场", fs=8.5, color=GRAY, ha="center")
+    ax3.set_title("③ MTR 四组件（缺一不可）", fontsize=11, color=DARK)
+    for ax in (ax1, ax2):
+        ax.set_xlim(-0.7, len(k) if ax is ax2 else 13.8)
+        ax.set_ylim(95.5, 116.5)
+        ax.grid(alpha=0.3)
+    fig.subplots_adjust(wspace=0.3, left=0.035, right=0.985, top=0.88, bottom=0.08)
+    fig.suptitle("反转形态的统一框架（Brooks + Ali）：头肩 = HH MTR + LH MTR，双顶 = 两次冲击同一阻力\nMTR 四组件齐了才是反转，否则只是反转尝试",
+                 fontsize=12.5, color=DARK)
+    savefig(fig, "fig_p3_mtr.png")
+
+
 # ---------------------------------------------------------------- v4：9.1 考核三段式流程
 def fig_prop_flow():
     """9.1 Prop 考核三段式：Phase 1 → Phase 2 → Funded，各带盈利目标与回撤约束"""
@@ -1899,6 +1957,7 @@ def main():
     fig_opt_strategies()
     fig_p1_asset_allocation()
     fig_p3_combo_bars()
+    fig_p3_mtr()
     # ---------- v4 新增（9/10 章无图章节） ----------
     fig_prop_flow()
     fig_risk_curve()
