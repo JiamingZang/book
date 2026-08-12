@@ -1,6 +1,7 @@
 # 交易手册（Markdown 版）
 
-> **在线阅读版**：[trading-handbook.html](trading-handbook.html)（单文件合并版，浏览器直接打开，可打印为 PDF；内容与 md 同步，由 `_build_html.py` 生成）
+> **在线阅读版**：[trading-handbook.html](trading-handbook.html)（单文件合并版，浏览器直接打开，含目录导航与移动端抽屉；由 `_build_html.py` 生成）
+> **PDF 打印版**：[trading-handbook.pdf](trading-handbook.pdf)（257 页，87 图全嵌入，每章分页；由 Edge headless 打印导出，内容与 md 同步）
 
 > 基于 `trading-handbook.pdf` 拆分提取，并经逐章扩写优化：机制展开、算例补全、表格化、图片代码重绘。
 > 配图全部由代码生成（80 张合成示意图 TradingView 风格 + 7 张真实行情图，见 `draw_handbook_figs.py`、`_real_figs.py`、`_micro_fig.py`、`_pair_fig.py`、`_pair_fig2.py`、`_rv_fig.py`），存放在 `images/`。真实图数据源为 AkShare 上证指数日线、510300 ETF 5 分钟线、沪深 300/中证 500 指数日线，图注标注品种/日期/数据源（4.3、4.4、3.9、4.6、4.28×2、10.5 真实案例）。

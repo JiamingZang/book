@@ -107,6 +107,16 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
   display: none; z-index: 1000; line-height: 40px; text-align: center;
 }
 #backtop:hover { background: #00897b; }
+/* ---- 打印版式：隐藏悬浮组件，章节分页，防图/表跨页 ---- */
+@media print {
+  #toc, #progress, #backtop, #tocbtn { display: none !important; }
+  body { max-width: none; padding: 0 6px; }
+  h1 { page-break-before: always; }
+  h1:first-of-type { page-break-before: avoid; }
+  h2, h3 { page-break-after: avoid; }
+  img, table, pre, blockquote { page-break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
 """
 
 JS = """
