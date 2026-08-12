@@ -2443,6 +2443,34 @@ def fig_p8_review_flow():
     savefig(fig, "fig_p8_review_flow.png")
 
 
+# ---------------------------------------------------------------- v14：10.6 期权策略决策树
+
+def fig_p10_strategy_tree():
+    """10.6 期权策略决策树：按“你想干什么”四分支选工具（与图 10-4 损益形状互补）"""
+    fig, ax = plt.subplots(figsize=(14.5, 6.2))
+    style_ax(ax, xlim=(0, 14), ylim=(0, 6.4))
+    # ---- 根节点 ----
+    draw_box(ax, 5.0, 5.05, 4.0, 0.95, "你想干什么？\n先有目的，再选工具（10.6）", ec=DARK, fs=11, tc=DARK)
+    # ---- 四分支 ----
+    branches = [
+        (0.5, "怕仓位出事\n→ 保护性 Put\n买保险，锁最大回吐\n前提：趋势仓位想继续拿", TEAL),
+        (4.0, "持仓想收租\n→ 备兑 Call\n卖虚值收权利金\n前提：震荡市、不指望大涨", ORANGE),
+        (7.5, "有方向、锁风险\n→ 垂直价差\n买一卖一，净成本入场\n前提：盈利封顶可接受", DOWN),
+        (11.0, "赌大波动不赌方向\n→ 跨式\nCall + Put 一起买\n前提：IV 没透支（10.5）", UP),
+    ]
+    for i, (x, txt, col) in enumerate(branches):
+        draw_box(ax, x, 2.55, 3.0, 2.1, txt, ec=col, fs=10, tc=DARK)
+        flow_arrow(ax, 7.0, 5.02, x + 1.5, 4.68, rad=-0.18 if i % 2 == 0 else 0.18)
+    # ---- 底部对照条 ----
+    draw_box(ax, 0.5, 0.35, 13.0, 1.15,
+             "四种用途 = 图 10-4 的四种到期损益形状：保险(保护性 Put) / 收租(备兑 Call) / 封顶方向(价差) / 波动(跨式)\n"
+             "先定用途 → 再选形状 → 最后检查前提（IV 是否高位、是否接受封顶）",
+             ec=GRAY, fs=10, tc=DARK)
+    fig.suptitle("期权策略决策树（10.6）：按“你想干什么”四分支选工具——名字可以忘，目的不能忘",
+                 fontsize=13, color=DARK, y=0.985)
+    savefig(fig, "fig_p10_strategy_tree.png")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     fig_kline_structure()
@@ -2510,6 +2538,8 @@ def main():
     # ---------- v13 新增（10.3 期权价格构成 / 8.8 复盘体系） ----------
     fig_p10_price_breakdown()
     fig_p8_review_flow()
+    # ---------- v14 新增（10.6 期权策略决策树） ----------
+    fig_p10_strategy_tree()
     fig_prop_flow()
     fig_risk_curve()
     fig_call_put()
