@@ -1115,6 +1115,116 @@ def fig_p8_orderflow():
     savefig(fig, "fig_p8_orderflow.png")
 
 
+# ---------------------------------------------------------------- v7：5.12 Volume Profile
+
+
+def fig_p5_volume_profile():
+    """5.12 Volume Profile：成交量按价格轴横向分布——POC/VA/HVN/LVN 一图看懂"""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15.5, 6.3), gridspec_kw={"width_ratios": [1.15, 1]})
+    # 左：K 线路径（横盘堆积 → 突破快速通过 → 新高再堆积）
+    k = [(0, 99.5, 100.5, 98.5, 100.0), (1, 100.0, 101.0, 99.0, 99.5), (2, 99.5, 100.5, 99.0, 100.0),
+         (3, 100.0, 101.5, 99.5, 101.0), (4, 101.0, 101.5, 99.0, 99.5), (5, 99.5, 100.5, 99.0, 100.0),
+         (6, 100.0, 101.0, 99.5, 100.5), (7, 100.5, 102.0, 100.0, 101.5), (8, 101.5, 102.0, 99.5, 100.0),
+         (9, 100.0, 101.0, 99.0, 99.5), (10, 99.5, 100.5, 99.0, 100.0),
+         (11, 100.0, 102.5, 99.5, 102.0), (12, 102.0, 104.5, 101.5, 104.0),
+         (13, 104.0, 106.0, 103.5, 105.5), (14, 105.5, 107.5, 105.0, 107.0)]
+    for x, o, h, l, c in k:
+        candle(ax1, x, o, h, l, c, width=0.6)
+    ax1.add_patch(Rectangle((-0.5, 98.2), 11, 4.1, facecolor=GRAY, alpha=0.10, zorder=1))
+    ax1.text(5, 103.0, "横盘区间：量在下方堆积（VA）", fontsize=10, color=DARK, ha="center")
+    ax1.annotate("突破 VA 上沿 → 按趋势思维", xy=(12, 102.3), xytext=(8.6, 105.6),
+                 fontsize=10, color=UP, arrowprops=dict(arrowstyle="->", color=UP, lw=1.1))
+    ax1.annotate("穿过 LVN 快速通过区：\n成交量稀薄，别挂单等回踩", xy=(12.7, 104.3), xytext=(11.9, 97.3),
+                 fontsize=9.5, color=ORANGE, va="top", ha="center",
+                 arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.1))
+    ax1.annotate("新高处新堆积（HVN）\n成为新支撑", xy=(14, 107.3), xytext=(10.8, 109.3),
+                 fontsize=9.5, color=TEAL, arrowprops=dict(arrowstyle="->", color=TEAL, lw=1.1))
+    ax1.set_xlabel("时间（K 线）", fontsize=10.5)
+    ax1.set_ylabel("价格", fontsize=10.5)
+    ax1.set_xlim(-0.8, 15.3)
+    ax1.set_ylim(96.5, 110.8)
+    ax1.grid(alpha=0.3)
+    ax1.set_title("价格路径：横盘堆积 → 突破快速通过 → 新高再堆积", fontsize=11.5, color=DARK)
+    # 右：Volume Profile 横向直方图（量按价格分布）
+    prices = np.arange(98.0, 107.75, 0.5)
+    vol = [12, 25, 40, 58, 85, 60, 44, 28, 15, 6, 4, 3, 3, 5, 8, 14, 22, 18, 12, 8]
+    yp = np.arange(len(prices))
+    colors = []
+    for p in prices:
+        if 98.5 <= p <= 101.5:
+            colors.append(UP)
+        elif 102.5 <= p <= 105.0:
+            colors.append(ORANGE)
+        elif p >= 106.0:
+            colors.append(TEAL)
+        else:
+            colors.append(GRAY)
+    ax2.barh(yp, vol, color=colors, alpha=0.85, height=0.72)
+    ax2.set_yticks(yp)
+    ax2.set_yticklabels([f"{p:.1f}" for p in prices], fontsize=8.5)
+    ax2.axhline(yp[4], color=DARK, ls="--", lw=1.2)  # POC = 100.0
+    ax2.axhspan(yp[1] - 0.4, yp[7] + 0.4, color=UP, alpha=0.06)  # VA 98.5-101.5
+    ax2.annotate("POC 100.0：量最大\n= 市场重心（磁铁 + 支撑阻力）", xy=(85, yp[4]), xytext=(98, yp[4] + 3.4),
+                 fontsize=9.5, color=DARK, va="center", ha="left",
+                 arrowprops=dict(arrowstyle="->", color=DARK, lw=1.1))
+    ax2.annotate("价值区间 VA：70% 成交量\n（VAL 98.5 / VAH 101.5）", xy=(60, yp[7]), xytext=(88, yp[7] + 4.2),
+                 fontsize=9.5, color=UP, va="center", ha="left",
+                 arrowprops=dict(arrowstyle="->", color=UP, lw=1.1))
+    ax2.annotate("LVN 低量节点：快速通过区\n（102.5-105.0 量稀薄）", xy=(6, yp[9]), xytext=(20, yp[14]),
+                 fontsize=9.5, color=ORANGE, va="center", ha="left",
+                 arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.1))
+    ax2.annotate("HVN 高量节点：\n突破后新堆积 = 新支撑", xy=(18, yp[17]), xytext=(30, yp[17]),
+                 fontsize=9.5, color=TEAL, va="center", ha="left",
+                 arrowprops=dict(arrowstyle="->", color=TEAL, lw=1.1))
+    ax2.set_xlim(0, 160)
+    ax2.set_ylim(-0.8, len(prices) - 0.2)
+    ax2.set_xlabel("成交量（横向分布）", fontsize=10.5)
+    ax2.set_title("Volume Profile：量按价格横向分布\n（POC 重心 / VA 价值区 / LVN 快车道 / HVN 支撑阻力）",
+                  fontsize=11.5, color=DARK)
+    ax2.grid(axis="x", alpha=0.25)
+    fig.subplots_adjust(wspace=0.22, left=0.05, right=0.975, top=0.88, bottom=0.1)
+    savefig(fig, "fig_p5_volume_profile.png")
+
+
+# ---------------------------------------------------------------- v7：8.11 足迹图
+
+def fig_p8_footprint():
+    """8.11 足迹图：每根 K 线的成交量按价格档拆开（左买右卖），失衡档高亮"""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15.5, 6.2), gridspec_kw={"width_ratios": [1.18, 1]})
+    # 左：足迹图本体（一根大阳 K 线，档位数字 左买右卖）
+    style_ax(ax1, xlim=(0, 12.5), ylim=(99.75, 101.25))
+    candle(ax1, 6.2, 100.0, 101.0, 99.9, 100.8, width=2.6)
+    ax1.plot([6.2, 6.2], [99.9, 101.0], color=GRAY, lw=0.7, alpha=0.5)
+    rows = [  # (价格, 买量, 卖量)
+        (101.0, 3, 12), (100.8, 8, 4), (100.7, 12, 5), (100.6, 22, 6), (100.5, 15, 8),
+        (100.4, 60, 10), (100.3, 18, 20), (100.2, 25, 12), (100.1, 42, 15), (100.0, 30, 18),
+        (99.9, 5, 25)]
+    for p, b, a in rows:
+        ax1.text(5.15, p, str(b), fontsize=8, color=UP, ha="right", va="center")
+        ax1.text(7.25, p, str(a), fontsize=8, color=DOWN, ha="left", va="center")
+        ax1.text(6.2, p, f"{p:.1f}", fontsize=7.5, color=GRAY, ha="center", va="center")
+    ax1.add_patch(Rectangle((4.95, 100.35), 2.5, 0.1, facecolor=ORANGE, alpha=0.28, edgecolor=ORANGE, lw=0.7))
+    ax1.annotate("失衡：买 60 vs 卖 10\n单边吃单 → 快速通过区\n价格倾向回填（呼应 5.6 FVG）",
+                 xy=(6.2, 100.4), xytext=(8.8, 100.55),
+                 fontsize=9.5, color=ORANGE, va="center", ha="left",
+                 arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.1))
+    ax1.annotate("上影档：卖量 12 压顶\n上攻受阻信号", xy=(6.2, 101.0), xytext=(8.4, 101.1),
+                 fontsize=9, color=DOWN, va="center", ha="left",
+                 arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.0))
+    ax1.text(0.2, 101.18, "足迹图：每根 K 线的成交量按价格档拆开\n左 = 主动买量，右 = 主动卖量（合成示意）",
+             fontsize=9.5, color=DARK, va="top")
+    # 右：三种读法小结
+    style_ax(ax2, xlim=(0, 10.5), ylim=(0, 8.2))
+    draw_box(ax2, 0.6, 6.1, 9.3, 1.6, "① 失衡：某档量远大于相邻档\n（买/卖严重一边倒）→ 快速通过区，倾向回填", ec=ORANGE, fs=9.5)
+    draw_box(ax2, 0.6, 3.8, 9.3, 1.6, "② 变盘模式：趋势中大量成交但价格不继续\n= 努力无结果 → 反转警告（呼应 5.10）", ec=DOWN, fs=9.5)
+    draw_box(ax2, 0.6, 1.5, 9.3, 1.6, "③ 延续模式：快速通过时清淡 + 回踩时放量\n→ 趋势健康，继续（呼应 8.4 三件套互证）", ec=UP, fs=9.5)
+    mark(ax2, 5.25, 0.55, "与图 8-4 互证：足迹失衡 ≈ 单根 delta 大幅转正；\n变盘 ≈ delta 衰竭——同一个过程的两套读数", fs=9, color=GRAY, ha="center")
+    fig.subplots_adjust(wspace=0.14, left=0.045, right=0.98, top=0.9, bottom=0.09)
+    fig.suptitle("足迹图：把每根 K 线的量按价格档拆开（左买右卖）——失衡、变盘、延续三种读法",
+                 fontsize=12.5, color=DARK)
+    savefig(fig, "fig_p8_footprint.png")
+
+
 # ---------------------------------------------------------------- v4：9.1 考核三段式流程
 def fig_prop_flow():
     """9.1 Prop 考核三段式：Phase 1 → Phase 2 → Funded，各带盈利目标与回撤约束"""
@@ -1578,6 +1688,8 @@ def main():
     fig_verify_loop()
     fig_r_dist()
     fig_p8_orderflow()
+    fig_p5_volume_profile()
+    fig_p8_footprint()
     # ---------- v4 新增（9/10 章无图章节） ----------
     fig_prop_flow()
     fig_risk_curve()
