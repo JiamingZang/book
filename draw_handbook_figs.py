@@ -1446,6 +1446,7 @@ def main():
     fig_p2_barbwire()
     fig_p3_wedge_contrast()
     fig_p3_h1h2()
+    fig_p4_mm_four()
     print("全部完成")
 
 
@@ -1612,6 +1613,81 @@ def fig_p3_h1h2():
     ax.set_title("② 宽通道/区间边界：H1 多失败，必须等 H2", fontsize=11.5, color=DARK)
     fig.suptitle("H1/H2 计数：以“突破前一棒高点”的入场棒为准——强趋势 H1 可用，宽通道/反转/边界必须等 H2，第三次回调（High 3）即楔形", fontsize=12, color=DARK, y=0.99)
     savefig(fig, "fig_p3_h1h2.png")
+
+
+# ---------------------------------------------------------------- 图 4-7（PA_Agent 文件23 四类 Measured Move）
+def fig_p4_mm_four():
+    """4.12 四类 Measured Move：区间高度/通道宽度/楔形高度/尖峰腿等距投射"""
+    fig, axes = plt.subplots(2, 2, figsize=(13.5, 9.2))
+    # ① 区间高度翻测：突破点 + 区间高 H（约 60% 到达）
+    ax = axes[0][0]
+    k = [(0, 98, 100.5, 97.5, 100), (1, 100, 101, 98.5, 99.5), (2, 99.5, 102, 99, 101.5), (3, 101.5, 102, 99, 99.8),
+         (4, 99.8, 101.8, 98.6, 101.2), (5, 101.2, 102, 98.8, 99.6), (6, 99.6, 103.2, 99.2, 102.8),  # 突破
+         (7, 102.8, 105.2, 102.4, 104.8)]
+    for x, o, h, l, c in k:
+        candle(ax, x, o, h, l, c)
+    ax.add_patch(Rectangle((0.5, 98), 5.2, 3.7, fill=False, ec=GRAY, lw=1.2, ls="--", zorder=1))
+    ax.annotate("", xy=(6.1, 101.7), xytext=(6.1, 98),
+                arrowprops=dict(arrowstyle="<->", color=GRAY, lw=1.4), zorder=5)
+    hl_line(ax, 6.6, 8, 105.4, color=TEAL, lw=1.2)
+    mark(ax, 6.15, 99.9, "区间高 H", color=GRAY, fs=9)
+    mark(ax, 2.8, 96.6, "区间（上下沿各测 2 次+）", color=DARK, fs=9, box=True)
+    annotate_mark(ax, 7, 105.6, "目标 = 突破点 + H\n约 60% 到达", 4.6, 107.6, color=UP, fs=9.5)
+    style_ax(ax, xlim=(-0.6, 9), ylim=(95, 110))
+    ax.set_title("① 区间高度翻测（约 60%）：目标 = 突破点 + 区间高 H", fontsize=10.5, color=DARK)
+    # ② 通道宽度翻测：破位点 − 通道宽 W
+    ax = axes[0][1]
+    k = [(0, 94.8, 96.3, 94.3, 96), (1, 96, 97.6, 95.6, 97.3), (2, 97.3, 98.9, 96.9, 98.6), (3, 98.6, 100.2, 98.2, 99.9),
+         (4, 99.9, 101.5, 99.5, 101.2), (5, 101.2, 102.8, 100.8, 102.5), (6, 102.5, 104.1, 102.1, 103.8),
+         (7, 103.8, 105.4, 103.4, 105.1), (8, 105.1, 105.6, 102.8, 103.4),  # 跌破下轨
+         (9, 103.4, 103.8, 101.9, 102.2)]
+    for x, o, h, l, c in k:
+        candle(ax, x, o, h, l, c)
+    ax.plot([0, 9], [96.5, 107.3], color=GRAY, ls="--", lw=1.2)
+    ax.plot([0, 9], [94.5, 105.3], color=GRAY, ls=":", lw=1.2)
+    ax.annotate("", xy=(9.5, 106.3), xytext=(9.5, 104.3),
+                arrowprops=dict(arrowstyle="<->", color=GRAY, lw=1.4), zorder=5)
+    hl_line(ax, 8.6, 9.8, 102.1, color=TEAL, lw=1.2)
+    mark(ax, 9.7, 105.3, "通道宽 W", color=GRAY, fs=9)
+    annotate_mark(ax, 8, 103.6, "跌破下轨\n目标 = 破位点 − W", 5.2, 101.4, color=DOWN, fs=9.5)
+    mark(ax, 4, 93.6, "平行通道（上下轨平行）", color=DARK, fs=9, box=True)
+    style_ax(ax, xlim=(-0.6, 10.6), ylim=(93, 109.5))
+    ax.set_title("② 通道宽度翻测：目标 = 破位点 − 通道宽 W", fontsize=10.5, color=DARK)
+    # ③ 楔形高度翻测：破位点 − 楔形高 H
+    ax = axes[1][0]
+    k = [(0, 99.5, 100.5, 99, 100.2), (1, 100.2, 101.2, 99.8, 100.9), (2, 100.9, 102, 100.5, 101.7),
+         (3, 101.7, 102.5, 101.3, 102.2), (4, 102.2, 103.2, 101.8, 102.9), (5, 102.9, 103.8, 102.5, 103.5),
+         (6, 103.5, 104.5, 103.1, 104.2), (7, 104.2, 105, 103.8, 104.7), (8, 104.7, 104.9, 101.8, 102.2)]  # 大阴破位
+    for x, o, h, l, c in k:
+        candle(ax, x, o, h, l, c)
+    ax.plot([0, 7], [99, 103.8], color=GRAY, ls="--", lw=1.2)
+    ax.plot([0, 7], [100.2, 104.7], color=GRAY, ls=":", lw=1.2)
+    ax.annotate("", xy=(7.6, 103.5), xytext=(7.6, 99.2),
+                arrowprops=dict(arrowstyle="<->", color=GRAY, lw=1.4), zorder=5)
+    hl_line(ax, 8.6, 9.6, 98.2, color=TEAL, lw=1.2)
+    mark(ax, 7.8, 101.4, "楔形高 H", color=GRAY, fs=9)
+    annotate_mark(ax, 8, 102.6, "破下边界\n目标 = 破位点 − H", 5.4, 99.4, color=DOWN, fs=9.5)
+    mark(ax, 4, 97.2, "上升楔形三推（起点→极点）", color=DARK, fs=9, box=True)
+    style_ax(ax, xlim=(-0.6, 10.6), ylim=(96, 108))
+    ax.set_title("③ 楔形高度翻测：目标 = 破位点 − 楔形高 H（反转方向）", fontsize=10.5, color=DARK)
+    # ④ 尖峰 leg 翻测：回撤低点 + L（70%+）
+    ax = axes[1][1]
+    k = [(0, 97, 98, 96.5, 97.7), (1, 97.7, 99.5, 97.3, 99.2), (2, 99.2, 101, 98.8, 100.7), (3, 100.7, 102.5, 100.3, 102.2),
+         (4, 102.2, 103.5, 101.8, 103.2), (5, 103.2, 103.4, 101, 101.6), (6, 101.6, 102.2, 100.4, 101),  # 回撤
+         (7, 101, 103, 100.6, 102.6), (8, 102.6, 104.6, 102.2, 104.2), (9, 104.2, 107.4, 103.8, 107)]
+    for x, o, h, l, c in k:
+        candle(ax, x, o, h, l, c)
+    ax.annotate("", xy=(0.9, 103.3), xytext=(0.9, 96.7),
+                arrowprops=dict(arrowstyle="<->", color=GRAY, lw=1.4), zorder=5)
+    hl_line(ax, 9.3, 10.3, 107.4, color=TEAL, lw=1.2)
+    mark(ax, 1.1, 100, "尖峰腿长 L", color=GRAY, fs=9)
+    annotate_mark(ax, 6, 100.8, "回撤低点", 3.4, 97.6, color=DOWN, fs=9.5)
+    annotate_mark(ax, 9, 107.6, "目标 = 回撤低点 + L\n约 70%+ 到达（最可靠）", 6.2, 109.6, color=UP, fs=9.5)
+    mark(ax, 2.6, 95.6, "强趋势 leg / 尖峰：起点→终点", color=DARK, fs=9, box=True)
+    style_ax(ax, xlim=(-0.6, 11), ylim=(94.5, 111.5))
+    ax.set_title("④ 尖峰 leg 翻测（70%+）：目标 = 回撤低点 + L", fontsize=10.5, color=DARK)
+    fig.suptitle("四类 Measured Move：目标是算出来的——等距投射（区间高度 / 通道宽度 / 楔形高度 / 尖峰腿），MM 多作 TP2", fontsize=12.5, color=DARK, y=0.99)
+    savefig(fig, "fig_p4_mm_four.png")
 
 
 if __name__ == "__main__":
