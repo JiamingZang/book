@@ -34,3 +34,5 @@ fix_ref_encoding.py
 inventory_refs.py
 _renumber.py
 _xref_audit.py
+_term_fix.py
+_src_fix.py
