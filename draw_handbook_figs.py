@@ -1445,6 +1445,7 @@ def main():
     fig_p2_signal_bars()
     fig_p2_barbwire()
     fig_p2_checklist()
+    fig_p2_spike_climax()
     fig_p3_wedge_contrast()
     fig_p3_h1h2()
     fig_p4_mm_four()
@@ -1570,6 +1571,49 @@ def fig_p2_checklist():
     ax.set_title("② 六条口诀（每次看图默念）", fontsize=11.5, color=DARK)
     fig.suptitle("逐棒检查单（Al Brooks）：先上下文再形态、先信号质量再计划、先二次入场再反转、先跟随再确认、先惯性再逆势、看不懂就等下一根", fontsize=12, color=DARK, y=0.99)
     savefig(fig, "fig_p2_checklist.png")
+
+
+# ---------------------------------------------------------------- 图 2-10（PA_Agent 极速行情：尖峰与高潮）
+def fig_p2_spike_climax():
+    """2.10 尖峰识别五标准+分级（左）；买进高潮四阶段+三路径概率（右）"""
+    fig, axes = plt.subplots(1, 2, figsize=(15, 6.6))
+    # 左：尖峰识别
+    ax = axes[0]
+    k = [(0, 100, 101, 99.5, 100.6), (1, 100.6, 101.5, 100, 100.8), (2, 100.8, 102, 100.3, 101.5),  # 背景
+         (3, 101.5, 104, 101.3, 103.7), (4, 103.7, 106.2, 103.5, 105.9), (5, 105.9, 108.5, 105.7, 108.2),
+         (6, 108.2, 111, 108, 110.7), (7, 110.7, 113.6, 110.5, 113.3), (8, 113.3, 116.2, 113.1, 115.8),  # 尖峰1-6
+         (9, 115.8, 117, 115.2, 115.6),  # 暂停棒
+         (10, 115.6, 116.5, 114.2, 114.6)]  # 回撤棒
+    for x, o, h, l, c in k:
+        candle(ax, x, o, h, l, c)
+    mark(ax, 1.2, 102.5, "背景\n小实体", color=GRAY, fs=8.5, box=True)
+    mark(ax, 5.7, 118.5, "尖峰 6 根：\n大实体（≥均值1.5-2倍）\n实体几乎无重叠\n上尾线短（≤实体30%）\n收盘持续创新高", color=UP, fs=9, box=True)
+    mark(ax, 9, 118.3, "暂停棒\n小实体→禁追\nspike ending", color=ORANGE, fs=8.5, box=True)
+    mark(ax, 10.2, 113.2, "回撤棒→\n尖峰确认结束", color=DOWN, fs=8.5, box=True)
+    mark(ax, 5.5, 98.8, "1根=弱候选等跟随 | 2根=最低可路由（仅SPS） | 3-5根=标准尖峰 | 6根+=高潮预警（以衰竭信号为准）", color=DARK, fs=8.5, box=True)
+    style_ax(ax, xlim=(-0.8, 11.8), ylim=(96, 121))
+    ax.set_title("① 尖峰识别：连续大型趋势棒 + 短尾线 + 收盘创新高（Spike ≠ Breakout ≠ Gap ≠ Climax）", fontsize=11, color=DARK)
+    # 右：买进高潮四阶段 + 三路径概率
+    ax = axes[1]
+    k = [(0, 100, 102.5, 99.5, 102), (1, 102, 104.5, 101.5, 104.1),  # 阶段1 趋势棒
+         (2, 104.1, 107.8, 103.8, 107.4),  # 阶段2 高潮棒
+         (3, 107.4, 110.5, 106.8, 108),  # 阶段3 拒绝棒（长上尾）
+         (4, 108, 108.8, 105.8, 106.2),  # 阶段4 空头确认
+         (5, 106.2, 107.5, 104.2, 104.8), (6, 104.8, 106, 102.8, 103.4)]
+    for x, o, h, l, c in k:
+        candle(ax, x, o, h, l, c)
+    mark(ax, 0.8, 112.8, "阶段1：大趋势棒\n推动上涨", color=UP, fs=8.5, box=True)
+    mark(ax, 2, 109.6, "阶段2：高潮棒\n（巨型实体）", color=ORANGE, fs=8.5, box=True)
+    mark(ax, 3.4, 112.8, "阶段3：拒绝棒\n长上尾线\n（>实体50%）", color=DOWN, fs=8.5, box=True)
+    mark(ax, 4.7, 108.6, "阶段4：空头趋势棒\n确认反转", color=DOWN, fs=8.5, box=True)
+    mark(ax, 6.2, 101.5, "衰竭信号三件套：\n长上尾 / 小实体 / 反向棒\n任一出现即触发高潮", color=DARK, fs=8.5, box=True)
+    draw_box(ax, 0.4, 97.4, 2.1, 1.4, "转通道延续\n≈60%", ec=UP, fs=9.5)
+    draw_box(ax, 2.9, 97.4, 2.1, 1.4, "进入区间\n≈30%", ec=ORANGE, fs=9.5)
+    draw_box(ax, 5.4, 97.4, 2.1, 1.4, "趋势反转\n≈10%\n仅诊断", ec=DOWN, fs=9.5)
+    style_ax(ax, xlim=(-0.8, 8.2), ylim=(95, 115))
+    ax.set_title("② 买进高潮四阶段序列 + 尖峰后三条路径概率（只做回撤 SPS，禁追尖峰 SCS）", fontsize=11, color=DARK)
+    fig.suptitle("尖峰与高潮（Al Brooks）：尖峰是趋势的 Leg 1——2 根以上大趋势棒才可路由；高潮以衰竭信号为准，不以根数；高潮后至少等 10 根棒", fontsize=12.5, color=DARK, y=0.99)
+    savefig(fig, "fig_p2_spike_climax.png")
 
 
 # ---------------------------------------------------------------- 图 4-10（PA_Agent 市场诊断框架 状态判定树）
