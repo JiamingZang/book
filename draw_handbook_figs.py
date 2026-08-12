@@ -2471,6 +2471,61 @@ def fig_p10_strategy_tree():
     savefig(fig, "fig_p10_strategy_tree.png")
 
 
+# ---------------------------------------------------------------- v15：1.3 订单类型
+
+def fig_p1_order_types():
+    """1.3 订单类型：四种订单的触发机制与成交特性（成交确定性 vs 价格确定性）"""
+    fig, axes = plt.subplots(2, 2, figsize=(14.5, 9.0))
+    for ax in axes.flat:
+        style_ax(ax, xlim=(0, 10), ylim=(0, 10))
+    # (a) 市价单
+    ax = axes[0][0]
+    ax.plot([0, 10], [7, 7], color=DARK, lw=2)
+    ax.annotate("", xy=(5.5, 7), xytext=(5.5, 9.0),
+                arrowprops=dict(arrowstyle="->", color=DOWN, lw=2))
+    ax.text(5.5, 9.3, "立即按当前最优价成交（吃单）", ha="center", fontsize=10.5, color=DOWN)
+    ax.text(5, 5.9, "当前价", ha="center", fontsize=10, color=DARK)
+    ax.text(5, 3.2, "代价：吃当下点差 + 可能有滑点\n场景：必须马上进出场（1.3）",
+            ha="center", fontsize=9.5, color=GRAY)
+    ax.set_title("(a) 市价单：成交确定性优先", fontsize=11.5, color=DARK)
+    # (b) 限价买单
+    ax = axes[0][1]
+    hl_line(ax, 0, 10, 5, color=ORANGE, ls="--", lw=1.6)
+    ax.plot([0, 3, 7], [9, 7.2, 5.0], color=TEAL, lw=2)
+    ax.plot([7, 10], [5.0, 5.0], color=TEAL, lw=2)
+    mark(ax, 7, 5, "触发成交", dy=0.8, color=ORANGE, fs=10, box=True)
+    ax.text(9.2, 6.6, "限价 5.0", fontsize=9.5, color=ORANGE, ha="right")
+    ax.text(5, 2.4, "价格触到才成交：永不滑点（市场来找你）\n可能不成交：价格没到 = 挂单作废\n场景：pin bar 影线 50% 位挂单入场（第 3 章）",
+            ha="center", fontsize=9.5, color=GRAY)
+    ax.set_title("(b) 限价单：价格确定性优先", fontsize=11.5, color=DARK)
+    # (c) 止损单（卖出）
+    ax = axes[1][0]
+    hl_line(ax, 0, 10, 5, color=DOWN, ls="--", lw=1.6)
+    ax.plot([0, 4, 6], [9, 7, 5.0], color=TEAL, lw=2)
+    ax.plot([6, 9], [5.0, 2.2], color=DOWN, lw=2)
+    mark(ax, 6, 5, "触发 → 转市价单", dy=0.8, color=DOWN, fs=10, box=True)
+    ax.annotate("滑点：实际成交价更差", xy=(9, 2.2), xytext=(8.3, 0.6), fontsize=9.5, color=DOWN,
+                arrowprops=dict(arrowstyle="->", color=DOWN))
+    ax.text(5, 7.6, "保证触发，不保证价格", ha="center", fontsize=10, color=DARK)
+    ax.text(5, 3.6, "跳空时可能远差于触发价成交（1.6）\n场景：止损保护——入场同时挂好，机器执行",
+            ha="center", fontsize=9.5, color=GRAY)
+    ax.set_title("(c) 止损单：触发确定性优先", fontsize=11.5, color=DARK)
+    # (d) 止损限价（卖出）
+    ax = axes[1][1]
+    hl_line(ax, 0, 10, 5, color=DOWN, ls="--", lw=1.6)
+    hl_line(ax, 0, 10, 3.5, color=ORANGE, ls=":", lw=1.6)
+    ax.plot([0, 4, 6], [9, 7, 5.0], color=TEAL, lw=2)
+    ax.plot([6, 9], [5.0, 3.5], color=DOWN, lw=2)
+    mark(ax, 6, 5, "触发 → 转限价单", dy=0.8, color=DOWN, fs=10, box=True)
+    ax.text(9.2, 3.1, "限价 3.5", fontsize=9.5, color=ORANGE, ha="right")
+    ax.text(5, 2.4, "锁死成交价上限；极端行情可能不成交\n风险单最重要的是“一定成交”——新手慎用\n场景：怕止损滑点太大（1.3）",
+            ha="center", fontsize=9.5, color=GRAY)
+    ax.set_title("(d) 止损限价单：价格上限优先", fontsize=11.5, color=DARK)
+    fig.suptitle("订单类型（1.3）：市价追市场，限价等市场，止损保风险——按“成交 vs 价格”哪个优先选单",
+                 fontsize=13, color=DARK, y=0.985)
+    savefig(fig, "fig_p1_order_types.png")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     fig_kline_structure()
@@ -2540,6 +2595,8 @@ def main():
     fig_p8_review_flow()
     # ---------- v14 新增（10.6 期权策略决策树） ----------
     fig_p10_strategy_tree()
+    # ---------- v15 新增（1.3 订单类型） ----------
+    fig_p1_order_types()
     fig_prop_flow()
     fig_risk_curve()
     fig_call_put()
