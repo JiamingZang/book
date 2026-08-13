@@ -21,7 +21,7 @@
 ```powershell
 cd "c:\Users\18315\Desktop\新建文件夹"
 
-# ① 改 md 源文件（handbook/0X_第X章_*.md 或 images/ 新图）
+# ① 改 md 源文件（handbook/0X_*.md 英文文件名，或 images/ 新图）
 # ② 重建单文件 HTML
 python -X utf8 tools\_build_html.py
 

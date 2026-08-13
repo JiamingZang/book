@@ -12,9 +12,9 @@ import sys
 sys.stdout.reconfigure(encoding="utf-8")
 
 JOBS = [
-    ("handbook/04_第4章_交易系统.md",
+    ("handbook/04_trading_system.md",
      {19: 20, 20: 21, 21: 22, 22: 23, 23: 24, 24: 25, 25: 26}),
-    ("handbook/06_第6章_仓位与风险.md",
+    ("handbook/06_position_and_risk.md",
      {2: 3, 3: 4, 4: 5, 5: 6, 6: 9, 7: 10}),
 ]
 

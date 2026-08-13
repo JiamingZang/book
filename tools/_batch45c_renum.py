@@ -5,7 +5,7 @@
 """
 import re
 
-p = "handbook/03_第3章_入场信号.md"
+p = "handbook/03_entry_signals.md"
 s = open(p, encoding="utf-8").read()
 
 pat = re.compile(r"图 3-(\d+)(?!R|\d)")

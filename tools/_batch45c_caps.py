@@ -2,7 +2,7 @@
 """批次45c：第 3 章补 figcap——img 行后插入 *图 3-X alt文本*"""
 import re
 
-p = "handbook/03_第3章_入场信号.md"
+p = "handbook/03_entry_signals.md"
 s = open(p, encoding="utf-8").read()
 
 # 匹配 img 行后跟空行（无 figcap）：![图 3-X ...](...)\n\n

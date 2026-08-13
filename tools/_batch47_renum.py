@@ -10,7 +10,7 @@ import sys
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PATH = "handbook/04_第4章_交易系统.md"
+PATH = "handbook/04_trading_system.md"
 
 mapping = {10: 15, 11: 16, 12: 17, 13: 18, 14: 19,
            15: 20, 16: 21, 17: 22, 18: 23, 19: 24, 20: 25}

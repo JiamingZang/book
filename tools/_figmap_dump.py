@@ -5,7 +5,7 @@ import sys
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-for fname in ["handbook/02_第2章_读懂价格行为.md", "handbook/04_第4章_交易系统.md"]:
+for fname in ["handbook/02_price_action.md", "handbook/04_trading_system.md"]:
     print(f"\n===== {fname} =====")
     lines = open(fname, encoding="utf-8").read().splitlines()
     for i, ln in enumerate(lines, 1):

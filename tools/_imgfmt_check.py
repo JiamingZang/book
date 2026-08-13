@@ -5,7 +5,7 @@ import markdown
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-t = open("handbook/01_第1章_市场是怎么运作的.md", encoding="utf-8").read()
+t = open("handbook/01_market_overview.md", encoding="utf-8").read()
 html = markdown.markdown(t, extensions=["tables", "fenced_code", "sane_lists"])
 m = re.search(r"<img[^>]*>", html)
 print("first img tag:", repr(m.group(0)))

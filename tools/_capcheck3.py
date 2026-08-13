@@ -2,7 +2,7 @@
 """批次45c：检查第 3 章 img 是否缺 figcap"""
 import re
 
-p = "handbook/03_第3章_入场信号.md"
+p = "handbook/03_entry_signals.md"
 lines = open(p, encoding="utf-8").read().splitlines()
 missing = []
 for i, ln in enumerate(lines):

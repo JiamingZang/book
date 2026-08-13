@@ -9,7 +9,7 @@ import sys
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PATH = "handbook/04_第4章_交易系统.md"
+PATH = "handbook/04_trading_system.md"
 mapping = {15: 12, 16: 13, 12: 14, 13: 15, 14: 16}
 
 with open(PATH, encoding="utf-8") as f:

@@ -17,7 +17,7 @@ def main():
     for f in sorted(glob.glob("handbook/0*.md") + glob.glob("handbook/1*.md")):
         body += open(f, encoding="utf-8").read() + "\n"
 
-    gloss = open("handbook/11_附录_术语表与学习资源.md", encoding="utf-8").read()
+    gloss = open("handbook/11_appendix_glossary.md", encoding="utf-8").read()
 
     # 正文中的英文单词/术语（含大小写、点号、连字符）
     words = re.findall(r"[A-Za-z][A-Za-z\-\.]{2,}", body)

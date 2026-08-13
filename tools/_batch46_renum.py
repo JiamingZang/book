@@ -6,7 +6,7 @@
 """
 import re
 
-p = "handbook/04_第4章_交易系统.md"
+p = "handbook/04_trading_system.md"
 s = open(p, encoding="utf-8").read()
 
 # 映射：旧号 → 新号（普通图；R 图保持原样）

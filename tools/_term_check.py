@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-t = open("handbook/11_附录_术语表与学习资源.md", encoding="utf-8").read()
+t = open("handbook/11_appendix_glossary.md", encoding="utf-8").read()
 terms = ["点差", "滑点", "插针", "凯利", "复利", "破产概率", "Ask", "Bid",
          "挂单", "流动性", "Funded", "一致性", "过拟合", "夏普", "波动率",
          "配对交易", "协整", "Z-score", "ORB", "DOM", "Delta", "Gamma"]

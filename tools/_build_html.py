@@ -15,18 +15,18 @@ import markdown
 sys.stdout.reconfigure(encoding="utf-8")
 
 FILES = [
-    "00_封面与前言.md",
-    "01_第1章_市场是怎么运作的.md",
-    "02_第2章_读懂价格行为.md",
-    "03_第3章_入场信号.md",
-    "04_第4章_交易系统.md",
-    "05_第5章_聪明钱概念SMC.md",
-    "06_第6章_仓位与风险.md",
-    "07_第7章_执行与心态.md",
-    "08_第8章_工具与验证.md",
-    "09_第9章_Prop考核实战.md",
-    "10_第10章_期权.md",
-    "11_附录_术语表与学习资源.md",
+    "00_cover_and_preface.md",
+    "01_market_overview.md",
+    "02_price_action.md",
+    "03_entry_signals.md",
+    "04_trading_system.md",
+    "05_smc.md",
+    "06_position_and_risk.md",
+    "07_execution_and_mindset.md",
+    "08_tools_and_validation.md",
+    "09_prop_firm.md",
+    "10_options.md",
+    "11_appendix_glossary.md",
 ]
 
 CSS = """
