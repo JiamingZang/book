@@ -2070,7 +2070,7 @@ def fig_p8_attribution():
     ax1.plot([35, 35], [0, peak], color=GRAY, ls=":", lw=1.0, zorder=3)
     ax1.plot([42, 42], [0, valley], color=GRAY, ls=":", lw=1.0, zorder=3)
     ax1.fill_between(x[34:42], eq[34:42], peak, color=DOWN, alpha=0.18, zorder=2)
-    ax1.annotate("连亏 6 笔 → 回撤 %.1f%%\n（峰 %.1f%% → 谷 %.1f%%）" % (peak - valley, peak, valley),
+    ax1.annotate("连亏 7 笔 → 回撤 %.1f%%\n（峰 %.1f%% → 谷 %.1f%%）" % (peak - valley, peak, valley),
                  xy=(38.5, valley + 0.3), xytext=(45, peak - 3.2), fontsize=10, color=DOWN,
                  arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.2))
     ax1.annotate("恢复：约 2-3 周回到前高——\n回撤能恢复的前提是仓位没爆（6.1）",
