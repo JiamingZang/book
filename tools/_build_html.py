@@ -93,6 +93,7 @@ tr:nth-child(even) td { background: #f7f9fc; }
 /* ---- 图片与图注 ---- */
 img { max-width: 100%; height: auto; display: block; margin: 12px auto; border: 1px solid #e3e9f2; border-radius: 4px; }
 p.figcap { text-align: center; font-weight: 600; color: #455a64; font-size: 0.95em; margin: -4px 0 20px; }
+div.figure { margin: 2px 0 4px; }
 /* ---- 引用块：深藏青左条（参考书 quote 样式） ---- */
 blockquote {
   border-left: 3px solid var(--navy); background: var(--accentbg); margin: 14px 0;
@@ -174,6 +175,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
   #cover h1 { page-break-before: avoid; }
   h2, h3 { page-break-after: avoid; }
   img, table, pre, blockquote { page-break-inside: avoid; }
+  div.figure { page-break-inside: avoid; break-inside: avoid; }
   a { color: inherit; text-decoration: none; }
   p { text-indent: 2em; }
   p.figcap, li p, td p, blockquote p { text-indent: 0; }
@@ -351,13 +353,21 @@ def main():
         # 先闭合外层 p 再开新 p 包 img，兼容图片夹在段落中间的情况
         html = re.sub(
             r'<img alt="(图\s*\d+[-.]\d+R?[^"]*)" src="([^"]+)"\s*/?>',
-            lambda m: '</p><p><img src="%s" alt="%s"></p><p class="figcap">%s</p>'
+            lambda m: '</p><div class="figure"><p><img src="%s" alt="%s"></p><p class="figcap">%s</p></div>'
             % (m.group(2), m.group(1), m.group(1)),
             html,
         )
+        # div.figure 包裹后，早期双写的斜体图注有两种残留形态：
+        # A) em 独立成段：<p></p><div class="figure">...</div></p>\n<p><em>图 ...</em></p>
+        # B) em 与 img 同段被 markdown 合并：<p></p><div class="figure">...</div>\n<em>...</em></p>
         html = re.sub(
-            r'<p class="figcap">(图\s*\d+[-.]\d+R?[^<]*)</p>\s*<p><em>图\s*\d+[-.]\d+R?[^<]*</em></p>',
-            r'<p class="figcap">\1</p>',
+            r'<p></p><div class="figure">(<p><img src="[^"]+" alt="[^"]*"></p><p class="figcap">(图\s*\d+[-.]\d+R?[^<]*)</p>)</div>\s*</p>\s*<p><em>图\s*\d+[-.]\d+R?[^<]*</em></p>',
+            r'<div class="figure">\1</div>',
+            html,
+        )
+        html = re.sub(
+            r'<p></p><div class="figure">(<p><img src="[^"]+" alt="[^"]*"></p><p class="figcap">(图\s*\d+[-.]\d+R?[^<]*)</p>)</div>\s*<em>图\s*\d+[-.]\d+R?[^<]*</em></p>',
+            r'<div class="figure">\1</div>',
             html,
         )
         # 给 h1/h2/h3 加锚点 id，并收集目录条目
