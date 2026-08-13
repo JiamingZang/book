@@ -432,6 +432,10 @@ Newbie（新手）→ Beginner（初学）→ Apprentice（学徒）→ Intermed
 
 **为什么要"以交易为志业"**：Tefi 借韦伯《以学术为志业》的命题提醒：如果永远受制于概率，要如何真正感到确定与踏实？答案是把交易当作一项需要长期打磨的志业，而不是赢一把就走的机会——**"大概一个人能将寂寞与繁华看作没有两样，才能耐寂寞而不热衷，感繁华而不没落。"**（清代文人张岱语）翻译成交易语言：连亏时不慌（寂寞），连赚时不飘（繁华）——第 7.4 的连亏/连赚纪律，最终要上升到这个境界。
 
+![图 7-9 精通阶梯：Newbie → Beginner → Apprentice → Intermediate → Proficient（基于规则）→ Advanced（基于规则的自由裁量）→ Expert（自由裁量）→ Mastery（直觉）——大多数人停在"基于规则"之前，能从规则走到规则的自由裁量已是前 5%](images/fig_p7_mastery_ladder.png)
+
+*图 7-9 精通阶梯：Newbie → Beginner → Apprentice → Intermediate → Proficient（基于规则）→ Advanced（基于规则的自由裁量）→ Expert（自由裁量）→ Mastery（直觉）——大多数人停在"基于规则"之前，能从规则走到规则的自由裁量已是前 5%*
+
 ### 本章自测（答案在本节末尾）
 
 1. 一笔按计划执行的亏损单，是好交易还是坏交易？评价标准是什么？
