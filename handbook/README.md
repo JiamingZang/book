@@ -1,7 +1,7 @@
 # 交易手册（Markdown 版）
 
 > **在线阅读版**：[trading-handbook.html](trading-handbook.html)（单文件合并版，浏览器直接打开，含封面、目录导航与移动端抽屉；由 `_build_html.py` 生成）
-> **PDF 打印版**：[trading-handbook.pdf](trading-handbook.pdf)（317 页，126 图全嵌入，每章分页、全书书签 218 项、页脚页码；由 Edge headless 打印导出，内容与 md 同步）
+> **PDF 打印版**：[trading-handbook.pdf](trading-handbook.pdf)（318 页，127 图全嵌入，每章分页、全书书签 218 项、页脚页码；由 Edge headless 打印导出，内容与 md 同步）
 
 > 基于 `trading-handbook.pdf` 拆分提取，并经逐章扩写优化：机制展开、算例补全、表格化、图片代码重绘。
 > 配图全部由代码生成（107 张合成示意图 TradingView 风格 + 19 张真实行情图，脚本见 `draw_handbook_figs.py`、`_real_figs.py`、`_real_crypto_figs.py`、`_real_figs2.py`、`_real_figs3.py`、`_real_paint.py`、`_micro_fig.py`、`_pair_fig.py`、`_pair_fig2.py`、`_rv_fig.py`、`_batch45_figs.py`、`_batch45b_figs.py`、`_batch45c_figs.py`、`_batch46_figs.py`、`_batch47_figs.py`、`_batch48_figs.py`），存放在 `images/`。真实图（图号带 R 后缀，共 19 张）数据源为 AkShare 上证指数日线、510300 ETF 5 分钟线、沪深 300/中证 500 指数日线，以及 Binance BTCUSDT/ETHUSDT 5 分钟 K 线（`_fetch_binance.py` 拉取，数据在 `data/`，2026-06-29 ~ 08-13）。每张真实图均用 matplotlib 教学级渲染：红涨绿跌 K 线 + 箭头/文字框标注 + 支撑压力线/结构连线/EMA 均线/Volume Profile 等，图注标注品种/日期/数据源/涨跌幅；典型行情段由 `_find_segs.py` 系列脚本在真实数据中挖掘（spring、HH/HL 趋势、诱多下跌、巨量锤子线、扫 SSL 反转、Volume Profile、两段式移动、区间突破、sweep-CHoCH、均线趋势跟踪、波动率回归、配对价差、ATR 通道、移动止损）。
