@@ -52,6 +52,20 @@ a { color: var(--navy); }
 #cover .rule { width: 64px; height: 3px; background: #4db6ac; border-radius: 2px; margin: 26px auto; }
 #cover .desc { max-width: 560px; margin: 0 auto 30px; color: #b9c8e2; font-size: 0.95em; line-height: 1.9; }
 #cover .meta { font-size: 0.82em; color: #7f95b8; letter-spacing: 1px; }
+#cover .startbtn {
+  display: inline-block; margin-top: 8px; padding: 12px 34px;
+  background: #4db6ac; color: #0f2440; border-radius: 24px;
+  font-size: 1.02em; font-weight: 700; letter-spacing: 3px; text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25); transition: transform 0.15s;
+}
+#cover .startbtn:hover { transform: translateY(-2px); background: #66c4bb; }
+/* 自测答案折叠按钮 */
+button.ansbtn {
+  display: inline-block; margin: 6px 0 14px; padding: 6px 18px;
+  background: var(--accentbg); color: var(--navy); border: 1px solid var(--navy);
+  border-radius: 16px; font-size: 0.9em; cursor: pointer; font-family: inherit;
+}
+button.ansbtn:hover { background: var(--navy); color: #fff; }
 /* ---- 标题 ---- */
 h1 {
   color: #fff; background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
@@ -147,7 +161,9 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 @media print {
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   @page :first { margin: 0; }
-  #toc, #progress, #backtop, #tocbtn { display: none !important; }
+  #toc, #progress, #backtop, #tocbtn, button.ansbtn { display: none !important; }
+  #cover .startbtn { display: none; }
+  .ansbody { display: block !important; }
   body { max-width: none; padding: 0 6px; }
   #cover {
     border-radius: 0; margin: 0; padding: 90px 40px 40px; height: 88vh;
@@ -210,6 +226,41 @@ JS = """
       em.parentElement.classList.add('figcap');
     }
   });
+  // 自测答案折叠：quizhead 后第一个含“答案”的段默认收起，按钮展开/收起
+  document.querySelectorAll('h3.quizhead').forEach(function (q) {
+    var el = q.nextElementSibling;
+    while (el && el.tagName !== 'H3') {
+      if (el.tagName === 'P' && el.querySelector('strong') &&
+          el.querySelector('strong').textContent.indexOf('答案') !== -1) {
+        el.classList.add('ansbody');
+        el.style.display = 'none';
+        var btn = document.createElement('button');
+        btn.className = 'ansbtn';
+        btn.textContent = '显示答案';
+        el.parentNode.insertBefore(btn, el);
+        btn.addEventListener('click', function () {
+          var show = el.style.display === 'none';
+          el.style.display = show ? 'block' : 'none';
+          btn.textContent = show ? '收起答案' : '显示答案';
+        });
+        break;
+      }
+      el = el.nextElementSibling;
+    }
+  });
+  // 封面“开始阅读”：滚动到隐藏书名 h1 之后的第一个标题
+  var bt = document.querySelector('#cover .startbtn');
+  if (bt) {
+    bt.addEventListener('click', function (e) {
+      e.preventDefault();
+      var h = document.querySelector('h1.booktitle');
+      var target = h ? h.nextElementSibling : null;
+      while (target && target.tagName !== 'H1' && target.tagName !== 'H2' && target.tagName !== 'H3') {
+        target = target.nextElementSibling;
+      }
+      if (target && target.id) document.getElementById(target.id).scrollIntoView({ behavior: 'smooth' });
+    });
+  }
   // v3 移动端：悬浮按钮开合抽屉；点链接或关闭钮收起
   var tocbtn = document.getElementById('tocbtn');
   var toc = document.getElementById('toc');
@@ -306,6 +357,7 @@ def main():
   <div class="rule"></div>
   <div class="desc">一套可验证、可重复、能控制风险的交易方法论。<br>
   市场基础 → 价格行为 → 信号 → 系统 → SMC → 仓位 → 心态 → 验证 → 应用</div>
+  <a class="startbtn" href="#">开 始 阅 读</a>
   <div class="meta">学习笔记 · 非出版物 · 不构成投资建议</div>
 </div>
 {body}

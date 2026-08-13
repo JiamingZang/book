@@ -27,6 +27,20 @@ a { color: var(--navy); }
 #cover .rule { width: 64px; height: 3px; background: #4db6ac; border-radius: 2px; margin: 26px auto; }
 #cover .desc { max-width: 560px; margin: 0 auto 30px; color: #b9c8e2; font-size: 0.95em; line-height: 1.9; }
 #cover .meta { font-size: 0.82em; color: #7f95b8; letter-spacing: 1px; }
+#cover .startbtn {
+  display: inline-block; margin-top: 8px; padding: 12px 34px;
+  background: #4db6ac; color: #0f2440; border-radius: 24px;
+  font-size: 1.02em; font-weight: 700; letter-spacing: 3px; text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25); transition: transform 0.15s;
+}
+#cover .startbtn:hover { transform: translateY(-2px); background: #66c4bb; }
+/* 自测答案折叠按钮 */
+button.ansbtn {
+  display: inline-block; margin: 6px 0 14px; padding: 6px 18px;
+  background: var(--accentbg); color: var(--navy); border: 1px solid var(--navy);
+  border-radius: 16px; font-size: 0.9em; cursor: pointer; font-family: inherit;
+}
+button.ansbtn:hover { background: var(--navy); color: #fff; }
 /* ---- 标题 ---- */
 h1 {
   color: #fff; background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
@@ -122,7 +136,9 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 @media print {
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   @page :first { margin: 0; }
-  #toc, #progress, #backtop, #tocbtn { display: none !important; }
+  #toc, #progress, #backtop, #tocbtn, button.ansbtn { display: none !important; }
+  #cover .startbtn { display: none; }
+  .ansbody { display: block !important; }
   body { max-width: none; padding: 0 6px; }
   #cover {
     border-radius: 0; margin: 0; padding: 90px 40px 40px; height: 88vh;
@@ -141,7 +157,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </head>
 <body>
 <div id="progress"></div>
-<div id="toc"><b>目录<button class="tocclose" title="收起">×</button></b><a class="lv1 h1" href="#sec-0" data-id="sec-0">交易手册：价格行为 · SMC · 仓位 · 心态 · Prop 考核</a><a class="lv3" href="#sec-1" data-id="sec-1" data-parent="sec-0">前言</a><a class="lv3" href="#sec-2" data-id="sec-2" data-parent="sec-0">章节地图</a><a class="lv3" href="#sec-3" data-id="sec-3" data-parent="sec-0">怎么读</a><a class="lv3" href="#sec-4" data-id="sec-4" data-parent="sec-0">最小可用系统：先跑起来</a><a class="lv3" href="#sec-5" data-id="sec-5" data-parent="sec-0">一个提醒</a><a class="lv3" href="#sec-6" data-id="sec-6" data-parent="sec-0">本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。</a><a class="lv1 h1" href="#sec-7" data-id="sec-7">第 1 章 市场与工具全景：钱、市场、品种、基金与 A 股</a><a class="lv3" href="#sec-8" data-id="sec-8" data-parent="sec-7">1.1 谁在交易：参与者结构 【核心】</a><a class="lv3" href="#sec-9" data-id="sec-9" data-parent="sec-7">1.2 交易什么：品种对比 【核心】</a><a class="lv3" href="#sec-10" data-id="sec-10" data-parent="sec-7">1.3 怎么下单：订单类型 【核心】</a><a class="lv3" href="#sec-11" data-id="sec-11" data-parent="sec-7">1.4 做多做空与合约规格 【核心】</a><a class="lv3" href="#sec-12" data-id="sec-12" data-parent="sec-7">1.5 杠杆与保证金：爆仓的数学 【核心】</a><a class="lv3" href="#sec-13" data-id="sec-13" data-parent="sec-7">1.6 价格是怎么形成的：买卖盘、点差、滑点、插针</a><a class="lv3" href="#sec-14" data-id="sec-14" data-parent="sec-7">1.7 什么时候交易：全球时段</a><a class="lv3" href="#sec-15" data-id="sec-15" data-parent="sec-7">1.8 什么在推动价格：基本面黑天鹅</a><a class="lv3" href="#sec-16" data-id="sec-16" data-parent="sec-7">1.9 品种细节：为什么"脾气"重要</a><a class="lv3" href="#sec-17" data-id="sec-17" data-parent="sec-7">1.10 期货：prop 考核的主战场</a><a class="lv3" href="#sec-18" data-id="sec-18" data-parent="sec-7">1.11 股票：做空限制与规则</a><a class="lv3" href="#sec-19" data-id="sec-19" data-parent="sec-7">1.12 外汇：要点速查</a><a class="lv3" href="#sec-20" data-id="sec-20" data-parent="sec-7">1.13 加密货币：24/7 与高波动</a><a class="lv3" href="#sec-21" data-id="sec-21" data-parent="sec-7">1.14 跨市场：相关性与风险叠加</a><a class="lv3" href="#sec-22" data-id="sec-22" data-parent="sec-7">1.15 怎么选品种：匹配你的系统和目标</a><a class="lv3" href="#sec-23" data-id="sec-23" data-parent="sec-7">1.16 A 股：规则与脾气（编者补充 · 投资通识）</a><a class="lv3" href="#sec-24" data-id="sec-24" data-parent="sec-7">1.17 基金与资产配置：不盯盘的财富底座（编者补充 · 投资通识）</a><a class="lv3" href="#sec-25" data-id="sec-25" data-parent="sec-7">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-26" data-id="sec-26" data-parent="sec-7">本章小结</a><a class="lv1 h1" href="#sec-27" data-id="sec-27">第 2 章 读懂价格行为</a><a class="lv3" href="#sec-28" data-id="sec-28" data-parent="sec-27">2.1 一根 K 线，就是拔河的一个回合 【核心】</a><a class="lv3" href="#sec-29" data-id="sec-29" data-parent="sec-27">2.2 同样一根 K 线，位置不同，天差地别 【核心】</a><a class="lv3" href="#sec-30" data-id="sec-30" data-parent="sec-27">2.3 趋势：钱走出来的方向 【核心】</a><a class="lv3" href="#sec-31" data-id="sec-31" data-parent="sec-27">2.4 支撑与阻力：一群人被困住的位置 【核心】</a><a class="lv3" href="#sec-32" data-id="sec-32" data-parent="sec-27">2.5 成交量：这场拔河的燃料 【核心】</a><a class="lv3" href="#sec-33" data-id="sec-33" data-parent="sec-27">2.6 实战演练：把一根锤子线，读成一次完整的入场 【核心】</a><a class="lv3" href="#sec-34" data-id="sec-34" data-parent="sec-27">2.7 趋势线、通道与缺口 【核心】</a><a class="lv3" href="#sec-35" data-id="sec-35" data-parent="sec-27">2.8 Al Brooks 把结构读"活" 【核心】</a><a class="lv3" href="#sec-36" data-id="sec-36" data-parent="sec-27">2.9 洛氏霍克交易法：把"结构突破"变成一套完整打法 【核心】</a><a class="lv3" href="#sec-37" data-id="sec-37" data-parent="sec-27">2.10 逐棒检查单：把读图变成流程</a><a class="lv3" href="#sec-38" data-id="sec-38" data-parent="sec-27">2.11 尖峰与高潮：趋势的引擎与末日</a><a class="lv3" href="#sec-39" data-id="sec-39" data-parent="sec-27">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-40" data-id="sec-40" data-parent="sec-27">本章小结</a><a class="lv1 h1" href="#sec-41" data-id="sec-41">第 3 章 入场信号</a><a class="lv3" href="#sec-42" data-id="sec-42" data-parent="sec-41">3.1 判定框架：背景 × 位置 × 形态 【核心】</a><a class="lv3" href="#sec-43" data-id="sec-43" data-parent="sec-41">3.2 假突破：最重要的单一信号 【核心】</a><a class="lv3" href="#sec-44" data-id="sec-44" data-parent="sec-41">3.3 Pin Bar（锤子 / 吊颈） 【核心】</a><a class="lv3" href="#sec-45" data-id="sec-45" data-parent="sec-41">3.4 吞没形态（Engulfing） 【核心】</a><a class="lv3" href="#sec-46" data-id="sec-46" data-parent="sec-41">3.5 内包线（Inside Bar） 【核心】</a><a class="lv3" href="#sec-47" data-id="sec-47" data-parent="sec-41">3.6 量价确认：信号的最后一道滤网</a><a class="lv3" href="#sec-48" data-id="sec-48" data-parent="sec-41">3.7 信号组合的胜率排序</a><a class="lv3" href="#sec-49" data-id="sec-49" data-parent="sec-41">3.8 蜡烛组合形态</a><a class="lv3" href="#sec-50" data-id="sec-50" data-parent="sec-41">3.9 图表形态</a><a class="lv3" href="#sec-51" data-id="sec-51" data-parent="sec-41">3.10 信号 K 的质量：Brooks 的评判标准</a><a class="lv3" href="#sec-52" data-id="sec-52" data-parent="sec-41">3.11 突破的真实概率：用数据校准你的预期</a><a class="lv3" href="#sec-53" data-id="sec-53" data-parent="sec-41">3.12 十种最佳价格行为模式（概率排序）</a><a class="lv3" href="#sec-54" data-id="sec-54" data-parent="sec-41">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-55" data-id="sec-55" data-parent="sec-41">本章小结</a><a class="lv1 h1" href="#sec-56" data-id="sec-56">第 4 章 交易系统：入场与出场</a><a class="lv3" href="#sec-57" data-id="sec-57" data-parent="sec-56">本篇导读：一章其实有四本书</a><a class="lv2" href="#sec-58" data-id="sec-58" data-parent="sec-56">篇一 系统与状态机（4.1-4.11）</a><a class="lv3" href="#sec-59" data-id="sec-59" data-parent="sec-58">4.1 信号不等于系统 【核心】</a><a class="lv3" href="#sec-60" data-id="sec-60" data-parent="sec-58">4.2 一套完整系统的六要素 【核心】</a><a class="lv3" href="#sec-61" data-id="sec-61" data-parent="sec-58">4.3 系统一：趋势回调交易（最推荐） 【核心】</a><a class="lv3" href="#sec-62" data-id="sec-62" data-parent="sec-58">4.4 系统二：区间边界交易 【核心】</a><a class="lv3" href="#sec-63" data-id="sec-63" data-parent="sec-58">4.5 系统三：突破交易 【核心】</a><a class="lv3" href="#sec-64" data-id="sec-64" data-parent="sec-58">4.6 系统四：微通道交易（Micro Channel） 【核心】</a><a class="lv3" href="#sec-65" data-id="sec-65" data-parent="sec-58">4.7 状态机与多时间框架 【核心】</a><a class="lv3" href="#sec-66" data-id="sec-66" data-parent="sec-58">4.8 斐波那契回撤 【核心】</a><a class="lv3" href="#sec-67" data-id="sec-67" data-parent="sec-58">4.9 海龟交易法则：系统化趋势跟踪的鼻祖 【核心】</a><a class="lv3" href="#sec-68" data-id="sec-68" data-parent="sec-58">4.10 市场的两种模式：趋势跟踪 vs 均值回归 【核心】</a><a class="lv3" href="#sec-69" data-id="sec-69" data-parent="sec-58">4.11 Van Tharp 的系统开发框架：系统要"合身" 【核心】</a><a class="lv2" href="#sec-70" data-id="sec-70" data-parent="sec-56">篇二 出场：期望值的另一半（4.12-4.20）</a><a class="lv3" href="#sec-71" data-id="sec-71" data-parent="sec-70">4.12 出场：期望值的另一半 【核心】</a><a class="lv3" href="#sec-72" data-id="sec-72" data-parent="sec-70">4.13 止盈目标怎么定 【核心】</a><a class="lv3" href="#sec-73" data-id="sec-73" data-parent="sec-70">4.14 分批止盈：兼顾落袋与奔跑 【核心】</a><a class="lv3" href="#sec-74" data-id="sec-74" data-parent="sec-70">4.15 移动止损：让利润奔跑的机制 【核心】</a><a class="lv3" href="#sec-75" data-id="sec-75" data-parent="sec-70">4.16 保本时机：别移太早 【核心】</a><a class="lv3" href="#sec-76" data-id="sec-76" data-parent="sec-70">4.17 时间止损：不动也是风险 【核心】</a><a class="lv3" href="#sec-77" data-id="sec-77" data-parent="sec-70">4.18 一笔交易的完整生命周期 【核心】</a><a class="lv3" href="#sec-78" data-id="sec-78" data-parent="sec-70">4.19 完整案例：一笔交易从入场到出场 【核心】</a><a class="lv3" href="#sec-79" data-id="sec-79" data-parent="sec-70">4.20 不同市场状态下的出场调整 【核心】</a><a class="lv2" href="#sec-80" data-id="sec-80" data-parent="sec-56">篇三 高级入场结构（4.21-4.25）</a><a class="lv3" href="#sec-81" data-id="sec-81" data-parent="sec-80">4.21 突破单三模型（实战课）</a><a class="lv3" href="#sec-82" data-id="sec-82" data-parent="sec-80">4.22 限价单四模型：把入场价定在"等你的地方"</a><a class="lv3" href="#sec-83" data-id="sec-83" data-parent="sec-80">4.23 always-in 强突破行情：四招短线打法</a><a class="lv3" href="#sec-84" data-id="sec-84" data-parent="sec-80">4.24 外包 K 线（Outside Bar）的实战用法</a><a class="lv3" href="#sec-85" data-id="sec-85" data-parent="sec-80">4.25 决策执行口诀与禁止清单</a><a class="lv2" href="#sec-86" data-id="sec-86" data-parent="sec-56">篇四 补充系统（4.26-4.28）：ORB、均线趋势跟踪、配对交易</a><a class="lv3" href="#sec-87" data-id="sec-87" data-parent="sec-86">4.26 ORB（开盘区间突破）：一天最重要的头 15 分钟</a><a class="lv3" href="#sec-88" data-id="sec-88" data-parent="sec-86">4.27 均线趋势跟踪：把"方向感"变成规则（编者补充 · 策略通识）</a><a class="lv3" href="#sec-89" data-id="sec-89" data-parent="sec-86">4.28 配对交易：市场中性的均值回归（编者补充 · 策略通识）</a><a class="lv3" href="#sec-90" data-id="sec-90" data-parent="sec-86">4.29 实战串讲：一个交易日走一遍</a><a class="lv3" href="#sec-91" data-id="sec-91" data-parent="sec-86">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-92" data-id="sec-92" data-parent="sec-86">本章小结</a><a class="lv1 h1" href="#sec-93" data-id="sec-93">第 5 章 机构视角与流动性：SMC、Wyckoff、订单流的统一解读</a><a class="lv3" href="#sec-94" data-id="sec-94" data-parent="sec-93">5.1 核心世界观</a><a class="lv3" href="#sec-95" data-id="sec-95" data-parent="sec-93">5.2 流动性池（Liquidity Pool）</a><a class="lv3" href="#sec-96" data-id="sec-96" data-parent="sec-93">5.3 扫流动性（Sweep / Stop Hunt）</a><a class="lv3" href="#sec-97" data-id="sec-97" data-parent="sec-93">5.4 市场结构转换（BOS / CHoCH）</a><a class="lv3" href="#sec-98" data-id="sec-98" data-parent="sec-93">5.5 订单块（Order Block, OB）</a><a class="lv3" href="#sec-99" data-id="sec-99" data-parent="sec-93">5.6 公允价值缺口（FVG / 失衡）</a><a class="lv3" href="#sec-100" data-id="sec-100" data-parent="sec-93">5.7 完整 SMC 交易流程（走一遍）</a><a class="lv3" href="#sec-101" data-id="sec-101" data-parent="sec-93">5.8 Kill Zones（时段）</a><a class="lv3" href="#sec-102" data-id="sec-102" data-parent="sec-93">5.9 验证心态：防事后叙事</a><a class="lv3" href="#sec-103" data-id="sec-103" data-parent="sec-93">5.10 Wyckoff：SMC 的正统源头</a><a class="lv3" href="#sec-104" data-id="sec-104" data-parent="sec-93">5.11 供需区（Supply/Demand）：给强势运动的起点标价</a><a class="lv3" href="#sec-105" data-id="sec-105" data-parent="sec-93">5.12 Volume Profile：量在哪里</a><a class="lv3" href="#sec-106" data-id="sec-106" data-parent="sec-93">5.13 摆动范围（Swing Range）：把结构变成"地图"</a><a class="lv3" href="#sec-107" data-id="sec-107" data-parent="sec-93">5.14 溢价与折价（Premium / Discount）："贵不贵"是交易决策的一半</a><a class="lv3" href="#sec-108" data-id="sec-108" data-parent="sec-93">5.15 机构订单块与 S2B/B2S：从"识别"到"理解意图"</a><a class="lv3" href="#sec-109" data-id="sec-109" data-parent="sec-93">5.16 流动性诱导与内外流动性：读懂"陷阱"的布局</a><a class="lv3" href="#sec-110" data-id="sec-110" data-parent="sec-93">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-111" data-id="sec-111" data-parent="sec-93">本章小结</a><a class="lv1 h1" href="#sec-112" data-id="sec-112">第 6 章 仓位与风险</a><a class="lv3" href="#sec-113" data-id="sec-113" data-parent="sec-112">6.1 考核规则决定仓位 【核心】</a><a class="lv3" href="#sec-114" data-id="sec-114" data-parent="sec-112">6.2 固定分数仓位公式 【核心】</a><a class="lv3" href="#sec-115" data-id="sec-115" data-parent="sec-112">6.3 连亏是必然，不是意外 【核心】</a><a class="lv3" href="#sec-116" data-id="sec-116" data-parent="sec-112">6.4 期望值与盈亏平衡 【核心】</a><a class="lv3" href="#sec-117" data-id="sec-117" data-parent="sec-112">6.5 ATR 止损与波动率（进阶）</a><a class="lv3" href="#sec-118" data-id="sec-118" data-parent="sec-112">6.6 成本：点差、滑点与隔夜利息</a><a class="lv3" href="#sec-119" data-id="sec-119" data-parent="sec-112">6.7 凯利公式：为什么不能满仓凯利</a><a class="lv3" href="#sec-120" data-id="sec-120" data-parent="sec-112">6.8 破产概率（Risk of Ruin）</a><a class="lv3" href="#sec-121" data-id="sec-121" data-parent="sec-112">6.9 复利与规模化</a><a class="lv3" href="#sec-122" data-id="sec-122" data-parent="sec-112">6.10 加仓：新手不宜，盈利才加</a><a class="lv3" href="#sec-123" data-id="sec-123" data-parent="sec-112">6.11 "我不在乎"的头寸规模：心理的仓位解</a><a class="lv3" href="#sec-124" data-id="sec-124" data-parent="sec-112">6.12 洛氏 3 手合约法：分批止盈的"成本先回"版</a><a class="lv3" href="#sec-125" data-id="sec-125" data-parent="sec-112">6.13 多策略资金分配：组合层的风险预算（进阶）</a><a class="lv3" href="#sec-126" data-id="sec-126" data-parent="sec-112">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-127" data-id="sec-127" data-parent="sec-112">本章小结</a><a class="lv1 h1" href="#sec-128" data-id="sec-128">第 7 章 执行与心态</a><a class="lv3" href="#sec-129" data-id="sec-129" data-parent="sec-128">7.1 概率思维 【核心】</a><a class="lv3" href="#sec-130" data-id="sec-130" data-parent="sec-128">7.2 行为金融：人会犯的七个错误 【核心】</a><a class="lv3" href="#sec-131" data-id="sec-131" data-parent="sec-128">7.3 交易流程：三个时刻 【核心】</a><a class="lv3" href="#sec-132" data-id="sec-132" data-parent="sec-128">7.4 连亏与连赚：两个危险时刻 【核心】</a><a class="lv3" href="#sec-133" data-id="sec-133" data-parent="sec-128">7.5 交易日志：心理维度 【核心】</a><a class="lv3" href="#sec-134" data-id="sec-134" data-parent="sec-128">7.6 考核期十条军规 【核心】</a><a class="lv3" href="#sec-135" data-id="sec-135" data-parent="sec-128">7.7 波段 vs 刮头皮：先想清楚你是哪种交易者</a><a class="lv3" href="#sec-136" data-id="sec-136" data-parent="sec-128">7.8 新手最常见的错误：因错误而输（Brooks 清单）</a><a class="lv3" href="#sec-137" data-id="sec-137" data-parent="sec-128">7.9 洛氏交易哲学：目标导向的自我管理</a><a class="lv3" href="#sec-138" data-id="sec-138" data-parent="sec-128">7.10 以交易为志业：决策树与精通阶梯（Tefi L20）</a><a class="lv3" href="#sec-139" data-id="sec-139" data-parent="sec-128">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-140" data-id="sec-140" data-parent="sec-128">本章小结</a><a class="lv1 h1" href="#sec-141" data-id="sec-141">第 8 章 工具与验证</a><a class="lv3" href="#sec-142" data-id="sec-142" data-parent="sec-141">8.1 图表与分析 【核心】</a><a class="lv3" href="#sec-143" data-id="sec-143" data-parent="sec-141">8.2 回测与数据 【核心】</a><a class="lv3" href="#sec-144" data-id="sec-144" data-parent="sec-141">8.3 交易日志与复盘 【核心】</a><a class="lv3" href="#sec-145" data-id="sec-145" data-parent="sec-141">8.4 模拟盘 【核心】</a><a class="lv3" href="#sec-146" data-id="sec-146" data-parent="sec-141">8.5 信息与日历 【核心】</a><a class="lv3" href="#sec-147" data-id="sec-147" data-parent="sec-141">8.6 防坑清单 【核心】</a><a class="lv3" href="#sec-148" data-id="sec-148" data-parent="sec-141">8.7 上真钱的门槛：验证闭环 【核心】</a><a class="lv3" href="#sec-149" data-id="sec-149" data-parent="sec-141">8.8 复盘体系：日/周/月 【核心】</a><a class="lv3" href="#sec-150" data-id="sec-150" data-parent="sec-141">8.9 SQN：用 R 分布给系统打分 【核心】</a><a class="lv3" href="#sec-151" data-id="sec-151" data-parent="sec-141">8.10 拍卖理论：把"平衡-失衡"读成循环（威科夫 2.0） 【核心】</a><a class="lv3" href="#sec-152" data-id="sec-152" data-parent="sec-141">8.11 足迹图（订单流图表）：看见逐价成交 【核心】</a><a class="lv3" href="#sec-153" data-id="sec-153" data-parent="sec-141">8.12 订单流三件套：DOM、逐笔、Delta 体系化（进阶）</a><a class="lv3" href="#sec-154" data-id="sec-154" data-parent="sec-141">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-155" data-id="sec-155" data-parent="sec-141">核心方法论收口</a><a class="lv3" href="#sec-156" data-id="sec-156" data-parent="sec-141">本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。</a><a class="lv1 h1" href="#sec-157" data-id="sec-157">第 9 章 Prop Firm 考核实战</a><a class="lv3" href="#sec-158" data-id="sec-158" data-parent="sec-157">9.1 考核的结构</a><a class="lv3" href="#sec-159" data-id="sec-159" data-parent="sec-157">9.2 平台选择</a><a class="lv3" href="#sec-160" data-id="sec-160" data-parent="sec-157">9.3 达标节奏的数学（本章核心）</a><a class="lv3" href="#sec-161" data-id="sec-161" data-parent="sec-157">9.4 常见失败原因</a><a class="lv3" href="#sec-162" data-id="sec-162" data-parent="sec-157">9.5 拿到 Funded 之后</a><a class="lv3" href="#sec-163" data-id="sec-163" data-parent="sec-157">9.6 出金与合规（简要）</a><a class="lv3" href="#sec-164" data-id="sec-164" data-parent="sec-157">9.7 规则细节（容易踩的坑）</a><a class="lv3" href="#sec-165" data-id="sec-165" data-parent="sec-157">9.8 案例：一次完整考核过程</a><a class="lv3" href="#sec-166" data-id="sec-166" data-parent="sec-157">9.9 账户规模的现实（Al Brooks 的提醒）</a><a class="lv3" href="#sec-167" data-id="sec-167" data-parent="sec-157">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-168" data-id="sec-168" data-parent="sec-157">本章小结</a><a class="lv1 h1" href="#sec-169" data-id="sec-169">第 10 章 期权：交易的另一个维度</a><a class="lv3" href="#sec-170" data-id="sec-170" data-parent="sec-169">10.1 先建立一个直觉：期权到底在交易什么</a><a class="lv3" href="#sec-171" data-id="sec-171" data-parent="sec-169">10.2 期权是什么：从一个具体例子讲起</a><a class="lv3" href="#sec-172" data-id="sec-172" data-parent="sec-169">10.3 期权的价格由什么构成</a><a class="lv3" href="#sec-173" data-id="sec-173" data-parent="sec-169">10.4 希腊字母：别背公式，理解它们在回答什么问题</a><a class="lv3" href="#sec-174" data-id="sec-174" data-parent="sec-169">10.5 波动率（IV）：期权的灵魂，也是和你已有知识的连接点</a><a class="lv3" href="#sec-175" data-id="sec-175" data-parent="sec-169">10.6 常用策略：按"你想干什么"来学，而不是按名字背</a><a class="lv3" href="#sec-176" data-id="sec-176" data-parent="sec-169">10.7 把期权放回全书坐标</a><a class="lv3" href="#sec-177" data-id="sec-177" data-parent="sec-169">10.8 期权的陷阱，以及什么时候该碰、什么时候别碰</a><a class="lv3" href="#sec-178" data-id="sec-178" data-parent="sec-169">10.9 一个极简主义的参照：Al Brooks 怎么用期权</a><a class="lv3" href="#sec-179" data-id="sec-179" data-parent="sec-169">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-180" data-id="sec-180" data-parent="sec-169">本章小结</a><a class="lv1 h1" href="#sec-181" data-id="sec-181">附录 术语表与学习资源</a><a class="lv2" href="#sec-182" data-id="sec-182" data-parent="sec-181">A0. 素材来源对照表</a><a class="lv2" href="#sec-183" data-id="sec-183" data-parent="sec-181">A. 术语速查表</a><a class="lv3" href="#sec-184" data-id="sec-184" data-parent="sec-183">市场结构</a><a class="lv3" href="#sec-185" data-id="sec-185" data-parent="sec-183">SMC / 流动性</a><a class="lv3" href="#sec-186" data-id="sec-186" data-parent="sec-183">Wyckoff</a><a class="lv3" href="#sec-187" data-id="sec-187" data-parent="sec-183">量价分布（5.12）</a><a class="lv3" href="#sec-188" data-id="sec-188" data-parent="sec-183">信号与形态</a><a class="lv3" href="#sec-189" data-id="sec-189" data-parent="sec-183">Brooks 与量化派术语</a><a class="lv3" href="#sec-190" data-id="sec-190" data-parent="sec-183">K 线组合形态（3.8-3.9）</a><a class="lv3" href="#sec-191" data-id="sec-191" data-parent="sec-183">突破系统（QuantSystems / Ali）</a><a class="lv3" href="#sec-192" data-id="sec-192" data-parent="sec-183">市场微观结构（1.6 / 8.11）</a><a class="lv3" href="#sec-193" data-id="sec-193" data-parent="sec-183">订单流（8.11-8.12）</a><a class="lv3" href="#sec-194" data-id="sec-194" data-parent="sec-183">SMC 与 Wyckoff（第 5 章）</a><a class="lv3" href="#sec-195" data-id="sec-195" data-parent="sec-183">策略与资金管理</a><a class="lv3" href="#sec-196" data-id="sec-196" data-parent="sec-183">Prop 考核（第 9 章）</a><a class="lv3" href="#sec-197" data-id="sec-197" data-parent="sec-183">风险与计量</a><a class="lv3" href="#sec-198" data-id="sec-198" data-parent="sec-183">宏观事件与经济数据（1.8）</a><a class="lv3" href="#sec-199" data-id="sec-199" data-parent="sec-183">时间框架</a><a class="lv3" href="#sec-200" data-id="sec-200" data-parent="sec-183">期权与波动率（第 10 章）</a><a class="lv2" href="#sec-201" data-id="sec-201" data-parent="sec-181">B. 学习资源（已验证）</a><a class="lv3" href="#sec-202" data-id="sec-202" data-parent="sec-201">中文免费课</a><a class="lv3" href="#sec-203" data-id="sec-203" data-parent="sec-201">文字教程</a><a class="lv3" href="#sec-204" data-id="sec-204" data-parent="sec-201">英文免费课</a><a class="lv3" href="#sec-205" data-id="sec-205" data-parent="sec-201">公版书（合法免费）</a><a class="lv3" href="#sec-206" data-id="sec-206" data-parent="sec-201">中文正版书（微信读书）</a><a class="lv3" href="#sec-207" data-id="sec-207" data-parent="sec-201">学术（免费）</a><a class="lv3" href="#sec-208" data-id="sec-208" data-parent="sec-201">认证路线</a><a class="lv2" href="#sec-209" data-id="sec-209" data-parent="sec-181">C. 网络大 V 系统参考</a><a class="lv3" href="#sec-210" data-id="sec-210" data-parent="sec-209">C.1 先立态度：大 V 系统的真相</a><a class="lv3" href="#sec-211" data-id="sec-211" data-parent="sec-209">C.2 ICT（Michael Huddleston）——SMC 的源头</a><a class="lv3" href="#sec-212" data-id="sec-212" data-parent="sec-209">C.3 Al Brooks——价格行为的教父</a><a class="lv3" href="#sec-213" data-id="sec-213" data-parent="sec-209">C.4 Thomas Wade——标普日内价格行为</a><a class="lv3" href="#sec-214" data-id="sec-214" data-parent="sec-209">C.5 南桥价格行为——中文标普日内</a><a class="lv3" href="#sec-215" data-id="sec-215" data-parent="sec-209">C.6 大 V 系统的共性，以及怎么用</a><a class="lv3" href="#sec-216" data-id="sec-216" data-parent="sec-209">C.7 Ali Moin-Afshari——微通道与量化突破（10,000 Trades）</a><a class="lv3" href="#sec-217" data-id="sec-217" data-parent="sec-209">C.8 GRANDMA——"连奶奶都会交易"的故障安全入场（Rose）</a><a class="lv3" href="#sec-218" data-id="sec-218" data-parent="sec-209">C.9 Rose 八大主题——把 Brooks 概念拆成专题</a><a class="lv2" href="#sec-219" data-id="sec-219" data-parent="sec-181">D. 防骗提醒</a><a class="lv2" href="#sec-220" data-id="sec-220" data-parent="sec-181">结语：把书合上之前</a><a class="lv3" href="#sec-221" data-id="sec-221" data-parent="sec-220">本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。</a></div>
+<div id="toc"><b>目录<button class="tocclose" title="收起">×</button></b><a class="lv1 h1" href="#sec-0" data-id="sec-0">交易手册：价格行为 · SMC · 仓位 · 心态 · Prop 考核</a><a class="lv3" href="#sec-1" data-id="sec-1" data-parent="sec-0">前言</a><a class="lv3" href="#sec-2" data-id="sec-2" data-parent="sec-0">章节地图</a><a class="lv3" href="#sec-3" data-id="sec-3" data-parent="sec-0">怎么读</a><a class="lv3" href="#sec-4" data-id="sec-4" data-parent="sec-0">最小可用系统：先跑起来</a><a class="lv3" href="#sec-5" data-id="sec-5" data-parent="sec-0">一个提醒</a><a class="lv1 h1" href="#sec-6" data-id="sec-6">第 1 章 市场与工具全景：钱、市场、品种、基金与 A 股</a><a class="lv3" href="#sec-7" data-id="sec-7" data-parent="sec-6">1.1 谁在交易：参与者结构 【核心】</a><a class="lv3" href="#sec-8" data-id="sec-8" data-parent="sec-6">1.2 交易什么：品种对比 【核心】</a><a class="lv3" href="#sec-9" data-id="sec-9" data-parent="sec-6">1.3 怎么下单：订单类型 【核心】</a><a class="lv3" href="#sec-10" data-id="sec-10" data-parent="sec-6">1.4 做多做空与合约规格 【核心】</a><a class="lv3" href="#sec-11" data-id="sec-11" data-parent="sec-6">1.5 杠杆与保证金：爆仓的数学 【核心】</a><a class="lv3" href="#sec-12" data-id="sec-12" data-parent="sec-6">1.6 价格是怎么形成的：买卖盘、点差、滑点、插针</a><a class="lv3" href="#sec-13" data-id="sec-13" data-parent="sec-6">1.7 什么时候交易：全球时段</a><a class="lv3" href="#sec-14" data-id="sec-14" data-parent="sec-6">1.8 什么在推动价格：基本面黑天鹅</a><a class="lv3" href="#sec-15" data-id="sec-15" data-parent="sec-6">1.9 品种细节：为什么"脾气"重要</a><a class="lv3" href="#sec-16" data-id="sec-16" data-parent="sec-6">1.10 期货：prop 考核的主战场</a><a class="lv3" href="#sec-17" data-id="sec-17" data-parent="sec-6">1.11 股票：做空限制与规则</a><a class="lv3" href="#sec-18" data-id="sec-18" data-parent="sec-6">1.12 外汇：要点速查</a><a class="lv3" href="#sec-19" data-id="sec-19" data-parent="sec-6">1.13 加密货币：24/7 与高波动</a><a class="lv3" href="#sec-20" data-id="sec-20" data-parent="sec-6">1.14 跨市场：相关性与风险叠加</a><a class="lv3" href="#sec-21" data-id="sec-21" data-parent="sec-6">1.15 怎么选品种：匹配你的系统和目标</a><a class="lv3" href="#sec-22" data-id="sec-22" data-parent="sec-6">1.16 A 股：规则与脾气（编者补充 · 投资通识）</a><a class="lv3" href="#sec-23" data-id="sec-23" data-parent="sec-6">1.17 基金与资产配置：不盯盘的财富底座（编者补充 · 投资通识）</a><a class="lv3" href="#sec-24" data-id="sec-24" data-parent="sec-6">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-25" data-id="sec-25" data-parent="sec-6">本章小结</a><a class="lv1 h1" href="#sec-26" data-id="sec-26">第 2 章 读懂价格行为</a><a class="lv3" href="#sec-27" data-id="sec-27" data-parent="sec-26">2.1 一根 K 线，就是拔河的一个回合 【核心】</a><a class="lv3" href="#sec-28" data-id="sec-28" data-parent="sec-26">2.2 同样一根 K 线，位置不同，天差地别 【核心】</a><a class="lv3" href="#sec-29" data-id="sec-29" data-parent="sec-26">2.3 趋势：钱走出来的方向 【核心】</a><a class="lv3" href="#sec-30" data-id="sec-30" data-parent="sec-26">2.4 支撑与阻力：一群人被困住的位置 【核心】</a><a class="lv3" href="#sec-31" data-id="sec-31" data-parent="sec-26">2.5 成交量：这场拔河的燃料 【核心】</a><a class="lv3" href="#sec-32" data-id="sec-32" data-parent="sec-26">2.6 实战演练：把一根锤子线，读成一次完整的入场 【核心】</a><a class="lv3" href="#sec-33" data-id="sec-33" data-parent="sec-26">2.7 趋势线、通道与缺口 【核心】</a><a class="lv3" href="#sec-34" data-id="sec-34" data-parent="sec-26">2.8 Al Brooks 把结构读"活" 【核心】</a><a class="lv3" href="#sec-35" data-id="sec-35" data-parent="sec-26">2.9 洛氏霍克交易法：把"结构突破"变成一套完整打法 【核心】</a><a class="lv3" href="#sec-36" data-id="sec-36" data-parent="sec-26">2.10 逐棒检查单：把读图变成流程</a><a class="lv3" href="#sec-37" data-id="sec-37" data-parent="sec-26">2.11 尖峰与高潮：趋势的引擎与末日</a><a class="lv3" href="#sec-38" data-id="sec-38" data-parent="sec-26">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-39" data-id="sec-39" data-parent="sec-26">本章小结</a><a class="lv1 h1" href="#sec-40" data-id="sec-40">第 3 章 入场信号</a><a class="lv3" href="#sec-41" data-id="sec-41" data-parent="sec-40">3.1 判定框架：背景 × 位置 × 形态 【核心】</a><a class="lv3" href="#sec-42" data-id="sec-42" data-parent="sec-40">3.2 假突破：最重要的单一信号 【核心】</a><a class="lv3" href="#sec-43" data-id="sec-43" data-parent="sec-40">3.3 Pin Bar（锤子 / 吊颈） 【核心】</a><a class="lv3" href="#sec-44" data-id="sec-44" data-parent="sec-40">3.4 吞没形态（Engulfing） 【核心】</a><a class="lv3" href="#sec-45" data-id="sec-45" data-parent="sec-40">3.5 内包线（Inside Bar） 【核心】</a><a class="lv3" href="#sec-46" data-id="sec-46" data-parent="sec-40">3.6 量价确认：信号的最后一道滤网</a><a class="lv3" href="#sec-47" data-id="sec-47" data-parent="sec-40">3.7 信号组合的胜率排序</a><a class="lv3" href="#sec-48" data-id="sec-48" data-parent="sec-40">3.8 蜡烛组合形态</a><a class="lv3" href="#sec-49" data-id="sec-49" data-parent="sec-40">3.9 图表形态</a><a class="lv3" href="#sec-50" data-id="sec-50" data-parent="sec-40">3.10 信号 K 的质量：Brooks 的评判标准</a><a class="lv3" href="#sec-51" data-id="sec-51" data-parent="sec-40">3.11 突破的真实概率：用数据校准你的预期</a><a class="lv3" href="#sec-52" data-id="sec-52" data-parent="sec-40">3.12 十种最佳价格行为模式（概率排序）</a><a class="lv3" href="#sec-53" data-id="sec-53" data-parent="sec-40">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-54" data-id="sec-54" data-parent="sec-40">本章小结</a><a class="lv1 h1" href="#sec-55" data-id="sec-55">第 4 章 交易系统：入场与出场</a><a class="lv3" href="#sec-56" data-id="sec-56" data-parent="sec-55">本篇导读：一章其实有四本书</a><a class="lv2" href="#sec-57" data-id="sec-57" data-parent="sec-55">篇一 系统与状态机（4.1-4.11）</a><a class="lv3" href="#sec-58" data-id="sec-58" data-parent="sec-57">4.1 信号不等于系统 【核心】</a><a class="lv3" href="#sec-59" data-id="sec-59" data-parent="sec-57">4.2 一套完整系统的六要素 【核心】</a><a class="lv3" href="#sec-60" data-id="sec-60" data-parent="sec-57">4.3 系统一：趋势回调交易（最推荐） 【核心】</a><a class="lv3" href="#sec-61" data-id="sec-61" data-parent="sec-57">4.4 系统二：区间边界交易 【核心】</a><a class="lv3" href="#sec-62" data-id="sec-62" data-parent="sec-57">4.5 系统三：突破交易 【核心】</a><a class="lv3" href="#sec-63" data-id="sec-63" data-parent="sec-57">4.6 系统四：微通道交易（Micro Channel） 【核心】</a><a class="lv3" href="#sec-64" data-id="sec-64" data-parent="sec-57">4.7 状态机与多时间框架 【核心】</a><a class="lv3" href="#sec-65" data-id="sec-65" data-parent="sec-57">4.8 斐波那契回撤 【核心】</a><a class="lv3" href="#sec-66" data-id="sec-66" data-parent="sec-57">4.9 海龟交易法则：系统化趋势跟踪的鼻祖 【核心】</a><a class="lv3" href="#sec-67" data-id="sec-67" data-parent="sec-57">4.10 市场的两种模式：趋势跟踪 vs 均值回归 【核心】</a><a class="lv3" href="#sec-68" data-id="sec-68" data-parent="sec-57">4.11 Van Tharp 的系统开发框架：系统要"合身" 【核心】</a><a class="lv2" href="#sec-69" data-id="sec-69" data-parent="sec-55">篇二 出场：期望值的另一半（4.12-4.20）</a><a class="lv3" href="#sec-70" data-id="sec-70" data-parent="sec-69">4.12 出场：期望值的另一半 【核心】</a><a class="lv3" href="#sec-71" data-id="sec-71" data-parent="sec-69">4.13 止盈目标怎么定 【核心】</a><a class="lv3" href="#sec-72" data-id="sec-72" data-parent="sec-69">4.14 分批止盈：兼顾落袋与奔跑 【核心】</a><a class="lv3" href="#sec-73" data-id="sec-73" data-parent="sec-69">4.15 移动止损：让利润奔跑的机制 【核心】</a><a class="lv3" href="#sec-74" data-id="sec-74" data-parent="sec-69">4.16 保本时机：别移太早 【核心】</a><a class="lv3" href="#sec-75" data-id="sec-75" data-parent="sec-69">4.17 时间止损：不动也是风险 【核心】</a><a class="lv3" href="#sec-76" data-id="sec-76" data-parent="sec-69">4.18 一笔交易的完整生命周期 【核心】</a><a class="lv3" href="#sec-77" data-id="sec-77" data-parent="sec-69">4.19 完整案例：一笔交易从入场到出场 【核心】</a><a class="lv3" href="#sec-78" data-id="sec-78" data-parent="sec-69">4.20 不同市场状态下的出场调整 【核心】</a><a class="lv2" href="#sec-79" data-id="sec-79" data-parent="sec-55">篇三 高级入场结构（4.21-4.25）</a><a class="lv3" href="#sec-80" data-id="sec-80" data-parent="sec-79">4.21 突破单三模型（实战课）</a><a class="lv3" href="#sec-81" data-id="sec-81" data-parent="sec-79">4.22 限价单四模型：把入场价定在"等你的地方"</a><a class="lv3" href="#sec-82" data-id="sec-82" data-parent="sec-79">4.23 always-in 强突破行情：四招短线打法</a><a class="lv3" href="#sec-83" data-id="sec-83" data-parent="sec-79">4.24 外包 K 线（Outside Bar）的实战用法</a><a class="lv3" href="#sec-84" data-id="sec-84" data-parent="sec-79">4.25 决策执行口诀与禁止清单</a><a class="lv2" href="#sec-85" data-id="sec-85" data-parent="sec-55">篇四 补充系统（4.26-4.28）：ORB、均线趋势跟踪、配对交易</a><a class="lv3" href="#sec-86" data-id="sec-86" data-parent="sec-85">4.26 ORB（开盘区间突破）：一天最重要的头 15 分钟</a><a class="lv3" href="#sec-87" data-id="sec-87" data-parent="sec-85">4.27 均线趋势跟踪：把"方向感"变成规则（编者补充 · 策略通识）</a><a class="lv3" href="#sec-88" data-id="sec-88" data-parent="sec-85">4.28 配对交易：市场中性的均值回归（编者补充 · 策略通识）</a><a class="lv3" href="#sec-89" data-id="sec-89" data-parent="sec-85">4.29 实战串讲：一个交易日走一遍</a><a class="lv3" href="#sec-90" data-id="sec-90" data-parent="sec-85">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-91" data-id="sec-91" data-parent="sec-85">本章小结</a><a class="lv1 h1" href="#sec-92" data-id="sec-92">第 5 章 机构视角与流动性：SMC、Wyckoff、订单流的统一解读</a><a class="lv3" href="#sec-93" data-id="sec-93" data-parent="sec-92">5.1 核心世界观</a><a class="lv3" href="#sec-94" data-id="sec-94" data-parent="sec-92">5.2 流动性池（Liquidity Pool）</a><a class="lv3" href="#sec-95" data-id="sec-95" data-parent="sec-92">5.3 扫流动性（Sweep / Stop Hunt）</a><a class="lv3" href="#sec-96" data-id="sec-96" data-parent="sec-92">5.4 市场结构转换（BOS / CHoCH）</a><a class="lv3" href="#sec-97" data-id="sec-97" data-parent="sec-92">5.5 订单块（Order Block, OB）</a><a class="lv3" href="#sec-98" data-id="sec-98" data-parent="sec-92">5.6 公允价值缺口（FVG / 失衡）</a><a class="lv3" href="#sec-99" data-id="sec-99" data-parent="sec-92">5.7 完整 SMC 交易流程（走一遍）</a><a class="lv3" href="#sec-100" data-id="sec-100" data-parent="sec-92">5.8 Kill Zones（时段）</a><a class="lv3" href="#sec-101" data-id="sec-101" data-parent="sec-92">5.9 验证心态：防事后叙事</a><a class="lv3" href="#sec-102" data-id="sec-102" data-parent="sec-92">5.10 Wyckoff：SMC 的正统源头</a><a class="lv3" href="#sec-103" data-id="sec-103" data-parent="sec-92">5.11 供需区（Supply/Demand）：给强势运动的起点标价</a><a class="lv3" href="#sec-104" data-id="sec-104" data-parent="sec-92">5.12 Volume Profile：量在哪里</a><a class="lv3" href="#sec-105" data-id="sec-105" data-parent="sec-92">5.13 摆动范围（Swing Range）：把结构变成"地图"</a><a class="lv3" href="#sec-106" data-id="sec-106" data-parent="sec-92">5.14 溢价与折价（Premium / Discount）："贵不贵"是交易决策的一半</a><a class="lv3" href="#sec-107" data-id="sec-107" data-parent="sec-92">5.15 机构订单块与 S2B/B2S：从"识别"到"理解意图"</a><a class="lv3" href="#sec-108" data-id="sec-108" data-parent="sec-92">5.16 流动性诱导与内外流动性：读懂"陷阱"的布局</a><a class="lv3" href="#sec-109" data-id="sec-109" data-parent="sec-92">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-110" data-id="sec-110" data-parent="sec-92">本章小结</a><a class="lv1 h1" href="#sec-111" data-id="sec-111">第 6 章 仓位与风险</a><a class="lv3" href="#sec-112" data-id="sec-112" data-parent="sec-111">6.1 考核规则决定仓位 【核心】</a><a class="lv3" href="#sec-113" data-id="sec-113" data-parent="sec-111">6.2 固定分数仓位公式 【核心】</a><a class="lv3" href="#sec-114" data-id="sec-114" data-parent="sec-111">6.3 连亏是必然，不是意外 【核心】</a><a class="lv3" href="#sec-115" data-id="sec-115" data-parent="sec-111">6.4 期望值与盈亏平衡 【核心】</a><a class="lv3" href="#sec-116" data-id="sec-116" data-parent="sec-111">6.5 ATR 止损与波动率（进阶）</a><a class="lv3" href="#sec-117" data-id="sec-117" data-parent="sec-111">6.6 成本：点差、滑点与隔夜利息</a><a class="lv3" href="#sec-118" data-id="sec-118" data-parent="sec-111">6.7 凯利公式：为什么不能满仓凯利</a><a class="lv3" href="#sec-119" data-id="sec-119" data-parent="sec-111">6.8 破产概率（Risk of Ruin）</a><a class="lv3" href="#sec-120" data-id="sec-120" data-parent="sec-111">6.9 复利与规模化</a><a class="lv3" href="#sec-121" data-id="sec-121" data-parent="sec-111">6.10 加仓：新手不宜，盈利才加</a><a class="lv3" href="#sec-122" data-id="sec-122" data-parent="sec-111">6.11 "我不在乎"的头寸规模：心理的仓位解</a><a class="lv3" href="#sec-123" data-id="sec-123" data-parent="sec-111">6.12 洛氏 3 手合约法：分批止盈的"成本先回"版</a><a class="lv3" href="#sec-124" data-id="sec-124" data-parent="sec-111">6.13 多策略资金分配：组合层的风险预算（进阶）</a><a class="lv3" href="#sec-125" data-id="sec-125" data-parent="sec-111">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-126" data-id="sec-126" data-parent="sec-111">本章小结</a><a class="lv1 h1" href="#sec-127" data-id="sec-127">第 7 章 执行与心态</a><a class="lv3" href="#sec-128" data-id="sec-128" data-parent="sec-127">7.1 概率思维 【核心】</a><a class="lv3" href="#sec-129" data-id="sec-129" data-parent="sec-127">7.2 行为金融：人会犯的七个错误 【核心】</a><a class="lv3" href="#sec-130" data-id="sec-130" data-parent="sec-127">7.3 交易流程：三个时刻 【核心】</a><a class="lv3" href="#sec-131" data-id="sec-131" data-parent="sec-127">7.4 连亏与连赚：两个危险时刻 【核心】</a><a class="lv3" href="#sec-132" data-id="sec-132" data-parent="sec-127">7.5 交易日志：心理维度 【核心】</a><a class="lv3" href="#sec-133" data-id="sec-133" data-parent="sec-127">7.6 考核期十条军规 【核心】</a><a class="lv3" href="#sec-134" data-id="sec-134" data-parent="sec-127">7.7 波段 vs 刮头皮：先想清楚你是哪种交易者</a><a class="lv3" href="#sec-135" data-id="sec-135" data-parent="sec-127">7.8 新手最常见的错误：因错误而输（Brooks 清单）</a><a class="lv3" href="#sec-136" data-id="sec-136" data-parent="sec-127">7.9 洛氏交易哲学：目标导向的自我管理</a><a class="lv3" href="#sec-137" data-id="sec-137" data-parent="sec-127">7.10 以交易为志业：决策树与精通阶梯（Tefi L20）</a><a class="lv3" href="#sec-138" data-id="sec-138" data-parent="sec-127">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-139" data-id="sec-139" data-parent="sec-127">本章小结</a><a class="lv1 h1" href="#sec-140" data-id="sec-140">第 8 章 工具与验证</a><a class="lv3" href="#sec-141" data-id="sec-141" data-parent="sec-140">8.1 图表与分析 【核心】</a><a class="lv3" href="#sec-142" data-id="sec-142" data-parent="sec-140">8.2 回测与数据 【核心】</a><a class="lv3" href="#sec-143" data-id="sec-143" data-parent="sec-140">8.3 交易日志与复盘 【核心】</a><a class="lv3" href="#sec-144" data-id="sec-144" data-parent="sec-140">8.4 模拟盘 【核心】</a><a class="lv3" href="#sec-145" data-id="sec-145" data-parent="sec-140">8.5 信息与日历 【核心】</a><a class="lv3" href="#sec-146" data-id="sec-146" data-parent="sec-140">8.6 防坑清单 【核心】</a><a class="lv3" href="#sec-147" data-id="sec-147" data-parent="sec-140">8.7 上真钱的门槛：验证闭环 【核心】</a><a class="lv3" href="#sec-148" data-id="sec-148" data-parent="sec-140">8.8 复盘体系：日/周/月 【核心】</a><a class="lv3" href="#sec-149" data-id="sec-149" data-parent="sec-140">8.9 SQN：用 R 分布给系统打分 【核心】</a><a class="lv3" href="#sec-150" data-id="sec-150" data-parent="sec-140">8.10 拍卖理论：把"平衡-失衡"读成循环（威科夫 2.0） 【核心】</a><a class="lv3" href="#sec-151" data-id="sec-151" data-parent="sec-140">8.11 足迹图（订单流图表）：看见逐价成交 【核心】</a><a class="lv3" href="#sec-152" data-id="sec-152" data-parent="sec-140">8.12 订单流三件套：DOM、逐笔、Delta 体系化（进阶）</a><a class="lv3" href="#sec-153" data-id="sec-153" data-parent="sec-140">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-154" data-id="sec-154" data-parent="sec-140">核心方法论收口</a><a class="lv1 h1" href="#sec-155" data-id="sec-155">第 9 章 Prop Firm 考核实战</a><a class="lv3" href="#sec-156" data-id="sec-156" data-parent="sec-155">9.1 考核的结构</a><a class="lv3" href="#sec-157" data-id="sec-157" data-parent="sec-155">9.2 平台选择</a><a class="lv3" href="#sec-158" data-id="sec-158" data-parent="sec-155">9.3 达标节奏的数学（本章核心）</a><a class="lv3" href="#sec-159" data-id="sec-159" data-parent="sec-155">9.4 常见失败原因</a><a class="lv3" href="#sec-160" data-id="sec-160" data-parent="sec-155">9.5 拿到 Funded 之后</a><a class="lv3" href="#sec-161" data-id="sec-161" data-parent="sec-155">9.6 出金与合规（简要）</a><a class="lv3" href="#sec-162" data-id="sec-162" data-parent="sec-155">9.7 规则细节（容易踩的坑）</a><a class="lv3" href="#sec-163" data-id="sec-163" data-parent="sec-155">9.8 案例：一次完整考核过程</a><a class="lv3" href="#sec-164" data-id="sec-164" data-parent="sec-155">9.9 账户规模的现实（Al Brooks 的提醒）</a><a class="lv3" href="#sec-165" data-id="sec-165" data-parent="sec-155">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-166" data-id="sec-166" data-parent="sec-155">本章小结</a><a class="lv1 h1" href="#sec-167" data-id="sec-167">第 10 章 期权：交易的另一个维度</a><a class="lv3" href="#sec-168" data-id="sec-168" data-parent="sec-167">10.1 先建立一个直觉：期权到底在交易什么</a><a class="lv3" href="#sec-169" data-id="sec-169" data-parent="sec-167">10.2 期权是什么：从一个具体例子讲起</a><a class="lv3" href="#sec-170" data-id="sec-170" data-parent="sec-167">10.3 期权的价格由什么构成</a><a class="lv3" href="#sec-171" data-id="sec-171" data-parent="sec-167">10.4 希腊字母：别背公式，理解它们在回答什么问题</a><a class="lv3" href="#sec-172" data-id="sec-172" data-parent="sec-167">10.5 波动率（IV）：期权的灵魂，也是和你已有知识的连接点</a><a class="lv3" href="#sec-173" data-id="sec-173" data-parent="sec-167">10.6 常用策略：按"你想干什么"来学，而不是按名字背</a><a class="lv3" href="#sec-174" data-id="sec-174" data-parent="sec-167">10.7 把期权放回全书坐标</a><a class="lv3" href="#sec-175" data-id="sec-175" data-parent="sec-167">10.8 期权的陷阱，以及什么时候该碰、什么时候别碰</a><a class="lv3" href="#sec-176" data-id="sec-176" data-parent="sec-167">10.9 一个极简主义的参照：Al Brooks 怎么用期权</a><a class="lv3" href="#sec-177" data-id="sec-177" data-parent="sec-167">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-178" data-id="sec-178" data-parent="sec-167">本章小结</a><a class="lv1 h1" href="#sec-179" data-id="sec-179">附录 术语表与学习资源</a><a class="lv2" href="#sec-180" data-id="sec-180" data-parent="sec-179">A0. 素材来源对照表</a><a class="lv2" href="#sec-181" data-id="sec-181" data-parent="sec-179">A. 术语速查表</a><a class="lv3" href="#sec-182" data-id="sec-182" data-parent="sec-181">市场结构</a><a class="lv3" href="#sec-183" data-id="sec-183" data-parent="sec-181">SMC / 流动性</a><a class="lv3" href="#sec-184" data-id="sec-184" data-parent="sec-181">Wyckoff</a><a class="lv3" href="#sec-185" data-id="sec-185" data-parent="sec-181">量价分布（5.12）</a><a class="lv3" href="#sec-186" data-id="sec-186" data-parent="sec-181">信号与形态</a><a class="lv3" href="#sec-187" data-id="sec-187" data-parent="sec-181">Brooks 与量化派术语</a><a class="lv3" href="#sec-188" data-id="sec-188" data-parent="sec-181">K 线组合形态（3.8-3.9）</a><a class="lv3" href="#sec-189" data-id="sec-189" data-parent="sec-181">突破系统（QuantSystems / Ali）</a><a class="lv3" href="#sec-190" data-id="sec-190" data-parent="sec-181">市场微观结构（1.6 / 8.11）</a><a class="lv3" href="#sec-191" data-id="sec-191" data-parent="sec-181">订单流（8.11-8.12）</a><a class="lv3" href="#sec-192" data-id="sec-192" data-parent="sec-181">SMC 与 Wyckoff（第 5 章）</a><a class="lv3" href="#sec-193" data-id="sec-193" data-parent="sec-181">策略与资金管理</a><a class="lv3" href="#sec-194" data-id="sec-194" data-parent="sec-181">Prop 考核（第 9 章）</a><a class="lv3" href="#sec-195" data-id="sec-195" data-parent="sec-181">风险与计量</a><a class="lv3" href="#sec-196" data-id="sec-196" data-parent="sec-181">宏观事件与经济数据（1.8）</a><a class="lv3" href="#sec-197" data-id="sec-197" data-parent="sec-181">时间框架</a><a class="lv3" href="#sec-198" data-id="sec-198" data-parent="sec-181">期权与波动率（第 10 章）</a><a class="lv2" href="#sec-199" data-id="sec-199" data-parent="sec-179">B. 学习资源（已验证）</a><a class="lv3" href="#sec-200" data-id="sec-200" data-parent="sec-199">中文免费课</a><a class="lv3" href="#sec-201" data-id="sec-201" data-parent="sec-199">文字教程</a><a class="lv3" href="#sec-202" data-id="sec-202" data-parent="sec-199">英文免费课</a><a class="lv3" href="#sec-203" data-id="sec-203" data-parent="sec-199">公版书（合法免费）</a><a class="lv3" href="#sec-204" data-id="sec-204" data-parent="sec-199">中文正版书（微信读书）</a><a class="lv3" href="#sec-205" data-id="sec-205" data-parent="sec-199">学术（免费）</a><a class="lv3" href="#sec-206" data-id="sec-206" data-parent="sec-199">认证路线</a><a class="lv2" href="#sec-207" data-id="sec-207" data-parent="sec-179">C. 网络大 V 系统参考</a><a class="lv3" href="#sec-208" data-id="sec-208" data-parent="sec-207">C.1 先立态度：大 V 系统的真相</a><a class="lv3" href="#sec-209" data-id="sec-209" data-parent="sec-207">C.2 ICT（Michael Huddleston）——SMC 的源头</a><a class="lv3" href="#sec-210" data-id="sec-210" data-parent="sec-207">C.3 Al Brooks——价格行为的教父</a><a class="lv3" href="#sec-211" data-id="sec-211" data-parent="sec-207">C.4 Thomas Wade——标普日内价格行为</a><a class="lv3" href="#sec-212" data-id="sec-212" data-parent="sec-207">C.5 南桥价格行为——中文标普日内</a><a class="lv3" href="#sec-213" data-id="sec-213" data-parent="sec-207">C.6 大 V 系统的共性，以及怎么用</a><a class="lv3" href="#sec-214" data-id="sec-214" data-parent="sec-207">C.7 Ali Moin-Afshari——微通道与量化突破（10,000 Trades）</a><a class="lv3" href="#sec-215" data-id="sec-215" data-parent="sec-207">C.8 GRANDMA——"连奶奶都会交易"的故障安全入场（Rose）</a><a class="lv3" href="#sec-216" data-id="sec-216" data-parent="sec-207">C.9 Rose 八大主题——把 Brooks 概念拆成专题</a><a class="lv2" href="#sec-217" data-id="sec-217" data-parent="sec-179">D. 防骗提醒</a><a class="lv2" href="#sec-218" data-id="sec-218" data-parent="sec-179">结语：把书合上之前</a></div>
 <button id="backtop" title="返回顶部">↑</button>
 <button id="tocbtn">☰ 目录</button>
 <div id="cover">
@@ -151,6 +167,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
   <div class="rule"></div>
   <div class="desc">一套可验证、可重复、能控制风险的交易方法论。<br>
   市场基础 → 价格行为 → 信号 → 系统 → SMC → 仓位 → 心态 → 验证 → 应用</div>
+  <a class="startbtn" href="#">开 始 阅 读</a>
   <div class="meta">学习笔记 · 非出版物 · 不构成投资建议</div>
 </div>
 <h1 id="sec-0" class="booktitle">交易手册：价格行为 · SMC · 仓位 · 心态 · Prop 考核</h1>
@@ -364,9 +381,9 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>为什么够用</strong>：趋势回调是期望值结构最好的一类交易（顺势 + 紧凑止损 + 远目标，第 4.3）；0.5% 风险保证连亏不出局（第 6.2）；分批 + 保本把"赚了还回去"从可能性里删掉（第 4.14）。这套系统的上限不高，但它的下限——执行不变形——已经是大多数人达不到的水平。</p>
 <h3 id="sec-5">一个提醒</h3>
 <p>这本书不预测涨跌，也不保证盈利。它给你的是一套<strong>让盈利在数学上可能、让亏损在可控范围内</strong>的框架。能不能赚到钱，取决于你是否一致地执行，并用数据持续验证。</p>
-<h3 id="sec-6">本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。</h3>
+<p><em>本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。</em></p>
 <hr/>
-<h1 id="sec-7">第 1 章 市场与工具全景：钱、市场、品种、基金与 A 股</h1>
+<h1 id="sec-6">第 1 章 市场与工具全景：钱、市场、品种、基金与 A 股</h1>
 <blockquote>
 <p><strong>阅读提示</strong>：本章是全书的地基——先搞清“钱和市场怎么转”，再谈技术分析。内容包含参与者、订单撮合、点差滑点、品种与基金/A 股通识。新手建议完整读一遍；有经验可扫读 1.1–1.6 后直接进第 2 章；1.16–1.17 的基金与资产配置通识可按需查阅，不影响主线。</p>
 </blockquote>
@@ -374,7 +391,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>为什么？因为技术分析里的每一条规则——"支撑会被测试""突破要放量""止损放在结构外"——背后都站着一个机制：真实的人，在真实的约束下，用真金白银买卖。你看到的每根 K 线，都不是随机跳动，而是订单、杠杆、流动性、时段共同作用的结果。</p>
 <p>本章的总纲：价格不是凭空动的，它是人的行为留下的痕迹。懂了机制，你后面学的每条技术规则才"落地"；不懂机制，那些规则就只是悬空的口诀，换个场景你就不会用了。</p>
 <p>这一章把底层机制拆开：谁在交易、交易什么、怎么下单、杠杆怎么放大风险、价格怎么形成、什么时段活跃、什么事件会引爆行情。每一节都会在后面的章节里被反复引用——当你第 5 章看到"sweep"、第 6 章算仓位、第 7 章定军规时，回到这里找"为什么"。</p>
-<h3 id="sec-8">1.1 谁在交易：参与者结构 【核心】</h3>
+<h3 id="sec-7">1.1 谁在交易：参与者结构 【核心】</h3>
 <p>市场价格是所有参与者博弈的合力。理解谁在场，才能理解价格为什么那样动。</p>
 <table>
 <thead>
@@ -507,7 +524,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>Al Brooks 的名言</strong>："交易最重要的两个概念：一切都有数学基础；当你确信方向时，有同样聪明的人相信相反方向。"——前半句是本书第 6.4 盈亏平衡的数学基础，后半句是第 7.1 概率思维的起点。</li>
 </ul>
 <p><strong>这条认知与 1.1 的"机构主导"不矛盾</strong>：机构主导的是"定价过程"（谁决定价格发现），无法操纵的是"结果"（没人能让价格违背成交量与订单流）。对散户的意义反而更好——<strong>你不需要打败机构，只需要站对位置</strong>：机构的意图会留下痕迹（第 5 章），而"均衡价位"是你理解这些痕迹的第一张地图。</p>
-<h3 id="sec-9">1.2 交易什么：品种对比 【核心】</h3>
+<h3 id="sec-8">1.2 交易什么：品种对比 【核心】</h3>
 <p>不同品种的机制差异，直接决定你的策略和成本。同样的"价格行为方法"，在外汇、期货、加密上的执行完全是三件事。</p>
 <table>
 <thead>
@@ -577,7 +594,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>prop 考核盘绝大多数是外汇或期货模拟盘。先确认你考的是哪种，因为它们的量价可靠性、时段、合约规格都不同——第 9 章会讲怎么按品种选平台。</p>
 </li>
 </ol>
-<h3 id="sec-10">1.3 怎么下单：订单类型 【核心】</h3>
+<h3 id="sec-9">1.3 怎么下单：订单类型 【核心】</h3>
 <p>订单是你和市场交互的唯一接口。用错订单类型，等于在错误的时机以错误的价格进场。这一节把每种订单的机制和适用场景讲透。</p>
 <table>
 <thead>
@@ -639,7 +656,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>限价单永不滑点。这是第 3 章 pin bar"影线 50% 位挂限价单"入场法的隐藏优势——你提前把价格定好，市场来找你，而不是你去追市场。</p>
 <p>挂单必须设时效（GTC 长期有效 / DAY 当日有效）。不设时效的挂单是过期炸弹——三天后你忘了它，它突然成交在一个你根本没在看的价位。纪律：当天计划里的单才挂，收盘前检查所有挂单。</p>
 <p><strong>prop 平台红线</strong>：考核盘允许 OCO 和挂单管理，但普遍禁止"让止损保护失效"的行为——对冲锁仓（同品种同手数多空各开一单）、马丁格尔加仓（亏损后加倍）、网格（固定间隔双向挂单）。这些行为的共同点是"把单笔风险变成无限风险"，正是考核平台最不能容忍的。下单前查清平台规则，违规直接封号，前面所有努力清零。</p>
-<h3 id="sec-11">1.4 做多做空与合约规格 【核心】</h3>
+<h3 id="sec-10">1.4 做多做空与合约规格 【核心】</h3>
 <p><strong>做多（Buy）</strong>：先买入，等价格涨了再卖出——低买高卖，涨了你赚钱。这是最自然的交易方向：先持有后平仓，不需要任何特殊机制。</p>
 <p><strong>做空（Sell）</strong>：先借入卖出，再低价买回还。跌了你赚钱。外汇和 CFD 天然支持做空，不需要真的"借"——平台自动完成借贷过程，你只需要关注价格。</p>
 <p><strong>做空心态坑</strong>：人天生觉得"卖出自己没有的东西"是逆天的，做空信号出现时更容易犹豫、更容易提前平仓。这不是技术问题，是心理本能——第 7 章会专门讲。对策不是克服本能，而是把做空写进规则书：信号到了就执行，和做多一视同仁。很多新手只会做多，等于把一半的行情扔掉了。</p>
@@ -651,7 +668,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ul>
 <p><strong>示例</strong>：EURUSD 从 1.0850 涨到 1.0890 = 40 pips。1 标准手盈利 = 40 × $10 = $400。</p>
 <p>再算一笔账把"点值"的坑讲清楚：如果你做的是 EURJPY（日元对），1 pip = 0.01，点值计算方式不同；如果你做的是微型手（0.01 手），点值又缩小 100 倍。<strong>这些数字不是常识，是仓位计算的输入（第 6 章）</strong>。查错一个，仓位就错一个量级——把每笔交易前要查的规格写进你的交易清单（第 8 章日志模板里有这一栏）。</p>
-<h3 id="sec-12">1.5 杠杆与保证金：爆仓的数学 【核心】</h3>
+<h3 id="sec-11">1.5 杠杆与保证金：爆仓的数学 【核心】</h3>
 <p>杠杆是双刃剑，而且它锋利的那面对着你。这一节把"爆仓是怎么发生的"彻底算清楚。</p>
 <p><strong>保证金占用 = 合约名义价值 ÷ 杠杆</strong></p>
 <p><strong>示例</strong>：1 标准手 EURUSD ≈ $100,000 名义价值。1:30 杠杆下，占用保证金 ≈ $3,333。也就是说你用 $3,333 撬动了 $100,000 的头寸——价格每动 1%，你的本金就动 100% ÷ 30 ≈ 3.3%。</p>
@@ -664,7 +681,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><img alt="图 1-4 杠杆放大的是仓位误差：同样的判断错误，低杠杆只是小伤，高杠杆直接爆仓" src="images/fig_p1_leverage.png" /></p>
 <p>该下 0.5 手的信号，你手一抖下了 5 手——杠杆没让你判断变差，但让同样的判断错误从"亏 0.5%"变成"亏 5%"，直接逼近爆仓线。杠杆越高，你允许的犯错空间越小。第 6 章会教你怎么用仓位公式"反推"需要的杠杆——不是平台给你多少你用多少。</p>
 <p><strong>考核期建议</strong>：用 1:30 以下的实际杠杆，别贪平台给的 1:500。平台给你高杠杆是为了让你更容易爆（你爆了对它没损失，考核费它已经收了）。需要多少杠杆，用第 6 章的仓位公式反推，多一分都不要。</p>
-<h3 id="sec-13">1.6 价格是怎么形成的：买卖盘、点差、滑点、插针</h3>
+<h3 id="sec-12">1.6 价格是怎么形成的：买卖盘、点差、滑点、插针</h3>
 <p>理解了订单和杠杆，再看价格本身是怎么"长"出来的。</p>
 <p><strong>买卖盘与点差</strong>：任何时刻市场有两个价格——</p>
 <ul>
@@ -679,7 +696,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>插针（Spike）</strong>：流动性瞬间枯竭时，价格猛地冲出一个极端影线又立刻回来。加密和亚盘数据时段高发。插针是第 5 章"sweep"最容易被误认的地方——<strong>不是每次插针都是机构扫止损，有时只是没人接单</strong>。怎么区分？看三个维度：插针是否发生在关键位（结构位上的插针更像 sweep）、插针后是否快速收回、收回时是否放量。第 5 章会给完整的识别清单。</p>
 <p><img alt="图 1-5 价格怎么形成：左=买卖盘结构（买用 Ask、卖用 Bid，点差是进出一次的固定成本，流动性越厚点差越窄）；右=滑点——价格跳空穿过止损，挂 99.95 的止损单只能在 99.80 成交，多亏 15 点" src="images/fig_p1_quotes.png" /></p>
 <p>左图是你每笔交易的真实处境：两个价格同时存在，你买入永远成交在更高的 Ask、卖出永远成交在更低的 Bid，一进一出之间点差已经亏掉。这就是为什么 7.8 的 Brooks 清单里"剥头皮"类交易要额外警惕——进出次数越多，点差成本吃掉的利润越多。右图把"滑点只发生在跳空"画成了具体数字：止损单是跟着价格走的，价格跳空时你只能在新的价位成交。<strong>结论一句话：成本意识要进入每笔交易的决策——选流动性好的时段、用限价单锁成本（1.6）、远离数据瞬间</strong>。</p>
-<h3 id="sec-14">1.7 什么时候交易：全球时段</h3>
+<h3 id="sec-13">1.7 什么时候交易：全球时段</h3>
 <p>外汇 24 小时可交易，但不是每个时段都值得交易。波动和流动性随时段变化巨大——你的信号质量，很大程度取决于你在哪个时段找信号。</p>
 <table>
 <thead>
@@ -717,7 +734,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>冬令时（11 月-次年 3 月）所有时间 +1 小时</strong>。美国夏令时（3 月-11 月）期间用上表时间；冬令时伦敦开盘推迟到北京 16:00，纽约开盘到北京 22:30。做外汇/期货的人必须每年调两次这个"时差表"，写进你的交易笔记。</p>
 <p><strong>周末与跳空</strong>：外汇周末休市。周五尾盘不平仓的隔周单，要承担周一开盘跳空的风险——价格可能直接跳过你的止损。你的止损单挂在 1.1000，周一开盘价格直接 1.0950，你的成交价就是 1.0950，多亏 50 点。<strong>多数 prop 平台禁止周末持仓</strong>，查清规则（第 9 章），周五收盘前处理干净。</p>
 <p><strong>一个实用原则</strong>：亚盘的信号质量普遍低于欧美盘。流动性薄的时候，假信号多、点差宽、滑点大。新手宁可只做伦敦和纽约时段——少做一半的时间，但做的那一半质量高得多。这也是第 8 章"过滤条件"的一种：<strong>时段本身就是过滤器</strong>。</p>
-<h3 id="sec-15">1.8 什么在推动价格：基本面黑天鹅</h3>
+<h3 id="sec-14">1.8 什么在推动价格：基本面黑天鹅</h3>
 <p>技术分析管"什么时候、什么价位"，但数据事件能瞬间击穿任何技术位。你画得再漂亮的支撑，一个超预期的非农数据就能把它打穿。这一节不是教你分析基本面，是教你别被它打穿。</p>
 <table>
 <thead>
@@ -776,7 +793,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>更准确的说法是：<strong>价格不是对新闻的反应，价格是新闻的先行指标</strong>。你该盯的是价格行为（第 2-3 章），而不是新闻标题。</li>
 <li>如果你发现"价格先动、新闻后到"，那不是巧合，是信息流的方向——机构先走，散户后知。你唯一能做的，是在价格行为上搭机构的便车，而不是在新闻上追机构的尾巴。</li>
 </ul>
-<h3 id="sec-16">1.9 品种细节：为什么"脾气"重要</h3>
+<h3 id="sec-15">1.9 品种细节：为什么"脾气"重要</h3>
 <p>前面 1.2 给了品种概览，本节深入每个品种的"脾气"。同一套价格行为方法，放在不同品种上，执行细节完全不同：</p>
 <ul>
 <li><strong>止损宽度要按品种的波动率（ATR）调</strong>，不是固定点数。EURUSD 的 50 点和 ES 的 50 点完全是两个世界——ES 一个交易日轻松波动 100+ 点，50 点的止损在 ES 上等于没设。</li>
@@ -785,7 +802,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>有的品种能真实看量（期货/股票），有的不能（外汇）</strong>。这直接决定你的方法能不能用量价确认。</li>
 </ul>
 <p><strong>选错品种 = 用对的方法在错的战场打仗</strong>。一个做趋势回调系统（第 4 章）的交易者，在加密上做日内止损会频繁被打——不是系统错了，是品种脾气和系统的周期、波动不匹配。选品种是系统设计的一部分（第 4 章 Van Tharp 会讲"合身"），不是随便挑一个。</p>
-<h3 id="sec-17">1.10 期货：prop 考核的主战场</h3>
+<h3 id="sec-16">1.10 期货：prop 考核的主战场</h3>
 <p>为什么 prop 公司偏爱期货：集中交易所、量价真实、合约标准、风控清晰。Topstep/Apex 都是期货 prop。这一节把期货的机制讲透——如果你考期货 prop，本节是必修。</p>
 <p><strong>核心机制</strong>：</p>
 <ul>
@@ -839,7 +856,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </tbody>
 </table>
 <p><strong>对价格行为的适配</strong>：ES/NQ 是日内价格行为的最佳标的——流动性好、结构清晰、量价真实。南桥/Thomas Wade 都做 ES（呼应附录的大 V 参考）。注意品种和波动的匹配：NQ 波动约为 ES 的两倍，同样的止损距离，NQ 上被扫的概率高得多——新手从 ES 起步更合理。</p>
-<h3 id="sec-18">1.11 股票：做空限制与规则</h3>
+<h3 id="sec-17">1.11 股票：做空限制与规则</h3>
 <p><strong>核心机制</strong>：</p>
 <ul>
 <li><strong>做空限制</strong>：股票做空要"借券"，不是所有股票都能做空；且有"uptick rule"等限制（美国规则，价格下跌时不能追空）。外汇/期货做空更自由。如果你主要做空，股票不是好战场。</li>
@@ -849,7 +866,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>个股 vs 指数</strong>：个股受公司基本面/财报影响大；指数（SPY/QQQ）更"干净"，适合纯技术。财报日是最大的"炸弹"——个股持仓跨财报 = 赌新闻。</li>
 </ul>
 <p><strong>对价格行为的适配</strong>：指数 ETF（SPY/QQQ）适合价格行为；个股要小心财报跳空和消息驱动。做个股务必把财报日历加进你的风险检查（第 8 章日历）。</p>
-<h3 id="sec-19">1.12 外汇：要点速查</h3>
+<h3 id="sec-18">1.12 外汇：要点速查</h3>
 <p>（本章 1.2 已概览，这里是速查）</p>
 <ul>
 <li>24h 交易（周一~周六），无集中交易所，OTC 市场。</li>
@@ -860,7 +877,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>对价格行为的适配：主流对流动性好、结构清晰，适合价格行为；但量价确认弱于期货。</li>
 </ul>
 <p><strong>新手选择</strong>：EURUSD 是公认最适合入门的货币对——点差最小、流动性最好、结构最清晰、和美股/黄金的相关性低（独立性强）。把它当你的"单一品种深耕"对象（1.15）。</p>
-<h3 id="sec-20">1.13 加密货币：24/7 与高波动</h3>
+<h3 id="sec-19">1.13 加密货币：24/7 与高波动</h3>
 <p><strong>核心机制</strong>：</p>
 <ul>
 <li>7×24 无休：没有开盘收盘，周末也交易。但也意味着没有"休息"，且周末流动性差易插针。你没法用"收盘后复盘"的节奏——需要更强的纪律来自我管理（第 7 章流程）。</li>
@@ -870,7 +887,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>交易所分散：各所价格略有差异，量也分散。你在币安看到的量不代表全局——"全市场量价"这个概念在加密上是被拆散的。</li>
 </ul>
 <p><strong>对价格行为的适配</strong>：加密结构也走价格行为，但高波动+插针让止损和仓位管理更难。新手不建议从加密开始——它不是"练手"品种，是"加难度"品种。</p>
-<h3 id="sec-21">1.14 跨市场：相关性与风险叠加</h3>
+<h3 id="sec-20">1.14 跨市场：相关性与风险叠加</h3>
 <p><strong>相关性（correlation）</strong>：不同品种可能同涨同跌。这不是巧合，是它们背后有共同的驱动因素：</p>
 <ul>
 <li>EURUSD 和 GBPUSD 高度正相关（都是非美货币对美元）。</li>
@@ -885,7 +902,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>用 DXY 辅助判断非美货币的整体方向。DXY 走强，非美多头整体要小心。</li>
 <li>组合持仓时，算的是"组合总风险"，不是单笔风险的简单相加。第 6 章的仓位公式按单笔算，组合层面要额外做一道"相关性修正"。</li>
 </ul>
-<h3 id="sec-22">1.15 怎么选品种：匹配你的系统和目标</h3>
+<h3 id="sec-21">1.15 怎么选品种：匹配你的系统和目标</h3>
 <p><strong>选择框架（按优先级）</strong>：</p>
 <ol>
 <li>匹配 prop 目标：考期货 prop → 练 ES/NQ；考外汇 prop → 练主流货币对。</li>
@@ -894,7 +911,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>匹配波动承受：波动大（NQ/CL/加密）→ 仓位小、止损宽；波动小（YM/EURUSD）→ 仓位可稍大。</li>
 </ol>
 <p><strong>一条实用建议</strong>：新手先聚焦单一品种（如 ES 或 EURUSD）。单品种让你摸透它的"脾气"——什么时段活跃、波动多大、结构多清晰、假信号长什么样。大 V 们（附录）都是单品种深耕，这不是偶然：一个品种的 1000 小时，比十个品种各 100 小时有效得多。第 8 章的验证（100+ 笔回测）也必须基于单一品种——不同品种混在一起统计，期望值就算不清了。</p>
-<h3 id="sec-23">1.16 A 股：规则与脾气（编者补充 · 投资通识）</h3>
+<h3 id="sec-22">1.16 A 股：规则与脾气（编者补充 · 投资通识）</h3>
 <p>本书主线是外汇/期货 + prop 考核，但作为中国读者，你的资产天然和 A 股纠缠在一起——工资、房贷、指数走势、周围人聊的股票。这一节把 A 股讲成"另一个品种"：它有自己的交易规则、成本结构和脾气，和 ES、EURUSD 一样需要先摸清再谈技术。</p>
 <p><strong>A 股交易规则速查</strong>（与期货/外汇对照）：</p>
 <table>
@@ -1001,7 +1018,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>打板的数学（了解即可，新手别做）</strong>：打板 = 在涨停价排队买入，赌次日溢价。它的胜率依赖情绪周期（连板高度），本质是"动量追涨的极端版"——胜率数据随市场情绪波动极大，且排板失败（未成交）和炸板（开板亏损）都是实亏成本。<strong>如果你想做，先按第 8 章验证闭环跑 100 笔再说</strong>；不想做，打板知识用来"识别顶部"就够了——全民打板日往往就是 4.10 的极速上涨末端。</li>
 </ul>
 <p><strong>一句话</strong>：A 股不是另一套市场，是同一套价格行为 + 三条特殊规则（T+1/涨跌停/政策驱动）的约束解——把本书的方法乘上这三条规则，就是 A 股打法。</p>
-<h3 id="sec-24">1.17 基金与资产配置：不盯盘的财富底座（编者补充 · 投资通识）</h3>
+<h3 id="sec-23">1.17 基金与资产配置：不盯盘的财富底座（编者补充 · 投资通识）</h3>
 <p><strong>为什么一本交易手册要讲基金</strong>：因为本书所有技术都有一个前提——你有一笔"输得起"的钱（第 6 章仓位公式、第 8 章验证标准，都是建立在"这笔钱只是资产的一部分"之上的）。如果全部身家都在交易账户里，第 7 章的概率思维就是空话：你不可能在"这笔亏损会毁掉生活"的恐惧下一致执行。</p>
 <p>所以把财富分成两条腿：</p>
 <ul>
@@ -1074,7 +1091,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>交易的第一年，你的最大成本不是亏钱，是时间</strong>——配置账户就是这段时间里"工资之外"的复利来源。</li>
 </ul>
 <p><strong>这一节的定位</strong>：本书其余部分教你"怎么把交易账户做精"，这一节教你"怎么让大部分身家稳着增值"。两条腿走路，第 7 章的概率思维才有着落——<strong>交易是为了活得更好，不是为了把生活押上桌</strong>（呼应前言立场 2：活得久比赚得快重要）。</p>
-<h3 id="sec-25" class="quizhead">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-24" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>为什么说"外汇没有统一的真实成交量"？这决定了什么？</li>
 <li>杠杆的真相是什么？</li>
@@ -1082,7 +1099,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>你买入成交在哪个价（Ask/Bid）？为什么点差是"固定成本"？限价单和止损单哪个会滑点？</li>
 </ol>
 <p><strong>答案</strong>：① 外汇是 OTC 场外市场、没有中心交易所（1.2）——依赖量价的方法（Wyckoff/订单流）在期货上更正统，外汇上只能参考；② 杠杆不改变胜率，放大的是仓位误差（1.5）——同样的判断错误，低杠杆是小伤、高杠杆直接爆仓；③ T+1（1.16）——当天买的仓位当天不能卖，止损最早次日生效，所以信号周期要放大到日线以上、仓位按两天的波动来算；④ 买入成交在 Ask、卖出成交在 Bid（图 1-6）——一进一出天然亏一个点差，高频进出（剥头皮）对点差最敏感（1.6）；止损单会滑点（跳空时以更差价格成交），限价单永不滑点（1.3）。</p>
-<h3 id="sec-26" class="sumhead">本章小结</h3>
+<h3 id="sec-25" class="sumhead">本章小结</h3>
 <p>价格是参与者行为的结果：散户行为可预测，机构需要对手盘，做市商赚点差。</p>
 <p>品种决定方法：外汇无真实量，期货量价可靠——量价方法在期货上更正统。</p>
 <p>限价单不滑点，挂单要设时效；prop 平台禁止对冲/马丁。</p>
@@ -1097,14 +1114,14 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>均衡价位是常态、突破是例外（&lt;20% 时间）；机构无法操纵市场——你不需要打败机构，只需要站对位置。</p>
 <p>下一章进入技术分析本身：怎么从 K 线里读出多空力量。本章的每个机制——流动性、点差、时段——都会在那里再次出现，作为信号成立的底层条件。</p>
 <hr/>
-<h1 id="sec-27">第 2 章 读懂价格行为</h1>
+<h1 id="sec-26">第 2 章 读懂价格行为</h1>
 <blockquote>
 <p><strong>阅读提示</strong>：本章是全书的语言课——K 线、信号棒、趋势、支撑阻力、交易区间，之后每一章的策略都是用本章的词汇写成的。建议配合图 2-1~2-7 逐图读，读到能指着一根 K 线说出“谁在赢”为止；读图时想不起某个概念，随时回本章查。</p>
 </blockquote>
 <p>打开任何一张 K 线图，你看到的是一排红红绿绿的柱子。大多数人看到的是“涨了”“跌了”。但交易员看到的是另一样东西——一场正在进行的、多空双方的拔河。每一根 K 线，就是这场拔河里的一个回合；整张图，就是无数个回合连起来的战况。</p>
 <p>这一章教你读懂这场拔河。不靠任何指标，只靠 K 线本身。学完之后，你看图的眼光会不一样：你不再看到"涨跌"，你开始看到谁在赢、赢得多艰难、以及哪里埋着别人的止损。</p>
 <p>一个贯穿全章的观点先放在这里：<strong>K 线记录的不是价格，是人</strong>。每一次冲高回落，背后都是有人在追、有人在跑、有人被套、有人解套。读懂 K 线，本质是读懂这些人的处境。</p>
-<h3 id="sec-28">2.1 一根 K 线，就是拔河的一个回合 【核心】</h3>
+<h3 id="sec-27">2.1 一根 K 线，就是拔河的一个回合 【核心】</h3>
 <p>一根 K 线由四个价格构成：开盘、收盘、最高、最低。但别把它当四个数字，把它当一个回合的战报。</p>
 <p><img alt="图 2-1 一根 K 线的结构：实体与影线" src="images/fig_p13_x111.png" /></p>
 <p><em>图 2-1 一根 K 线的结构：实体与影线</em></p>
@@ -1136,7 +1153,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><img alt="图 2-2 K 线信号字典：信号棒→入场棒→确认棒，及内包/外包/ioi/2BR 组合" src="images/fig_p2_signal_bars.png" /></p>
 <p><em>图 2-2 K 线信号字典：信号棒→入场棒→确认棒，及内包/外包/ioi/2BR 组合</em></p>
 <p>字典的用法口诀：<strong>先上下文，再形态；没有跟随的信号，不能当成高概率机会</strong>。孤立信号、信号棒过长（超均值 2 倍）、十字星信号、假外包——是四个最常见的误读陷阱。</p>
-<h3 id="sec-29">2.2 同样一根 K 线，位置不同，天差地别 【核心】</h3>
+<h3 id="sec-28">2.2 同样一根 K 线，位置不同，天差地别 【核心】</h3>
 <p>现在给你第二个洞察，它比第一个更值钱：</p>
 <blockquote>
 <p>一根 K 线的意义，不由它自己决定，由它出现的位置决定。</p>
@@ -1148,7 +1165,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ul>
 <p>同一根 K 线，一个位置是机会，另一个位置是陷阱。这就是为什么本书反复强调一句话：<strong>信号必须放在位置里读</strong>。后面第 3 章的所有入场信号，都建立在这条之上——先看位置，再看形态。形态只是"最后一道确认"，位置才是"这一单值不值得做"。</p>
 <p><strong>实操含义</strong>：每次看到一根"漂亮的 K 线"，别急着兴奋，先问三个问题——它在哪？背景是什么？这里有没有聚集着人的成本和止损？回答完这三个问题，这根 K 线的价值才浮出来。第 3 章的判定框架（背景 × 位置 × 形态）就是这三个问题的公式化。</p>
-<h3 id="sec-30">2.3 趋势：钱走出来的方向 【核心】</h3>
+<h3 id="sec-29">2.3 趋势：钱走出来的方向 【核心】</h3>
 <p>那么"位置"怎么判断？先要判断市场现在处于什么状态。市场只有三种状态：上升趋势、下降趋势、区间震荡。而判断趋势，靠的是高低点的排列。</p>
 <p><img alt="图 2-3 趋势：HH/HL 与 LH/LL 的高低点排列" src="images/fig_p15_x117.png" /></p>
 <p><em>图 2-3 趋势：HH/HL 与 LH/LL 的高低点排列</em></p>
@@ -1177,7 +1194,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>趋势一致性 = 低波动性强市场</strong>：一致性不只关乎趋势强度，更关乎均匀的动量——理想的顺势环境是"低波动性、强 BL/BR 单边"。注意：<strong>趋势持续的时间越长，趋势往往越弱</strong>（越接近尾声）。</li>
 <li><strong>限价单买不到 = 强势信号（让感觉指引你）</strong>：每当你焦急地等待回调买入、而空头（BRs）无法通过限价单获利时——两个都是强劲多头趋势的信号，立即以市价买入。BR 无法靠限价单拿到货，说明价格必须上涨才能找到更多卖家；等回调的那份焦虑，恰恰是市场强势的证明。最坏情况：买入后立即抛售，持有——1LD 是交易区间的一部分，低位加仓、回测反弹时保本或盈利退出。</li>
 </ul>
-<h3 id="sec-31">2.4 支撑与阻力：一群人被困住的位置 【核心】</h3>
+<h3 id="sec-30">2.4 支撑与阻力：一群人被困住的位置 【核心】</h3>
 <p>接下来是"位置"的核心——支撑和阻力。先给你一个能改变你看图方式的洞察：</p>
 <blockquote>
 <p>支撑不是一条线，是一群人被套住的位置。</p>
@@ -1209,7 +1226,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>操作</strong>：等价格涨到那里触发，别提前卖。</li>
 </ol>
 <p><strong>同一枚硬币的两面</strong>：与 2.3 的"限价单买不到"合起来——<strong>成交不了的订单，暴露了力量的分布</strong>。</p>
-<h3 id="sec-32">2.5 成交量：这场拔河的燃料 【核心】</h3>
+<h3 id="sec-31">2.5 成交量：这场拔河的燃料 【核心】</h3>
 <p>K 线告诉你价格去了哪，成交量告诉你这次移动有多少真金白银参与。<strong>价格是因，量是验证</strong>。没有量确认的价格移动，就像没有观众的比赛——赢了也可能是自嗨。</p>
 <p><strong>四条最实用的量价规则</strong>：</p>
 <ol>
@@ -1222,7 +1239,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>四格对照着读：① 放量上涨——每一步新高都有真实成交支撑，健康；② 缩量回调——下跌时没人真卖，是洗盘不是出货，趋势大概率延续；③ 放量不新高——使了大力气（巨量）却没破前高，多方耗尽，是趋势变天的早期信号；④ 缩量新高——突破了但没人跟，强弩之末，假突破（FBO）概率上升。<strong>量柱颜色只是方向提示，真正要读的是“价格成果与量的匹配度”</strong>。</p>
 <p><strong>一个必须记住的限定</strong>（第 1 章讲过，这里再强调，因为它直接影响你怎么用量价）：外汇没有统一的真实成交量（场外市场），你看到的是 tick 量近似，只能当参考；期货和股票的量是真实的，量价方法在它们身上最可靠。所以如果你重度依赖量价，优先做期货。</p>
 <p><strong>量价方法的正确用法</strong>：量不是独立的入场信号，它是"确认器"——给已经成立的技术信号加一个可信度评分。放量突破 = 真突破概率上升；缩量突破 = 假突破概率上升。第 3 章的量价三问就是把这个评分流程化。</p>
-<h3 id="sec-33">2.6 实战演练：把一根锤子线，读成一次完整的入场 【核心】</h3>
+<h3 id="sec-32">2.6 实战演练：把一根锤子线，读成一次完整的入场 【核心】</h3>
 <p>前面讲的都是"零件"。现在把它们组装起来，走一遍真实的读图过程——这是本章的"代入感"环节，请跟着一步步想。</p>
 <p><strong>场景</strong>：你在看 ES（标普 500）的 4 小时图。过去几天价格一路走高，高低点依次抬高——你判断这是上升趋势（2.3）。最近价格从高点回落，正在向一个位置靠近：那个位置是上一波上涨的起点、一个前低，也就是一个支撑位（2.4）。</p>
 <p><img alt="图 2-6 实战演练：锤子线跌破支撑后快速拉回（sweep 雏形）" src="images/fig_p17_x123.png" /></p>
@@ -1248,7 +1265,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>目标</strong>：看向前方的高点（前高），那是下一个"位置"。</li>
 </ul>
 <p>看到了吗？一次入场，不是"我看到一根锤子线所以买"，而是"背景是趋势 + 位置是支撑 + 形态是锤子 + 止损有明确依据"四个条件同时成立。这就是第 3 章那个公式"信号质量=背景×位置×形态"的完整样子。本章教你的所有零件，在这一刻组装成了一次真实的决策。</p>
-<h3 id="sec-34">2.7 趋势线、通道与缺口 【核心】</h3>
+<h3 id="sec-33">2.7 趋势线、通道与缺口 【核心】</h3>
 <p>补充三个常用工具，它们是上面核心概念的延伸：</p>
 <p><strong>趋势线与通道</strong>：连接两个以上的低点画出上升趋势线（下降趋势连高点）。趋势线本质是 HL 序列的另一种画法——趋势线跌破，往往意味着最近的 HL 也快破了，是结构转弱的早期预警。在趋势线对面画平行线就是通道，通道上沿是趋势里的止盈参考。</p>
 <p>注意趋势线的坑：趋势线是你"主观选择"连接哪几个点画出来的，同样的图能画出三条不同的趋势线。所以把趋势线当"参考"可以，当"判据"要小心——第 2.3 的"最近低点是否被跌破"才是客观判据。<strong>趋势线给你提前预警，结构点给你最终裁决</strong>。</p>
@@ -1267,7 +1284,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>均线缺口棒（MAG）</strong>：整根 K 线与均线之间出现空隙（K 线完全在均线上方/下方）——这是对方力量显现的早期迹象，往往是趋势最后一段的起点。</li>
 </ul>
 <p>判断法则：<strong>趋势早期的大 K 线 = 测量缺口（继续），趋势晚期的大 K 线 = 衰竭缺口（警惕反转）</strong>。位置决定性质——又回到了 2.2 节的母题。</p>
-<h3 id="sec-35">2.8 Al Brooks 把结构读"活" 【核心】</h3>
+<h3 id="sec-34">2.8 Al Brooks 把结构读"活" 【核心】</h3>
 <p>Al Brooks（前医生转职交易员，价格行为领域最系统的作者，附录有他的定位）把"读结构"推进到了极致。这里提炼四个最实用、且和本书无缝衔接的概念：</p>
 <p><strong>Always-in 方向</strong>：问自己一个问题——"如果现在强迫我必须持仓（不能空仓），我该持多还是持空？"答案就是 always-in 方向。它比"趋势还是区间"更细，问的是"当下力量偏向哪边"。只做和 always-in 方向一致的单——这其实是 2.2 节"背景"的精确化，给你一个逐 K 线更新的方向判断。</p>
 <p><strong>两段式移动</strong>：大多数趋势性移动不是一步到位，而是分两段——涨一段、回调、再涨一段。用法：第一段走完、第二段回调时是顺势入场点（呼应第 4 章趋势回调系统）；合理目标常是"第二段=第一段长度"；两段走完后趋势容易转区间或反转，别追。</p>
@@ -1302,7 +1319,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>铁丝网之后的机会不是"追突破"，而是：<strong>突破失败（失败的失败）</strong>、极值附近短 K 线刮头皮（仅边界非中部）、铁丝网后尖峰级突破 + 跟随。铁丝网内止损<strong>禁止</strong>设在边界外 1-2 跳（噪音太大，必被扫）——结构缓冲不足就放弃。</p>
 <p><strong>TTR 中的 101 结构（Ali）</strong>：TTR（无趋势区间）是一种无趋势环境，<strong>单根外包线（101）的小动量足以影响其后 1 根柱的方向</strong>——市场将中间柱视为小型突破，随后出现回调（PB），接着在突破方向上形成小型两腿走势；101 之后的柱通常朝相反方向运行（例如买入 101 后出现卖出失败柱），它会跟随 101 外柱的方向；双失败柱（2FT）通常沿 101 的方向运行。四种情况下 101 策略都奏效——<strong>了解 1 号柱的方向可能与反转期方向相反，有助于避免在成功交易中被震出局</strong>。</p>
 <p><strong>20GB（均线缺口计数）</strong>：连续约 20 根 K 线未触及 EMA，说明趋势极强、市场严重偏离均值。两个结论：第一，<strong>无明确反转前不要逆势</strong>交易 20GB 趋势；第二，20GB 后<strong>首次触及 EMA 是顺势刮头皮的高胜率结构</strong>，预期至少测试原趋势极点（配合第 4 章"20 gap bar 两种建仓方案"）。若第一次触及失败，可等第二次；<strong>两次都失败，不再第三次强行尝试</strong>——回到状态机重新判断是通道、区间还是反转。</p>
-<h3 id="sec-36">2.9 洛氏霍克交易法：把"结构突破"变成一套完整打法 【核心】</h3>
+<h3 id="sec-35">2.9 洛氏霍克交易法：把"结构突破"变成一套完整打法 【核心】</h3>
 <p>如果说 Brooks 把结构读"活"，Joe Ross（洛氏霍克交易法创始人，20 世纪中叶的职业交易员）则把结构读"机械"——他的体系只用两个结构（1-2-3 结构和洛氏霍克结构 Rh），却配齐了从定义、入市、止损到资金管理的完整流程。它和第 2.3 节的结构突破是同一件事，但更形式化：每个点都有明确的确认条件，没有"感觉"的余地。</p>
 <p><strong>1-2-3 结构：趋势的起点</strong></p>
 <p>几乎每段趋势（无论大小）都始于一个 1-2-3 结构。以做多为例（低位 1-2-3）：</p>
@@ -1358,7 +1375,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </tbody>
 </table>
 <p><strong>诚实评价</strong>：洛氏体系的价值是把"结构"定义成可编程规则（每个点都有硬条件），这是它的最大优点；但 1-2-3 在区间市场会反复失效（每次突破 2 点都是假突破），所以必须配合第 4 章状态机判断"趋势 vs 区间"。洛氏自己的配套方案是严格资金管理（3 手合约法，见 6.12）和止损纪律（见 6.5 与 4.16）——结构只解决"在哪进"，仓位和止损解决"活下来"，两者缺一不可。</p>
-<h3 id="sec-37">2.10 逐棒检查单：把读图变成流程</h3>
+<h3 id="sec-36">2.10 逐棒检查单：把读图变成流程</h3>
 <p>以上所有内容，最终要压缩成一个“每根 K 线收盘后 10 秒内跑完”的固定流程（Al Brooks 逐棒分析检查单，PA 逐棒检查单）：</p>
 <ol>
 <li><strong>分类</strong>：这根 K 线是趋势棒、十字星、内包还是外包？</li>
@@ -1387,7 +1404,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ul>
 <p><img alt="图 2-10 逐棒检查单：每根 K 线收盘后的五步流程与六条口诀" src="images/fig_p2_checklist.png" /></p>
 <p><strong>收盘纪律：8 次正确才能弥补 1 次过早进场</strong>（诊断）：K 线通常会延续收盘前几秒的走势——过早进场最多多赚 1 跳，但每天总有一两次“你以为信号会出现、实际没有”的情况，一次过早进场平均多亏约 8 跳。<strong>需要 8 次正确运行的趋势才能对冲一次过早进场——几乎不可能</strong>。两个常见结局：强趋势中看到“完美”反转棒提前进场，收盘前几秒价格崩盘收于低点（假反转陷阱）；或把保护止损移得太紧，收盘前被下探击穿、下一根开盘直奔目标（被挡在好交易之外）。纪律：<strong>收盘前不动手，收盘后不移动初始止损</strong>。</p>
-<h3 id="sec-38">2.11 尖峰与高潮：趋势的引擎与末日</h3>
+<h3 id="sec-37">2.11 尖峰与高潮：趋势的引擎与末日</h3>
 <p><strong>尖峰（Spike）是趋势的 Leg 1</strong>——由连续大型趋势棒构成、几乎没有回撤的快速单向运动，是买方力量短时间集中爆发的结果（PA 极速行情）。</p>
 <p><strong>先拆概念：Spike ≠ Breakout ≠ Gap ≠ Climax</strong>（四个字段不能混为一谈）：</p>
 <ul>
@@ -1454,14 +1471,14 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>趋势日与小幅反弹趋势日（尖峰的日线形态）</strong>：开盘起下跌趋势日——开盘后前几根棒形成当日最高点，开盘区间 &lt; 当日波幅 25%，跌破后价格持续下跌；约 20% 的交易日属此类（上涨镜像同理）。确认规则：<strong>开盘低点（或高点）在第一小时内被突破 = 趋势日失败</strong>；确立后每次反弹都是顺势入场点。<strong>小幅反弹趋势日 = 最强趋势日类型（每月约 1-2 次）</strong>：全天反弹幅度仅为日均波幅的 10-30%、反弹只持续 1-3 根、反弹棒约趋势棒的 30-50%——所有反弹都是顺势入场点，禁止逆势。趋势日逻辑呼应第 1.9 时段：欧美交易时段交界最易发生。</p>
 <p><strong>陷阱速查</strong>：单根大实体棒 ≠ 尖峰（须 2 根+跟随）；区间内急涨 ≠ 尖峰（须突破区间边界并持续）；通道内大棒 ≠ 新尖峰（须突破通道上轨并显著加速）；二次推动明显弱于第一次 = 只是通道行为；高潮后追涨 = 接最后一棒。</p>
 <p><img alt="图 2-11 尖峰识别五标准与持续时间分级（左）；买进高潮四阶段序列与尖峰后三路径概率（右）" src="images/fig_p2_spike_climax.png" /></p>
-<h3 id="sec-39" class="quizhead">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-38" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>一根锤子线出现在上升趋势的 HL 处，另一根同样的锤子线出现在前高阻力正下方——哪根更值得关注？为什么？</li>
 <li>趋势的客观定义是什么？一段行情没有 HH/HL 有序排列，还算趋势吗？</li>
 <li>逐棒检查单（2.10）的核心价值是什么？</li>
 </ol>
 <p><strong>答案</strong>：① 出现在 HL 处的——同样的形态，位置不同天差地别（2.2），阻力正下方可能是逆势或半空信号；② 有序的 HH/HL 排列（2.3）——没有就不算趋势，那是区间或混沌，别用趋势系统；③ 把读图从"感觉"变成固定流程——每根 K 线收盘后按固定顺序问结构/方向/信号，这是第 7 章流程化的读图版。</p>
-<h3 id="sec-40" class="sumhead">本章小结</h3>
+<h3 id="sec-39" class="sumhead">本章小结</h3>
 <p>K 线记录的不是价格，是人。实体告诉你谁赢了，影线告诉你赢得多艰难。</p>
 <p>一根 K 线的意义由位置决定：同样的锤子线，在支撑位是黄金，在半空是垃圾。</p>
 <p>趋势是钱走出来的，不是画出来的：最近的重要低点被跌破，上升趋势就在定义上被破坏——别跟结构争辩。</p>
@@ -1477,7 +1494,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>尖峰是趋势的引擎：2 根以上连续大型趋势棒、实体几乎无重叠、短尾线、收盘创新高——1 根只是候选；6 根以上进高潮预警，但高潮以衰竭信号为准（长上尾 &gt; 实体 50% / 小实体 &lt; 均值 30% / 反向棒）；尖峰后 60% 转通道、30% 进区间、10% 反转；只做回撤不追尖峰，高潮后至少等 10 棒。卖出高潮倾向 V 形反转（买进高潮需更久盘整）；反弹超 61.8% = 尖峰失败进区间、低于 23.6% = 极强趋势日；连续三次高潮是趋势末日。</p>
 <p>下一章进入具体的入场信号：假突破、pin bar、吞没、内包线——它们都是本章“位置+形态”的具体化。</p>
 <hr/>
-<h1 id="sec-41">第 3 章 入场信号</h1>
+<h1 id="sec-40">第 3 章 入场信号</h1>
 <blockquote>
 <p><strong>阅读提示</strong>：本章是信号词典——假突破、pin bar、吞没、内包、顺势信号等。先记住 3.1 的信号质量三要素（背景 × 位置 × 形态），再学单个信号；所有信号都要挂在总纲下面用，脱离背景的形态只是噪音。</p>
 </blockquote>
@@ -1487,7 +1504,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>信号不是"看到形态就进场"，而是"位置先对，形态只是最后一道确认"。</p>
 </blockquote>
 <p>很多人学了一堆形态——锤子、吞没、早晨之星——然后满图找形态，找到就进。这是错的。形态本身不值钱，形态出现在对的位置才值钱。这一章的每个信号，你都要先问"位置对不对"，再看"形态好不好"。</p>
-<h3 id="sec-42">3.1 判定框架：背景 × 位置 × 形态 【核心】</h3>
+<h3 id="sec-41">3.1 判定框架：背景 × 位置 × 形态 【核心】</h3>
 <p>所有信号，都用同一个框架判定，按优先级排：</p>
 <pre><code>背景(HTF方向) 与信号一致? --否--&gt; 放弃
       |是
@@ -1513,7 +1530,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>第三道（形态）：信号 K 质量合格吗？（第 3.10 的质量标准）不合格 → 放弃。</li>
 </ul>
 <p>三道闸全过才入场。这个流程看起来简单，但它把"感觉"替换成了"清单"——第 7 章会讲，这是对抗情绪的唯一工程化方法。</p>
-<h3 id="sec-43">3.2 假突破：最重要的单一信号 【核心】</h3>
+<h3 id="sec-42">3.2 假突破：最重要的单一信号 【核心】</h3>
 <p>如果这一章只能留一个信号，那就是假突破。先给你一个洞察，理解它你就懂了为什么：</p>
 <blockquote>
 <p>假突破之所以有效，是因为它是"别人亏钱的地方"。一批人的止损刚被扫掉，他们被迫离场，而他们的离场，恰恰成了反向行情的燃料。</p>
@@ -1558,7 +1575,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ul>
 <p><strong>记忆</strong>：放弃 K 线 = 突破缺口被关上的那一刻，等于"一方已投降"——顺投降方向做，等它走两段（呼应 3.11 缺口降级为 EG 的量化版）。</p>
 <p><strong>支撑位下方的反转 = 更高概率（Ali）</strong>：市场<strong>测试支撑位下方之后</strong>的反转，是高概率买入信号——比在支撑位上方直接反转更可靠；如果市场<strong>第二次</strong>测试支撑位下方并形成第二次反转（2Rev），概率比第一次更高。逻辑：跌破支撑 = 扫掉支撑下方的止损单 = 流动性被收割，随后的反转没有止损盘的压制。用法：突破支撑假跌破后，等收盘收回支撑上方再入场，别在假跌破形成过程中抢跑。</p>
-<h3 id="sec-44">3.3 Pin Bar（锤子 / 吊颈） 【核心】</h3>
+<h3 id="sec-43">3.3 Pin Bar（锤子 / 吊颈） 【核心】</h3>
 <p>这是最经典的反转形态。一根 K 线，影线至少是实体的 2 倍，实体很小，缩在整根 K 线的一端。</p>
 <p><img alt="图 3-2 Pin Bar：锤子线（长影线 + 小实体）" src="images/fig_p17_x123.png" /></p>
 <p><em>图 3-2 Pin Bar：锤子线（长影线 + 小实体）</em></p>
@@ -1581,7 +1598,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>这个评分表就是 3.1 框架的具体化——把"背景×位置×形态"拆成可打勾的项。每一项都是客观的，没有"感觉"的空间。</p>
 <p><strong>失败案例</strong>：下降趋势中途冒出一根锤子线，下方没有任何支撑，你逆势做多——大概率继续跌。锤子只在"位置对+方向对"时才是信号，孤立的锤子是噪音。</p>
 <p><strong>影线 50% 挂单的具体操作</strong>：假设锤子线影线范围是 100.00-101.00，实体收在 100.80。影线 50% 位 = (100.00+101.00)/2 = 100.50。在 100.50 挂限价买单，止损放 99.90（影线最低点下方），目标看前高。价格回到 100.50 自动成交——成交价精确、止损距离短、盈亏比天然好。</p>
-<h3 id="sec-45">3.4 吞没形态（Engulfing） 【核心】</h3>
+<h3 id="sec-44">3.4 吞没形态（Engulfing） 【核心】</h3>
 <p>一根 K 线的实体，完全包住前一根 K 线的实体，方向相反。</p>
 <p><img alt="图 3-3 看涨吞没：大阳线包住前一根小阴线" src="images/fig_p23_x138.png" /></p>
 <p><em>图 3-3 看涨吞没：大阳线包住前一根小阴线</em></p>
@@ -1593,7 +1610,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ul>
 <p><strong>实例（看图）</strong>：一段下跌后，价格到了支撑位，先出一根小阴线（犹豫），紧接一根大阳线完全包住它且放量——这就是看涨吞没，入场做多，止损放在吞没 K 线低点下方。</p>
 <p><strong>吞没 vs 锤子的选择</strong>：两者都是反转信号，但性格不同。锤子线给出的是"拒绝"（下方有人接），吞没给出的是"反攻"（多头主动吃掉空头阵地）。吞没的力量感更强，但要求更苛刻（实体必须完全包住前一根）——信号更少，质量更高。把两者都写进规则书，但每种信号单独统计胜率（第 8 章），不要混在一起算。</p>
-<h3 id="sec-46">3.5 内包线（Inside Bar） 【核心】</h3>
+<h3 id="sec-45">3.5 内包线（Inside Bar） 【核心】</h3>
 <p>当前这根 K 线的最高、最低，都缩在前一根 K 线的范围之内——像被"包"在里面。</p>
 <p><img alt="图 3-4 内包线：波动收缩，等待突破方向" src="images/fig_p23_x139.png" /></p>
 <p><em>图 3-4 内包线：波动收缩，等待突破方向</em></p>
@@ -1609,7 +1626,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>大多头 K 线之后的多头内包线：70% 概率出现小两段上涨</strong>（大棒之后的犹豫，等的是第二波）。</li>
 </ul>
 <p>止损细节：内包线做突破时，止损放在<strong>外包线（母线）高点上方 2 个跳动点</strong>而不是子线极值——市场常先小幅刺穿再走方向（呼应 4.13 止损表）。</p>
-<h3 id="sec-47">3.6 量价确认：信号的最后一道滤网</h3>
+<h3 id="sec-46">3.6 量价确认：信号的最后一道滤网</h3>
 <p>任何信号入场前，过一遍量价三问（呼应第 2.5 节）：</p>
 <ol>
 <li><strong>趋势方向的移动有没有量？</strong>（顺势信号放量跟随=加分）</li>
@@ -1618,7 +1635,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ol>
 <p>三问全过=做；两问不过=等下一个。记住第 2 章的限定：外汇的量是 tick 近似，只能当参考；期货的量才真。</p>
 <p><strong>量价三问的用法</strong>：这不是第四个入场条件，而是给前三道闸的"评分器"——形态合格后，用量给它打个分：三问全过 = 高质量信号，可以按规则入场；一问不过 = 降级处理，等更好的位置或更明确的量；两问不过 = 放弃。这样"量"就从"模糊的感觉"变成了"可执行的规则"。</p>
-<h3 id="sec-48">3.7 信号组合的胜率排序</h3>
+<h3 id="sec-47">3.7 信号组合的胜率排序</h3>
 <p><strong>高胜率组合（顺势+位置+形态三合一）</strong>：</p>
 <ol>
 <li>上升趋势回调到前支撑/HL 区 + 缩量 + 锤子/吞没 → 做多</li>
@@ -1632,14 +1649,14 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>区间中部的任何信号</li>
 </ul>
 <p><strong>怎么用这张表</strong>：高胜率组合是你的"主力 setup"，做它、统计它（第 8 章）、优化它。低胜率组合是"不该做的清单"——把它写进规则书的原因，不是为了"万一可以做"，而是为了在盘中止住你的手。你不需要回避所有低胜率组合，但你必须<strong>先知道它们是低胜率的</strong>——大多数人是在连亏之后才意识到自己在做低胜率单。</p>
-<h3 id="sec-49">3.8 蜡烛组合形态</h3>
+<h3 id="sec-48">3.8 蜡烛组合形态</h3>
 <p>除了单根形态，几个经典多根组合（同样原则：要有位置和背景）：</p>
 <p><strong>启明星/黄昏星（三根反转）</strong>：大阴+小实体（星）+大阳，且大阳吞没第一根实体过半→看涨；黄昏星是镜像→看跌。中间的"星"是犹豫的象征——市场在两根大 K 线之间停顿了一下，然后掉头。停顿越干净（实体越小、影线越短），反转信号越强。</p>
 <p><strong>红三兵/三乌鸦</strong>：低位三根连续阳线（每根开盘在前一根实体内、收盘接近最高）→趋势启动；三乌鸦镜像。注意高位三根大阳后警惕衰竭（第 2.8 高潮 K 线）——三兵是"启动"信号，出现在高位时可能是"最后一冲"。</p>
 <p><strong>平头顶部/底部（Tweezer）</strong>：相邻两根 K 线高点（或低点）几乎相同——同一位置被两次拒绝=支撑/阻力确认。平头是"位置"的 K 线版表达：两根 K 线都在这同一个价位被拒绝，说明那里有人持续在卖（或买）。</p>
 <p><img alt="图 3-5 蜡烛组合形态六连图：启明星/黄昏星、红三兵/三乌鸦、平头顶/底——多根 K 线&quot;合谋&quot;（合成示意）" src="images/fig_p3_combo_bars.png" /></p>
 <p>三组镜像对照着记：① 启明星/黄昏星是"大 K 线 + 犹豫的星 + 反吞"的节奏反转；② 红三兵/三乌鸦是"步步为营"的趋势启动；③ 平头是"同一价位两次被拒"的位置确认。共同原则：<strong>单根形态讲"形态"，组合形态讲"节奏"——但都要有位置和背景</strong>（呼应 4.2 信号质量 = 背景×位置×形态）。</p>
-<h3 id="sec-50">3.9 图表形态</h3>
+<h3 id="sec-49">3.9 图表形态</h3>
 <p>K 线形态是微观（1-3 根），图表形态是中观（几十根）。分反转和持续两类：</p>
 <p><strong>反转形态</strong>：</p>
 <ul>
@@ -1736,7 +1753,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>周期越大越可靠</strong>。日线头肩比 5 分钟头肩可靠得多——周期越大，参与的参与者越多，形态越"扎实"。</li>
 <li><strong>形态突破和假突破是一体两面</strong>——突破站稳就跟随，突破收回就反手（呼应 3.2）。同一个突破点，两种剧本，规则写死，临场不猜。</li>
 </ol>
-<h3 id="sec-51">3.10 信号 K 的质量：Brooks 的评判标准</h3>
+<h3 id="sec-50">3.10 信号 K 的质量：Brooks 的评判标准</h3>
 <p>第 3.1 节讲了"背景&gt;位置&gt;形态"，但"形态"这一项本身也有质量高低。Al Brooks 对"信号 K"（触发你入场的那根 K 线）有一套细致的质量标准——同样是一个锤子线，质量可以差很多。</p>
 <p><strong>强信号 K 的特征（以做多锤子为例）</strong>：</p>
 <ol>
@@ -1762,7 +1779,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>内包线</strong>：区间压缩，是低时间框架上的三角形——<strong>从内包线开始的反转/突破失败倾向高、且很快回调</strong>。所以内包线只当"触发器"（3.5），不要当"反转确认"。</li>
 <li><strong>外包线</strong>：波动扩张，是低时间框架上的扩散三角形——<strong>外包线的方向偏向由突破幅度决定</strong>：上破幅度大于下破幅度 → 看涨倾向（反之看跌）。外包 K 线不是中性的，它的"大方向"暴露了谁在主导。</li>
 </ul>
-<h3 id="sec-52">3.11 突破的真实概率：用数据校准你的预期</h3>
+<h3 id="sec-51">3.11 突破的真实概率：用数据校准你的预期</h3>
 <p>突破是本书系统三的核心，但"突破后到底有多少概率继续"，多数人凭感觉。Ali Moin-Afshari 的突破白皮书用 2023 年的 E-mini 5 分钟数据给出了量化基准（他的信号经 Al Brooks 验证）：</p>
 <p><strong>突破（BO）信号</strong>：价格超过前一根 K 线高低点至少 1 tick 即算突破；"后续 K 线"（FT，follow-through）确认成败。统计结果：</p>
 <ul>
@@ -1808,7 +1825,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <strong>趋势中约 80% 的反转尝试失败——顺势突破（趋势恢复）更可信。</strong></p>
 </blockquote>
 <p>这就是为什么 3.12 说"概率最低的三类（通道追单、末段突破、区间追突破）恰恰是新手最爱做的"。改变惯性需要：强突破棒 + 跟随 +（可选）缺口。三条里缺两条，默认假突破；两条以上成立，才考虑追。这张表背下来，突破类交易的方向就清晰了：<strong>在区间里等边界反转，在趋势里等顺势回撤，别把两者搞反。</strong></p>
-<h3 id="sec-53">3.12 十种最佳价格行为模式（概率排序）</h3>
+<h3 id="sec-52">3.12 十种最佳价格行为模式（概率排序）</h3>
 <p>Al Brooks 的缩写词典（附录 B）里藏着他对“哪些模式值得专门学习”的排序。本节把十种最佳模式连同概率底色一次讲清——它们是整本书信号库的“精华名单”，剩下的都是变体或噪音。</p>
 <p><strong>信号线的四级可靠性排序</strong>（诊断）：① 与交易方向<strong>同向的趋势 K 线</strong>（最强信号线）；② 标准反转 K 线；③ 短 K 线/内包线（需市场环境支持）；④ <strong>反方向的十字星或趋势 K 线</strong>（风险最大）。新手只做第一种：做多只选阳线信号棒、做空只选阴线信号棒——“在你希望的一方至少控制信号线之后进场，总是更优的选择”。</p>
 <p><strong>模式一：趋势反转（约 40% 概率）</strong></p>
@@ -1910,14 +1927,14 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>注意：磁力位效应是"倾向"不是"保证"——价格可能被磁力位吸引测试后直接穿过（突破模式）。</li>
 </ul>
 <p><strong>一句话记忆</strong>：反转看 40%（趋势反转、最终旗形），突破看 48%（FT），楔形破位 75%，通道突破只有 25%，区间突破 80% 失败——<strong>概率最低的三类（通道追单、末段突破、区间追突破）恰恰是新手最爱做的</strong>。</p>
-<h3 id="sec-54" class="quizhead">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-53" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>价格冲破前高但收盘拉回前高下方，追突破做多的人全被套——这个场景叫什么？接下来大概率怎么走？</li>
 <li>假突破成立的两个"必须"是什么？</li>
 <li>信号质量 = 背景 × 位置 × 形态——"半空中一根漂亮的吞没"为什么不能做？</li>
 </ol>
 <p><strong>答案</strong>：① 假突破（3.2）——被扫止损的人被迫离场，他们的离场成为反向行情的燃料；② 收盘确认（盘中插破不算数）+ 配合量能（突破/收回放量才高质量，3.2）；③ 位置不过关，乘号上有一个零，整个信号质量就是零（3.1）——背景顺、形态漂亮都不抵位置不对。</p>
-<h3 id="sec-55" class="sumhead">本章小结</h3>
+<h3 id="sec-54" class="sumhead">本章小结</h3>
 <p>信号质量 = 背景 × 位置 × 形态，三者相乘，缺一个就是零。先看位置，再看形态。</p>
 <p>假突破是最重要的信号——它建立在"止损被扫"这个最确定的机制上，是第 5 章 sweep 的前身。</p>
 <p>pin bar/吞没/内包线，都必须在关键位上才有意义。</p>
@@ -1933,7 +1950,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>H1/H2 计数以突破前一棒极点的入场棒为准：强趋势 H1 即可，宽通道/反转/边界必须等 H2；Weak H1 要实体弱+上影长；第三次回调（High 3）是楔形不是追单。</p>
 <p>下一章把这些信号组装成完整的交易系统——光有信号还不够，你还需要止损、目标、仓位、和"什么情况下不做"。</p>
 <hr/>
-<h1 id="sec-56">第 4 章 交易系统：入场与出场</h1>
+<h1 id="sec-55">第 4 章 交易系统：入场与出场</h1>
 <blockquote>
 <p><strong>阅读提示</strong>：本章是全书最重的一章——把信号变成系统。主线必读篇一（状态机）与篇二（出场，期望值的另一半）；篇三高级入场结构、篇四补充系统（ORB/均线趋势跟踪/配对交易）按需查阅；最后 4.29“一个交易日走一遍”把全部串起来，建议通读后再回到本篇。</p>
 </blockquote>
@@ -1943,7 +1960,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </blockquote>
 <p>为什么？因为一笔完整的交易，远不止"进场"这一个动作。进场之后呢？止损放哪？目标看哪？下多大仓位？涨了一点要不要先跑？跌了要不要扛？这些问题，如果你没有事先写死的答案，那么每一次你都会在盘中的情绪里临时决定——而情绪里的决定，几乎都是错的。</p>
 <p>这一章就是把"信号"升级成"系统"：一套你事先写死、可以重复执行、不依赖临场发挥的完整规则。</p>
-<h3 id="sec-57">本篇导读：一章其实有四本书</h3>
+<h3 id="sec-56">本篇导读：一章其实有四本书</h3>
 <p>这一章共 28 个小节，是全书最厚的一章（其他章平均不到它的三分之一）。为了不让你一上来就被淹没，把它分成四篇，彼此独立、可单独阅读：</p>
 <table>
 <thead>
@@ -1988,8 +2005,8 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </tbody>
 </table>
 <p><strong>建议</strong>：第一遍只读篇一 + 篇二（配合第 6 章仓位公式），已经是一套完整可执行的系统；篇三是给这套系统加深度和鲁棒性的，等你觉得"信号不够用"或第二遍复习时再读；篇四是工具箱扩展——换三种"赚钱方式"的备选系统，实战 100 笔、主线验证通过后再按需选学。</p>
-<h2 id="sec-58">篇一 系统与状态机（4.1-4.11）</h2>
-<h3 id="sec-59">4.1 信号不等于系统 【核心】</h3>
+<h2 id="sec-57">篇一 系统与状态机（4.1-4.11）</h2>
+<h3 id="sec-58">4.1 信号不等于系统 【核心】</h3>
 <p>先想清楚一个区别。信号回答的是"这里能不能进"。但一笔交易要回答六个问题：</p>
 <ol>
 <li>现在什么状态？（背景）</li>
@@ -2002,7 +2019,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>只解决第 2 个就下单，是赌博；六个都有确定答案，才是交易。</p>
 <p><strong>系统的真正作用，不是帮你赚更多，而是帮你在情绪上头时不做蠢事</strong>。规则写死了，盘中就不需要"思考"，只需要"执行"。思考留给冷静的盘前，执行交给机械的盘中。</p>
 <p>这个区别怎么落地？你不需要六要素完美到"永远赚钱"——你只需要六要素具体到"没有临场决策的空间"。比如止损不能写"亏了就跑"，要写"放在 HL 下方 0.5×ATR"；过滤不能写"感觉不对就不做"，要写"数据前 15 分钟不开仓"。模糊的规则 = 给情绪留门，第 7 章的军规会反复强调这一点。</p>
-<h3 id="sec-60">4.2 一套完整系统的六要素 【核心】</h3>
+<h3 id="sec-59">4.2 一套完整系统的六要素 【核心】</h3>
 <ol>
 <li><strong>背景判断</strong>：当前趋势/区间，用什么结构判断——写死，不临场发挥。</li>
 <li><strong>入场触发</strong>：具体信号（假突破？锤子？吞没？）——写死。</li>
@@ -2021,7 +2038,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>[ ] 仓位：<strong><em>_ 手（风险 </em></strong>_%）</li>
 <li>[ ] 过滤：无数据事件 / 活跃时段 / 非连亏期</li>
 </ul>
-<h3 id="sec-61">4.3 系统一：趋势回调交易（最推荐） 【核心】</h3>
+<h3 id="sec-60">4.3 系统一：趋势回调交易（最推荐） 【核心】</h3>
 <p>这是本书的默认系统，先给你一个洞察，理解它为什么是默认：</p>
 <blockquote>
 <p>趋势回调是期望值结构最好的系统：顺势（站在惯性那边）、回调入场（止损紧凑）、目标远（盈亏比天然大于 2）。三个优势叠在一起。</p>
@@ -2116,7 +2133,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>3 根连续 K 线回撤 = 趋势转变的开始（Ali）</strong>：小型回调的牛市趋势常出 2 根 K 线的回调——3 或 4 根 K 线会增加形成紧凑交易区间或交易区间的概率（呼应上文 3-Bar PB）。部分交易者允许 1 根 K 线的回调但不接受 2 根，会在 2 根以下出场。</p>
 <p><strong>为什么 3 根这么关键</strong>：若出现三根 K 线形态，特别是至少两根 K 线收于低点附近时，随后很可能出现大幅上涨和下跌，因此至少会有两波向下走势——许多多头会在那三根 K 线形态时离场，许多空头会在高点上方设置卖出限价单，多头和空头都会在其低点下方设止损卖单。2 号 K 线是 1 号反转的跟进，3 号 K 线则是入场点的信号。</p>
 <p><strong>回调、修正还是趋势反转？（基于百分比和回调势头，Ali）</strong>：<strong>最高 5% 是回调；超过 10% 属于修正</strong>（反转需要至少一个双重底）；<strong>20% 属于看跌的趋势</strong>（反转需要底部形态的形成）。动量规则：如果修正幅度过大且过快，通常不会在未先形成通道的情况下反转上升——通道为买价水平提供构建买入压力区的机会；<strong>动量决定修正浪是否会沿着突破方向走出 2 波或更多</strong>。</p>
-<h3 id="sec-62">4.4 系统二：区间边界交易 【核心】</h3>
+<h3 id="sec-61">4.4 系统二：区间边界交易 【核心】</h3>
 <p><strong>逻辑</strong>：区间=供需平衡，边界反复被测试。在边界做反向。</p>
 <p><strong>规则</strong>：</p>
 <ol>
@@ -2173,7 +2190,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><img alt="图 4-4R 真实数据：区间完整生命周期——边界多测 → 真突破 → 高潮（ETH 5 分钟，2026-07-02 ~ 07-03）" src="images/fig_real_btc_range.png" /></p>
 <p><em>图 4-4R 真实数据：区间 → 边界 fade → 真突破（数据源：Binance ETHUSDT 5m K 线）</em></p>
 <p>四步对应：① <strong>边界双测</strong>：17:35 上沿 1652、19:10 上沿 1657 两次测试回落，下沿 1614/1644 也被多次测试——边界 fade 的机会（做空到中线/下沿落袋）；② <strong>突破前兆</strong>：19:55 下沿测试后低点抬高、K 线实体开始变大——突破在酝酿（4.4 的"成功 4 信号"）；③ <strong>真突破</strong>：20:30 大实体站上上沿 1669、放量，真突破三条件齐——区间思维到此结束，切趋势思维；④ <strong>高潮回落</strong>：22:10 高潮 1725（+4%），23:05 起回落——高潮后不追。三个注意：加密 5 分钟图的"边界测试"通常 2-3 次就要动手（不像日线可以等 4 次）；区间宽度 2.5% 左右（ETH 1614-1657）意味着止损距离小、盈亏比天然好；突破后<strong>立即把止损移到突破位下方</strong>。</p>
-<h3 id="sec-63">4.5 系统三：突破交易 【核心】</h3>
+<h3 id="sec-62">4.5 系统三：突破交易 【核心】</h3>
 <p><strong>逻辑</strong>：区间突破=供需失衡，新趋势开始。</p>
 <p><strong>规则</strong>：</p>
 <ol>
@@ -2206,7 +2223,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>突破缺口的生命周期：闭合序列（BOG，Ali）</strong>：突破缺口（Breakout Gap）不是一次性事件——它有自己可读的闭合序列：① 突破后每次回调（PB）都在缩小缺口，但<strong>只要缺口仍开放，突破方向就有更多动能</strong>；② 最终回调触及突破点（BOP）把缺口减到零，但<strong>通常不会越过它</strong>（无重叠）——缺口完全闭合前，突破都算"测试中"；③ 如果下一条腿又创出新的突破缺口，新缺口的闭合概率更高（后创的缺口更脆弱）；④ 如果下一轮回合产生新的<strong>大缺口</strong>且仍保持开放，模式将升级为<strong>高潮或新一轮突破</strong>——这种序列通常会画出"收缩楼梯"图案；⑤ <strong>当最后一个缺口闭合时，逆势交易者开始淡化第一个回调</strong>——第一批被套者离场完毕，真正的反转测试才刚开始。两个精确版本：<strong>负向测量缺口</strong>——回调点略低于突破点、表明动能不足，回撤填补突破缺口后形成"负向测量缺口"，其预测可靠性降低但仍可能非常准确；<strong>身体缺口</strong>——突破形态最后一根 K 线的实体与突破 K 线实体不重叠即形成，只要实体缺口保持开放，突破延续（TRES）的概率就高于反转（TREV），尤其在回调较弱时。</p>
 <p><strong>突破之后：三种结局（Ali）</strong>：价格突破至新低（或新高）后只有三种可能——<strong>横盘整理、反转、趋势</strong>。别急着给突破定性，突破后的头几根 K 线决定剧本：① 若突破后出现强回抽拒绝（突破 K 线展示前期买方力量后创出新高、随后对新低形成拒绝），说明反向方把突破当回调处理，反转概率上升；② 若突破后跟随即时跟进（大实体、无犹豫），趋势概率上升；③ 突破后立刻横盘 = 正在"投票"——等测试结果再站队（呼应 3.11 的测试=四批人投票）。</p>
 <p><strong>突破 60EMA：成败两种迹象（Ali：ES 日内常用）</strong>：以 60 周期均线为目标的突破，成败在突破前就有迹可循：<strong>失败迹象</strong>——接近 60EMA 时出现犹豫、内部回撤、大量重叠且无明确缺口，后续回撤中价格突破回撤高点的情况值得怀疑；弱势接近突然转为强势并形成明确缺口时后续可能上涨，但<strong>迟到的突破必须超越所有阻力位且展现出惊人强度</strong>。<strong>成功迹象</strong>——清晰强劲的跳空缺口（突破前后均有明显缺口）、K 线之间几乎没有重叠、极少或没有内包线、K 线接近高点且几乎没有上影、突破后回踩（PB）疲软且令人失望——<strong>回踩越弱，突破越可靠</strong>。</p>
-<h3 id="sec-64">4.6 系统四：微通道交易（Micro Channel） 【核心】</h3>
+<h3 id="sec-63">4.6 系统四：微通道交易（Micro Channel） 【核心】</h3>
 <p>微通道是通道家族里最特殊、也最容易被量化的一支（Al Brooks 一脉的 Ali Moin-Afshari 把它做成了完整系统，附录 C.7）。它适合明确趋势日，基础胜率 70% 以上，但利润薄、节奏快——新手了解即可，趋势回调（系统一）仍是默认。</p>
 <p><strong>定义（可编程标准）</strong>：价格沿同一方向至少 3 根 K 线、且存在微小缺口（相邻 K 线低点不重叠）：</p>
 <ul>
@@ -2256,7 +2273,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>矫正腿 ≈ 图案一半（Ali：时间管理）</strong>：修正量通常约为图案尺寸的一半——例如图案由 48 根 K 线构成时，预计调整阶段将持续约 24 根 K 线。时间管理同理：如果一轮持续两小时的上行行情在触及阻力位后转跌，那么这轮下跌很可能持续 1 至 2 小时——<strong>接下来至少一小时，只考虑做空</strong>。观察呈现清晰形态的最高时间周期，以它作为回调持续时间的参考基准。</p>
 <p><strong>楼梯形态：宽幅通道趋势结构（Ali）</strong>：楼梯交易日是 TTRD 的变体，要求至少出现三个交易区间——当日波动度较大，但呈现明确的高低点趋势走势；几乎每个突破点之后都会出现回调测试（PB），因此连续波动之间存在部分重叠。<strong>收缩楼梯</strong>：若每次突破幅度都比前次小，则形成收缩楼梯模式——这是动能减弱的信号，可能引发更大级别的反转（呼应 4.5：收缩楼梯通常对应 BOG 闭合序列的升级）。低概率事件顶部：突破 W 底失败后出现的顶部。</p>
 <p><strong>熊市通道卖出技巧（Ali）</strong>：当市场处于 BR 通道（弱 BR 趋势）且在 EMA 上方反复测试时，有三种主要卖出方式：① 在 BR 趋势线下方卖出（尤其是在 EMA 附近）；② 强势卖出 K 线收于 EMA 附近时卖出；③ 在较高的点上卖出（等待反弹至更强位置再空）。</p>
-<h3 id="sec-65">4.7 状态机与多时间框架 【核心】</h3>
+<h3 id="sec-64">4.7 状态机与多时间框架 【核心】</h3>
 <p>三个系统不是三选一，而是<strong>状态机</strong>——市场状态决定用哪个系统（系统四微通道是趋势日内部的快枪，其余时段仍由前三者主导）：</p>
 <p><img alt="图 4-5 状态机：结构判定 → 选择系统" src="images/fig_p4_state_machine.png" /></p>
 <p>每根 K 线收盘后重估状态，结构变了就换系统，不恋战。</p>
@@ -2337,14 +2354,14 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>错误示范</strong>：日线下跌趋势里，1H 出现看涨吞没就做多——这是逆 HTF 方向。HTF 方向不对，LTF 信号作废。<strong>MTF 的本质：大周期定方向，小周期优化入场价</strong>。</p>
 <p><strong>MTF 的具体流程</strong>（写进规则书）：开盘前先在日线定方向（只写"多/空/观望"三个字），然后在 4H/1H 画关键位，最后在 15m/5m 等信号。三层各自独立判断，三层同向才动手。任何一层反向，这一单就不做——不是"信号不好"，是"三层不同向"，就这么简单。</p>
 <p><strong>长程背景 vs 近期结构冲突时，近期为主</strong>（诊断场景 5/6）：MTF 讲的是“跨周期同向”，但<strong>同一周期内</strong>长程窗口与近期方向冲突时，裁决规则是：<strong>以近期结构为交易主方向，长程背景写入风险提示</strong>。例：日线背景看跌，但本周期刚走出多头尖峰——<strong>禁止因长程看跌而在近期多头尖峰中做空</strong>（反过来同理）。长程背景的作用是风险警示和位置参考，不是直接否决近期结构——近期结构才是当前价格的推动力。这与上文“HTF 方向不对，LTF 信号作废”不冲突：前者是不同周期之间的方向裁决，后者是同一周期内的时间尺度冲突。</p>
-<h3 id="sec-66">4.8 斐波那契回撤 【核心】</h3>
+<h3 id="sec-65">4.8 斐波那契回撤 【核心】</h3>
 <p>广泛使用的测量工具，与回调入场天然融合。</p>
 <p><strong>画法</strong>：上升趋势里，连接一波行情的起点（近期低点）和终点（近期高点），自动生成回撤位：38.2%、50%、61.8%。</p>
 <p><strong>与系统一融合</strong>：回调的 HL 区，经常恰好落在 50%-61.8% 回撤位。HL 支撑区 + 61.8% 回撤重叠 = 高质量入场区（confluence，多因素汇聚）。重叠因素越多，位置越可靠。</p>
 <p><strong>斐波那契扩展作目标</strong>：127.2%、161.8% 扩展位可作止盈目标。</p>
 <p><strong>诚实评价</strong>：斐波那契背后没有物理定律，它的有效性很大程度来自自我实现——太多人盯着 61.8%，那里就有了反应。把它当"汇聚因素"用，别当独立入场理由。</p>
 <p><strong>confluence（汇聚）的概念是本节真正的收获</strong>：入场位叠的因素越多——结构点 + 斐波那契 + 前高前低 + 整数关口 + OB/FVG——位置越可能引发反应。但注意：汇聚是"加分项"，不是"必要条件"。一个结构清晰的 HL 区，即使没有斐波那契重叠，也完全值得做。别为了凑 confluence 把入场条件堆到几乎不出现。</p>
-<h3 id="sec-67">4.9 海龟交易法则：系统化趋势跟踪的鼻祖 【核心】</h3>
+<h3 id="sec-66">4.9 海龟交易法则：系统化趋势跟踪的鼻祖 【核心】</h3>
 <p>海龟实验（Richard Dennis，1983）证明了交易可以完全规则化、可以教会。它的规则至今是趋势跟踪系统的范本。</p>
 <p><strong>核心规则（原版简化）</strong>：</p>
 <ol>
@@ -2360,7 +2377,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>金字塔加仓</strong>：只在盈利时加仓，每次加仓有独立止损，整体止损跟随上移。这是"让利润奔跑"的正确打开方式——不是一单扛到底，而是让赢利的仓位变大。</p>
 <p><strong>考核期注意</strong>：金字塔加仓激进，不适合考核期（违背第 7 章"不加仓"军规）。学它的仓位管理和趋势跟踪哲学，别照搬加仓动作。</p>
 <p><strong>海龟的意义</strong>：它证明了"截断亏损、让利润奔跑"可以完全规则化——这是本书所有系统的思想鼻祖。海龟的规则全是客观数字（20 日、2×ATR、0.5×ATR），没有任何主观判断——这是"写死规则"的极致示范，也是它 40 年后仍然被研究的原因。</p>
-<h3 id="sec-68">4.10 市场的两种模式：趋势跟踪 vs 均值回归 【核心】</h3>
+<h3 id="sec-67">4.10 市场的两种模式：趋势跟踪 vs 均值回归 【核心】</h3>
 <p>剥开所有流派，市场其实只在两种模式间交替：趋势和区间。对应的赚钱逻辑也只有两种：</p>
 <ul>
 <li><strong>趋势跟踪</strong>：假设趋势延续——回调买入、让利润奔跑。系统一就是它。</li>
@@ -2374,7 +2391,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ul>
 <p><strong>一个有用的辅助过滤器（均线学派的精华）</strong>：用 200 周期均线当多空分界线——价格在 200 均线上方只做多，下方只做空。它不给你入场信号，只帮你过滤方向，减少逆势单。</p>
 <p><strong>均值回归学派（布林带/RSI）和均线学派真正有用的就是上面这两点</strong>——模式匹配和方向过滤。至于具体指标参数，是次要的。别把精力花在调 RSI 是 30 还是 25 上。指标是工具不是圣杯——布林带告诉你"现在偏离均值"（均值回归触发器），200 均线告诉你"大方向"（方向过滤器），仅此而已。</p>
-<h3 id="sec-69">4.11 Van Tharp 的系统开发框架：系统要"合身" 【核心】</h3>
+<h3 id="sec-68">4.11 Van Tharp 的系统开发框架：系统要"合身" 【核心】</h3>
 <p>第 4.1-4.10 给了你具体的系统，但 Van Tharp 在《通向财务自由之路》里提出了一个更上位的观点：</p>
 <blockquote>
 <p>没有"最好"的系统，只有"适合你"的系统。系统开发不是找一个圣杯，而是设计一套和你的心理、目标、生活节奏匹配的规则。</p>
@@ -2392,8 +2409,8 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>一个你能一致执行的 70 分系统，远好于一个你执行不了的 95 分系统。系统的上限，是你执行它的下限。</p>
 </blockquote>
 <p><strong>实践</strong>：选系统时问自己三个问题——①我的时间精力匹配这个周期吗？②我的心理承受得住这个胜率和回撤吗？③我能一致执行它 100 笔不变形吗？三个都"是"，才是你的系统。系统为你服务，不是你为系统服务。</p>
-<h2 id="sec-70">篇二 出场：期望值的另一半（4.12-4.20）</h2>
-<h3 id="sec-71">4.12 出场：期望值的另一半 【核心】</h3>
+<h2 id="sec-69">篇二 出场：期望值的另一半（4.12-4.20）</h2>
+<h3 id="sec-70">4.12 出场：期望值的另一半 【核心】</h3>
 <p>进场之后怎么办？入场只决定你上不上车，出场决定你最终赚多少、以及赚到的能不能留住。大多数人花 90% 精力研究入场，10% 都不到研究出场——这是反的。</p>
 <blockquote>
 <p>一笔交易的期望值 = 胜率 × 平均盈利 − 败率 × 平均亏损。入场决定胜率的下限，出场决定平均盈利的上限。</p>
@@ -2406,7 +2423,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>对了之后怎么扩大</strong>——移动止损与分批。</li>
 </ol>
 <p>第 1 个在入场前就解决了。本节讲第 2、3 个。</p>
-<h3 id="sec-72">4.13 止盈目标怎么定 【核心】</h3>
+<h3 id="sec-71">4.13 止盈目标怎么定 【核心】</h3>
 <p><strong>三个常用锚点，按优先级</strong>：</p>
 <ol>
 <li><strong>结构位</strong>：前高/前低、流动性池（BSL/SSL）。价格倾向于去扫下一个流动性池——这是最自然的目标。</li>
@@ -2528,7 +2545,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>禁止缩小 TP1 凑 RR</strong>：TP1 是结构目标、有磁力效应，不是调节变量。尖峰场景附加：扩止损上限 = 尖峰高度 50%，超过则放弃。</li>
 </ol>
 <p><strong>突破单挂位规则</strong>（二元决策 §11.4）：做多突破单挂在信号棒或有效突破依据 K 线高点上方 1 跳，做空挂在低点下方 1 跳；<strong>禁止挂在 K 线实体中部、影线中部、EMA 附近、当前价附近或任意折中位置</strong>。无法明确依据 K 线时，评估是否改挂结构支撑/阻力/通道边界/EMA 处的限价单。</p>
-<h3 id="sec-73">4.14 分批止盈：兼顾落袋与奔跑 【核心】</h3>
+<h3 id="sec-72">4.14 分批止盈：兼顾落袋与奔跑 【核心】</h3>
 <p>全仓持有到目标，中途回撤会很难受；全仓在 1R 就跑，又吃不到趋势。分批是折中：</p>
 <p><strong>标准方案</strong>：</p>
 <ol>
@@ -2537,7 +2554,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ol>
 <p>这笔交易的结果从此只有三种：小赚（保本出场）、中赚（1R 部分）、大赚（剩余部分到目标）。不再有"赚了又还回去"的亏损——<strong>这是分批最大的心理价值</strong>。</p>
 <p><strong>代价</strong>：如果行情直接冲到底，你少赚了一半。接受这个代价——你要的是稳定的期望值曲线，不是单笔最大化。</p>
-<h3 id="sec-74">4.15 移动止损：让利润奔跑的机制 【核心】</h3>
+<h3 id="sec-73">4.15 移动止损：让利润奔跑的机制 【核心】</h3>
 <p>剩余仓位怎么跟？两种主流方式：</p>
 <p><strong>结构移动法（推荐）</strong>：上升趋势里，每出现一个新的 HL（更高的低点），就把止损移到该 HL 下方。价格不跌破结构，你就一直拿着；跌破结构，说明趋势可能结束，止损离场。</p>
 <p><strong>ATR 移动法</strong>：止损保持在价格后方 k×ATR（k 取 1.5-2），随价格推进。适合不想盯结构的人，但容易被正常回调扫掉。</p>
@@ -2552,7 +2569,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>二次入场点 2E（Second Entry）</strong>：2E 比首次入场（1E）胜率更高、持仓更久：首次入场通常是短线交易，二次入场是波段交易（或更大的短线）；2E 可能比 1E 形成于同一价位（双顶/双底），也可能更高或更低——由于是二次失败突破，其反转概率更高。执行细则：① <strong>1 号入场必须触发后失效</strong>，2 号入场点必须设置在比 1 号更有利的价格；② 入场前至少 3-4 根连续 K 线趋势（2 根可接受）；③ 选择 2 号入场点，有超过 60% 概率至少触及 1 号入场点；④ 重要磁体处的信号更可靠；⑤ 1 号入场信号 K 线必须强劲。原则：<strong>逆势动量强劲时不要入场，确定好二次加仓位置，等形态确立后把它当作首次入场</strong>；市场动量越弱越可采用首次入场（反转所需动能小）。</p>
 <p><strong>第二腿 2LT（Second Leg Trap）</strong>：TRD/TTRD 中的第二腿往往比第一腿更强——但注意：<strong>2LT 看起来是新的，实际上是两段式陷阱</strong>，通常小幅突破后反转形成失败突破。识别条件：① 交易区间内的 2LT 需要一根强劲的信号 K 线；② 至少需要一个小波段；③ 卖出信号 K 线后的跟进很重要（连续看跌 K 线 = 2LT，K 线反转 = 旗形）。<strong>2LT 向磁吸位的波动必须迅速、高潮迭起且情绪化，否则很可能只是突破</strong>——缺乏这种动能的 2LT 不可靠；当市场维持在某支撑/阻力下方时，2LT 反转概率更高。区间内双腿形态有 80% 概率演变成失败突破并快速反转——若微通道本身是区间内的双腿形态，沿微通道方向的首次回踩失败率极高。</p>
 <p><strong>交易情境决定订单类型</strong>：顺势方向交易优先用限价单而非止损单；预期突破行情时<strong>不要逆势挂限价单</strong>——应等突破失败信号出现后，用止损单或市价入场；若使用限价单，应等亏损方放弃离场时用盈亏平衡点退出；仅在支撑位下方逆势操作、且前期存在多头力量迹象时才逆势（反之亦然）；仅当市场特征转变且有明确证据支持时才进行逆势操作。</p>
-<h3 id="sec-75">4.16 保本时机：别移太早 【核心】</h3>
+<h3 id="sec-74">4.16 保本时机：别移太早 【核心】</h3>
 <p>把止损移到入场价（保本）是好事，但移太早是常见错误：价格刚到 1R 就保本，一个正常回调就把你扫出去，然后行情奔目标而去。</p>
 <p><strong>经验法则</strong>：</p>
 <ul>
@@ -2561,12 +2578,12 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>保本后接受"被扫个保本"——这不亏钱，只是少赚，比"赚了还回去"好得多。</li>
 </ul>
 <p><strong>为什么保本"被扫"不是坏事</strong>：保本单被扫 = 你这笔 0 成本离场 + 你的资金被释放可以再战。它证明了"保本"机制在工作——你消灭了亏损的可能。情绪上，被扫保本比止损离场舒服得多，这正是保本的心理学价值。</p>
-<h3 id="sec-76">4.17 时间止损：不动也是风险 【核心】</h3>
+<h3 id="sec-75">4.17 时间止损：不动也是风险 【核心】</h3>
 <p>入场后，如果价格长时间不动（既不触发止损也不向目标走），说明你的入场逻辑可能没兑现。</p>
 <p><strong>规则示例</strong>：入场后 5-8 根 K 线（按你的交易周期）仍在入场价附近徘徊 → 主动离场或减半仓。</p>
 <p><strong>理由</strong>：持仓占用保证金、承受隔夜利息和突发风险，却没有换来预期的移动。<strong>时间也是成本</strong>。这条对考核期尤其重要——资金效率低会拖长达标时间（第 9 章达标数学）。</p>
 <p><strong>时间止损的另一种形式——信号失效</strong>：入场逻辑成立的前提（如"回调到 HL"）已经变化（价格又走出了新结构），即使价格没到止损，这笔的"为什么"已经不存在了——主动离场。别等价格来打你的止损，等逻辑失效就该走。</p>
-<h3 id="sec-77">4.18 一笔交易的完整生命周期 【核心】</h3>
+<h3 id="sec-76">4.18 一笔交易的完整生命周期 【核心】</h3>
 <p>把入场到出场串起来（以做多趋势回调为例）：</p>
 <ul>
 <li><strong>入场前</strong>：背景✓ 位置✓ 信号✓ → 算好止损/目标/仓位（本章六要素+第 6 章）</li>
@@ -2578,7 +2595,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>例外</strong>：8 根 K 线不动 → 时间止损，主动离场</li>
 </ul>
 <p><strong>注意整个生命周期里"决策"只发生两次</strong>：入场前（计划）和到 1R 时（分批）。其余全是机械执行——这就是"思考留给冷静时刻，执行交给机械盘中"的完整示范。</p>
-<h3 id="sec-78">4.19 完整案例：一笔交易从入场到出场 【核心】</h3>
+<h3 id="sec-77">4.19 完整案例：一笔交易从入场到出场 【核心】</h3>
 <p>用一个带数字的全流程，串起所有出场规则（做多，趋势回调）：</p>
 <ol>
 <li><strong>入场</strong>：4H 上升趋势，1H 回调到 HL 区+锤子。入场 1.1090，止损 1.1065（25 pips=1R），目标 1.1150（60 pips≈2.4R），下 2 手。</li>
@@ -2589,7 +2606,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>结局 B</strong>：价格未到目标，回调跌破 1.1135 → 剩余仓位止损离场（锁定 45 pips）。总盈利 ≈ 前半仓 60 pips + 后半仓 45 pips。</li>
 </ol>
 <p><strong>关键</strong>：从第 2 步起，这笔交易已经不可能亏——最差结果是保本或小赚。这就是分批+保本的价值：<strong>把"赚了又还回去"从可能里删掉</strong>。</p>
-<h3 id="sec-79">4.20 不同市场状态下的出场调整 【核心】</h3>
+<h3 id="sec-78">4.20 不同市场状态下的出场调整 【核心】</h3>
 <p>出场策略不是一刀切，按市场状态调：</p>
 <ul>
 <li><strong>趋势明确</strong>：让利润奔跑，用结构移动止损，不轻易止盈（系统一思维）。</li>
@@ -2605,8 +2622,8 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>垂直价差 = 下单即物理锁死最大亏损</strong>：买入时就把最大亏损和最大盈利都封顶，比裸持仓更确定（10.6 用途三）——适合小资金表达方向。</li>
 </ul>
 <p>一句话：<strong>出场用价格管理风险，期权用合约管理风险</strong>。两者不冲突——第 10 章学完后回来对比，你会发现期权只是给"锁最坏情况、让利润奔跑"这两个目标各多了一种实现方式。</p>
-<h2 id="sec-80">篇三 高级入场结构（4.21-4.25）</h2>
-<h3 id="sec-81">4.21 突破单三模型（实战课）</h3>
+<h2 id="sec-79">篇三 高级入场结构（4.21-4.25）</h2>
+<h3 id="sec-80">4.21 突破单三模型（实战课）</h3>
 <p>前面系统三讲了突破交易的通用规则。这里把"突破单"拆成三种具体模型，每种都有明确的触发条件和过滤条件——实战课把它浓缩为三句话：<strong>顺大逆小、二次确认、结构反转</strong>（本节核心规则来自南桥《5 分钟价格行为策略》公开 PPT，2025-12）。</p>
 <p><strong>模型一：趋势回调突破单（H2/L2，顺大逆小）</strong></p>
 <p>适用：强趋势 + 窄通道或强突破后的首次回调。</p>
@@ -2675,7 +2692,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>三角形的交易规则与区间一致：<strong>80% 的突破尝试失败，普通突破不追</strong>（3.11 的 80-20 法则）；边界入场优先第二次触边 + 反转信号棒（且与 direction 一致）；突破须尖峰级或强趋势棒 + 跟随、或“失败的失败”后二次入场——禁止追第一根突破棒；目标 = 三角形高度 MM（第 4.13 的 MM 公式一：区间高度翻测）。三角形与楔形的区别：三角形的边常水平或单向下倾、三推非必须；楔形两边同向倾斜、必须三推。</p>
 <p><strong>双顶/双底（DT/DB）</strong>：价格两次测试相近高点/低点，第二次未能创新高/新低后反转。三个有效条件：① 两次极点价位接近（允许小幅刺破，收盘不确认新高/新低）；② 第二次测试后出现反向趋势棒或明确信号棒；③ 中间有清晰回撤（颈线区域可识别）。<strong>三种无效情形</strong>：第二次大幅创新高/新低（只是趋势延续）、铁丝网/区间中部小波动的“假双顶”、仅单根长上影无第二次结构化测试。</p>
 <p><strong>二次测试优先（双顶底的灵魂）</strong>：第一次触顶/底可能是正常回撤——<strong>不追、不下单</strong>；第二次触顶/底失败才确认极点（反转<em>可能</em>发生）；突破颈线后的回撤是 Brooks 的二次入场背景（呼应 3.12 模式四 H2/L2）。失效条件：第二次极点被收盘突破。双顶底常是 MTR 的“前极点测试失败”环节（第 3.9 四组件之四）——仅有双顶形态而无趋势线突破，只是反转尝试，不是 MTR。</p>
-<h3 id="sec-82">4.22 限价单四模型：把入场价定在"等你的地方"</h3>
+<h3 id="sec-81">4.22 限价单四模型：把入场价定在"等你的地方"</h3>
 <p>突破单是追市场，限价单是等市场。限价单的优势是入场价精确、永不滑点（第 1.3），代价是可能不成交（错过不亏钱，第 7 章军规第 8 条）。四种模型：</p>
 <p><strong>模型一：区间前高前低限价反转（固定 1:1）</strong></p>
 <ul>
@@ -2823,7 +2840,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>均线纪律</strong>：EMA20 是通道内的动态支撑——回撤至均线且出现合格信号棒才评估入场，不因“每根低点都像机会”而过度交易。</li>
 </ul>
 <p><img alt="图 4-12 通道演变五阶段（左）：尖峰→扩展→台阶→收缩→区间；通道线四种画法（右）：平行线/波段点/最佳拟合/平行投影" src="images/fig_p4_channel_evolve.png" /></p>
-<h3 id="sec-83">4.23 always-in 强突破行情：四招短线打法</h3>
+<h3 id="sec-82">4.23 always-in 强突破行情：四招短线打法</h3>
 <p>always in（始终在场）是 Brooks 判断“当前走势方向”的方法——强突破行情里，每根 K 线收盘后都要问：现在还是不是多头/空头主导？四招打法：</p>
 <p><strong>Always In 的判定清单（AIL/AIS，PA-20）</strong>——先确认方向，再谈打法：</p>
 <ul>
@@ -2892,7 +2909,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>FF 常是 MTR 的<strong>末端旗形阶段</strong>——单根 FF 失败不等于 MTR 完成，升级 MTR 须四组件齐全（第 3.9）。</li>
 </ul>
 <p><img alt="图 4-14 20GB 与最终旗形：二十根不触均线=趋势极强（第一次回触顺势刮头皮）；趋势末端旗形突破常失败——失败 FF 是高价值反转" src="images/fig_p4_ff_20gb.png" /></p>
-<h3 id="sec-84">4.24 外包 K 线（Outside Bar）的实战用法</h3>
+<h3 id="sec-83">4.24 外包 K 线（Outside Bar）的实战用法</h3>
 <p>外包 K 的含义是"先失败再吞没"：第一根 K 线的极值，被第二根 K 线完全吞没（外包线，见 2.1）。实战用法五条：</p>
 <ul>
 <li><strong>先失败再吞没 = 反转信号</strong>：第一根 K 线失败的一方是弱者，吞没它的一方是强者。</li>
@@ -2904,7 +2921,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>外包 K 与 3.4 吞没的区别</strong>：吞没只要求第二根 K 包住第一根实体，外包 K 要求包住<strong>整根（含影线）</strong>——更严格，出现更少，但信号更强。两者用法相同：位置优先，形态其次。</p>
 <p><strong>外包线的三个特殊场景</strong>（诊断）：① 强趋势中的外包线更像趋势 K 线而非凝滞区——通常会引发两次进攻；② 趋势线突破/轨道线穿越后的强势反转中，外包线若构成二次进场，是极佳的进场 K 线；③ <strong>内-外-内形态</strong>：外包线后紧跟内含线，按内含线的突破方向进场。</p>
 <p><strong>方向偏向：突破幅度比较法（突破）</strong>：外包线的看涨/看跌倾向不取决于 K 线方向，而取决于两端突破幅度的比较——<strong>前棒高点之上的突破幅度 &gt; 前棒低点之下的突破幅度 = 看涨</strong>（说明低点下方有买家，价格回踩有支撑）；反之看跌（高点上方有卖家）。仅凭这个方向偏向做短线，胜率可达 83%；更妙的是<strong>失败信号的二次交易</strong>：外包线信号失败后，价格回踩被套点位时反向操作（如信号做空被套，回踩时做多，即“反杀”被套者），胜率超过 85%——被套方止损回补正是反向燃料（呼应 3.2 假突破）。另外，外包线的高点/低点在反转后常角色互换：突破后的阻力变支撑、支撑变阻力，回踩这些位置时被套方回补推动价格再次上行。</p>
-<h3 id="sec-85">4.25 决策执行口诀与禁止清单</h3>
+<h3 id="sec-84">4.25 决策执行口诀与禁止清单</h3>
 <p>把全书纪律压缩成两页纸：10 条执行口诀 + 一份“直接放弃”清单（PA 二元决策 §14/§15）。遇到清单里任何一条，停止交易或放弃当前信号：</p>
 <p><strong>执行口诀 10 条</strong>：</p>
 <ol>
@@ -2932,9 +2949,9 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>为“更好看”扭曲结构止损凑方程；止损后立即反手；连续两笔止损后仍不重新评估市场。</li>
 </ul>
 <p><strong>一句话记忆</strong>：决策 = 门控 + 方程——方向不明先等（门控），三价定死再算盈亏比（方程）；止损永远挂在结构失效位外 1 跳，不是挂在你希望的地方。</p>
-<h2 id="sec-86">篇四 补充系统（4.26-4.28）：ORB、均线趋势跟踪、配对交易</h2>
+<h2 id="sec-85">篇四 补充系统（4.26-4.28）：ORB、均线趋势跟踪、配对交易</h2>
 <p>篇四给你三个"换一种赚钱方式"的系统：ORB 赚开盘的秩序、均线趋势跟踪赚长趋势、配对交易赚相对价格。它们不是主线的替代，是工具箱的扩展——每一套都要用第 8 章的验证流程独立验证，验证不过就不上真钱。</p>
-<h3 id="sec-87">4.26 ORB（开盘区间突破）：一天最重要的头 15 分钟</h3>
+<h3 id="sec-86">4.26 ORB（开盘区间突破）：一天最重要的头 15 分钟</h3>
 <p><strong>定义</strong>：开盘后 N 分钟（常见 5/15/30 分钟，ES 最常用首 15 分钟或首小时）的高低点围成的区间 = 开盘区间（Opening Range）。价格突破区间边界 → 顺着突破方向进场。</p>
 <p><img alt="图 4-15 ORB：开盘区间（灰框）→ 收盘突破上沿 → 回测不破 → 移动止损吃全天（合成示意）" src="images/fig_p4_orb.png" /></p>
 <p>（灰框）开盘头 N 根 K 线的高低点围出 ORB；突破要等 K 线收盘确认（别追盘中插针）；突破后的第一次回测不破上沿 = 高质量二次入场；止损 = 对侧边界外 1 tick——窄 ORB 的止损天然紧凑，盈亏比好。</p>
@@ -2956,7 +2973,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ol>
 <p><strong>与系统三（4.5）的关系</strong>：ORB 是突破系统在"时间维度"的特化——突破系统选位置，ORB 选时间。两者规则同源（突破→回测→目标），可以共享一套出场（篇二）。</p>
 <p><strong>诚实评价</strong>：ORB 胜率受"趋势日比例"限制（约 30-50% 的日子是趋势日），所以它的第一过滤器永远是状态机；但它结构极简、规则全客观（时间+价格），是第 8 章验证的绝佳入门系统。</p>
-<h3 id="sec-88">4.27 均线趋势跟踪：把"方向感"变成规则（编者补充 · 策略通识）</h3>
+<h3 id="sec-87">4.27 均线趋势跟踪：把"方向感"变成规则（编者补充 · 策略通识）</h3>
 <p><strong>均线的本质</strong>：均线（MA/EMA）不是"神秘指标"，是平均成本线——EMA(20) ≈ 最近 20 根 K 线的平均成交位置。价格在均线上方 = 最近的平均买家赚钱，这就是趋势方向的另一种表达（呼应 2.3 趋势定义与第 4.7 direction）。</p>
 <p><strong>三种用法（按纪律强度排序）</strong>：</p>
 <ol>
@@ -2967,7 +2984,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>均线趋势跟踪的数学</strong>：趋势跟踪的代价是低胜率——典型 35-45%——靠盈亏比赢：胜率 40% + 平均盈亏比 1:2.5 = 正期望（用第 6.4 的交易者方程自己算一遍）。<strong>连续 5-6 笔小止损是这类系统的正常呼吸</strong>（呼应 6.3 连亏是必然），不能扛单、不能手痒抄底。</p>
 <p><strong>与本书价格行为的融合（本节真正的收获）</strong>：均线系统单独用会"震荡市反复打脸"（第 4 章 20GB 就是均线失效的场景），价格行为单独用缺"方向锚"。两者组合：<strong>均线做过滤器滤掉逆势信号，价格行为做扳机选入场点</strong>——用趋势的"确定性"过滤，用结构的"精确性"入场。</p>
 <p><strong>诚实评价</strong>：慢均线（周线/日线 50-200）适合波段和资产配置级别的仓位（呼应 1.17：定投+再平衡本质就是"机械的均值回归"，而均线趋势是它的方向版）；快均线（15m/1H）在震荡日全是假信号，必须配状态机过滤器（4.7）。</p>
-<h3 id="sec-89">4.28 配对交易：市场中性的均值回归（编者补充 · 策略通识）</h3>
+<h3 id="sec-88">4.28 配对交易：市场中性的均值回归（编者补充 · 策略通识）</h3>
 <p><strong>定义</strong>：同时做多一个品种、做空另一个高度相关的品种，赚"相对价差"回归的收益。经典例子：做多 ES / 做空 NQ（两个指数高度正相关，第 1.14），或同板块两只股票。</p>
 <p><strong>为什么"中性"</strong>：同时多空，大盘涨跌的方向风险被抵消——收益只取决于"相对价格"。普通均值回归要猜方向（逆势，危险，呼应 4.10），配对交易不需要猜：<strong>贵的一腿做空、便宜的一腿做多，价差回归即盈利</strong>。</p>
 <p><strong>逻辑</strong>：两个高度相关标的（相关性 &gt;0.8）的价差长期围绕均值波动。价差极端偏离（如 &gt;2 倍标准差）→ 反向开仓；价差回归均值 → 平仓。</p>
@@ -3003,7 +3020,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>资金门槛：两腿同时占用保证金（约翻倍），利润薄（价差回归幅度有限）——<strong>适合资金量大、想降低回撤的进阶者，新手知道它存在即可</strong>。</li>
 </ul>
 <p><strong>诚实评价</strong>：配对交易最怕"价差结构性漂移"——两个标的的"相关性"是统计事实，不是承诺；一旦基本面脱钩（如行业政策变化），价差不回归，反而成为双倍亏损。它的低回撤是"统计上"的，不是"保证"的。</p>
-<h3 id="sec-90">4.29 实战串讲：一个交易日走一遍</h3>
+<h3 id="sec-89">4.29 实战串讲：一个交易日走一遍</h3>
 <p>前面的内容都是"零件"：状态机（4.7）、四个系统（4.3-4.6）、出场（篇二）。这一节把它们组装起来——用一个完整的 ES 交易日，把"状态机随时切换系统"的过程从头走一遍。目标是：让你在真实盘前知道"每个时刻该做什么"。</p>
 <p><strong>盘前（美东 8:30-9:30，北京 21:30-22:30）</strong></p>
 <ul>
@@ -3074,7 +3091,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><img alt="图 4-5R 真实数据：突破生命周期——突破 → 回踩守住 → 深回调失败 → 第二腿（BTC 5 分钟，2026-06-29）" src="images/fig_real_btc_day.png" /></p>
 <p><em>图 4-5R 真实数据：突破生命周期（数据源：Binance BTCUSDT 5m K 线）</em></p>
 <p>对照着读五幕：① <strong>区间</strong>：08:40-11:00 价格在 58900-59700 之间来回，上沿 59700/59588 被测试两次——默认区间逻辑（4.7：85% 的时间在区间里）；② <strong>突破</strong>：11:25 大实体阳线收盘站上区间上沿 60233——突破发生，切系统一；③ <strong>回踩守住</strong>：11:35 回踩 59878 不破上沿——突破测试成功，顺势入场点，止损放回踩低点下方；④ <strong>深回调（失败）</strong>：13:10 59392 跌回区间内部——这次测试失败，突破进入假突破模式（呼应 3.2），持仓者被扫止损，但<strong>别反手</strong>：它可能是新一轮突破的起点；⑤ <strong>第二腿</strong>：14:15 反转再上 60346 新高——失败的回调本身成了新突破。<strong>每一步都等收盘确认</strong>：你在 11:25 突破时追入，13:10 会被扫；等 11:35 回踩确认再入，才有资格吃第二腿。加密 24 小时市场没有 9:30 开盘，但有同样的突破节奏：区间磨人时忍、突破时切、回踩时进、失败时走。</p>
-<h3 id="sec-91" class="quizhead">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-90" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>状态机判定出"上升通道"，你应该用哪套系统？判定变成"区间"后呢？</li>
 <li>区间被真正突破的判据是什么？"插破边界又收回"算什么？</li>
@@ -3083,7 +3100,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>配对交易为什么"市场中性"？Z-score 的 &gt;2 / 回 0 / &gt;3 分别对应什么动作？</li>
 </ol>
 <p><strong>答案</strong>：① 系统一趋势回调（4.3）；状态变了就换——区间用系统二区间边界（4.4/4.7），不恋战；② 收盘站稳边界外 + 放量 + 大实体三条件（4.4）——插破收回是假突破（3.2），是区间交易者的反向入场机会；③ 背景/触发/止损/目标/仓位/过滤器（4.2）——出场是期望值的另一半（4.12），临场定目标等于把决策交给情绪；④ 状态机确认趋势日 + 收盘确认突破（4.26，窄 ORB 更佳）——收回区间是假突破，反向信号；⑤ 同时多空抵消大盘方向风险，只赚相对价差回归（4.28）——&gt;2 倍标准差反向开仓（贵的空、便宜的买）、回归均值（Z 回 0）平仓、&gt;3 或结构性脱钩止损。</p>
-<h3 id="sec-92" class="sumhead">本章小结</h3>
+<h3 id="sec-91" class="sumhead">本章小结</h3>
 <p>会看信号≠会交易：信号只是扳机，系统才是整把枪。系统的作用是让你在情绪上头时不做蠢事。</p>
 <p>六要素写死才算系统：背景/触发/止损/目标/仓位/过滤器。</p>
 <p>系统一（趋势回调）期望值结构最好：顺势+止损紧凑+目标远，是默认选择。</p>
@@ -3108,7 +3125,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>篇四补充系统：ORB 赚开盘秩序（只做趋势日，窄区间最有效）；均线趋势跟踪胜率 35-45% 靠盈亏比赢（均线过滤+结构入场）；配对交易赚相对价差（中性对冲、资金门槛高）——主线先验证，扩展按需选。</p>
 <p>下一章讲 SMC——它给这套系统提供了一个"机构视角"的补充框架，核心是流动性池和 sweep。</p>
 <hr/>
-<h1 id="sec-93">第 5 章 机构视角与流动性：SMC、Wyckoff、订单流的统一解读</h1>
+<h1 id="sec-92">第 5 章 机构视角与流动性：SMC、Wyckoff、订单流的统一解读</h1>
 <blockquote>
 <p><strong>阅读提示</strong>：本章是 SMC 的“换皮”解读——假突破 = sweep、吞没 = displacement、支撑阻力 = 流动性池。学 SMC 学的是纪律框架，不是神秘学。建议与第 2、3 章对照读：词汇不同，逻辑同源；看完能互译，才算真正吃透。</p>
 </blockquote>
@@ -3124,7 +3141,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>供需区（5.11）</strong>：把同一套机制翻译成"供需失衡的起点"——SMC 与 Wyckoff 的中介。</li>
 </ul>
 <p>所以读本章的正确姿势：<strong>先理解"机制"（流动性、量价、结构），再记各流派的"词汇"</strong>。机制是骨架，词汇是皮肤——记住骨架，任何流派的术语到你眼里都是同一件事的不同说法。</p>
-<h3 id="sec-94">5.1 核心世界观</h3>
+<h3 id="sec-93">5.1 核心世界观</h3>
 <p>SMC 的叙事是这样的：</p>
 <ul>
 <li>市场参与者分两类：机构（聪明钱）和散户。</li>
@@ -3139,7 +3156,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ul>
 <p>所以正确的态度是：借用 SMC 的决策框架（等 sweep、不追突破、在流动性池附近警惕），但不必相信它的阴谋论叙事。<strong>框架帮你少亏，叙事只会让你觉得自己看穿了市场</strong>——后者是危险的自负。</p>
 <p>这条批判视角为什么重要：SMC 圈子里最流行的心态就是"看穿主力"的优越感——而优越感会放大仓位、无视止损。记住：你用 SMC 是为了更机械地执行，不是为了更聪明地"看穿"。</p>
-<h3 id="sec-95">5.2 流动性池（Liquidity Pool）</h3>
+<h3 id="sec-94">5.2 流动性池（Liquidity Pool）</h3>
 <p><strong>定义</strong>：大量止损/限价单聚集的区域。两类：</p>
 <ul>
 <li><strong>买方流动性（BSL）</strong>：前高上方——空头止损 + 追多散户的止损。</li>
@@ -3155,7 +3172,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ol>
 <p><strong>池子的质量 = 触过次数 × 停留时间 × 周期级别</strong>。三者越高，止损越密集，被扫的概率越高、扫完后的行情越大。</p>
 <p><strong>具体怎么操作</strong>：打开图，先找被测试 3 次以上的水平位——那是"已验证的池子"；再找日线/4H 的显著极值——那是"大池子"；最后叠加整数关口。每个池子用横线标出来，旁边写上是 BSL 还是 SSL。这张"池子地图"就是你当天的作战图（第 5.7 完整流程会用它）。</p>
-<h3 id="sec-96">5.3 扫流动性（Sweep / Stop Hunt）</h3>
+<h3 id="sec-95">5.3 扫流动性（Sweep / Stop Hunt）</h3>
 <p><strong>定义</strong>：价格短暂插破流动性池（前高/前低），把止损吃掉，然后迅速反向。这就是第 3 章假突破的 SMC 叫法。</p>
 <p><img alt="图 5-2 扫流动性：插破前高扫 BSL 后快速收回" src="images/fig_p5_sweep.png" /></p>
 <p><strong>SMC 入场核心规则：不要在扫流动性之前入场，要等 sweep 发生之后再跟随真实方向</strong>。这条纪律能帮你避开绝大多数追突破被套的情况。</p>
@@ -3173,7 +3190,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li>假突破 + 反向大实体 + 放量 = 最高质量的 sweep 信号。</li>
 </ul>
 <p><strong>为什么"收盘回到池内"是关键</strong>：插破只是一瞬间的流动性测试，收盘位置才是市场对这次测试的"裁决"。收盘收在池外 = 空头（或多头）赢了这个回合，结构变了；收盘收在池内 = 突破失败，原来的结构完好，sweep 成立。所以永远等收盘确认，别在插破瞬间就反向进场（第 3.2 的收盘确认在 SMC 里同样成立）。</p>
-<h3 id="sec-97">5.4 市场结构转换（BOS / CHoCH）</h3>
+<h3 id="sec-96">5.4 市场结构转换（BOS / CHoCH）</h3>
 <p>这两个是第 2 章"结构突破"的 SMC 术语：</p>
 <ul>
 <li><strong>BOS（Break of Structure，结构破坏）</strong>：趋势同向突破。上升趋势中价格突破前高 = 趋势延续确认。</li>
@@ -3192,7 +3209,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><img alt="图 5-1R 真实数据：扫流动性 → CHoCH → 下跌趋势日（BTC 5 分钟，2026-07-02，半天 -2.8%）" src="images/fig_real_btc_sweep.png" /></p>
 <p><em>图 5-1R 真实数据：sweep → CHoCH → 下跌趋势日（数据源：Binance BTCUSDT 5m K 线）</em></p>
 <p>四步对照上面的规则：① <strong>sweep</strong>：06:20 一根 K 线插破早盘高点 60846 到 61334，扫掉上方追多止损（BSL）后立刻收回——sweep 成立（5.3 识别清单全中）；② <strong>CHoCH</strong>：08:15 跌破前低 59876，且是强位移 K 线（严格定义），多头结构被破坏——此时<strong>只停止做多，不急着反手</strong>；③ <strong>等新结构</strong>：09:40 反抽 60325 不破前高，形成 LH + LL 序列，下跌结构确认，反抽位就是顺势做空入场点（止损放 LH 上方）；④ <strong>纪律</strong>：08:40 日内低点 59588（比 CHoCH 又低了 300 点），随后反抽无力，当天 -2.8% 走完。注意加密 5 分钟图里 sweep 和 CHoCH 常常间隔只有十几根 K 线（不像日线可以等一天），<strong>等收盘确认的纪律在快节奏里更重要，别在插破瞬间抢跑</strong>。</p>
-<h3 id="sec-98">5.5 订单块（Order Block, OB）</h3>
+<h3 id="sec-97">5.5 订单块（Order Block, OB）</h3>
 <p><strong>定义</strong>：机构建仓留下的"痕迹"——趋势启动前，最后一根反向 K 线。SMC 认为机构在那里下了大量订单，价格回踩会再获支撑/阻力。</p>
 <p><strong>识别方法（上升趋势为例）</strong>：</p>
 <ol>
@@ -3210,7 +3227,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ul>
 <p><strong>实例</strong>：4H 上升趋势，一段大阳线拉升前有一根小阴线（101.0-101.5）。后续价格拉升到 105，回调到 101.3 进入那根小阴线区域并出现锤子 → 做多，止损 100.8（OB 下沿外），目标 105 前高。</p>
 <p><strong>诚实的评价</strong>：OB 与普通"支撑阻力区"高度重合。它是否真代表机构行为没有证据，但作为"关键位入场"的规则是可用的。别因为叫"订单块"就觉得它比支撑位高级——本质是同一类东西。</p>
-<h3 id="sec-99">5.6 公允价值缺口（FVG / 失衡）</h3>
+<h3 id="sec-98">5.6 公允价值缺口（FVG / 失衡）</h3>
 <p><strong>定义</strong>：三根 K 线之间留下的价格缝隙——第一根和第三根之间没有重叠的部分（看涨 FVG：K1 高点 &lt; K3 低点）。SMC 解释为"机构急于建仓留下的缺口"，价格倾向回补。</p>
 <p><img alt="图 5-5 FVG：K1 与 K3 之间的失衡缺口" src="images/fig_p5_fvg.png" /></p>
 <p><strong>用法</strong>：</p>
@@ -3222,7 +3239,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ul>
 <p><strong>识别步骤（上升趋势的看涨 FVG 为例）</strong>：找到一根大阳线（K3）——它之前的 K1 和它之间如果有价格空隙（K1 的高点低于 K3 的低点），这个空隙就是 FVG。空隙的上下沿就是回补的参考区。识别不难，难的是只做"顺势 + 结构内"的 FVG——半空中的 FVG 只是噪音。</p>
 <p><strong>诚实的评价</strong>：FVG 本质是"加速段后的首次回调位"，和价格行为的"支撑阻力区域"是同一种东西换了名字。可以用它做规则，但别迷信名字。</p>
-<h3 id="sec-100">5.7 完整 SMC 交易流程（走一遍）</h3>
+<h3 id="sec-99">5.7 完整 SMC 交易流程（走一遍）</h3>
 <p><strong>背景</strong>：日线上升趋势，4H 出现 CHoCH 警告，我们在 1H 等做多机会。</p>
 <ol>
 <li><strong>画结构</strong>：标出所有 swing high/low，画出流动性池（前高上方 BSL、前低下方 SSL），标出最近的看涨 OB 和 FVG。</li>
@@ -3271,7 +3288,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </table>
 <p><img alt="图 5-6 完整 SMC 交易流程：顶部=多级别背景过滤（日线趋势→4H CHoCH→1H 等回调）；中部=五步执行（画结构→等 sweep→找入场区→执行→管理），每步标注本书对应节；底部=关键认知——这套流程就是第 4 章趋势回调系统的 SMC 翻译版" src="images/fig_p5_smc_flow.png" /></p>
 <p>图 5-6 把 5.2-5.6 的知识点收拢成一个可执行的序列：顶部先问"背景允不允许做"，中部每一步都在回答"现在到了哪一步"，底部提醒你这不是新体系。<strong>五步的顺序不能跳</strong>——先有结构才知道 sweep 有意义；先确认 sweep 才知道 FVG/OB 是入场区而不是下跌中继；先有入场区才有执行和管理。对照表与图 5-6 就是同一件事的两种呈现：表格给你"每个 SMC 术语翻译成什么"，图给你"翻译后的系统长什么样"。</p>
-<h3 id="sec-101">5.8 Kill Zones（时段）</h3>
+<h3 id="sec-100">5.8 Kill Zones（时段）</h3>
 <p>SMC 认为机构只在特定时段活跃（ICT 定义）。北京时间（美东夏令时，北京=UTC+8）：</p>
 <ul>
 <li><strong>伦敦时段</strong>：14:00-17:00（伦敦 8:00 开盘 = 北京 15:00 夏令时 / 16:00 冬令时）。</li>
@@ -3281,7 +3298,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>冬令时（11 月-次年 3 月）所有时间 +1 小时。</p>
 <p>这与第 1 章的时段结论一致：伦敦-纽约重叠是黄金窗口。<strong>规则优先于时段</strong>——有信号哪个时段都能做，没信号在 Kill Zone 里也别硬做。时段是加分项，不是入场理由。</p>
 <p><strong>Kill Zone 的正确用法</strong>：不是"只在 Kill Zone 做单"（那是把时段当圣杯），而是"在 Kill Zone 里出现的信号优先级更高、可以放宽一点质量门槛（比如评分 4 即可）；非 Kill Zone 的信号要更严格（评分必须满分）"。时段是信号质量评分的加权项，不是开关。</p>
-<h3 id="sec-102">5.9 验证心态：防事后叙事</h3>
+<h3 id="sec-101">5.9 验证心态：防事后叙事</h3>
 <p><strong>SMC 最大的问题是事后叙事</strong>：行情走完，你总能找到一个"OB+FVG+sweep"的解释，看起来头头是道——但那是马后炮，不是预测。</p>
 <p><strong>防呆三招</strong>：</p>
 <ol>
@@ -3290,7 +3307,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>对照验证</strong>：同一位置用"普通支撑阻力+假突破"的旧规则回测——如果结果差不多，说明 SMC 语言没给你增量，你用的是价格行为本身。</li>
 </ol>
 <p><strong>为什么"入场前截图"是防呆第一招</strong>：事后复盘时，大脑会自动把"当时的判断"重写成"正确的判断"（记忆重构）。入场前的截图 + 入场理由（写下来），是唯一能对抗这种重构的证据。第 8 章日志模板里的"截图链接"字段就是干这个的。</p>
-<h3 id="sec-103">5.10 Wyckoff：SMC 的正统源头</h3>
+<h3 id="sec-102">5.10 Wyckoff：SMC 的正统源头</h3>
 <p>SMC 的"聪明钱"不是 ICT 发明的，源头是理查德·威科夫（Richard Wyckoff，1873-1934）——20 世纪初的华尔街传奇。他的方法比 SMC 早了近一百年，而且更成体系。</p>
 <p><strong>三大定律</strong>：</p>
 <ol>
@@ -3321,7 +3338,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ul>
 <p><strong>为什么值得知道</strong>：读 Wyckoff 原著（公版免费，见附录）你会发现，SMC 的每个概念都有出处。它帮你把 SMC 从"神秘学"还原成"一百年前就被总结过的市场机制"——止损聚集与猎杀，Wyckoff 早就看明白了。</p>
 <p><strong>Wyckoff 在实战中的用法</strong>：不需要等完整的 7 步走完才动手。实战中最重要的两个识别点：SC（恐慌高潮，观察巨量）和 Spring（扫损拉回，第 5.3 的 sweep 清单直接套用）。中间的过程（AR/ST）是用来"确认阶段"的，不是每次都会标准走完——当结构不完整时，按第 2.3 的客观结构判据处理，别强行套 Wyckoff 剧本。</p>
-<h3 id="sec-104">5.11 供需区（Supply/Demand）：给强势运动的起点标价</h3>
+<h3 id="sec-103">5.11 供需区（Supply/Demand）：给强势运动的起点标价</h3>
 <p><strong>Seiden 基础定义</strong>：Sam Seiden 的供需区学派，与 SMC 的 OB 是近亲——很多人认为 OB 就是供需区的换皮。</p>
 <p><strong>定义</strong>：一段强势运动的起点——强势拉升前的"基地"（一小簇 K 线）是需求区，强势下跌前的基地是供给区。</p>
 <p><strong>四种结构</strong>：</p>
@@ -3333,7 +3350,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>画法</strong>：取基地小 K 线的范围作为区域。</p>
 <p><strong>与 OB 的关系</strong>：OB（强位移前最后一根反向 K 线）本质就是一种需求/供给区。不同学派，同一实质——都是"强势运动起源的关键位"。</p>
 <p><strong>用法规则</strong>：新鲜区（未被触碰过）最有效。被碰过一次后，那里的挂单被消耗，有效性下降——呼应 OB 的"只做未使用过的"。</p>
-<h3 id="sec-105">5.12 Volume Profile：量在哪里</h3>
+<h3 id="sec-104">5.12 Volume Profile：量在哪里</h3>
 <p>Volume Profile（成交量分布）把成交量按价格轴画成横向直方图——区别于传统的纵向成交量（按时间）。Market Profile 同源。</p>
 <p><strong>三个概念</strong>：</p>
 <ul>
@@ -3351,7 +3368,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ul>
 <p><strong>工具</strong>：TradingView 有 Volume Profile 指标（完整版付费，免费版有替代）。在期货/股票（真实量）上最有用，外汇用 tick 量近似。</p>
 <p><strong>实战用法（三句话）</strong>：①入场前看 POC 在哪——它常与支撑/阻力/OB 重叠，是 confluence 的天然加分项；②价格在 VA 内时按区间思维（系统二），突破 VA 外时按趋势思维（系统一/三）；③LVN 快速通过区不要挂单等回踩——价格不会在那里停留，等它穿过 LVN 到下一个 HVN 再评估。</p>
-<h3 id="sec-106">5.13 摆动范围（Swing Range）：把结构变成"地图"</h3>
+<h3 id="sec-105">5.13 摆动范围（Swing Range）：把结构变成"地图"</h3>
 <p>雷神订单流流派（国内 SMC 教学中结构最严谨的一支）把"最近的趋势结构"机械化为两个摆动范围——这是它对本书第 2.3 趋势定义的可执行化。学它的意义：把"感觉在涨"彻底替换成"当前摆动范围对左侧摆动范围是向上还是向下突破"。</p>
 <p><strong>定义</strong>：</p>
 <ul>
@@ -3368,7 +3385,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>实操</strong>：图上标出最近的两个摆动范围——左侧（已走完）和右侧（当前）。看当前范围对左侧是向上还是向下突破，这就是你当天的订单流方向。价格在摆动范围内做任何行为（上下穿插）都不改变趋势；一旦反向突破当前摆动范围的结构低点（需结合反转结构确认），摆动趋势反转。</p>
 <p><img alt="图 5-9 摆动范围与溢价/折价：左侧范围 vs 当前范围，中点分界“贵不贵”" src="images/fig_p5_swing_range.png" /></p>
 <p><strong>与本书系统的对照</strong>：摆动范围 = 第 2.3 的高低点排列的可视化；摆动趋势 = 状态机（第 4.7）的"结构判定"。雷神流派的增量是"两个范围"的取法——只看最近的两个，不看更早的，避免把老结构当成当前地图。</p>
-<h3 id="sec-107">5.14 溢价与折价（Premium / Discount）："贵不贵"是交易决策的一半</h3>
+<h3 id="sec-106">5.14 溢价与折价（Premium / Discount）："贵不贵"是交易决策的一半</h3>
 <p>SMC 里常被忽视但决定"这笔要不要执行"的概念。</p>
 <p><strong>定义</strong>：以当前摆动范围的中点为界：</p>
 <ul>
@@ -3396,7 +3413,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>有效性前置条件</strong>：必须产生结构突破。大实体 K 线 + 突破前期结构高/低点，该区才有效；不能突破 = 存在量价分歧 = 放弃。</p>
 <p><strong>与 OB 的关系</strong>（第 5.5）：订单块 = 广义上的供需区——强突破前最后一根反向 K 线的高低点区域。雷神原话："订单块可以是广义上的供需区，因为价格信息在任何时间周期都是相同的，不同周期只是改变蜡烛的外观和数量。"同一实质，两个流派名字。</p>
 <p><img alt="图 5-10 供需区：大实体离开前的区域，回踩需求区做多" src="images/fig_p5_supply_demand.png" /></p>
-<h3 id="sec-108">5.15 机构订单块与 S2B/B2S：从"识别"到"理解意图"</h3>
+<h3 id="sec-107">5.15 机构订单块与 S2B/B2S：从"识别"到"理解意图"</h3>
 <p>S2B（Sell to Buy）和 B2S（Buy to Sell）是 SMC 对"为什么先反向插针再启动"的机制解释：</p>
 <ul>
 <li><strong>S2B（卖出再做多）</strong>：机构想建多仓之前，先卖出推低价格、突破前低支撑，制造下跌假象——把空头止损和多头追空单变成自己的对手盘（流动性），完成大量买单匹配后，价格向上启动。</li>
@@ -3413,7 +3430,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ul>
 <p><strong>诚实的评价</strong>：S2B/B2S 同样是"事后叙事"重灾区（第 5.9）——行情走完总能找到一个"机构先洗再拉"的解释。它的实用价值在于提醒你：<strong>反向插针后的第一次反向确认，比插针本身更值得交易</strong>。这个规则可以独立于叙事成立。</p>
 <p><img alt="图 5-11 S2B：先卖推低扫 SSL，再突破前高做多（B2S 为镜像）" src="images/fig_p5_s2b_b2s.png" /></p>
-<h3 id="sec-109">5.16 流动性诱导与内外流动性：读懂"陷阱"的布局</h3>
+<h3 id="sec-108">5.16 流动性诱导与内外流动性：读懂"陷阱"的布局</h3>
 <p><strong>流动性诱导（Liquidity Inducement）</strong>：机构在回收成本前建立的、用于误导急切入场者的流动性池。识别它 = 识别"哪里是陷阱"。两类最常见：</p>
 <ol>
 <li><strong>亚洲时段横盘高低点</strong>（外汇专有）：亚盘（北京 6:00-14:00）横盘的高低点积累的流动性，是为伦敦/纽约开盘准备的——开盘后常先掠夺亚盘高低点（突破后反向运行）。识别前提：亚盘确实有累积流动性的行为（多次测试），没有累积行为的高低点不是有效池子。</li>
@@ -3428,14 +3445,14 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>实操</strong>：从大周期开始自上而下定位——当前价格在获取外部还是内部流动性？获取外部流动性（扫前高/前低）后，倾向于转为获取内部流动性（回调扫次级结构点）。心中带着"当前在扫哪层池子"的图景，就不会把内部扫损误判成趋势反转。</p>
 <p><img alt="图 5-12 流动性诱导：亚盘高低点被伦敦/纽约掠夺，内外流动性层层嵌套" src="images/fig_p5_liquidity_induce.png" /></p>
 <p><strong>雷神原话（值得抄在规则书扉页）</strong>："交易时如果不了解流动性，那么你的止损就是流动性。"——你的止损单就是别人的目标池子；了解流动性，你的止损至少是结构外、有依据的（第 4.2 六要素）。</p>
-<h3 id="sec-110" class="quizhead">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-109" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>SMC 的"sweep"本质上是什么？</li>
 <li>为什么说"你的止损就是别人的目标"？</li>
 <li>防事后叙事的第一招是什么？</li>
 </ol>
 <p><strong>答案</strong>：① 假突破换了个名字（5.3/3.2）——扫止损的机制完全相同，SMC 是价格行为的换皮（前言立场 4）；② 止损单聚集在前高前低附近，机构需要对手盘，扫掉止损才有反向燃料（5.2）——所以止损必须挂结构外、有依据的位置；③ 入场前截图 + 写下理由（5.9）——事后解释不算数，只有入场前的判断才算，这是对抗记忆重构的唯一证据。</p>
-<h3 id="sec-111" class="sumhead">本章小结</h3>
+<h3 id="sec-110" class="sumhead">本章小结</h3>
 <p>SMC 是价格行为的换皮：假突破=sweep，支撑阻力=流动性池，结构突破=BOS/CHoCH。</p>
 <p>流动性池+sweep 是核心，OB 和 FVG 是关键位的包装。</p>
 <p>区分实证（止损确实聚集）和叙事（机构故意猎杀）——借框架，别信阴谋论。</p>
@@ -3444,7 +3461,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>防事后叙事：入场前记录、统计验证、对照验证。</p>
 <p>下一章回到所有方法的共同约束：仓位与风险。再好的信号，仓位错了照样出局。</p>
 <hr/>
-<h1 id="sec-112">第 6 章 仓位与风险</h1>
+<h1 id="sec-111">第 6 章 仓位与风险</h1>
 <blockquote>
 <p><strong>阅读提示</strong>：本章是“活命数学”——期望值、凯利公式、破产概率、复利、40-60 规则与风险预算制。6.1–6.4 必读，公式不必背，用表格查；6.13 多策略资金分配是组合层视角，配置型读者可重点关注。</p>
 </blockquote>
@@ -3489,7 +3506,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>看懂了吗？<strong>亏得越深，回本越难，而且是加速变难</strong>。亏 5% 只要赚 5.3% 就回来，但亏 50% 要赚 100% 才回本——你得把亏掉的那半座山，整个再爬一遍。</p>
 <p>这个表的数学本质：亏损是乘性的，不是加性的。账户 100 亏 20% 变 80，回 20 要涨 25%；再亏 20% 变 64，回 16 要涨 25%……每一次亏损都在抬高"回本所需的涨幅"。<strong>控制回撤，就是控制你未来要爬的坡</strong>。</p>
 <p>这就是为什么风险控制是下单前的第一件事，不是赚完钱才想的事。考核期尤其如此——约束你的不是"能赚多少"，而是"能亏几次"。</p>
-<h3 id="sec-113">6.1 考核规则决定仓位 【核心】</h3>
+<h3 id="sec-112">6.1 考核规则决定仓位 【核心】</h3>
 <p>考核账户的真实约束，不是"你能赚多少"，而是"你能亏几次"。算给你看：</p>
 <ul>
 <li>日回撤 5% + 单笔风险 0.5% → 一天最多错 10 次才碰线</li>
@@ -3499,7 +3516,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><strong>结论</strong>：考核期单笔风险 ≤ 0.5%（保守派用 0.25%）。这不是"赚得慢"，这是"活得久"——只要活到趋势来，利润自然到。</p>
 <p>把"能亏几次"这个数字再往深算一步：日回撤 5% 的考核账户，单笔风险 0.5% 意味着你一天有 10 次"犯错预算"。看起来很多？但注意：<strong>交易日里连续亏 3-4 次是家常便饭</strong>（第 6.3 会算给你看）。如果单笔 2%，一天错 3 次就直接碰线出局——你甚至来不及等到下午的行情。0.5% 的意义不是"少赚一点"，是"把出局概率压到可以忽略"。</p>
 <p><strong>大多数考核失败，不是因为不会赚钱，而是某一天情绪上头重仓，把几周的努力一笔亏掉</strong>。记住：重仓不是加速达标，是加速出局。</p>
-<h3 id="sec-114">6.2 固定分数仓位公式 【核心】</h3>
+<h3 id="sec-113">6.2 固定分数仓位公式 【核心】</h3>
 <p>仓位怎么算？核心公式：</p>
 <pre><code>风险金额 = 账户权益 × 单笔风险%
 每 1 手止损亏损 = 止损距离(点) × 每点价值
@@ -3542,13 +3559,13 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p>理由很直接：止损距离是"每单位头寸的风险"，距离翻倍，想保持同样的总风险，只能把头寸减半。这个比例就是上面公式的图形化表达。它同时回答了一个常见困惑："为什么专业交易者用宽止损？"——不是让你更冒险，而是让你用更小的仓位去<strong>换"前提兑现的时间"</strong>（6.5 会展开）。</p>
 <p><img alt="图 6-1 止损距离 × 仓位 = 恒定风险：止损翻倍，仓位减半" src="images/fig_p6_stop_size.png" /></p>
 <p>再补充一个新手最容易搞错的点：<strong>手数向下取整，不要四舍五入</strong>。公式算出 5.6 手，你就下 5 手——0.6 手的误差虽然小，但每次都在"超额冒险"，连亏时误差会叠加。宁可仓位小一点，别让实际风险超过计划风险。</p>
-<h3 id="sec-115">6.3 连亏是必然，不是意外 【核心】</h3>
+<h3 id="sec-114">6.3 连亏是必然，不是意外 【核心】</h3>
 <p>很多人对连亏没有心理准备，一连亏就慌、就改规则。先给你算清楚：</p>
 <p>40% 胜率的系统，连亏 5 笔的概率 = 0.6⁵ ≈ 7.8%，连亏 8 笔 ≈ 1.7%。单看一次不大，但在 100 笔的周期里，几乎必然出现至少一段 5 连亏。</p>
 <p><strong>连亏不是系统坏了，是概率的正常样子</strong>。连亏时怀疑系统、临场改仓位，是最常见的死法。正确的预期是：连亏一定会来，问题是你的仓位能不能扛过去。</p>
 <p>把概率再展开一点：100 笔里出现"至少一次 5 连亏"的概率约 = 1 − (1 − 0.078)^(100−4) ≈ 99.9%——<strong>几乎必然</strong>。如果你对连亏没有预期，第一次 5 连亏就会让你放弃一个本来正期望值的系统（第 7 章概率思维）。如果你有预期，5 连亏只是"又来了"，按计划继续。</p>
 <p>这就是 0.5% 风险的深层原因：它保证了无论摸到多少颗亏损的弹珠，你都不会出局。只要不出局，概率迟早兑现。</p>
-<h3 id="sec-116">6.4 期望值与盈亏平衡 【核心】</h3>
+<h3 id="sec-115">6.4 期望值与盈亏平衡 【核心】</h3>
 <p>你的系统到底行不行，不靠感觉，靠期望值：</p>
 <pre><code>期望值 = 胜率 × 平均盈利 − (1−胜率) × 平均亏损
 </code></pre>
@@ -3632,7 +3649,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <li><strong>Z &lt; 2</strong>：成绩很可能只是运气。</li>
 </ul>
 <p><strong>Z 分数与破产风险直接相关</strong>：Z 越高，破产概率越小。它和期望值互为补充：期望值回答"赚多少"，Z 分数回答"是真的还是运气"——第 8 章复盘时两个一起看。</p>
-<h3 id="sec-117">6.5 ATR 止损与波动率（进阶）</h3>
+<h3 id="sec-116">6.5 ATR 止损与波动率（进阶）</h3>
 <p>固定点数止损的毛病：同样的 50 点，在低波动期是"大止损"，在高波动期可能连噪音都装不下。按波动率定位止损更稳：</p>
 <pre><code>ATR(14) = 最近 14 根 K 线的平均真实波幅
 止损距离 = k × ATR（日内系统 1.0-1.5×ATR；波段系统 1.5-2×ATR）
@@ -3665,7 +3682,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 <p><img alt="图 6-3 ATR 波动率通道（BTC/USDT 5 分钟真实数据）：价格 ±1.5×ATR 形成动态通道，低波动期通道收窄、高波动期通道张开；顶部紫色窗格为 ATR(14) 数值" src="images/fig_real_atr.png" /></p>
 <p><em>图 6-3 ATR 波动率通道（数据源：Binance BTCUSDT 5m，2026-07-01 15:00 ~ 23:15，100 根）：通道宽度 = 波动率本身</em></p>
 <p>看图的三个要点：① <strong>通道宽度在变</strong>——15:00 到 20:45 的六个小时里通道明显收窄（ATR 只有 ~97，低波动期），21:00 之后通道骤然张开（ATR 升到 ~169，高波动期）；② <strong>固定 50 点止损在不同位置的"真实含义"不同</strong>——收窄时 50 点是通道的几倍宽（大止损，正常回调扫不掉你，但也说明你承受的波动风险大）；张开时 50 点可能只有通道的一半（小止损，一根正常波动 K 线就扫掉你）；③ <strong>紫色 ATR 线是通道的"仪表盘"</strong>——20:45 前它趴在地板上横着走，21:00 后它直线拉升，说明市场开始折腾，先别急着收紧止损；等它掉头向下说明市场重新安静，才可以收紧。回到本节开头的问题：止损该用多少点？不是固定的 50，是 k×ATR——因为 50 点本身没有意义，有意义的是"它等于几个 ATR"。</p>
-<h3 id="sec-118">6.6 成本：点差、滑点与隔夜利息</h3>
+<h3 id="sec-117">6.6 成本：点差、滑点与隔夜利息</h3>
 <p>这些是期望值的隐形扣减项：</p>
 <ul>
 <li><strong>点差/佣金</strong>：每次进出场成本 = 点差 × 2（一进一出）。对低胜率高盈亏比系统影响小，对剥头皮是毁灭性的——这也是 prop 平台常把考核盘点差做差的原因（考核费收完了，你频繁交易它赚点差，双赢的是平台）。</li>
@@ -3674,7 +3691,7 @@ hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 </ul>
 <p><strong>成本要算进期望值</strong>：真实期望值 = 理论期望值 − 每笔平均成本。</p>
 <p>算一笔账：假设每笔点差成本 1.5 pips（约 0.1R），一年做 300 笔，总成本 = 30R。如果你的系统年化期望值是 60R，成本就吃掉了 50%。<strong>成本不是小事，它决定你的系统是真正还是勉强正</strong>。第 8 章回测时必须扣掉成本，否则你验证的是一个不存在的系统。</p>
-<h3 id="sec-119">6.7 凯利公式：为什么不能满仓凯利</h3>
+<h3 id="sec-118">6.7 凯利公式：为什么不能满仓凯利</h3>
 <p>凯利公式给出"理论最优"仓位：</p>
 <pre><code>f* = (b×p − q) / b
 b = 盈亏比，p = 胜率，q = 1−p
@@ -3690,7 +3707,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <p>而本书的 0.5% 风险远低于任何凯利值——因为考核期要的是生存，不是增长。<strong>凯利的意义是告诉你仓位的"理论上限"，而你要做的是远离这个上限</strong>。</p>
 <p><img alt="图 6-4 凯利公式：左=f* 随胜率变化曲线族（盈亏比 1/2/3），40% 胜率 + 盈亏比 2 对应 f*=10%；右=对数增长率曲线，满凯利是尖峰，半凯利（5%）损失极小但波动大幅缩小" src="images/fig_p6_kelly.png" /></p>
 <p>左图三条线把"为什么没人用满凯利"画清楚了：盈亏比 2 时 40% 胜率对应的最优仓位只有 10%，且 f<em> 对胜率极度敏感——胜率从 40% 高估到 45%，f</em> 就从 10% 跳到 17.5%，输入误差被放大近一倍。右图则给出实践答案：增长率曲线在最优值附近是"缓坡"，从满凯利 10% 降到半凯利 5%，增长率几乎不掉，波动却减半——这就是"用 20% 的波动换 80% 的增长"的图形表达。</p>
-<h3 id="sec-120">6.8 破产概率（Risk of Ruin）</h3>
+<h3 id="sec-119">6.8 破产概率（Risk of Ruin）</h3>
 <p>破产概率 = 账户跌到爆仓线（考核总回撤线）的概率。它直观回答"我会不会死"。</p>
 <p><strong>影响因素（每个都直接改变"允许连亏几次"）</strong>：</p>
 <ul>
@@ -3708,14 +3725,14 @@ b = 盈亏比，p = 胜率，q = 1−p
 <p>把这两个数字再读一遍：0.5% 风险 + 10% 回撤线 = 你有 20 次犯错预算；2% 风险 + 10% 回撤线 = 只有 5 次。40% 胜率系统在 100 笔里几乎必有一段 5 连亏——2% 风险的人，<strong>平均每个"正常连亏"就有一次爆仓</strong>；0.5% 风险的人，要 4 段 5 连亏连续叠加（概率极低）才出局。这就是"风险百分比"和"存活率"之间的指数关系：风险减半，存活率呈数量级提升。</p>
 <p><img alt="图 6-5 破产概率：左=100 笔内至少出现一段 k 连亏的概率（40% 胜率）——5 连亏约 100%、10 连亏约 42%、20 连亏趋近于零；右=犯错预算对比，2% 风险只有 5 次，0.5% 风险有 20 次" src="images/fig_p6_ruin.png" /></p>
 <p>左图是"连亏必现"的量化证明：40% 胜率的系统做 100 笔，出现至少一段 5 连亏的概率几乎就是 100%——连亏不是"运气差"，是数学必然。但同一张图也给出出路：20 连亏的概率趋近于零，而 0.5% 风险正好允许 20 次连亏（10% 回撤线 ÷ 0.5%）。右图把两套方案并排：2% 风险的人 5 次就出局，0.5% 风险的人可以错 20 次——风险减半一次，存活率提高一个数量级。</p>
-<h3 id="sec-121">6.9 复利与规模化</h3>
+<h3 id="sec-120">6.9 复利与规模化</h3>
 <p><strong>复利</strong>：权益增长后，同样的风险百分比对应的绝对金额变大。$100k 账户风险 0.5% = $500；涨到 $120k 后，风险 0.5% = $600。仓位自动随权益变大——这是"活得久"的红利，系统正确时权益滚雪球。</p>
 <p><strong>注意</strong>：保持风险百分比不变，不要手动加大风险。复利的引擎是"权益增长"，不是"你变大胆"。很多人赚了一波之后手动加风险——等于把复利引擎换成赌场老虎机。</p>
 <p><strong>考核期不建议复利</strong>：考核有固定目标，复利放大波动和不确定性，用固定风险稳定推进（第 9 章）更可靠。</p>
 <p><strong>规模化</strong>：从小账户到大账户，方法完全一样，只是绝对金额不同。别因为账户变大就改规则——规则是规模无关的。但有一个例外要警惕：账户变大后，同样的风险百分比绝对金额变大，<strong>情绪压力也会变大</strong>——$500 和 $5,000 的风险，心理重量完全不同。规模化之前，先确认你的执行在小金额下已经稳定（第 8 章门槛）。</p>
 <p><img alt="图 6-6 复利 vs 单利：月收益 4%（年化约 60%）持续 36 个月——复利滚到约 4.1 倍，单利只有 2.4 倍，差距全在&quot;利滚利&quot;" src="images/fig_p6_compound.png" /></p>
 <p>36 个月里复利曲线越到后面越陡——前半段它和单利几乎重合，真正的差距在后 12 个月集中兑现。这就是"活得久"的复利红利：系统期望值为正时，你不需要任何额外操作，权益自己滚雪球；而手动加大风险（单利式激进）恰恰破坏了这条曲线的起点。<strong>复利的前提是 6.8 的存活率，先保证不爆仓，再让时间站在你这边</strong>。</p>
-<h3 id="sec-122">6.10 加仓：新手不宜，盈利才加</h3>
+<h3 id="sec-121">6.10 加仓：新手不宜，盈利才加</h3>
 <p>加仓是把双刃剑——用得好，它让利润奔跑（第 4 章海龟）；用得差，它是爆仓的加速器。Al Brooks 给加仓画了三条边界：</p>
 <ol>
 <li><strong>新手不做</strong>：加仓要求你能精确判断"前提仍然有效"，这是多年功底。新手加仓几乎总做错——最常见的错法是把"反转"当"回调"，在亏损头寸上越加越多（这正是第 7 章承诺升级的变体）。</li>
@@ -3724,11 +3741,11 @@ b = 盈亏比，p = 胜率，q = 1−p
 </ol>
 <p><strong>为什么盈利加仓在数学上成立</strong>：浮亏加仓降低平均成本，但前提是"价格回来"——而价格不回来才是常态；盈利加仓恰恰相反：它在"趋势已被验证"之后才加大暴露，用已实现利润做缓冲。海龟的"每 0.5×ATR 加一单位、最多 4 个单位"就是盈利加仓的经典模板（第 4.9）。</p>
 <p><strong>考核期结论</strong>：完全不加仓（军规第 7 条）。考核账户的目标是活下来，加仓放大单笔波动。等你实盘稳定盈利后，再把"盈利加仓"写进规则书（次数、间隔、大小、退出四要素缺一不可）。</p>
-<h3 id="sec-123">6.11 "我不在乎"的头寸规模：心理的仓位解</h3>
+<h3 id="sec-122">6.11 "我不在乎"的头寸规模：心理的仓位解</h3>
 <p>第 7 章会讲"需要确定性"是交易心理的根源，但心理问题往往有仓位解。Al Brooks 建议交易"<strong>我不在乎</strong>"的尺寸——<strong>仓位小到"亏了也不影响你心情"</strong>。</p>
 <p>为什么有效？因为执行变形的根源是"这笔亏了会很痛"：怕痛 → 提前止盈；怕痛 → 止损犹豫；怕痛 → 报复加仓。当仓位小到"我不在乎"，这些情绪的燃料就消失了——你能更频繁地做"正确的事"（执行规则），而<strong>执行一致本身就是最大的优势来源</strong>。这不是"赚得少"，这是"先保证做得对"。Brooks 的原话精神：<strong>如果你感到焦虑，先找原因——是不是仓位太大，或者在做逆势单</strong>。焦虑是信号，不是性格缺陷。</p>
 <p>一个具体建议：把你的常规仓位再减 50%-75% 作为"训练仓"——模拟期和考核前期尤其如此，等执行率稳定（第 8.7 门槛）再逐步放大。记住 6.9 的话：放大的是权益，不是胆量。</p>
-<h3 id="sec-124">6.12 洛氏 3 手合约法：分批止盈的"成本先回"版</h3>
+<h3 id="sec-123">6.12 洛氏 3 手合约法：分批止盈的"成本先回"版</h3>
 <p>Joe Ross（第 2.9 洛氏霍克交易法）的仓位管理和他的结构一样机械——<strong>每次入场固定 3 手合约，每手承担一个明确任务</strong>：</p>
 <ol>
 <li><strong>第 1 手：抵费用</strong>——尽快获利平仓，抵补佣金和交易费（有时产生很小盈利）。</li>
@@ -3745,7 +3762,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 </ul>
 <p><strong>考核期适用性</strong>：3 手合约法是"多单位分仓"的一种，与 6.10 的"考核期不加仓"并不冲突——它不是加仓，而是入场时就规划好的分批出场。若平台允许，可以把 6.2 算出的仓位拆成 1:1:2 三份执行（保本到位的第三份再奔跑）；不允许多单的话，用 4.14 的单单分批（50%+50%）即可，思想相同。</p>
 <p><img alt="图 6-7 洛氏 3 手合约：第 1 手抵费用、第 2 手赚成本、第 3 手保本后奔跑" src="images/fig_p6_three_contracts.png" /></p>
-<h3 id="sec-125">6.13 多策略资金分配：组合层的风险预算（进阶）</h3>
+<h3 id="sec-124">6.13 多策略资金分配：组合层的风险预算（进阶）</h3>
 <p>前面的仓位公式（6.2）解决"单笔下多少"。当你同时运行多个系统（4.3 趋势回调、4.4 区间、4.6 微通道、4.26 ORB…）时，出现新问题：<strong>每笔 0.5% 风险，同时开三笔是不是 1.5%？</strong></p>
 <p>答案：不是简单相加。组合层的原则有三条：</p>
 <p><strong>1. 总风险预算封顶</strong>：所有持仓的名义风险之和 ≤ 账户的 1.5-2%（考核期建议 ≤1.5%）。每笔 0.5% 是单笔上限，不是自动授权——同时挂 4 个单，总敞口超了就要砍。</p>
@@ -3801,7 +3818,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li><strong>只对冲你有观点的大仓位</strong>：浮盈趋势单（4.15 移动止损的仓位）才是对冲对象，短线小仓位不值得付保费；</li>
 <li><strong>与预算制分工</strong>：预算制管理"多策略同向触发"的日常极端，期权对冲管理"持仓过夜的尾部风险"——两者是组合层的两条安全带（10.7 已把期权放回全书坐标）。</li>
 </ul>
-<h3 id="sec-126" class="quizhead">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-125" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>账户 1 万、止损距离 20 点、点值 $10/点、单笔风险 0.5%——仓位是多少手？</li>
 <li>为什么说"亏 50% 要赚 100% 才回本"？它直接推导出什么纪律？</li>
@@ -3811,7 +3828,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li>单笔风险 0.5% vs 2%（总回撤线都是 10%），犯错预算各多少次？这解释了哪条存活率规律？</li>
 </ol>
 <p><strong>答案</strong>：① 单笔风险 = 1 万 × 0.5% = $50，仓位 = $50 ÷ (20 点 × $10) = 0.25 手（6.2 公式）；② 回本不对称（6.1）——控制回撤优先于盈利，单笔风险 0.5% 就是为它服务的；③ 约 7.8%（图 7-2）——100 笔内几乎必然出现，连亏是正常分布不是系统坏了（6.3），继续按公式执行，不加仓不报复；④ 不是简单相加——先总风险封顶（名义风险 ≤ 账户 1.5-2%），同向高相关持仓（EURUSD+GBPUSD 本质是同一笔"美元走弱"）合并计算，不同逻辑的策略（趋势+均值回归）天然对冲才允许同时持（6.13）；⑤ f* = (2×0.4 − 0.6) ÷ 2 = 10%（图 6-3）——但满凯利输入不准即错、回撤极深，半凯利（5%）增长率几乎不掉而波动减半，考核期用 0.5% 更是远低于任何凯利值（6.7）；⑥ 0.5% → 10% ÷ 0.5% = 20 次；2% → 10% ÷ 2% = 5 次（图 6-4）——40% 胜率系统 100 笔里几乎必现一段 5 连亏，2% 风险的人平均每个"正常连亏"就爆仓一次，0.5% 风险的人要 4 段 5 连亏连续叠加才出局（概率极低）：风险减半，存活率呈数量级提升（6.8）。</p>
-<h3 id="sec-127" class="sumhead">本章小结</h3>
+<h3 id="sec-126" class="sumhead">本章小结</h3>
 <p>决定长期结果的不是入场信号，是仓位管理——仓位才是真正的圣杯（Van Tharp）。</p>
 <p>回本不对称：亏 50% 要赚 100% 回本——控制回撤优先于盈利。</p>
 <p>考核期单笔风险 ≤0.5%：约束你的是"能亏几次"，重仓=加速出局。</p>
@@ -3827,7 +3844,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <p>"我不在乎"的仓位是心理的仓位解——焦虑时先查仓位，再查方向。</p>
 <p>下一章讲执行与心态——再好的系统和仓位，执行变形了也是零。</p>
 <hr/>
-<h1 id="sec-128">第 7 章 执行与心态</h1>
+<h1 id="sec-127">第 7 章 执行与心态</h1>
 <blockquote>
 <p><strong>阅读提示</strong>：本章解决“怎么把正确的事重复做”——连亏连赚、三时刻流程、情绪与决策疲劳。建议读两遍：第一遍建立认知，实盘/考核前再读一遍，当检查单用。</p>
 </blockquote>
@@ -3837,7 +3854,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <p>一个残酷的观察：<strong>大多数考核失败的人，不是方法不行，而是执行变形</strong>——重仓、报复、追单、扛单。这些都不是"技术问题"，是"人在真金白银压力下的本能反应"。</p>
 <p>关键在于：<strong>心态问题只在真钱下暴露</strong>。模拟盘里你能完美执行，因为没有真实损失触发恐惧和贪婪。这就是为什么模拟→实盘的过渡是最大的一道坎。</p>
 <p>所以本章不给"心灵鸡汤"，给一套工程化方法：<strong>不靠意志力对抗人性，靠流程和规则把情绪的操作空间压缩到最小</strong>。意志力是消耗品，流程不是。</p>
-<h3 id="sec-129">7.1 概率思维 【核心】</h3>
+<h3 id="sec-128">7.1 概率思维 【核心】</h3>
 <p>Mark Douglas《交易心理分析》的核心，浓缩成三条：</p>
 <ol>
 <li><strong>任何单笔交易都可能亏，哪怕信号完美</strong>。你控制的是期望值，不是单笔结果。</li>
@@ -3984,7 +4001,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 </ul>
 <p><strong>陷阱自检三问（Ali）</strong>：谁被套牢了？LIM 订单在哪里成交？市场是否给了被套交易者保本退出的机会？——回答不了这三问，先别交易反转。</p>
 <p>例外：尖峰级突破区间可评估顺主方向回踩；微型通道第一次突破失败后顺主方向入场。</p>
-<h3 id="sec-130">7.2 行为金融：人会犯的七个错误 【核心】</h3>
+<h3 id="sec-129">7.2 行为金融：人会犯的七个错误 【核心】</h3>
 <p>这些不是"心态不好"，是人类大脑的出厂设置（有实验依据）。每个给出自诊断信号和对策。</p>
 <p><strong>1. 损失厌恶（Kahneman &amp; Tversky, 1979）</strong>：亏 $100 的痛苦 ≈ 赚 $200 的快乐。</p>
 <p><img alt="图 7-3 损失厌恶价值函数：亏损区凸而陡（死扛不止损），盈利区凹而缓（赚一点就跑）" src="images/fig_p7_loss_aversion.png" /></p>
@@ -4031,7 +4048,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li>对策：军规第 7 条：不浮亏加仓。加仓只在盈利时（海龟式，第 4 章），且考核期完全不加。</li>
 </ul>
 <p><strong>总对策：不是"我要冷静"，是流程化</strong>——止损挂好、计划外不做、每笔写理由。把决策从"情绪时刻"移到"冷静时刻"。</p>
-<h3 id="sec-131">7.3 交易流程：三个时刻 【核心】</h3>
+<h3 id="sec-130">7.3 交易流程：三个时刻 【核心】</h3>
 <p>把交易拆成三个时刻，每个时刻做固定的事——仪式化压缩情绪的操作空间。</p>
 <p><strong>开盘前（冷静时刻，做计划）</strong>：</p>
 <ol>
@@ -4080,7 +4097,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <p><img alt="图 7-4 一个交易日的三时刻流程：盘前做计划（冷静）→ 盘中只执行（情绪被规则框死）→ 盘后做复盘（记录）；连接线是&quot;边界物理化&quot;——计划写在纸上、盘中不刷消息、复盘用固定模板" src="images/fig_p7_flow.png" /></p>
 <p><em>图 7-4 三时刻流程：重决策在冷静时刻完成，盘中只剩执行——情绪最活跃的时段被规则占满</em></p>
 <p>看图理解这套设计的本质：<strong>三个时刻的功能不同，节奏不同</strong>——盘前是"慢"（写计划、查日历，越细越好）；盘中是"快"（照单执行，越机械越好）；盘后是"深"（只复盘一笔，挖透心理）。为什么中间要"物理化"边界？因为人脑的切换成本很高：盘中突然开始思考"今天到底该不该做"，思考本身就会带来情绪；把决策提前做完，盘中就只剩"勾选-执行-记录"的机械动作，情绪没有入口。</p>
-<h3 id="sec-132">7.4 连亏与连赚：两个危险时刻 【核心】</h3>
+<h3 id="sec-131">7.4 连亏与连赚：两个危险时刻 【核心】</h3>
 <p><strong>连亏期（必然到来，第 6 章算过概率）</strong>：</p>
 <ul>
 <li>首先确认：这是系统的正常连亏，还是市场结构变了？</li>
@@ -4098,7 +4115,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <p><strong>连亏期的一个实操细节</strong>：如果连续亏损让你开始"想证明自己"，主动降风险预算（比如 0.5% → 0.25%）而不是停手——保持执行，但缩小伤害。完全停手会破坏节奏感，缩量继续则既保护账户又保持手感。等心态平复，恢复原风险。</p>
 <p><img alt="图 7-5 两个危险时刻：左=连亏螺旋（正常连亏→怀疑系统→想改规则→想加倍回本→报复交易），违规风险逐级升级，危险区强制停手；右=连赚螺旋（连赚→过度自信→想加仓位→计划外交易→回吐利润）——应对都在底部：降预算、维持原仓位" src="images/fig_p7_streaks.png" /></p>
 <p>两个螺旋的共同点：<strong>危险信号是渐进出现的，没有一个交易日是"突然失控"的</strong>。连亏时你在"怀疑系统"阶段就该拦截（第 6 章的数学已经告诉你连亏必现，不需要怀疑）；连赚时"我悟了"这个念头本身就是最危险的一句话——它是概率的馈赠，不是能力的提升。把这张图贴在屏幕边：只要发现自己滑到第二、三格，就回到底部应对框执行。<strong>拦截得越早，动作越轻</strong>。</p>
-<h3 id="sec-133">7.5 交易日志：心理维度 【核心】</h3>
+<h3 id="sec-132">7.5 交易日志：心理维度 【核心】</h3>
 <p>第 8 章的交易日志记录"做了什么"，这里补充记录"当时状态"——因为执行变形的根源是心理。</p>
 <p><strong>每笔额外记录</strong>：</p>
 <ul>
@@ -4115,7 +4132,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 </ul>
 <p><strong>找到高危模式，才能针对性设防</strong>。日志不只是记交易，是给你自己画像。</p>
 <p><strong>心理日志的具体格式</strong>（加进第 8 章日志模板的后 5 列）：入场前情绪用"平静/急切/犹豫/FOMO"四选一；盘中冲动记"有/无 + 是否执行"；结果后情绪记一句话。每周复盘时，把同类情绪出现的次数统计出来——你会发现自己的"高危场景"（比如"连亏后 30 分钟内开的下一个单，违规率 80%"），然后用规则堵住它（比如"连亏后强制休息 1 小时"）。</p>
-<h3 id="sec-134">7.6 考核期十条军规 【核心】</h3>
+<h3 id="sec-133">7.6 考核期十条军规 【核心】</h3>
 <ol>
 <li>单笔风险 ≤ 0.5%</li>
 <li>每日最多 2-3 笔，连亏 2 笔当天收工</li>
@@ -4130,7 +4147,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 </ol>
 <p><strong>这十条不是建议，是硬约束</strong>。每条对应一种真实的死法：第 1、3 条防单笔/单日爆仓，第 2、8 条防情绪化过度交易，第 5 条防数据黑天鹅，第 7 条防承诺升级，第 10 条是总纲。</p>
 <p><strong>军规的执行细节</strong>：把它们抄在一张纸上放桌面，入场前逐条核对；违规一次，当天强制收工（不管盈亏）。第 3 条"3% 停手"的数字不是随便定的——日回撤 5% 的考核线，留 2% 缓冲，意味着即使停手后行情反转，你也不会碰线。第 2 条"连亏 2 笔收工"防的是报复交易——第 7.2 讲过的心理学：连亏 2 笔后，第三笔的决策质量断崖式下降。</p>
-<h3 id="sec-135">7.7 波段 vs 刮头皮：先想清楚你是哪种交易者</h3>
+<h3 id="sec-134">7.7 波段 vs 刮头皮：先想清楚你是哪种交易者</h3>
 <p>Al Brooks 把交易者分成两种，混用是亏损的一大来源：</p>
 <ul>
 <li><strong>波段（Swing）</strong>：回报 ≥ 2 倍风险，持有 20+ 根 K 线，最低目标 TBTL（10 棒两腿，第 2.8）。</li>
@@ -4156,7 +4173,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li><strong>新手不适合刮头皮</strong>：刮头皮需要 60%+ 概率和极快的执行，交易成本占比高（第 6.6）。Brooks 的原话精神：大多数交易者的图表每小时不应超过 20 根棒——频繁操作本身就是亏损信号。5 分钟图是良好起点。</li>
 </ol>
 <p><strong>Brooks 的默认出场计划</strong>（不知道目标时用它）：<strong>2R 减半仓 → 3R 再减 25% → 剩余用跟踪止损做波段 → 收盘前全部了结</strong>。这套默认计划写进规则书，消灭"不知道怎么办"时的临时决策。</p>
-<h3 id="sec-136">7.8 新手最常见的错误：因错误而输（Brooks 清单）</h3>
+<h3 id="sec-135">7.8 新手最常见的错误：因错误而输（Brooks 清单）</h3>
 <p>Brooks 课程最后一章"因错误而输"的清单，几乎每条都对应本书一条军规：</p>
 <ol>
 <li><strong>过度交易</strong>：没有优势的时段也做（军规第 4 条）。</li>
@@ -4169,7 +4186,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li><strong>没有计划</strong>：临时起意入场（第 7.3 三时刻）。</li>
 </ol>
 <p>用法：把这张清单贴在你的复盘表顶部，每天收盘后对照一遍——<strong>你不需要记住所有正确做法，只需要确认今天没犯清单上的错</strong>。</p>
-<h3 id="sec-137">7.9 洛氏交易哲学：目标导向的自我管理</h3>
+<h3 id="sec-136">7.9 洛氏交易哲学：目标导向的自我管理</h3>
 <p>Joe Ross（第 2.9）的仓位是机械的（6.12 的 3 手合约法），心态观也一样直白——三句话就能说完，但每一句都值得抄进规则书：</p>
 <p><strong>1. "学会痛恨亏损，勉强可以接受盈亏平衡，热爱盈利"</strong>：</p>
 <p>这句话和我们熟悉的"拥抱亏损"教导完全相反，但洛氏的落点不同——他不是让你怕亏（那是第 7.2 的损失厌恶），而是让你对亏损<strong>零容忍地执行纪律</strong>：亏损可以发生（概率上必然），但绝不允许"超计划亏损"发生。他的原话逻辑：<strong>热爱亏损的交易者，在潜意识里希望亏损，于是他们的交易就会亏损</strong>——这是目标导向的心理学：大脑是"目标寻求式"的，"我要盈利"调动积极的一面，"我不要亏损"调动防守的一面。</p>
@@ -4179,7 +4196,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <p><strong>3. "交易是一项事业"（他的另一本书名）</strong>：</p>
 <p>事业 = 有流程、有账本、有长期目标——不是"一把梭哈"的赌局。具体化：每笔交易都是"一系列事件之一"（6.12 已引），今天做错一笔不改变明天继续执行；目标不是"这笔赚多少"而是"这个月的流程执行率"（第 8.7）。洛氏还坚持多市场多周期（他不做单一品种的专职日内）——你可以不认同他的品种观，但他的理由值得记住：<strong>专职盯一个品种的日内图，人很快会疲惫；疲惫是执行力的隐形杀手</strong>（呼应 7.3 的盘后休息）。</p>
 <p><strong>三句话合一</strong>：目标导向（要盈利而非怕亏损）+ 控制自己（而非市场）+ 事业心态（而非赌局）——这是洛氏用几十年交易时间总结的"自我管理"，和本章开头的结论一致：心态不是性格，是管理。</p>
-<h3 id="sec-138">7.10 以交易为志业：决策树与精通阶梯（Tefi L20）</h3>
+<h3 id="sec-137">7.10 以交易为志业：决策树与精通阶梯（Tefi L20）</h3>
 <p>Tefi 课程最后一课把"职业化"落成两个可执行的工具——决策树和精通阶梯。</p>
 <p><strong>工具一：把规则写成决策树（Decision Tree）</strong>：交易的流程是"输入 → 处理 → 输出"：交易者接收视觉化资料（图表），进行处理，输出为具体决策。如果有一条清晰的决策树作为指引，一切就能有条不紊、不假思索：</p>
 <ul>
@@ -4196,14 +4213,14 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li>职业化的每日动作：持续做"事后读图"（找出图表中能对应课程内容的所有信息），直到能对任何图表进行不倚靠外部协助的、细致的逐根 K 线解析；出现单次或系统性错误时，调用已学的知识自行排除。</li>
 </ul>
 <p><strong>为什么要"以交易为志业"</strong>：Tefi 借韦伯《以学术为志业》的命题提醒：如果永远受制于概率，要如何真正感到确定与踏实？答案是把交易当作一项需要长期打磨的志业，而不是赢一把就走的机会——<strong>"大概一个人能将寂寞与繁华看作没有两样，才能耐寂寞而不热衷，感繁华而不没落。"</strong>（清代文人张岱语）翻译成交易语言：连亏时不慌（寂寞），连赚时不飘（繁华）——第 7.4 的连亏/连赚纪律，最终要上升到这个境界。</p>
-<h3 id="sec-139" class="quizhead">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-138" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>一笔按计划执行的亏损单，是好交易还是坏交易？评价标准是什么？</li>
 <li>三大必记概率锚点（7.1 速查表的三个 ★）是什么？</li>
 <li>止损单的真正作用是什么？为什么说"入场即挂止损"是心态对策而不是技术动作？</li>
 </ol>
 <p><strong>答案</strong>：① 好交易（7.1）——评价标准是"是否一致执行了正期望值系统"，不是单笔盈亏；② 区间突破约 80% 失败；一般反转尝试约 80% 失败变旗形；90% 的 K 线下一笔胜率在 40-60%（盈亏比 ≥2 是数学底线）；③ 把决策从"感觉"手里夺回来（7.2 损失厌恶/处置效应）——人在浮亏时大脑会祈祷而不是判断，止损单让机器替你做决定。</p>
-<h3 id="sec-140" class="sumhead">本章小结</h3>
+<h3 id="sec-139" class="sumhead">本章小结</h3>
 <p>心态是最后的瓶颈——方法、仓位都对了，输给自己就全白搭。</p>
 <p>四种核心思维：频谱（状态是连续频谱非二元）、概率（趋势中多数反转失败、区间中多数突破失败）、惯性（默认延续，反转须趋势线突破+极点测试失败）、嵌套（大周期定方向、小周期定入场）。概率锚点：区间突破约 80% 失败、反转尝试约 80% 变旗形、完整 MTR 仅 35-40%（只诊断不下单）、尖峰后 60/30/10——末端三推/楔形反转时追顺势是最隐蔽的陷阱，应 wait。</p>
 <p>心理成熟三阶段：结果导向 → 规则导向 → 概率导向。好交易=按计划执行，不论盈亏。</p>
@@ -4218,12 +4235,12 @@ b = 盈亏比，p = 胜率，q = 1−p
 <p>新手八大错误（过度交易/追突破/回调当反转/逆势/扛单/报复/过早止盈/无计划）——复盘时对照清单。</p>
 <p>下一章是闭环：用什么工具，以及怎么验证系统真的有效——验证通过才配上真钱。</p>
 <hr/>
-<h1 id="sec-141">第 8 章 工具与验证</h1>
+<h1 id="sec-140">第 8 章 工具与验证</h1>
 <blockquote>
 <p><strong>阅读提示</strong>：本章是“科学方法”章——复盘流水线、统计口径、回测陷阱、订单流三件套与 Volume Profile。8.1 复盘体系是闭环入口，先按它跑起来；8.6–8.7 的验证方法决定你敢不敢上真钱。</p>
 </blockquote>
 <p>本章解决一个问题：用什么工具，以及怎么验证你的系统真的有效。前面七章给你方法，这一章给你闭环——验证通过，才配上真钱。</p>
-<h3 id="sec-142">8.1 图表与分析 【核心】</h3>
+<h3 id="sec-141">8.1 图表与分析 【核心】</h3>
 <table>
 <thead>
 <tr>
@@ -4265,7 +4282,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li>手机装 TradingView App，开关键位价格提醒。</li>
 <li>MT5 里把每个品种的合约规格（点值、保证金）抄进笔记（第 6 章仓位公式的输入）。</li>
 </ol>
-<h3 id="sec-143">8.2 回测与数据 【核心】</h3>
+<h3 id="sec-142">8.2 回测与数据 【核心】</h3>
 <p><strong>TradingView Pine Script 策略回测</strong>：把规则写成脚本（如"4H HH+HL 结构 + 1H 回调锤子"），跑 5 年历史数据看胜率/最大回撤。不会写脚本可先用指标筛选器入门。</p>
 <p><strong>免费历史数据</strong>：</p>
 <ul>
@@ -4307,7 +4324,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li><strong>回看期稳健性测试</strong>：改变回看参数（如 7-12 根 K 线），结果不应剧烈变化——小改参数成绩大变 = 过拟合，不是优势。</li>
 <li><strong>容错资本</strong>：回测结果至少打八折再当真实预期（第 8.6 已有），并且要为"回测没见过的行情"预留容错——市场结构会变，你的系统不能只对历史最优。</li>
 </ul>
-<h3 id="sec-144">8.3 交易日志与复盘 【核心】</h3>
+<h3 id="sec-143">8.3 交易日志与复盘 【核心】</h3>
 <p><strong>表格模板（每笔一行）</strong>：日期 | 品种 | 方向 | 入场 | 止损 | 目标 | 结果(R) | 是否按计划 | 复盘备注 | 截图链接。</p>
 <p><strong>Notion / Excel</strong>：建"交易日志"表 + 每周透视统计（胜率、盈亏比、执行率）——第 6 章的期望值就从这个表算。</p>
 <p><strong>Myfxbook（免费）</strong>：绑定 MT 账户自动统计曲线、回撤、盈亏比。</p>
@@ -4381,18 +4398,18 @@ b = 盈亏比，p = 胜率，q = 1−p
 </table>
 <p><strong>前 9 列在入场前填（计划），后 5 列在平仓后填（结果与反思）</strong>。先填计划、后填结果——这是防事后偏差的关键：入场前的判断被固定下来，复盘时才能客观对照。</p>
 <p><strong>日志的统计用法（每周一次，10 分钟）</strong>：筛选出"是否按计划 = 否"的行，数一下比例——这就是执行率（计划内单 ÷ 总单）。执行率 &lt; 80% 说明问题不在系统，在执行（第 7 章）。再按"信号"分组算各 setup 的胜率和平均 R——表现最差的 setup 要么优化要么砍掉（月复盘时决定）。</p>
-<h3 id="sec-145">8.4 模拟盘 【核心】</h3>
+<h3 id="sec-144">8.4 模拟盘 【核心】</h3>
 <p><strong>TradingView Paper Trading（免费）</strong>：虚拟资金，图表和实盘一致。</p>
 <p><strong>prop 考核盘本身</strong>：考核阶段就是模拟盘——训练期就用它当战场，不另外找模拟盘。</p>
 <p><strong>标准</strong>：100+ 笔模拟记录、期望值为正、执行率 &gt; 80% 再买下一次考核。</p>
 <p><strong>模拟盘的两个陷阱</strong>：① 模拟盘没有真实资金压力，心理状态失真——所以模拟期最重要的统计不是盈亏，是执行率（执行习惯可迁移，盈亏感受不可迁移）；② 模拟盘容易"想证明自己"而重仓——规则不变，0.5% 风险在模拟期一样执行，否则你训练的是错误习惯。</p>
-<h3 id="sec-146">8.5 信息与日历 【核心】</h3>
+<h3 id="sec-145">8.5 信息与日历 【核心】</h3>
 <p><strong>ForexFactory 经济日历</strong>（forexfactory.com/calendar，免费）：全球数据事件权威日历，高/中/低影响分级。</p>
 <p><strong>investing.com 日历</strong>（中文）：界面友好，直接看北京时间。</p>
 <p><strong>央行利率决议日程</strong>：美联储（约每 6 周）、欧央行、日央行——把"炸弹时间"标进周计划（呼应第 1 章 1.8）。</p>
 <p><strong>VIX 指数</strong>（TradingView 搜 VIX）：市场恐慌温度计，VIX 飙升时降低仓位。</p>
 <p><strong>日历的用法不是"预测数据"</strong>，是"规避数据"：每周日把下一周的所有高影响事件标进计划，数据前后 15 分钟不开新仓（军规第 5 条），已有持仓提前收紧止损。你不需要知道数据结果，只需要知道"那一刻别站在坑里"。</p>
-<h3 id="sec-147">8.6 防坑清单 【核心】</h3>
+<h3 id="sec-146">8.6 防坑清单 【核心】</h3>
 <ul>
 <li>任何"免费信号群/跟单/自动交易软件"都是钓鱼——工具只用来分析，不把账户 API 交给第三方。</li>
 <li>数据源交叉验证：一个数据异常时换源核对（Yahoo/Alpha Vantage/investing 互查）。</li>
@@ -4400,7 +4417,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li>警惕"幸存者偏差"：你看到的晒单都是活下来的，爆仓的不会发帖。</li>
 </ul>
 <p><strong>防坑的底层逻辑</strong>：交易行业的"免费午餐"全都是收费的——免费信号群收的是你的跟单（接盘），免费软件收的是你的数据（API 泄露），"保证收益"的收的是你的本金。你的工具链只需要上面列的那些正经工具，任何"额外赠送"都要警惕。</p>
-<h3 id="sec-148">8.7 上真钱的门槛：验证闭环 【核心】</h3>
+<h3 id="sec-147">8.7 上真钱的门槛：验证闭环 【核心】</h3>
 <p>这是全书的收口。把前面的要求汇总成一个明确的门槛——<strong>全部满足才上真钱（或买下一次考核）</strong>：</p>
 <ol>
 <li><strong>样本量</strong>：模拟盘 100+ 笔，覆盖趋势和震荡两种行情。</li>
@@ -4412,7 +4429,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 </ol>
 <p>任何一条不满足，就还在训练期。<strong>验证不是为了走流程，是为了在你拿真金白银冒险之前，让数据先替你冒一次险</strong>。</p>
 <p><img alt="图 8-1 验证闭环：回测→模拟盘→小资金实盘→复盘，不达标回到回测" src="images/fig_p8_verify_loop.png" /></p>
-<h3 id="sec-149">8.8 复盘体系：日/周/月 【核心】</h3>
+<h3 id="sec-148">8.8 复盘体系：日/周/月 【核心】</h3>
 <p>验证不是一次性的，是持续的。三层复盘节奏：</p>
 <p><strong>日复盘（15 分钟）</strong>：</p>
 <ul>
@@ -4444,7 +4461,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 </ul>
 <p><strong>为什么不能越权</strong>：日复盘不做月复盘的决定——单笔或单日结果不足以砍掉一个系统；月复盘也不替代日复盘的记录——没有逐笔数据，月复盘就无米下锅。</p>
 <p><strong>流水线的关键是底部的反馈回路</strong>：月复盘的结论（继续/优化/暂停）必须变成下一个月日复盘的规则，否则复盘就只是"事后感想"，不是"持续验证"。</p>
-<h3 id="sec-150">8.9 SQN：用 R 分布给系统打分 【核心】</h3>
+<h3 id="sec-149">8.9 SQN：用 R 分布给系统打分 【核心】</h3>
 <p>Van Tharp 的 SQN（System Quality Number，系统质量指数）把第 6 章的 R 倍数分布压缩成一个分数：</p>
 <pre><code>SQN = √N × 平均 R ÷ R 的标准差
 </code></pre>
@@ -4504,7 +4521,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li><strong>右图回答"钱从哪来"</strong>——趋势回调 42 笔贡献 +8.2R（占全部利润 76%，呼应 7.1 的 80/20），突破 15 笔反而是 -1.4R 的净拖累。</li>
 </ul>
 <p><strong>下一步动作</strong>：不是"优化突破信号"，而是把突破从系统中砍掉、把风险预算让给主力 setup（呼应 6.13）——归因的价值就在这里：它告诉你该改哪里，而不是"系统再调调"。</p>
-<h3 id="sec-151">8.10 拍卖理论：把"平衡-失衡"读成循环（威科夫 2.0） 【核心】</h3>
+<h3 id="sec-150">8.10 拍卖理论：把"平衡-失衡"读成循环（威科夫 2.0） 【核心】</h3>
 <p>威科夫 2.0（Rubén Villahermosa《威科夫 2.0》）用拍卖理论把市场运行概括为一个反复循环：<strong>市场是一台拍卖机，价格+时间+成交量三要素共同确定"价值"，价格在"平衡"与"失衡"之间来回摆</strong>。</p>
 <ul>
 <li><strong>平衡（市场有效）</strong>：买卖双方对价格估值接近，价格横盘——这是市场大部分时间所处的状态，也是"价值"所在。区间交易（第 4.4 系统二）赚的就是平衡的钱。</li>
@@ -4531,7 +4548,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li>"价格上涨因为买家多于卖家"——错：买卖数量永远相等（有人买必有人卖），关键在<strong>主动/被动</strong>：主动方（市价单）推动价格，被动方（限价单）承接；</li>
 <li>"需求=主动买入+被动买入"——错：供应/需求特指<strong>挂在委买/委卖区的限价单（流动性）</strong>，主动单是"吃流动性"的一方。区分这两类，是理解第 1.6 买卖盘和第 4.22 限价单逻辑的前提。</li>
 </ol>
-<h3 id="sec-152">8.11 足迹图（订单流图表）：看见逐价成交 【核心】</h3>
+<h3 id="sec-151">8.11 足迹图（订单流图表）：看见逐价成交 【核心】</h3>
 <p>足迹图把每根 K 线的成交量按"价格档位"拆开（每档显示买入/卖出量），是比成交量分布更细一层的工具（成交量分布见 5.12 的 POC/VA/HVN/LVN）。威科夫 2.0 的足迹图解读四要素：</p>
 <ul>
 <li><strong>失衡（Imbalance）</strong>：某档位成交量远大于相邻档位（买/卖严重一边倒）——代表快速通过区，价格倾向回填（与第 5.6 FVG 同源：都是"失衡"的另一种度量）。</li>
@@ -4543,7 +4560,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <p>（左）一根大阳 K 线的逐档拆解：每一档标出"主动买量/主动卖量"——100.4 档买 60 卖 10 是失衡（橙色高亮）：单边吃单、价格快速通过，之后倾向回填；101.0 上影档卖量 12 压顶是上攻受阻信号。（右）三种读法：失衡 → 快速通过区；变盘 → 努力无结果（反转警告）；延续 → 趋势健康。<strong>与图 8-7 互证</strong>：足迹失衡 ≈ 单根 delta 大幅转正，变盘 ≈ delta 衰竭——同一个过程的两套读数。</p>
 <p><strong>工具</strong>：TradingView 无足迹图，需用专业订单流软件（如 Sierra Chart + DOM、ATAS、Exocharts）；期货有真实量，外汇只有 tick 量（第 1.2）——足迹图在外汇上仅供参考。<strong>入门建议</strong>：先用 5.12 的 Volume Profile（TradingView 免费版够用），足迹图是它的进阶——等到你的系统验证完毕（本章验证闭环）再考虑，工具从来不是先决条件。</p>
 <p><strong>诚实的评价</strong>：足迹图把"量价"的分辨率提高了，但它回答的问题（供需失衡、努力无结果、真假突破）本书前八章用 K 线+结构已经能回答——足迹图是<strong>锦上添花的确认工具</strong>，不是独立系统。别让工具复杂度超过你的系统复杂度。</p>
-<h3 id="sec-153">8.12 订单流三件套：DOM、逐笔、Delta 体系化（进阶）</h3>
+<h3 id="sec-152">8.12 订单流三件套：DOM、逐笔、Delta 体系化（进阶）</h3>
 <p>8.11 的足迹图是订单流家族的"结果图"。完整体系还有三件工具，配合起来才能回答"价格行为为什么这么走"：</p>
 <table>
 <thead>
@@ -4587,7 +4604,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <p><strong>与价格行为的关系——一句话</strong>：K 线是结果，订单流是过程。订单流不替代价格行为（第 2-4 章），它只回答"为什么"——当你对一笔信号的质量不确定时，订单流给第二意见；当信号与订单流矛盾时，以价格行为为主、降低仓位或放弃（呼应 4.2 信号质量 = 背景×位置×形态）。</p>
 <p><strong>工具与入门顺序</strong>：Sierra Chart + DOM、ATAS、Exocharts（呼应 8.11）；期货量真实、外汇只有 tick 量（第 1.2），三件套在外汇上仅供参考。<strong>入门顺序：5.12 Volume Profile → 8.11 足迹图 → 本节三件套</strong>——每一步都等到上一步用熟，工具从来不是先决条件。</p>
 <p><strong>诚实的评价</strong>：三件套是"确认工具"，不是"独立系统"——它不能告诉你入场信号，只能帮你确认/否决价格行为信号。新手阶段别碰（工具复杂度超过系统复杂度 = 亏损的另一种来源）；系统验证通过、想提高执行质量时再引入。</p>
-<h3 id="sec-154" class="quizhead">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-153" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>上真钱的门槛（验证闭环）是什么？</li>
 <li>SQN 衡量什么？得分高低分别意味着什么？</li>
@@ -4605,7 +4622,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li><strong>绩效归因</strong>：把交易日志的 R 数据按 setup/时段/品种分组，分别算笔数、胜率、总 R、SQN（8.9）——说不清钱从哪来 = 验证没闭环；总 R 为负或 SQN &lt; 1 的 setup 直接砍掉，系统质量立刻上一个台阶（比优化信号快）；</li>
 <li><strong>收益稳定度</strong>：简化夏普（平均月收益 ÷ 月收益标准差）——衡量每单位波动换多少收益，收益稳定度比收益大小更值得盯。</li>
 </ol>
-<h3 id="sec-155">核心方法论收口</h3>
+<h3 id="sec-154">核心方法论收口</h3>
 <p>回到前言的五个观点，现在它们都有了落点：</p>
 <ol>
 <li>交易是概率游戏 → 第 6 章期望值、第 7 章概率思维。</li>
@@ -4615,14 +4632,14 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li>验证高于信仰 → 本章。</li>
 </ol>
 <p><strong>这套框架不预测涨跌，也不保证盈利</strong>。它做的是：让盈利在数学上可能（正期望值），让亏损在可控范围内（仓位+止损），让执行不变形（流程化+军规）。能不能赚到钱，取决于你是否一致地执行，并用数据持续验证。全书的正式结语见附录末。</p>
-<h3 id="sec-156">本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。</h3>
+<p><em>本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。</em></p>
 <hr/>
-<h1 id="sec-157">第 9 章 Prop Firm 考核实战</h1>
+<h1 id="sec-155">第 9 章 Prop Firm 考核实战</h1>
 <blockquote>
 <p><strong>阅读提示</strong>：本章把前 8 章装进 Prop 考核框架——先看 9.1 规则清单（盈利目标/回撤/期限），再读资金曲线管理、失败归因与考核进度阶梯；考核不是新系统，是同一套方法在不同约束下的应用。</p>
 </blockquote>
 <p>本章解决一个问题：怎么通过 Prop Firm 考核、拿到并守住 funded 账户。前面所有的方法、仓位、出场，在这里都要服务于一个约束——考核规则。</p>
-<h3 id="sec-158">9.1 考核的结构</h3>
+<h3 id="sec-156">9.1 考核的结构</h3>
 <p>主流零售 prop 考核是三段式：</p>
 <pre><code>Phase 1（挑战）──→ Phase 2（验证）──→ Funded（实盘分成）
  盈利目标 8-10%      盈利目标 5%        分成 80-90%
@@ -4637,7 +4654,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <p><strong>记住约束的本质（呼应第 6 章）</strong>：日回撤 5% 意味着你一天最多错 10 次（单笔 0.5% 风险时）。考核考的不是"你能赚多快"，是"你能不能稳定地不碰线"。</p>
 <p><strong>考核设计的商业逻辑（看懂它，你就不焦虑了）</strong>：平台卖的不是"让你赚钱"，是"考核费 + 对赌亏损"。大多数参与者亏掉考核费离场——平台的商业模式建立在"多数人过不了"上。所以考核的设计天然倾向：目标定得比散户的耐心长（1.5-2 个月），回撤定得比散户的纪律紧（碰线出局）。你的优势恰恰是多数人的反面：耐心 + 纪律。第 9.3 的数学会证明，稳定执行的人通过是概率上的必然。</p>
 <p><img alt="图 9-1 考核三段式：Phase 1（8-10%）→ Phase 2（5%）→ Funded（80-90% 分成）" src="images/fig_p9_prop_flow.png" /></p>
-<h3 id="sec-159">9.2 平台选择</h3>
+<h3 id="sec-157">9.2 平台选择</h3>
 <table>
 <thead>
 <tr>
@@ -4676,7 +4693,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li><strong>警惕过低的考核费</strong>——有些靠"高通过率假象"或隐藏规则收割。</li>
 </ol>
 <p><strong>平台对比的实操维度</strong>（不止看考核费）：① 规则透明度（规则文档是否完整、是否频繁改规则）；② 出金口碑（搜索"平台名 + 出金/封号"看真实反馈）；③ 点差/佣金水平（第 6.6 讲过，点差是隐性成本，考核盘普遍点差偏大）；④ 客服响应（考核中遇到技术问题，客服态度决定你的体验）。考核费只是最表面的成本，别被"$49 挑战 $100k"的广告带着走。</p>
-<h3 id="sec-160">9.3 达标节奏的数学（本章核心）</h3>
+<h3 id="sec-158">9.3 达标节奏的数学（本章核心）</h3>
 <p>用第 6 章的期望值算一笔账。假设：单笔风险 0.5%，RR=2，胜率 40%。</p>
 <pre><code>每笔期望值 = 0.4×2R − 0.6×1R = 0.2R
 每笔期望收益率 = 0.2 × 0.5% = 0.1%
@@ -4698,7 +4715,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <li>达标时间 1.5-2 个月是正常的。任何承诺"一周过考核"的方法，本质都是重仓赌博。</li>
 </ul>
 <p><strong>数学的进一步展开（为什么是 80 笔而不是"赚够就走"）</strong>：0.2R 期望值是"每笔平均"，但实际分布是大多数笔在 −1R 到 +1R 之间摆动。80 笔的意义在于让大数定律生效——40% 胜率 + RR2 的系统，80 笔之后收益收敛到正态分布的中心（期望值附近），运气的影响被摊薄。20 笔就撞线的重仓者，赌的是"前 20 笔运气好"——那不是交易，是掷硬币。</p>
-<h3 id="sec-161">9.4 常见失败原因</h3>
+<h3 id="sec-159">9.4 常见失败原因</h3>
 <p>按频率排序：</p>
 <ol>
 <li><strong>重仓冲刺</strong>——想快点达标，单笔 2%+，连亏即爆（见 9.3 的数学）。</li>
@@ -4710,7 +4727,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <p><strong>这五条的共同点</strong>：没有一条是"技术不行"。它们全是纪律问题——方法（第 2-5 章）和仓位（第 6 章）都教过了，失败发生在执行层。这也是第 7 章放在第 9 章前面的原因：考核期 = 方法 × 仓位 × 执行，三者缺一不可。</p>
 <p><img alt="图 9-3 考核为什么失败：左=五类失败原因按频率排序（示意值），重仓冲刺最高、忽视一致性规则最低，全是纪律问题；右=方法 × 仓位 × 执行三角——三者缺一不可，考核通过是三者都满足的结果" src="images/fig_p9_fail.png" /></p>
 <p>左图的排序说明一件事：<strong>排在前面的是"想快点达标"的冲动，不是"不懂技术"</strong>——重仓冲刺和报复交易本质上都是情绪驱动的仓位失控（第 6 章就是给仓位装刹车）。右图的三角把第 2-9 章的结构压成一句话：方法教你怎么看市场，仓位教你怎么活下来，执行教你怎么把前两者变成每一笔一致的动作。9.8 的案例里 72 笔全部按计划执行，就是在给这个三角补全最后一条边。</p>
-<h3 id="sec-162">9.5 拿到 Funded 之后</h3>
+<h3 id="sec-160">9.5 拿到 Funded 之后</h3>
 <p>通过考核不是终点，是新的起点——funded 账户有自己的规则：</p>
 <ul>
 <li><strong>分成与出金</strong>：通常 80-90% 分成，出金周期 14-30 天，可能有最低盈利要求。</li>
@@ -4719,10 +4736,10 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>别急着放大</strong>：拿到账户后先按考核期的节奏跑 1-2 个月，稳定出金一次，再考虑加仓或买更大账户。</li>
 </ul>
 <p><strong>funded 期的心态转变</strong>：考核期的目标是"过线"，funded 期的目标是"稳定出金"——出金记录才是你真正的信用资产。很多人在考核期纪律完美，拿到账户就放飞（"反正考核过了"）——结果第一个月就碰线收户。把 funded 当"第二场考核"：规则一样，只是奖励从"过线"变成了"现金流"。</p>
-<h3 id="sec-163">9.6 出金与合规（简要）</h3>
+<h3 id="sec-161">9.6 出金与合规（简要）</h3>
 <p>如果你在中国大陆，funded 出金涉及外汇合规的灰色地带——个人每年 5 万美元便利化额度、大额境外汇入的反洗钱问询。这部分没有干净的官方通道，务必自行咨询专业人士，别依赖平台的"出金教程"。</p>
 <p>本章只负责把账户做起来，资金通道的合规是你自己的责任。</p>
-<h3 id="sec-164">9.7 规则细节（容易踩的坑）</h3>
+<h3 id="sec-162">9.7 规则细节（容易踩的坑）</h3>
 <p>除了盈利目标和回撤，各平台还有隐藏规则，违反=封号：</p>
 <ul>
 <li><strong>一致性规则（consistency）</strong>：部分平台要求单笔盈利不超过总盈利的某个比例（如 30-50%），防止"一把重仓赌对"。所以不能靠一笔大单达标，要分散盈利。</li>
@@ -4742,7 +4759,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <li>[ ] 出金周期和最低出金额？分成比例？</li>
 </ul>
 <p>"回撤怎么计算"是新手最常忽略的细节：有的平台用"账户余额"（已实现盈亏），有的用"账户权益"（含浮动盈亏）——用权益算的，浮亏就会占用回撤额度，持仓管理策略完全不同。读规则时把这类定义性细节抠清楚，写进你的考核计划。</p>
-<h3 id="sec-165">9.8 案例：一次完整考核过程</h3>
+<h3 id="sec-163">9.8 案例：一次完整考核过程</h3>
 <p>用数字走一遍标准考核（FTMO 式，$100k 账户）：</p>
 <p><strong>规则</strong>：Phase 1 目标 10%，日回撤 ≤5%，总回撤 ≤10%，单笔风险 0.5%。</p>
 <ul>
@@ -4762,7 +4779,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <p><strong>关键认识</strong>：达标不是靠某笔爆发，而是"小优势 × 大样本"的确定性累积——全程无回撤浪费（连亏 2 笔后休息，没有放大亏损段）。盈亏比 2.2 略优于 9.3 的基准假设（RR=2，期望 0.1%/笔、需 80 笔），所以 72 笔就够——这就是"略高的盈亏比 + 稳定执行"带来的时间差。</p>
 <p><img alt="图 9-4 一次完整考核的进度阶梯：8 周 72 笔稳稳 +10%（红线一次不碰）；Phase 2 与 Funded 摘要（编者按 9.8 数字绘制）" src="images/fig_p9_progress.png" /></p>
 <p>阶梯的每个台阶都是“18 笔 × 0.14% ≈ 2.5%”的稳定累积；上方 10% 目标线、下方 -5% 日回撤线与 -10% 总回撤线始终没被碰到——考核的本质不是“冲得高”，是<strong>在两条红线之间稳稳爬到目标</strong>。Phase 2 与 Funded 期纪律不变（单笔 ≤0.5%、总敞口 ≤1.5%），奖励从“过线”变成“现金流”。</p>
-<h3 id="sec-166">9.9 账户规模的现实（Al Brooks 的提醒）</h3>
+<h3 id="sec-164">9.9 账户规模的现实（Al Brooks 的提醒）</h3>
 <p>prop 考核看起来很香——花几十到几百美元就能"管"十万账户。但请先算清另一笔账：<strong>你自己的资金够不够支撑学习期</strong>。Al Brooks 给过一个直白到刺耳的估算：</p>
 <ul>
 <li><strong>新手交易 Emini（ES），账户至少需要 10,000-25,000 美元</strong>。原因是学习期可能要亏 1-2 年——不是天天亏，而是"连续几天盈利然后一把亏回去"的循环。账户太小，学费还没交完就被清算了。</li>
@@ -4815,14 +4832,14 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>节假日效应</strong>：长假（感恩节/圣诞/春节）前成交缩量、趋势减弱（机构提前放假），假前假后常出现"方向缺失日"——状态机（4.7）会判定为区间/铁丝网，正确动作是不做；节后第一个交易日波动恢复，但跳空消化需要时间。A 股春节/国庆长假尤其明显：长假后首日大幅跳空常见，日内系统直接跳过首日或按 1.6 跳空规则处理。</li>
 <li><strong>与考核节奏的落地</strong>：日历效应唯一合理的用法是<strong>排期</strong>——1 月适合启动考核（全年大概率偏多），9 月/长假前后不是休息的理由，但适合用周效应错开"周一大行情日"的考核冲刺。统计只能改你的节奏，不改你的入场。</li>
 </ul>
-<h3 id="sec-167" class="quizhead">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-165" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>考核期单笔风险多少？用 9.3 的数学解释为什么不能重仓？</li>
 <li>考核失败原因排前二的是什么？它们的共同点是什么？</li>
 <li>拿到 Funded 之后应该用什么节奏？为什么？</li>
 </ol>
 <p><strong>答案</strong>：① 0.5%——重仓把达标时间从 1.5 个月压缩到 1-2 周，但连亏 3 笔概率 21.6%，长期重仓必然撞线（9.3）；② 重仓冲刺、报复交易——没有一条是技术问题，全是执行层纪律问题（9.4），这就是第 7 章放在第 9 章前面的原因；③ 先按考核期节奏跑 1-2 个月、稳定出金一次再放大（9.5）——把 Funded 当第二场考核，出金记录才是真正的信用资产。</p>
-<h3 id="sec-168" class="sumhead">本章小结</h3>
+<h3 id="sec-166" class="sumhead">本章小结</h3>
 <p>考核是三段式：Phase 1（8-10%）→ Phase 2（5%）→ Funded。</p>
 <p>先定品种再选平台，读全规则（周末/新闻/一致性）。</p>
 <p>达标数学：0.5% 风险 + RR2 + 40% 胜率 → 每笔 +0.1%，8% 约需 80 笔、1.5-2 个月。重仓提速=把淘汰变成必然。</p>
@@ -4832,12 +4849,12 @@ Phase 1 目标 8% → 理论需 80 笔
 <p>账户规模决定学习期存活：Emini 新手至少 10-25K 美元；小账户用低价 ETF 或 SPY 周期权交学费。</p>
 <p>至此方法论闭环完成。最后的附录提供术语速查和学习资源。</p>
 <hr/>
-<h1 id="sec-169">第 10 章 期权：交易的另一个维度</h1>
+<h1 id="sec-167">第 10 章 期权：交易的另一个维度</h1>
 <blockquote>
 <p><strong>阅读提示</strong>：本章把你从“方向交易”带到三维——价格、时间、波动率。先读 10.1 期权价格构成（内在价值 + 时间价值 + 波动率溢价），再按需查阅策略表；10.5 波动率交易与第 8 章的工具衔接，想进阶可重点看。</p>
 </blockquote>
 <p>本章解决一个问题：你之前做的都是方向交易——判断涨跌，然后用仓位和止损管理风险。期权在这个基础上多出了两个你从没处理过的维度：波动率和时间。这一章不打算把你培养成期权做市商，而是要让你真正理解期权是怎么回事、它和你已经会的东西怎么接上、什么时候它对你有用、什么时候你该离它远点。</p>
-<h3 id="sec-170">10.1 先建立一个直觉：期权到底在交易什么</h3>
+<h3 id="sec-168">10.1 先建立一个直觉：期权到底在交易什么</h3>
 <p>做方向交易时，你的盈亏只取决于一件事：价格往哪走、走多少。你买多，涨了就赚，跌了就亏，关系是线性的、直接的——这也是前面九章所有内容共同的前提。</p>
 <p>期权把这件事变复杂了，因为它让你同时押注三件事：</p>
 <ol>
@@ -4880,7 +4897,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <blockquote>
 <p><strong>核心洞察</strong>：期权不是更便宜的股票，它是一个同时关于方向、波动、时间的合约。后面所有概念都是这句话的展开。</p>
 </blockquote>
-<h3 id="sec-171">10.2 期权是什么：从一个具体例子讲起</h3>
+<h3 id="sec-169">10.2 期权是什么：从一个具体例子讲起</h3>
 <p>抛开定义，先看一个真实场景。</p>
 <p>假设 ES（标普500期货）现在在 5000 点。你认为接下来一个月它会涨。最直接的做法是做多 ES，但你想用更少的钱、并且把最大亏损锁死。于是你买入一张看涨期权（Call）：</p>
 <blockquote>
@@ -4935,7 +4952,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </blockquote>
 <p>再补一个角色区分，因为后面策略要用：<strong>买方付权利金、风险封顶、靠方向/波动赚钱；卖方收权利金、赚时间/波动率回落、但风险不对等（裸卖理论无限）</strong>。新手天然倾向买方（因为"亏损有限"听起来安全），但买方要同时赢三个维度才赚钱，其实很难；卖方刚好相反——胜率高、但一次黑天鹅就可能亏掉一年的收成。第 10.8 会展开这个坑。</p>
 <p><img alt="图 10-1 期权买方到期损益：最大亏损 = 权利金，盈亏平衡点 = 行权价 ± 权利金" src="images/fig_p10_call_put.png" /></p>
-<h3 id="sec-172">10.3 期权的价格由什么构成</h3>
+<h3 id="sec-170">10.3 期权的价格由什么构成</h3>
 <p>上面例子里那个 30 点权利金，到底是怎么定的？它由两部分组成：</p>
 <pre><code>期权价格 = 内在价值 + 时间价值
 </code></pre>
@@ -4964,7 +4981,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>帽子越薄，Theta 咬得越狠</strong>——帽子最厚的 ATM 期权，时间衰减的绝对值也最大（对应 10.4 的 Gamma 敏感区）。</li>
 </ol>
 <p>这就引出了期权买方最大的敌人——Theta。它属于下面要讲的"希腊字母"家族。</p>
-<h3 id="sec-173">10.4 希腊字母：别背公式，理解它们在回答什么问题</h3>
+<h3 id="sec-171">10.4 希腊字母：别背公式，理解它们在回答什么问题</h3>
 <p>"希腊字母"听起来吓人，但它们其实各自只回答一个朴素的问题。我们逐个用直觉理解，重点是每个在回答什么、对你意味着什么，不是背公式。</p>
 <p><strong>Delta（Δ）——"我的方向敞口有多大？"</strong></p>
 <p>Delta 回答：标的每动 1 点，我的期权动多少？</p>
@@ -5024,7 +5041,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <blockquote>
 <p>做任何一笔期权前，问自己：<strong>我在这四个维度上各押了什么？</strong> 大多数新手只想了方向（Delta），完全没意识到自己在 Theta 和 Vega 上也下了注。</p>
 </blockquote>
-<h3 id="sec-174">10.5 波动率（IV）：期权的灵魂，也是和你已有知识的连接点</h3>
+<h3 id="sec-172">10.5 波动率（IV）：期权的灵魂，也是和你已有知识的连接点</h3>
 <p>如果说只能懂一个期权概念，那应该是隐含波动率（IV）。它是期权定价的核心，也是期权和你已有知识体系最自然的接口。</p>
 <p><strong>IV 是什么</strong>：市场对未来波动的预期，从期权当前价格反推出来的。IV 高，说明市场预期接下来波动大（期权被买得贵）；IV 低，说明预期波动小（期权便宜）。</p>
 <p>现在看一个关键的连接——"波动率"这件事，你在书里其实已经见过三个不同的度量：</p>
@@ -5081,7 +5098,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>峰②（07-21，22.4%）</strong>：7 月再次暴跌（与图 4-6R 微通道次日反转同期）→ <strong>8 月回落</strong>（08-10 已 19.7%）——恐慌会平息。</li>
 <li><strong>中枢 ≈ 16%</strong>：两轮峰谷都围绕同一中枢——波动率不像价格可以长期单边，<strong>它必然回归</strong>。这就是"低 IV 买、高 IV 卖"和"事件后卖波动率"的统计基础：波动率压缩到谷底（如 05-15 的 10.5%）是买期权的便宜时机，飙升到峰值（如 07-21 的 22.4%）是卖波动率/回避买期权的时机。</li>
 </ul>
-<h3 id="sec-175">10.6 常用策略：按"你想干什么"来学，而不是按名字背</h3>
+<h3 id="sec-173">10.6 常用策略：按"你想干什么"来学，而不是按名字背</h3>
 <p>策略名字一大堆，但按用途归类就只有四种。每种我用"你想干什么"来引出，这样你以后是"先有目的，再选工具"，而不是背了一堆名字不知道何时用。</p>
 <p><strong>用途一：给现有仓位买保险（对冲）</strong></p>
 <p>你持有一个浮盈的趋势多单（第 4 章那种让利润奔跑的仓位），担心黑天鹅，但又不想离场丢掉趋势。怎么办？</p>
@@ -5149,7 +5166,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <p>四张损益图对照着读：① 保护性 Put = 多单下方加保险（最大回吐锁在保费，上涨不封顶）；② 备兑 Call = 多单上方卖租金（震荡期白收权利金，大涨封顶但少赚不亏）；③ 牛市价差 = 下单即锁死最大亏损（净成本 15），代价是盈利封顶 85；④ 跨式 = 盈亏像 V 形（唯一风险是波动不够），但事件前 IV 已被抬高时买跨式是送钱（IV crush 风险）。</p>
 <p><img alt="图 10-6 期权策略决策树：按“你想干什么”四分支选工具——怕仓位出事→保护性 Put；持仓想收租→备兑 Call；有方向锁风险→垂直价差；赌大波动不赌方向→跨式；每分支都要检查前提（IV 是否高位、是否接受封顶）" src="images/fig_p10_strategy_tree.png" /></p>
 <p>图 10-6 就是 10.6 那张总结表的图形化：<strong>先问“你想干什么”，再对号入座选策略</strong>。四个分支的箭头都从同一个根出发——因为期权策略不是“哪个更好”，而是“哪个匹配你现在的问题”。读这张图的正确顺序是从上往下：先定用途（根节点），再选形状（中间框），最后检查前提（每框最后一行）——前提不满足就回到根重新选，而不是硬用。<strong>用这张图替代记忆</strong>：背不下四个策略的名字没关系，记得四个问题（怕出事？想收租？有方向？赌波动？）就够了，打开图 10-6 对号入座。</p>
-<h3 id="sec-176">10.7 把期权放回全书坐标</h3>
+<h3 id="sec-174">10.7 把期权放回全书坐标</h3>
 <p>学完细节，退一步看期权在你整个体系里的位置——<strong>它是补充工具，不是新主线</strong>：</p>
 <ol>
 <li><strong>方向判断（第 2-5 章）</strong>：期权完全不改变这一点。你还是靠价格行为判方向，期权只是表达方向的另一种载体。别指望期权让你"不用会看盘"。</li>
@@ -5161,7 +5178,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <blockquote>
 <p><strong>一句话定位</strong>：期权解决的是"表达观点时的成本、风险和收益形状"，不解决"观点本身"。观点依然来自价格行为——这是全书不变的顺序。</p>
 </blockquote>
-<h3 id="sec-177">10.8 期权的陷阱，以及什么时候该碰、什么时候别碰</h3>
+<h3 id="sec-175">10.8 期权的陷阱，以及什么时候该碰、什么时候别碰</h3>
 <p>期权表面诱人——"杠杆高、亏损有限"——但对新手处处是坑。把坑讲明白，你才知道何时该远离：</p>
 <table>
 <thead>
@@ -5208,7 +5225,7 @@ Phase 1 目标 8% → 理论需 80 笔
 4. 期权 vs 直接做标的，哪个更划算？（算成本与风险形状）
 5. 我能给盈亏归因吗？（说不清就退出）
 </code></pre>
-<h3 id="sec-178">10.9 一个极简主义的参照：Al Brooks 怎么用期权</h3>
+<h3 id="sec-176">10.9 一个极简主义的参照：Al Brooks 怎么用期权</h3>
 <p>前面教了希腊字母、IV、四种策略——这是"理解层"。但你可能会问：实战里到底需要多复杂？Al Brooks 的答案是：<strong>极简</strong>。他分享过自己多年的做法：</p>
 <ul>
 <li><strong>持仓过夜时，几乎总是用期权</strong>，而不是期货或股票。原因很朴素：隔夜有跳空风险（第 1.6），期权把最大亏损锁死在权利金，比裸持仓过夜干净。</li>
@@ -5257,14 +5274,14 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>ATM 行权价 = 最宽的价格区间</strong>：ATM 期权在更宽范围内跟随标的的价格行为，比 OTM 更容易获利——日内用期权尤其重要；买入略价外（OTM）只是为了凑 3:1 价差比时偶尔为之；</li>
 <li><strong>波动性缩小，利润缩小</strong>：期权快速达到目标后横盘，随着波动性缩小期权价格会更快缩水——退出以标的资产的价格为指导，不要等期权本身的价格；标的触及止损时亏损出场，头寸达到风险两倍时部分获利，期权价值翻倍时部分或全部了结。</li>
 </ul>
-<h3 id="sec-179" class="quizhead">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-177" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>期权和方向交易最大的区别是什么？</li>
 <li>期权买方的最大亏损是多少？卖方呢？</li>
 <li>IV 低时买还是卖？为什么？</li>
 </ol>
 <p><strong>答案</strong>：① 方向交易只有一个变量（方向），期权同时押注方向、幅度、时间三件事，三者必须同时对你才赚（10.1）；② 买方最多亏权利金（物理上限，10.2），卖方亏损理论无上限——这就是"买方风险有限、卖方风险无限"的铁律；③ 低 IV 买（便宜）、高 IV 卖（贵）——IV 是期权的灵魂，方向交易者用它评估"波动率贵不贵"（呼应 10.5 IV 与 VIX）。</p>
-<h3 id="sec-180" class="sumhead">本章小结</h3>
+<h3 id="sec-178" class="sumhead">本章小结</h3>
 <ul>
 <li>期权让你同时押注方向、波动、时间三件事，三者必须同时对你才赚——这是它和方向交易的根本区别。</li>
 <li>买方亏损有限（最多权利金）但盈亏平衡点要往前跑一段，且受 Theta 侵蚀。</li>
@@ -5278,8 +5295,8 @@ Phase 1 目标 8% → 理论需 80 笔
 </ul>
 <p>下一章是附录——术语速查表、学习资源和网络大 V 系统的参考用法，忘了概念时随手翻。</p>
 <hr/>
-<h1 id="sec-181">附录 术语表与学习资源</h1>
-<h2 id="sec-182">A0. 素材来源对照表</h2>
+<h1 id="sec-179">附录 术语表与学习资源</h1>
+<h2 id="sec-180">A0. 素材来源对照表</h2>
 <p>正文中所有带括号的短标（如 （Ali）、（PA-18））都指向这里。短标用于降低阅读干扰；对某条内容想追根溯源时，按表找回原始素材。</p>
 <table>
 <thead>
@@ -5343,8 +5360,8 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h2 id="sec-183">A. 术语速查表</h2>
-<h3 id="sec-184">市场结构</h3>
+<h2 id="sec-181">A. 术语速查表</h2>
+<h3 id="sec-182">市场结构</h3>
 <table>
 <thead>
 <tr>
@@ -5391,7 +5408,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-185">SMC / 流动性</h3>
+<h3 id="sec-183">SMC / 流动性</h3>
 <table>
 <thead>
 <tr>
@@ -5443,7 +5460,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-186">Wyckoff</h3>
+<h3 id="sec-184">Wyckoff</h3>
 <table>
 <thead>
 <tr>
@@ -5478,7 +5495,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-187">量价分布（5.12）</h3>
+<h3 id="sec-185">量价分布（5.12）</h3>
 <table>
 <thead>
 <tr>
@@ -5510,7 +5527,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-188">信号与形态</h3>
+<h3 id="sec-186">信号与形态</h3>
 <table>
 <thead>
 <tr>
@@ -5549,7 +5566,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-189">Brooks 与量化派术语</h3>
+<h3 id="sec-187">Brooks 与量化派术语</h3>
 <table>
 <thead>
 <tr>
@@ -5748,7 +5765,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-190">K 线组合形态（3.8-3.9）</h3>
+<h3 id="sec-188">K 线组合形态（3.8-3.9）</h3>
 <table>
 <thead>
 <tr>
@@ -5779,7 +5796,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-191">突破系统（QuantSystems / Ali）</h3>
+<h3 id="sec-189">突破系统（QuantSystems / Ali）</h3>
 <table>
 <thead>
 <tr>
@@ -5902,7 +5919,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-192">市场微观结构（1.6 / 8.11）</h3>
+<h3 id="sec-190">市场微观结构（1.6 / 8.11）</h3>
 <table>
 <thead>
 <tr>
@@ -5945,7 +5962,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-193">订单流（8.11-8.12）</h3>
+<h3 id="sec-191">订单流（8.11-8.12）</h3>
 <table>
 <thead>
 <tr>
@@ -5982,7 +5999,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-194">SMC 与 Wyckoff（第 5 章）</h3>
+<h3 id="sec-192">SMC 与 Wyckoff（第 5 章）</h3>
 <table>
 <thead>
 <tr>
@@ -6029,7 +6046,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-195">策略与资金管理</h3>
+<h3 id="sec-193">策略与资金管理</h3>
 <table>
 <thead>
 <tr>
@@ -6064,7 +6081,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-196">Prop 考核（第 9 章）</h3>
+<h3 id="sec-194">Prop 考核（第 9 章）</h3>
 <table>
 <thead>
 <tr>
@@ -6091,7 +6108,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-197">风险与计量</h3>
+<h3 id="sec-195">风险与计量</h3>
 <table>
 <thead>
 <tr>
@@ -6162,7 +6179,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-198">宏观事件与经济数据（1.8）</h3>
+<h3 id="sec-196">宏观事件与经济数据（1.8）</h3>
 <table>
 <thead>
 <tr>
@@ -6204,7 +6221,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-199">时间框架</h3>
+<h3 id="sec-197">时间框架</h3>
 <table>
 <thead>
 <tr>
@@ -6231,7 +6248,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h3 id="sec-200">期权与波动率（第 10 章）</h3>
+<h3 id="sec-198">期权与波动率（第 10 章）</h3>
 <table>
 <thead>
 <tr>
@@ -6333,17 +6350,17 @@ Phase 1 目标 8% → 理论需 80 笔
 </tr>
 </tbody>
 </table>
-<h2 id="sec-201">B. 学习资源（已验证）</h2>
-<h3 id="sec-202">中文免费课</h3>
+<h2 id="sec-199">B. 学习资源（已验证）</h2>
+<h3 id="sec-200">中文免费课</h3>
 <ul>
 <li>B站 Al Brooks 价格行为课程（国语中字 53 集，BV1jBP7e1EPk）</li>
 <li>B站 ICT 做市商系列中字（BV1Hi2cYcER6）</li>
 </ul>
-<h3 id="sec-203">文字教程</h3>
+<h3 id="sec-201">文字教程</h3>
 <ul>
 <li>Tangly 学习笔记（blog.tangly1024.com，价格行为 + SMC 系列）</li>
 </ul>
-<h3 id="sec-204">英文免费课</h3>
+<h3 id="sec-202">英文免费课</h3>
 <ul>
 <li>BabyPips School of Pipsology（babypips.com/learn）——最系统的免费章节式课程</li>
 <li>Tradeciety 价格行为课（tradeciety.com）</li>
@@ -6351,12 +6368,12 @@ Phase 1 目标 8% → 理论需 80 笔
 <li>Al Brooks 官网免费内容（brookstradingcourse.com）</li>
 <li>QuantSystems.ca（Ali Moin-Afshari 官网，突破白皮书 + 交易者方程/突破过程/10+2 因子技术附录）</li>
 </ul>
-<h3 id="sec-205">公版书（合法免费）</h3>
+<h3 id="sec-203">公版书（合法免费）</h3>
 <ul>
 <li>《股票大作手回忆录》——Project Gutenberg #60979</li>
 <li>Wyckoff《盘口阅读研究》《How I Trade and Invest in Stocks and Bonds》——archive.org</li>
 </ul>
-<h3 id="sec-206">中文正版书（微信读书）</h3>
+<h3 id="sec-204">中文正版书（微信读书）</h3>
 <ul>
 <li>《威科夫股票交易与投资分析》</li>
 <li>约翰·墨菲《金融市场技术分析》</li>
@@ -6364,18 +6381,18 @@ Phase 1 目标 8% → 理论需 80 笔
 <li>Mark Douglas《交易心理分析》</li>
 <li>范·撒普《通向财务自由之路》</li>
 </ul>
-<h3 id="sec-207">学术（免费）</h3>
+<h3 id="sec-205">学术（免费）</h3>
 <ul>
 <li>Lo, Mamaysky &amp; Wang《Foundations of Technical Analysis》——NBER w7613，技术分析统计检验奠基论文</li>
 <li>行为金融：Kahneman &amp; Tversky (1979) 损失厌恶、Shefrin &amp; Statman (1985) 处置效应</li>
 </ul>
-<h3 id="sec-208">认证路线</h3>
+<h3 id="sec-206">认证路线</h3>
 <ul>
 <li>CMT（特许市场技术分析师）——prometric.com/zh-hans/exams/cmta/</li>
 </ul>
-<h2 id="sec-209">C. 网络大 V 系统参考</h2>
+<h2 id="sec-207">C. 网络大 V 系统参考</h2>
 <p>怎么看待和利用网上交易大 V 公开的系统。先立态度——<strong>大 V 是用来"取材"的，不是用来"信"的</strong>。他们的系统本质都不超出本书框架，价值在具体的执行细节，陷阱在营销话术。</p>
-<h3 id="sec-210">C.1 先立态度：大 V 系统的真相</h3>
+<h3 id="sec-208">C.1 先立态度：大 V 系统的真相</h3>
 <p>看任何大 V 系统前，记住三条：</p>
 <ol>
 <li><strong>"80% 胜率""日赚 1000 刀"是营销话术。</strong> 真实可持续的胜率配合 RR2，长期期望值就已经很好了。宣称超高胜率/暴利的，要么选择性展示，要么在卖课。</li>
@@ -6383,7 +6400,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>免费内容是引流，核心往往在付费。</strong> 公开视频学方法思路可以，别指望免费部分给你完整可盈利系统。</li>
 </ol>
 <p>正确的用法：从大 V 那里取材（品种选择、时段、具体 setup 的呈现方式），用本书的框架（验证、仓位、风控）去筛选和落地。不照搬，不迷信。</p>
-<h3 id="sec-211">C.2 ICT（Michael Huddleston）——SMC 的源头</h3>
+<h3 id="sec-209">C.2 ICT（Michael Huddleston）——SMC 的源头</h3>
 <ul>
 <li><strong>是谁</strong>：SMC（聪明钱概念）的创始人，现代零售交易圈影响最大的人物之一。</li>
 <li><strong>交易什么</strong>：股指期货、外汇。</li>
@@ -6392,7 +6409,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>有用的</strong>：免费内容极多（YouTube 2022 Mentorship 是系统化的），流动性/sweep 框架有真实微观结构基础。</li>
 <li><strong>要警惕的</strong>：体系庞杂、术语堆砌、自我神话；"机构故意猎杀"是叙事不是证据。用他的框架给纪律，别信他的阴谋论。</li>
 </ul>
-<h3 id="sec-212">C.3 Al Brooks——价格行为的教父</h3>
+<h3 id="sec-210">C.3 Al Brooks——价格行为的教父</h3>
 <ul>
 <li><strong>是谁</strong>：前眼科医生转职交易员，价格行为领域最系统、最深入的作者。</li>
 <li><strong>交易什么</strong>：股指期货（ES）日内为主。</li>
@@ -6400,7 +6417,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>有用的</strong>：三卷本《Trading Price Action》是价格行为最完整的体系；中文读者可配合《阿布价格行为学》（基础篇/进阶篇）对照阅读——它是 Brooks Trading Course 官方课程的中文翻译笔记（4000+ 页幻灯片逐页翻译），与三卷本同源、按视频逐讲组织，可当中文进阶字典用。</li>
 <li><strong>要警惕的</strong>：极其晦涩（人称"天书"），信息密度过大。建议先掌握本书第 2、3 章，再把它当进阶字典查，不要当入门。</li>
 </ul>
-<h3 id="sec-213">C.4 Thomas Wade——标普日内价格行为</h3>
+<h3 id="sec-211">C.4 Thomas Wade——标普日内价格行为</h3>
 <ul>
 <li><strong>是谁</strong>：YouTube 价格行为教学者，Al Brooks 一脉，但讲得更通俗。</li>
 <li><strong>交易什么</strong>：标普 500（ES）日内。</li>
@@ -6408,7 +6425,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>有用的</strong>：免费视频多，示范了"怎么把价格行为用在单一品种（ES）的日内"。</li>
 <li><strong>要警惕的</strong>：日内对执行速度和心态要求极高，新手直接上日内容易亏快。</li>
 </ul>
-<h3 id="sec-214">C.5 南桥价格行为——中文标普日内</h3>
+<h3 id="sec-212">C.5 南桥价格行为——中文标普日内</h3>
 <ul>
 <li><strong>是谁</strong>：中文价格行为博主（YouTube：NanqiaoPriceAction，X：@junjie_pen43898），风格与 Thomas Wade 相近。</li>
 <li><strong>交易什么</strong>：标普 500（ES）日内价格行为，融合 Al Brooks 式读盘 + ICT 概念。</li>
@@ -6416,7 +6433,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>诚实说明</strong>：完整 setup 清单不公开（付费/私域），但这份公开 PPT 的核心规则已融入本书 3.2（FOFS 时限/实体要求）、4.3（回调硬过滤）、4.21（突破单三模型）、4.22（限价单四模型）。其余内容基于其公开复盘视频，能学到的是"怎么读标普日内结构"的思路，不是完整可复制系统。</li>
 <li><strong>要警惕的</strong>："80% 真实胜率""日均 1000 刀"这类话术要打折。</li>
 </ul>
-<h3 id="sec-215">C.6 大 V 系统的共性，以及怎么用</h3>
+<h3 id="sec-213">C.6 大 V 系统的共性，以及怎么用</h3>
 <table>
 <thead>
 <tr>
@@ -6474,7 +6491,7 @@ Phase 1 目标 8% → 理论需 80 笔
 </table>
 <p>共性：都聚焦单一品种（多是 ES）+ 固定时段 + 少数几个 setup + 严格风控。这恰恰印证本书第 4 章——系统要写死、要聚焦，不是什么都做。值得注意的是，量化派（Ali）证明了 Brooks 的主观概念可以被转成可编程规则并验证——这正是第 8 章的验证闭环在大 V 体系里的落点。</p>
 <p>怎么用大 V：①学他们的"聚焦"；②取材具体 setup 的呈现方式；③用本书框架落地（回测 100 笔、算期望值、配仓位再用）；④过滤营销（胜率/收益宣称一律打折）。</p>
-<h3 id="sec-216">C.7 Ali Moin-Afshari——微通道与量化突破（10,000 Trades）</h3>
+<h3 id="sec-214">C.7 Ali Moin-Afshari——微通道与量化突破（10,000 Trades）</h3>
 <ul>
 <li><strong>是谁</strong>：加拿大交易者，网络工程师转行，师承 Van Tharp 课程 + Al Brooks 体系；把 300+ 个价格行为概念编程量化，公开两个代表作：微通道系统与突破白皮书（其信号经 Al Brooks 本人验证）。</li>
 <li><strong>交易什么</strong>：E-mini 5 分钟日内。</li>
@@ -6483,7 +6500,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>有用的</strong>："设计致胜"的系统开发理念；把"信号 K 质量"等主观概念量化成 IBS、CX 因子这类可编程指标——这是从"感觉"到"规则"的最佳示范；用 SQN 做优化前后对比（第 8.9）。</li>
 <li><strong>要警惕的</strong>：微通道本质是刮头皮/快节奏交易，新手执行不了；量化结论基于 E-mini 特定时段，跨品种需重新验证。</li>
 </ul>
-<h3 id="sec-217">C.8 GRANDMA——"连奶奶都会交易"的故障安全入场（Rose）</h3>
+<h3 id="sec-215">C.8 GRANDMA——"连奶奶都会交易"的故障安全入场（Rose）</h3>
 <ul>
 <li><strong>是谁</strong>：Rose，中文圈价格行为交易者，公开策略 GRANDMA（Grandma 策略，即"奶奶都会"），并提供免费指标（在 K 线上方/下方画 X 标记）。</li>
 <li><strong>交易什么</strong>：股指日内。</li>
@@ -6495,7 +6512,7 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>故障安全设计（它的独特点）</strong>：如果入场后被反向困住（触发 K 线上方买入后价格反向），<strong>先别止损</strong>——在信号 K 线位置挂限价单加仓摊平，把均价拉回成本附近，等市场回到原入场点保本离场（"修正交易并称其为哑弹"）。注意：这与本书军规"不浮亏加仓"相抵触——它的前提是微支撑/阻力位极其精确（1 跳级），新手复制不了这种精度，建议只学入场纪律、不学摊平。</li>
 <li><strong>要警惕的</strong>：依赖免费指标的 X 标记（黑盒逻辑）；"反向利用"（逆势交易）与"破位失败反手"属于进阶玩法，新手先只做顺势版。</li>
 </ul>
-<h3 id="sec-218">C.9 Rose 八大主题——把 Brooks 概念拆成专题</h3>
+<h3 id="sec-216">C.9 Rose 八大主题——把 Brooks 概念拆成专题</h3>
 <p>Rose 除 GRANDMA 外，还公开了八大主题课（与本书各章对应）：</p>
 <ol>
 <li><strong>买入区域/卖出区域</strong>：机构挂单进出的位置（对应第 2.4 支撑阻力 + 第 5 章流动性）。</li>
@@ -6509,18 +6526,18 @@ Phase 1 目标 8% → 理论需 80 笔
 </ol>
 <p><strong>怎么用这份清单</strong>：把它当作本书的"查缺补漏索引"——如果你在某主题上薄弱，直接看对应章节，再用 Rose 的讲解换个角度理解。它证明了一个事实：<strong>所有大 V 的专题，都是本书框架某一块的展开</strong>。</p>
 <p>注：本附录对南桥的描述基于其公开视频与公开 PPT（2025-12），完整系统未公开，不构成对其方法的完整还原或评价。所有大 V 的收益宣称均需独立验证，本书不背书任何大 V。</p>
-<h2 id="sec-219">D. 防骗提醒</h2>
+<h2 id="sec-217">D. 防骗提醒</h2>
 <ul>
 <li>任何"免费信号群 / 跟单 / 自动交易软件 / 内部策略"都是钓鱼。</li>
 <li>盗版 PDF 站（dokumen.pub、Scribd 上传版、z-library 克隆）带毒率高，且侵权——用上面的合法渠道。</li>
 <li>晒单幸存者偏差：爆仓的人不发帖。</li>
 <li>承诺"一周过考核""稳定月入 X%"的，都是收割。</li>
 </ul>
-<h2 id="sec-220">结语：把书合上之前</h2>
+<h2 id="sec-218">结语：把书合上之前</h2>
 <p>市场永远在，机会也永远在。活得久的人，才等得到属于自己的那一段趋势。</p>
 <p>书有合上的时候，市场没有。第 8 章收口时说过：这套框架不预测涨跌，只负责让盈利在数学上可能（正期望值）、让亏损在可控范围内（仓位+止损）、让执行不变形（流程化+军规）。剩下的部分不在书里，在你身上——每一笔交易前的检查单、每一次复盘里的诚实、每一份日志积累的数据。</p>
 <p>如果只带走一页，带走前言的最小可用系统；如果只记住一句，记住：<strong>先验证，再实战</strong>。</p>
-<h3 id="sec-221">本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。</h3>
+<p><em>本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。</em></p>
 <p style="margin-top:60px;color:#90a4ae;font-size:0.85em;text-align:center;">
 本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。
 </p>
@@ -6570,6 +6587,41 @@ Phase 1 目标 8% → 理论需 80 笔
       em.parentElement.classList.add('figcap');
     }
   });
+  // 自测答案折叠：quizhead 后第一个含“答案”的段默认收起，按钮展开/收起
+  document.querySelectorAll('h3.quizhead').forEach(function (q) {
+    var el = q.nextElementSibling;
+    while (el && el.tagName !== 'H3') {
+      if (el.tagName === 'P' && el.querySelector('strong') &&
+          el.querySelector('strong').textContent.indexOf('答案') !== -1) {
+        el.classList.add('ansbody');
+        el.style.display = 'none';
+        var btn = document.createElement('button');
+        btn.className = 'ansbtn';
+        btn.textContent = '显示答案';
+        el.parentNode.insertBefore(btn, el);
+        btn.addEventListener('click', function () {
+          var show = el.style.display === 'none';
+          el.style.display = show ? 'block' : 'none';
+          btn.textContent = show ? '收起答案' : '显示答案';
+        });
+        break;
+      }
+      el = el.nextElementSibling;
+    }
+  });
+  // 封面“开始阅读”：滚动到隐藏书名 h1 之后的第一个标题
+  var bt = document.querySelector('#cover .startbtn');
+  if (bt) {
+    bt.addEventListener('click', function (e) {
+      e.preventDefault();
+      var h = document.querySelector('h1.booktitle');
+      var target = h ? h.nextElementSibling : null;
+      while (target && target.tagName !== 'H1' && target.tagName !== 'H2' && target.tagName !== 'H3') {
+        target = target.nextElementSibling;
+      }
+      if (target && target.id) document.getElementById(target.id).scrollIntoView({ behavior: 'smooth' });
+    });
+  }
   // v3 移动端：悬浮按钮开合抽屉；点链接或关闭钮收起
   var tocbtn = document.getElementById('tocbtn');
   var toc = document.getElementById('toc');
