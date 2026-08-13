@@ -28,7 +28,7 @@ eq10 = pd.Series((1 + R * 0.010).cumprod())
 dd05 = (eq05 / eq05.cummax() - 1) * 100
 dd10 = (eq10 / eq10.cummax() - 1) * 100
 
-cross_i = int(np.argmax(dd10 <= -10.0))  # 第 79 笔（0-based 78）
+cross_i = int(np.argmax(dd10 <= -10.0))  # 第 80 笔（0-based 79）
 
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(13, 8), dpi=110, sharex=True,
                                gridspec_kw={"height_ratios": [1.15, 1]})
@@ -46,7 +46,7 @@ ax1.axhline(1.0, color=GRAY, lw=1, ls=":")
 ax1.plot(x, eq05.values, drawstyle="steps-post", color=BLUE, lw=1.9, zorder=4,
          label="0.5% 风险（单笔 0.5%）——82 笔全程没碰线")
 ax1.plot(x, eq10.values, drawstyle="steps-post", color=RED, lw=1.9, zorder=4,
-         label="1% 风险（单笔 1%）——第 79 笔打穿总回撤线")
+         label="1% 风险（单笔 1%）——第 80 笔打穿总回撤线")
 
 # 1% 打穿段阴影（0.90 以下）
 below = np.where(eq10.values < 0.90, 0.90, eq10.values)
@@ -60,7 +60,7 @@ ax1.text(1.5, 0.885, "-10% 总回撤线（碰线即出局）",
          fontsize=9.5, color=RED, fontweight="bold", zorder=6, va="top")
 
 # 1% 打穿标注
-ax1.annotate("第 79 笔打穿 -10% → 账户作废\n前 78 笔全部白费\n考核只认结果：碰线即出局，不看过程",
+ax1.annotate("第 80 笔打穿 -10% → 账户作废\n前 79 笔全部白费\n考核只认结果：碰线即出局，不看过程",
              xy=(x[cross_i], eq10.iloc[cross_i]),
              xytext=(x[cross_i] - 34, 0.945),
              fontsize=9.5, color=RED, fontweight="bold", zorder=6,
@@ -102,7 +102,7 @@ ax2.axhline(-10.0, color=RED, lw=1.5, ls="--", zorder=4)
 ax2.text(1.5, -10.7, "-10% 总回撤线", fontsize=9.5, color=RED, fontweight="bold", zorder=6)
 
 # 1% 打穿标注
-ax2.annotate("1% 回撤 -11.0%，越过总回撤线（第 79 笔）\n最差单日只有 -2.93%（1% 下）< 5% 日线\n→ 杀死账户的是总回撤线，不是日线",
+ax2.annotate("1% 回撤 -11.0%，越过总回撤线（第 80 笔）\n最差单日只有 -2.93%（1% 下）< 5% 日线\n→ 杀死账户的是总回撤线，不是日线",
              xy=(x[cross_i], dd10.iloc[cross_i]),
              xytext=(x[cross_i] - 36, -16.5),
              fontsize=9.5, color=RED, fontweight="bold", zorder=6,
@@ -131,7 +131,7 @@ for r in R:
     streak = max(streak, cur)
 stats = (f"样本：82 笔 · 29 个交易日 · BTC 1H（2026-07-02 ~ 08-10）\n"
          f"胜率 {wins * 100:.0f}% · 盈亏比 0.94 · 总 R {R.sum():.2f}\n"
-         f"最长连亏 {streak} 笔（1% 下 ≈ -6%）· 最差单日 {worst_day:.2f}R（08-10）\n"
+         f"最长连亏 {streak} 笔（-3.7R）· 最差单日 {worst_day:.2f}R（08-10）\n"
          f"最差单笔 -1.0R（止损到点，未失控）")
 ax2.text(0.985, 0.97, stats, transform=ax2.transAxes, ha="right", va="top",
          fontsize=9.5, color=DARK, zorder=6,
