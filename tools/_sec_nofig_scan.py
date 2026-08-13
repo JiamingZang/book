@@ -16,7 +16,7 @@ for f in sorted(glob.glob("handbook/0*_*.md")) + sorted(glob.glob("handbook/1*_*
             if cur_title is not None:
                 sections.append((cur_level, cur_title, has_img))
             cur_level, cur_title, has_img = len(m.group(1)), m.group(2).strip(), False
-        elif "](images/" in ln:
+        elif "](images/" in ln or "![[fig_" in ln:
             has_img = True
     if cur_title is not None:
         sections.append((cur_level, cur_title, has_img))

@@ -1,13 +1,25 @@
 # -*- coding: utf-8 -*-
-"""图编号审计 v2：只统计图片行（^![图 X-Y），合成图应连续无重复；
-真实图（X-YR）单独列出检查（允许任意编号）。"""
+"""图编号审计 v2：只统计图片行（^![图 X-Y 或 ![[fig_x.excalidraw]] + 图注），
+合成图应连续无重复；真实图（X-YR）单独列出检查（允许任意编号）。
+v51：兼容 Excalidraw 引用（图号从后续图注行 *图 X-Y* 获取）"""
 import re
 import glob
 
 ok = True
 for f in sorted(glob.glob("handbook/0*.md") + glob.glob("handbook/10_*.md")):
-    t = open(f, encoding="utf-8").read()
-    imgs = re.findall(r"^!\[图 (\d+-\d+R?)", t, re.M)
+    lines = open(f, encoding="utf-8").read().split("\n")
+    imgs = []
+    for i, ln in enumerate(lines):
+        m = re.match(r"^!\[图 (\d+-\d+R?)", ln)
+        if m:
+            imgs.append(m.group(1))
+            continue
+        if re.match(r"^!\[\[fig_[a-z0-9_]+\.excalidraw\]\]", ln.strip()):
+            for j in range(i + 1, min(i + 3, len(lines))):
+                fm = re.match(r"^\s*\*(图\s*(\d+-\d+R?))", lines[j].strip())
+                if fm:
+                    imgs.append(fm.group(2))
+                    break
     if not imgs:
         continue
     ch = int(imgs[0].split("-")[0])

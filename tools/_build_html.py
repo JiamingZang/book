@@ -328,6 +328,23 @@ def main():
     for f in FILES:
         with open(f"handbook/{f}", encoding="utf-8") as fh:
             md = fh.read()
+        # v51：Excalidraw 流程图预处理——`![[fig_x.excalidraw]]` 行在 HTML 中
+        # 渲染为 PNG（Obsidian 里仍是可编辑的 .excalidraw）；alt 从后续图注行提取
+        lines = md.split("\n")
+        for i, ln in enumerate(lines):
+            m = re.match(r"^\s*!\[\[(fig_[a-z0-9_]+)\.excalidraw\]\]\s*$", ln)
+            if not m:
+                continue
+            name = m.group(1)
+            cap = None
+            for j in range(i + 1, min(i + 3, len(lines))):
+                cm = re.match(r"^\s*\*(图\s*\d+[-.]\d+R?[^*]*)\*", lines[j].strip())
+                if cm:
+                    cap = cm.group(1).strip()
+                    break
+            lines[i] = ("![%s](images/%s.png)" % (cap, name)) if cap else (
+                "![%s](images/%s.png)" % (name, name))
+        md = "\n".join(lines)
         html = markdown.markdown(md, extensions=["tables", "fenced_code", "sane_lists"])
         # 图注统一：alt 文本中的"图 N-M ..."提取为图片下方可见图注；
         # 若图片后紧跟重复的斜体图注（早期双写格式）则删除，避免显示两次。
