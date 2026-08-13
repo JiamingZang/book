@@ -226,6 +226,51 @@ JS = """
       em.parentElement.classList.add('figcap');
     }
   });
+  // 图注锚点：从图注文本解析“图 N-M(R)”→ id="fig-N-M(R)"
+  var figids = {};
+  document.querySelectorAll('p.figcap').forEach(function (p) {
+    var m = /^(图)\\s*(\\d+-\\d+R?)/.exec(p.textContent.trim());
+    if (m) {
+      p.id = 'fig-' + m[2];
+      figids[p.id] = true;
+    }
+  });
+  // 正文“图 N-M”引用链接化：文本节点替换为 <a href="#fig-...">（仅当锚点存在）
+  if (Object.keys(figids).length) {
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        var p = n.parentNode;
+        if (p && p.classList && (p.classList.contains('figcap') || p.tagName === 'A')) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var tnodes = [];
+    while (walker.nextNode()) tnodes.push(walker.currentNode);
+    tnodes.forEach(function (n) {
+      var t = n.nodeValue;
+      var re = /(图)\\s*(\\d+-\\d+R?)/g;
+      var out = [];
+      var last = 0, m, changed = false;
+      while ((m = re.exec(t)) !== null) {
+        var key = 'fig-' + m[2];
+        if (!figids[key]) continue;
+        if (m.index > last) out.push(t.slice(last, m.index));
+        var a = document.createElement('a');
+        a.href = '#' + key;
+        a.textContent = m[0];
+        out.push(a);
+        last = m.index + m[0].length;
+        changed = true;
+      }
+      if (!changed) return;
+      if (last < t.length) out.push(t.slice(last));
+      var frag = document.createDocumentFragment();
+      out.forEach(function (x) { frag.appendChild(typeof x === 'string' ? document.createTextNode(x) : x); });
+      n.parentNode.replaceChild(frag, n);
+    });
+  }
   // 自测答案折叠：quizhead 后第一个含“答案”的段默认收起，按钮展开/收起
   document.querySelectorAll('h3.quizhead').forEach(function (q) {
     var el = q.nextElementSibling;
@@ -284,6 +329,20 @@ def main():
         with open(f"handbook/{f}", encoding="utf-8") as fh:
             md = fh.read()
         html = markdown.markdown(md, extensions=["tables", "fenced_code", "sane_lists"])
+        # 图注统一：alt 文本中的"图 N-M ..."提取为图片下方可见图注；
+        # 若图片后紧跟重复的斜体图注（早期双写格式）则删除，避免显示两次。
+        # 先闭合外层 p 再开新 p 包 img，兼容图片夹在段落中间的情况
+        html = re.sub(
+            r'<img alt="(图\s*\d+[-.]\d+R?[^"]*)" src="([^"]+)"\s*/?>',
+            lambda m: '</p><p><img src="%s" alt="%s"></p><p class="figcap">%s</p>'
+            % (m.group(2), m.group(1), m.group(1)),
+            html,
+        )
+        html = re.sub(
+            r'<p class="figcap">(图\s*\d+[-.]\d+R?[^<]*)</p>\s*<p><em>图\s*\d+[-.]\d+R?[^<]*</em></p>',
+            r'<p class="figcap">\1</p>',
+            html,
+        )
         # 给 h1/h2/h3 加锚点 id，并收集目录条目
         hstack = [None, None, None]  # 各级最近 id
 
