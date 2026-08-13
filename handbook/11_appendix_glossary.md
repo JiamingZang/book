@@ -119,14 +119,14 @@
 | BOG | Breakout Gap，突破缺口（回调守住它 = 突破仍有效，Ali） |
 | BL / BR | Breakout Leg / Bear Rally，突破腿 / 空头反弹（Brooks 通道腿；Ali 用 BL 指突破后的第一段走势） |
 | COTC | Close On The Close，收盘价买入/卖出（Ali 突破入场固定形态） |
-| CV | Coefficient of Variation，变异系数（4.x 区间密度指标 = 波段幅度标准差÷均值，<0.3 高密度） |
+| CV | Coefficient of Variation，变异系数（4.4 区间密度指标 = 波段幅度标准差÷均值，<0.3 高密度） |
 | EGO | 衰竭性高潮：EG 之后再来一个 EG（Ali，趋势末期出现最强 K 线，随后失败反转） |
 | MDB / MDT | Micro Double Bottom / Top，微双底/顶（两根 K 线低/高点相同，2.5） |
 | MM | Measured Move，测量移动（第一腿长度投影到突破位，3.9/4.24） |
 | OCO | One Cancels Other，二选一委托（一个成交另一个自动取消） |
 | OTO | One Triggers Other，一个成交后自动挂出另一个（分批止盈自动化，1.3） |
 | ORV | Opening Range Reversal，开盘区间反转（Ali，4.27；反转后 70% 概率两波同向） |
-| SCS | Spike Counter-trend Scalp，逆尖峰刮头皮（尖峰中逆势，4.x 军规禁止） |
+| SCS | Spike Counter-trend Scalp，逆尖峰刮头皮（尖峰中逆势，2.11 尖峰纪律 / 4.25 禁止清单） |
 | SPS | Spike Pullback Scalp，尖峰回撤刮头皮（只做回撤入场，回撤位 38.2%-50%） |
 | TIB | 市场接受缺口的连续跟进 K 线形态（Ali；开盘连续 4 根 TIB = 支撑/阻力真空试探） |
 | TP1 / TP2 | Take Profit 1 / 2，第一/第二止盈目标（分批出场） |
@@ -202,9 +202,9 @@
 | 深度 | Depth；各价位挂单量分布，深度越厚点差越窄、大单冲击越小（1.6 / 8.12） |
 | Tick | 最小价格变动单位（最小跳动）；逐笔成交的最小粒度，tick 图看微观结构（8.12） |
 | Gap | 缺口/跳空；价格瞬间跳过价位形成的空档——突破/测量/衰竭缺口语义不同（EG/BOG/MG） |
-| Confluence | 汇合/共振；多时间框架 + 多因素在同一价位重合（HTF 结构 + 订单块 + FVG 叠加），共振越强胜率越高（5.x） |
+| Confluence | 汇合/共振；多时间框架 + 多因素在同一价位重合（HTF 结构 + 订单块 + FVG 叠加），共振越强胜率越高（5.12/5.14） |
 | CFD | Contract for Difference，差价合约；衍生品——不持有标的本身，只与经纪商对赌价格，成交量部分真实（1.2） |
-| OTC | Over The Counter，场外交易；无中心化交易所，报价由做市商撮合——外汇/加密均属场外，量价数据不可全信（1.2） |
+| OTC | Over The Counter，场外交易；无中心化交易所，报价由做市商撮合——外汇属 OTC（无统一真实量）；加密在中心化交易所撮合但各所分散，量价同样不可全信（1.2） |
 
 ### 订单流（8.11-8.12）
 
