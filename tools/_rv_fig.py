@@ -36,13 +36,13 @@ ax1.annotate("3 月下旬回调低点 3813",
              xytext=(pd.Timestamp("2026-03-05"), 4020),
              fontsize=9, color="#263238", fontweight="bold",
              arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.2))
-ax1.annotate("5 月高点 4180（横盘：波动率谷底）",
-             xy=(pd.Timestamp("2026-05-08"), 4180),
-             xytext=(pd.Timestamp("2026-05-12"), 4080),
+ax1.annotate("5 月中旬高点 4242（05-13）\n（随后横盘：波动率谷底）",
+             xy=(pd.Timestamp("2026-05-13"), 4242.6),
+             xytext=(pd.Timestamp("2026-05-15"), 4060),
              fontsize=9, color="#263238", fontweight="bold",
              arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.2))
-ax1.annotate("7 月暴跌低点 3796\n（-10% 级别回调）",
-             xy=(pd.Timestamp("2026-07-20"), 3796),
+ax1.annotate("7 月暴跌低点 3764（07-17）\n（-10% 级别回调）",
+             xy=(pd.Timestamp("2026-07-17"), 3764.2),
              xytext=(pd.Timestamp("2026-06-25"), 4020),
              fontsize=9, color="#c62828", fontweight="bold",
              arrowprops=dict(arrowstyle="->", color="#ef5350", lw=1.2))
@@ -64,16 +64,16 @@ ax2.annotate("峰① 04-14：22.2%\n3 月暴跌余波，波动率飙升",
              xytext=(pd.Timestamp("2026-04-16"), 26.5),
              fontsize=9, color="#c62828", fontweight="bold",
              arrowprops=dict(arrowstyle="->", color="#ef5350", lw=1.2))
-# 谷 1
-ax2.plot([pd.Timestamp("2026-05-15")], [10.5], marker="o", color="#26a69a", ms=9, zorder=6)
-ax2.annotate("谷① 05-15：10.5%\n横盘压缩——低 IV 买期权/卖波动率的背景",
-             xy=(pd.Timestamp("2026-05-15"), 10.5),
+# 谷 1（窗口内真实谷底：05-12 的 7.5%）
+ax2.plot([pd.Timestamp("2026-05-12")], [7.5], marker="o", color="#26a69a", ms=9, zorder=6)
+ax2.annotate("谷① 05-12：7.5%\n横盘压缩——低 IV 买期权/卖波动率的背景",
+             xy=(pd.Timestamp("2026-05-12"), 7.5),
              xytext=(pd.Timestamp("2026-05-18"), 8.2),
              fontsize=9, color="#00695c", fontweight="bold",
              arrowprops=dict(arrowstyle="->", color="#26a69a", lw=1.2))
 # 峰 2
 ax2.plot([pd.Timestamp("2026-07-21")], [22.4], marker="o", color="#ef5350", ms=9, zorder=6)
-ax2.annotate("峰② 07-21：22.4%\n7 月暴跌——波动率再次飙升\n（与图 4-6R 微通道次日反转同期）",
+ax2.annotate("峰② 07-21：22.4%\n7 月暴跌——波动率再次飙升\n（与图 4-4R 微通道次日反转同期）",
              xy=(pd.Timestamp("2026-07-21"), 22.4),
              xytext=(pd.Timestamp("2026-07-23"), 27.5),
              fontsize=9, color="#c62828", fontweight="bold",
