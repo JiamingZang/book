@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>交易手册：价格行为 · SMC · 仓位 · 心态 · Prop 考核</title>
 <style>
-:root { --teal:#26a69a; --down:#ef5350; --dark:#263238; --gray:#90a4ae; }
+/* ElegantBook 风格：深藏青主色（参考 ai-agent-book 排版），红涨绿跌不变 */
+:root { --navy:#1e3a6b; --navy2:#2c4a7c; --down:#ef5350; --up:#26a69a; --dark:#263238; --gray:#90a4ae; --accentbg:#f2f5fa; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -13,28 +14,63 @@ body {
   color: #333; line-height: 1.75; margin: 0 auto; max-width: 900px;
   padding: 24px 28px 80px;
 }
-h1 { color: var(--dark); border-bottom: 3px solid var(--teal); padding-bottom: 8px; margin-top: 56px; font-size: 1.7em; }
-h2 { color: var(--teal); margin-top: 40px; font-size: 1.35em; border-left: 4px solid var(--teal); padding-left: 10px; }
+a { color: var(--navy); }
+/* ---- 封面（打印时独占一页） ---- */
+#cover {
+  background: linear-gradient(160deg, #0f2440 0%, #1e3a6b 55%, #2c4a7c 100%);
+  color: #fff; border-radius: 12px; padding: 70px 44px 56px; text-align: center;
+  margin: 8px 0 36px;
+}
+#cover .kicker { font-size: 0.95em; letter-spacing: 6px; color: #9db4d9; margin-bottom: 18px; }
+#cover h1 { color: #fff; border: none; padding: 0; margin: 0 0 14px; font-size: 2.6em; letter-spacing: 8px; background: none; box-shadow: none; }
+#cover .sub { font-size: 1.15em; color: #c9d8f0; letter-spacing: 2px; }
+#cover .rule { width: 64px; height: 3px; background: #4db6ac; border-radius: 2px; margin: 26px auto; }
+#cover .desc { max-width: 560px; margin: 0 auto 30px; color: #b9c8e2; font-size: 0.95em; line-height: 1.9; }
+#cover .meta { font-size: 0.82em; color: #7f95b8; letter-spacing: 1px; }
+/* ---- 标题 ---- */
+h1 {
+  color: #fff; background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  padding: 16px 22px; border-radius: 8px; margin-top: 56px; font-size: 1.6em;
+  border: none; box-shadow: 0 2px 10px rgba(30,58,107,0.25);
+}
+h1.booktitle { display: none; }
+h2 { color: var(--navy); margin-top: 40px; font-size: 1.32em; border-left: 4px solid var(--navy); padding-left: 10px; }
 h3 { color: var(--dark); margin-top: 28px; font-size: 1.15em; }
 h4 { color: #455a64; }
 h1, h2, h3 { scroll-margin-top: 14px; }
+h3.quizhead {
+  background: var(--navy); color: #fff; display: inline-block;
+  padding: 7px 18px; border-radius: 6px; font-size: 1.1em; margin-top: 36px;
+}
+h3.sumhead {
+  background: var(--accentbg); color: var(--navy); border-left: 4px solid var(--navy);
+  padding: 8px 14px; border-radius: 0 6px 6px 0;
+}
+/* ---- 表格 ---- */
 table { border-collapse: collapse; margin: 14px 0 20px; width: 100%; font-size: 0.95em; }
-th { background: #e0f2f1; color: #00695c; }
-th, td { border: 1px solid #cfd8dc; padding: 6px 10px; text-align: left; vertical-align: top; }
-tr:nth-child(even) td { background: #f8fafa; }
-img { max-width: 100%; height: auto; display: block; margin: 12px auto; border: 1px solid #eceff1; border-radius: 4px; }
+th { background: var(--navy); color: #fff; }
+th, td { border: 1px solid #c9d4e4; padding: 6px 10px; text-align: left; vertical-align: top; }
+tr:nth-child(even) td { background: #f7f9fc; }
+/* ---- 图片与图注 ---- */
+img { max-width: 100%; height: auto; display: block; margin: 12px auto; border: 1px solid #e3e9f2; border-radius: 4px; }
+p.figcap { text-align: center; font-weight: 600; color: #455a64; font-size: 0.95em; margin: -4px 0 20px; }
+/* ---- 引用块：深藏青左条（参考书 quote 样式） ---- */
 blockquote {
-  border-left: 4px solid var(--teal); background: #f1f8f7; margin: 14px 0;
+  border-left: 3px solid var(--navy); background: var(--accentbg); margin: 14px 0;
   padding: 10px 14px; color: #37474f;
 }
-code { background: #eceff1; padding: 2px 5px; border-radius: 3px; font-size: 0.9em; }
-pre { background: #263238; color: #eceff1; padding: 14px; border-radius: 6px; overflow-x: auto; }
+/* ---- 代码：浅灰底 + 深藏青左条（参考书 codebox） ---- */
+code { background: #eef1f6; padding: 2px 5px; border-radius: 3px; font-size: 0.9em; color: #1e3a6b; }
+pre {
+  background: #f7f9fc; color: #263238; padding: 14px 16px; border-radius: 6px;
+  overflow-x: auto; border: 1px solid #d8e0ec; border-left: 4px solid var(--navy);
+}
 pre code { background: none; color: inherit; padding: 0; }
 strong { color: var(--dark); }
-hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
+hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 /* ---- v2 阅读体验：进度条 / TOC / 返回顶部 ---- */
 #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-  background: linear-gradient(90deg, var(--teal), #4db6ac); z-index: 1000; }
+  background: linear-gradient(90deg, var(--navy), #4db6ac); z-index: 1000; }
 #toc {
   position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
   width: 230px; max-height: 78vh; overflow-y: auto;
@@ -46,21 +82,21 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
   border-bottom: 1px solid #eceff1; padding-bottom: 6px; }
 #toc a { display: block; color: #546e7a; text-decoration: none; padding: 2px 6px;
   border-radius: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-#toc a:hover { background: #e0f2f1; color: var(--teal); }
+#toc a:hover { background: var(--accentbg); color: var(--navy); }
 #toc a.lv2 { padding-left: 16px; }
 #toc a.lv3 { padding-left: 30px; font-size: 0.92em; color: #78909c; }
-#toc a.active { background: var(--teal); color: #fff; }
+#toc a.active { background: var(--navy); color: #fff; }
 #toc a.h1 { font-weight: bold; color: var(--dark); }
 #toc .tocclose { display: none; }
 @media (min-width: 1380px) { #toc { display: block; } }
 /* ---- v3 移动端：抽屉式目录 + 悬浮按钮 ---- */
 #tocbtn {
   position: fixed; right: 16px; bottom: 76px; z-index: 1001; display: none;
-  background: var(--teal); color: #fff; border: none; border-radius: 20px;
+  background: var(--navy); color: #fff; border: none; border-radius: 20px;
   padding: 9px 16px; font-size: 13px; cursor: pointer;
   box-shadow: 0 2px 10px rgba(0,0,0,0.28); font-family: inherit;
 }
-#tocbtn:hover { background: #00897b; }
+#tocbtn:hover { background: var(--navy2); }
 @media (max-width: 1379px) {
   #tocbtn { display: block; }
   #toc {
@@ -77,20 +113,29 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
 }
 #backtop {
   position: fixed; right: 20px; bottom: 24px; width: 40px; height: 40px;
-  border-radius: 50%; background: var(--teal); color: #fff; border: none;
+  border-radius: 50%; background: var(--navy); color: #fff; border: none;
   font-size: 18px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.25);
   display: none; z-index: 1000; line-height: 40px; text-align: center;
 }
-#backtop:hover { background: #00897b; }
-/* ---- 打印版式：隐藏悬浮组件，章节分页，防图/表跨页 ---- */
+#backtop:hover { background: var(--navy2); }
+/* ---- 打印版式：隐藏悬浮组件，封面/章节分页，防图/表跨页，段首缩进 ---- */
 @media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page :first { margin: 0; }
   #toc, #progress, #backtop, #tocbtn { display: none !important; }
   body { max-width: none; padding: 0 6px; }
-  h1 { page-break-before: always; }
-  h1:first-of-type { page-break-before: avoid; }
+  #cover {
+    border-radius: 0; margin: 0; padding: 90px 40px 40px; height: 88vh;
+    page-break-after: always;
+  }
+  h1 { page-break-before: always; border-radius: 4px; }
+  h1.booktitle { page-break-before: avoid; }
+  #cover h1 { page-break-before: avoid; }
   h2, h3 { page-break-after: avoid; }
   img, table, pre, blockquote { page-break-inside: avoid; }
   a { color: inherit; text-decoration: none; }
+  p { text-indent: 2em; }
+  p.figcap, li p, td p, blockquote p { text-indent: 0; }
 }
 </style>
 </head>
@@ -99,7 +144,16 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
 <div id="toc"><b>目录<button class="tocclose" title="收起">×</button></b><a class="lv1 h1" href="#sec-0" data-id="sec-0">交易手册：价格行为 · SMC · 仓位 · 心态 · Prop 考核</a><a class="lv3" href="#sec-1" data-id="sec-1" data-parent="sec-0">前言</a><a class="lv3" href="#sec-2" data-id="sec-2" data-parent="sec-0">章节地图</a><a class="lv3" href="#sec-3" data-id="sec-3" data-parent="sec-0">怎么读</a><a class="lv3" href="#sec-4" data-id="sec-4" data-parent="sec-0">最小可用系统：先跑起来</a><a class="lv3" href="#sec-5" data-id="sec-5" data-parent="sec-0">一个提醒</a><a class="lv3" href="#sec-6" data-id="sec-6" data-parent="sec-0">本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。</a><a class="lv1 h1" href="#sec-7" data-id="sec-7">第 1 章 市场与工具全景：钱、市场、品种、基金与 A 股</a><a class="lv3" href="#sec-8" data-id="sec-8" data-parent="sec-7">1.1 谁在交易：参与者结构 【核心】</a><a class="lv3" href="#sec-9" data-id="sec-9" data-parent="sec-7">1.2 交易什么：品种对比 【核心】</a><a class="lv3" href="#sec-10" data-id="sec-10" data-parent="sec-7">1.3 怎么下单：订单类型 【核心】</a><a class="lv3" href="#sec-11" data-id="sec-11" data-parent="sec-7">1.4 做多做空与合约规格 【核心】</a><a class="lv3" href="#sec-12" data-id="sec-12" data-parent="sec-7">1.5 杠杆与保证金：爆仓的数学 【核心】</a><a class="lv3" href="#sec-13" data-id="sec-13" data-parent="sec-7">1.6 价格是怎么形成的：买卖盘、点差、滑点、插针</a><a class="lv3" href="#sec-14" data-id="sec-14" data-parent="sec-7">1.7 什么时候交易：全球时段</a><a class="lv3" href="#sec-15" data-id="sec-15" data-parent="sec-7">1.8 什么在推动价格：基本面黑天鹅</a><a class="lv3" href="#sec-16" data-id="sec-16" data-parent="sec-7">1.9 品种细节：为什么"脾气"重要</a><a class="lv3" href="#sec-17" data-id="sec-17" data-parent="sec-7">1.10 期货：prop 考核的主战场</a><a class="lv3" href="#sec-18" data-id="sec-18" data-parent="sec-7">1.11 股票：做空限制与规则</a><a class="lv3" href="#sec-19" data-id="sec-19" data-parent="sec-7">1.12 外汇：要点速查</a><a class="lv3" href="#sec-20" data-id="sec-20" data-parent="sec-7">1.13 加密货币：24/7 与高波动</a><a class="lv3" href="#sec-21" data-id="sec-21" data-parent="sec-7">1.14 跨市场：相关性与风险叠加</a><a class="lv3" href="#sec-22" data-id="sec-22" data-parent="sec-7">1.15 怎么选品种：匹配你的系统和目标</a><a class="lv3" href="#sec-23" data-id="sec-23" data-parent="sec-7">1.16 A 股：规则与脾气（编者补充 · 投资通识）</a><a class="lv3" href="#sec-24" data-id="sec-24" data-parent="sec-7">1.17 基金与资产配置：不盯盘的财富底座（编者补充 · 投资通识）</a><a class="lv3" href="#sec-25" data-id="sec-25" data-parent="sec-7">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-26" data-id="sec-26" data-parent="sec-7">本章小结</a><a class="lv1 h1" href="#sec-27" data-id="sec-27">第 2 章 读懂价格行为</a><a class="lv3" href="#sec-28" data-id="sec-28" data-parent="sec-27">2.1 一根 K 线，就是拔河的一个回合 【核心】</a><a class="lv3" href="#sec-29" data-id="sec-29" data-parent="sec-27">2.2 同样一根 K 线，位置不同，天差地别 【核心】</a><a class="lv3" href="#sec-30" data-id="sec-30" data-parent="sec-27">2.3 趋势：钱走出来的方向 【核心】</a><a class="lv3" href="#sec-31" data-id="sec-31" data-parent="sec-27">2.4 支撑与阻力：一群人被困住的位置 【核心】</a><a class="lv3" href="#sec-32" data-id="sec-32" data-parent="sec-27">2.5 成交量：这场拔河的燃料 【核心】</a><a class="lv3" href="#sec-33" data-id="sec-33" data-parent="sec-27">2.6 实战演练：把一根锤子线，读成一次完整的入场 【核心】</a><a class="lv3" href="#sec-34" data-id="sec-34" data-parent="sec-27">2.7 趋势线、通道与缺口 【核心】</a><a class="lv3" href="#sec-35" data-id="sec-35" data-parent="sec-27">2.8 Al Brooks 把结构读"活" 【核心】</a><a class="lv3" href="#sec-36" data-id="sec-36" data-parent="sec-27">2.9 洛氏霍克交易法：把"结构突破"变成一套完整打法 【核心】</a><a class="lv3" href="#sec-37" data-id="sec-37" data-parent="sec-27">2.10 逐棒检查单：把读图变成流程</a><a class="lv3" href="#sec-38" data-id="sec-38" data-parent="sec-27">2.11 尖峰与高潮：趋势的引擎与末日</a><a class="lv3" href="#sec-39" data-id="sec-39" data-parent="sec-27">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-40" data-id="sec-40" data-parent="sec-27">本章小结</a><a class="lv1 h1" href="#sec-41" data-id="sec-41">第 3 章 入场信号</a><a class="lv3" href="#sec-42" data-id="sec-42" data-parent="sec-41">3.1 判定框架：背景 × 位置 × 形态 【核心】</a><a class="lv3" href="#sec-43" data-id="sec-43" data-parent="sec-41">3.2 假突破：最重要的单一信号 【核心】</a><a class="lv3" href="#sec-44" data-id="sec-44" data-parent="sec-41">3.3 Pin Bar（锤子 / 吊颈） 【核心】</a><a class="lv3" href="#sec-45" data-id="sec-45" data-parent="sec-41">3.4 吞没形态（Engulfing） 【核心】</a><a class="lv3" href="#sec-46" data-id="sec-46" data-parent="sec-41">3.5 内包线（Inside Bar） 【核心】</a><a class="lv3" href="#sec-47" data-id="sec-47" data-parent="sec-41">3.6 量价确认：信号的最后一道滤网</a><a class="lv3" href="#sec-48" data-id="sec-48" data-parent="sec-41">3.7 信号组合的胜率排序</a><a class="lv3" href="#sec-49" data-id="sec-49" data-parent="sec-41">3.8 蜡烛组合形态</a><a class="lv3" href="#sec-50" data-id="sec-50" data-parent="sec-41">3.9 图表形态</a><a class="lv3" href="#sec-51" data-id="sec-51" data-parent="sec-41">3.10 信号 K 的质量：Brooks 的评判标准</a><a class="lv3" href="#sec-52" data-id="sec-52" data-parent="sec-41">3.11 突破的真实概率：用数据校准你的预期</a><a class="lv3" href="#sec-53" data-id="sec-53" data-parent="sec-41">3.12 十种最佳价格行为模式（概率排序）</a><a class="lv3" href="#sec-54" data-id="sec-54" data-parent="sec-41">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-55" data-id="sec-55" data-parent="sec-41">本章小结</a><a class="lv1 h1" href="#sec-56" data-id="sec-56">第 4 章 交易系统：入场与出场</a><a class="lv3" href="#sec-57" data-id="sec-57" data-parent="sec-56">本篇导读：一章其实有四本书</a><a class="lv2" href="#sec-58" data-id="sec-58" data-parent="sec-56">篇一 系统与状态机（4.1-4.11）</a><a class="lv3" href="#sec-59" data-id="sec-59" data-parent="sec-58">4.1 信号不等于系统 【核心】</a><a class="lv3" href="#sec-60" data-id="sec-60" data-parent="sec-58">4.2 一套完整系统的六要素 【核心】</a><a class="lv3" href="#sec-61" data-id="sec-61" data-parent="sec-58">4.3 系统一：趋势回调交易（最推荐） 【核心】</a><a class="lv3" href="#sec-62" data-id="sec-62" data-parent="sec-58">4.4 系统二：区间边界交易 【核心】</a><a class="lv3" href="#sec-63" data-id="sec-63" data-parent="sec-58">4.5 系统三：突破交易 【核心】</a><a class="lv3" href="#sec-64" data-id="sec-64" data-parent="sec-58">4.6 系统四：微通道交易（Micro Channel） 【核心】</a><a class="lv3" href="#sec-65" data-id="sec-65" data-parent="sec-58">4.7 状态机与多时间框架 【核心】</a><a class="lv3" href="#sec-66" data-id="sec-66" data-parent="sec-58">4.8 斐波那契回撤 【核心】</a><a class="lv3" href="#sec-67" data-id="sec-67" data-parent="sec-58">4.9 海龟交易法则：系统化趋势跟踪的鼻祖 【核心】</a><a class="lv3" href="#sec-68" data-id="sec-68" data-parent="sec-58">4.10 市场的两种模式：趋势跟踪 vs 均值回归 【核心】</a><a class="lv3" href="#sec-69" data-id="sec-69" data-parent="sec-58">4.11 Van Tharp 的系统开发框架：系统要"合身" 【核心】</a><a class="lv2" href="#sec-70" data-id="sec-70" data-parent="sec-56">篇二 出场：期望值的另一半（4.12-4.20）</a><a class="lv3" href="#sec-71" data-id="sec-71" data-parent="sec-70">4.12 出场：期望值的另一半 【核心】</a><a class="lv3" href="#sec-72" data-id="sec-72" data-parent="sec-70">4.13 止盈目标怎么定 【核心】</a><a class="lv3" href="#sec-73" data-id="sec-73" data-parent="sec-70">4.14 分批止盈：兼顾落袋与奔跑 【核心】</a><a class="lv3" href="#sec-74" data-id="sec-74" data-parent="sec-70">4.15 移动止损：让利润奔跑的机制 【核心】</a><a class="lv3" href="#sec-75" data-id="sec-75" data-parent="sec-70">4.16 保本时机：别移太早 【核心】</a><a class="lv3" href="#sec-76" data-id="sec-76" data-parent="sec-70">4.17 时间止损：不动也是风险 【核心】</a><a class="lv3" href="#sec-77" data-id="sec-77" data-parent="sec-70">4.18 一笔交易的完整生命周期 【核心】</a><a class="lv3" href="#sec-78" data-id="sec-78" data-parent="sec-70">4.19 完整案例：一笔交易从入场到出场 【核心】</a><a class="lv3" href="#sec-79" data-id="sec-79" data-parent="sec-70">4.20 不同市场状态下的出场调整 【核心】</a><a class="lv2" href="#sec-80" data-id="sec-80" data-parent="sec-56">篇三 高级入场结构（4.21-4.25）</a><a class="lv3" href="#sec-81" data-id="sec-81" data-parent="sec-80">4.21 突破单三模型（实战课）</a><a class="lv3" href="#sec-82" data-id="sec-82" data-parent="sec-80">4.22 限价单四模型：把入场价定在"等你的地方"</a><a class="lv3" href="#sec-83" data-id="sec-83" data-parent="sec-80">4.23 always-in 强突破行情：四招短线打法</a><a class="lv3" href="#sec-84" data-id="sec-84" data-parent="sec-80">4.24 外包 K 线（Outside Bar）的实战用法</a><a class="lv3" href="#sec-85" data-id="sec-85" data-parent="sec-80">4.25 决策执行口诀与禁止清单</a><a class="lv2" href="#sec-86" data-id="sec-86" data-parent="sec-56">篇四 补充系统（4.26-4.28）：ORB、均线趋势跟踪、配对交易</a><a class="lv3" href="#sec-87" data-id="sec-87" data-parent="sec-86">4.26 ORB（开盘区间突破）：一天最重要的头 15 分钟</a><a class="lv3" href="#sec-88" data-id="sec-88" data-parent="sec-86">4.27 均线趋势跟踪：把"方向感"变成规则（编者补充 · 策略通识）</a><a class="lv3" href="#sec-89" data-id="sec-89" data-parent="sec-86">4.28 配对交易：市场中性的均值回归（编者补充 · 策略通识）</a><a class="lv3" href="#sec-90" data-id="sec-90" data-parent="sec-86">4.29 实战串讲：一个交易日走一遍</a><a class="lv3" href="#sec-91" data-id="sec-91" data-parent="sec-86">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-92" data-id="sec-92" data-parent="sec-86">本章小结</a><a class="lv1 h1" href="#sec-93" data-id="sec-93">第 5 章 机构视角与流动性：SMC、Wyckoff、订单流的统一解读</a><a class="lv3" href="#sec-94" data-id="sec-94" data-parent="sec-93">5.1 核心世界观</a><a class="lv3" href="#sec-95" data-id="sec-95" data-parent="sec-93">5.2 流动性池（Liquidity Pool）</a><a class="lv3" href="#sec-96" data-id="sec-96" data-parent="sec-93">5.3 扫流动性（Sweep / Stop Hunt）</a><a class="lv3" href="#sec-97" data-id="sec-97" data-parent="sec-93">5.4 市场结构转换（BOS / CHoCH）</a><a class="lv3" href="#sec-98" data-id="sec-98" data-parent="sec-93">5.5 订单块（Order Block, OB）</a><a class="lv3" href="#sec-99" data-id="sec-99" data-parent="sec-93">5.6 公允价值缺口（FVG / 失衡）</a><a class="lv3" href="#sec-100" data-id="sec-100" data-parent="sec-93">5.7 完整 SMC 交易流程（走一遍）</a><a class="lv3" href="#sec-101" data-id="sec-101" data-parent="sec-93">5.8 Kill Zones（时段）</a><a class="lv3" href="#sec-102" data-id="sec-102" data-parent="sec-93">5.9 验证心态：防事后叙事</a><a class="lv3" href="#sec-103" data-id="sec-103" data-parent="sec-93">5.10 Wyckoff：SMC 的正统源头</a><a class="lv3" href="#sec-104" data-id="sec-104" data-parent="sec-93">5.11 供需区（Supply/Demand）：给强势运动的起点标价</a><a class="lv3" href="#sec-105" data-id="sec-105" data-parent="sec-93">5.12 Volume Profile：量在哪里</a><a class="lv3" href="#sec-106" data-id="sec-106" data-parent="sec-93">5.13 摆动范围（Swing Range）：把结构变成"地图"</a><a class="lv3" href="#sec-107" data-id="sec-107" data-parent="sec-93">5.14 溢价与折价（Premium / Discount）："贵不贵"是交易决策的一半</a><a class="lv3" href="#sec-108" data-id="sec-108" data-parent="sec-93">5.15 机构订单块与 S2B/B2S：从"识别"到"理解意图"</a><a class="lv3" href="#sec-109" data-id="sec-109" data-parent="sec-93">5.16 流动性诱导与内外流动性：读懂"陷阱"的布局</a><a class="lv3" href="#sec-110" data-id="sec-110" data-parent="sec-93">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-111" data-id="sec-111" data-parent="sec-93">本章小结</a><a class="lv1 h1" href="#sec-112" data-id="sec-112">第 6 章 仓位与风险</a><a class="lv3" href="#sec-113" data-id="sec-113" data-parent="sec-112">6.1 考核规则决定仓位 【核心】</a><a class="lv3" href="#sec-114" data-id="sec-114" data-parent="sec-112">6.2 固定分数仓位公式 【核心】</a><a class="lv3" href="#sec-115" data-id="sec-115" data-parent="sec-112">6.3 连亏是必然，不是意外 【核心】</a><a class="lv3" href="#sec-116" data-id="sec-116" data-parent="sec-112">6.4 期望值与盈亏平衡 【核心】</a><a class="lv3" href="#sec-117" data-id="sec-117" data-parent="sec-112">6.5 ATR 止损与波动率（进阶）</a><a class="lv3" href="#sec-118" data-id="sec-118" data-parent="sec-112">6.6 成本：点差、滑点与隔夜利息</a><a class="lv3" href="#sec-119" data-id="sec-119" data-parent="sec-112">6.7 凯利公式：为什么不能满仓凯利</a><a class="lv3" href="#sec-120" data-id="sec-120" data-parent="sec-112">6.8 破产概率（Risk of Ruin）</a><a class="lv3" href="#sec-121" data-id="sec-121" data-parent="sec-112">6.9 复利与规模化</a><a class="lv3" href="#sec-122" data-id="sec-122" data-parent="sec-112">6.10 加仓：新手不宜，盈利才加</a><a class="lv3" href="#sec-123" data-id="sec-123" data-parent="sec-112">6.11 "我不在乎"的头寸规模：心理的仓位解</a><a class="lv3" href="#sec-124" data-id="sec-124" data-parent="sec-112">6.12 洛氏 3 手合约法：分批止盈的"成本先回"版</a><a class="lv3" href="#sec-125" data-id="sec-125" data-parent="sec-112">6.13 多策略资金分配：组合层的风险预算（进阶）</a><a class="lv3" href="#sec-126" data-id="sec-126" data-parent="sec-112">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-127" data-id="sec-127" data-parent="sec-112">本章小结</a><a class="lv1 h1" href="#sec-128" data-id="sec-128">第 7 章 执行与心态</a><a class="lv3" href="#sec-129" data-id="sec-129" data-parent="sec-128">7.1 概率思维 【核心】</a><a class="lv3" href="#sec-130" data-id="sec-130" data-parent="sec-128">7.2 行为金融：人会犯的七个错误 【核心】</a><a class="lv3" href="#sec-131" data-id="sec-131" data-parent="sec-128">7.3 交易流程：三个时刻 【核心】</a><a class="lv3" href="#sec-132" data-id="sec-132" data-parent="sec-128">7.4 连亏与连赚：两个危险时刻 【核心】</a><a class="lv3" href="#sec-133" data-id="sec-133" data-parent="sec-128">7.5 交易日志：心理维度 【核心】</a><a class="lv3" href="#sec-134" data-id="sec-134" data-parent="sec-128">7.6 考核期十条军规 【核心】</a><a class="lv3" href="#sec-135" data-id="sec-135" data-parent="sec-128">7.7 波段 vs 刮头皮：先想清楚你是哪种交易者</a><a class="lv3" href="#sec-136" data-id="sec-136" data-parent="sec-128">7.8 新手最常见的错误：因错误而输（Brooks 清单）</a><a class="lv3" href="#sec-137" data-id="sec-137" data-parent="sec-128">7.9 洛氏交易哲学：目标导向的自我管理</a><a class="lv3" href="#sec-138" data-id="sec-138" data-parent="sec-128">7.10 以交易为志业：决策树与精通阶梯（Tefi L20）</a><a class="lv3" href="#sec-139" data-id="sec-139" data-parent="sec-128">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-140" data-id="sec-140" data-parent="sec-128">本章小结</a><a class="lv1 h1" href="#sec-141" data-id="sec-141">第 8 章 工具与验证</a><a class="lv3" href="#sec-142" data-id="sec-142" data-parent="sec-141">8.1 图表与分析 【核心】</a><a class="lv3" href="#sec-143" data-id="sec-143" data-parent="sec-141">8.2 回测与数据 【核心】</a><a class="lv3" href="#sec-144" data-id="sec-144" data-parent="sec-141">8.3 交易日志与复盘 【核心】</a><a class="lv3" href="#sec-145" data-id="sec-145" data-parent="sec-141">8.4 模拟盘 【核心】</a><a class="lv3" href="#sec-146" data-id="sec-146" data-parent="sec-141">8.5 信息与日历 【核心】</a><a class="lv3" href="#sec-147" data-id="sec-147" data-parent="sec-141">8.6 防坑清单 【核心】</a><a class="lv3" href="#sec-148" data-id="sec-148" data-parent="sec-141">8.7 上真钱的门槛：验证闭环 【核心】</a><a class="lv3" href="#sec-149" data-id="sec-149" data-parent="sec-141">8.8 复盘体系：日/周/月 【核心】</a><a class="lv3" href="#sec-150" data-id="sec-150" data-parent="sec-141">8.9 SQN：用 R 分布给系统打分 【核心】</a><a class="lv3" href="#sec-151" data-id="sec-151" data-parent="sec-141">8.10 拍卖理论：把"平衡-失衡"读成循环（威科夫 2.0） 【核心】</a><a class="lv3" href="#sec-152" data-id="sec-152" data-parent="sec-141">8.11 足迹图（订单流图表）：看见逐价成交 【核心】</a><a class="lv3" href="#sec-153" data-id="sec-153" data-parent="sec-141">8.12 订单流三件套：DOM、逐笔、Delta 体系化（进阶）</a><a class="lv3" href="#sec-154" data-id="sec-154" data-parent="sec-141">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-155" data-id="sec-155" data-parent="sec-141">核心方法论收口</a><a class="lv3" href="#sec-156" data-id="sec-156" data-parent="sec-141">本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。</a><a class="lv1 h1" href="#sec-157" data-id="sec-157">第 9 章 Prop Firm 考核实战</a><a class="lv3" href="#sec-158" data-id="sec-158" data-parent="sec-157">9.1 考核的结构</a><a class="lv3" href="#sec-159" data-id="sec-159" data-parent="sec-157">9.2 平台选择</a><a class="lv3" href="#sec-160" data-id="sec-160" data-parent="sec-157">9.3 达标节奏的数学（本章核心）</a><a class="lv3" href="#sec-161" data-id="sec-161" data-parent="sec-157">9.4 常见失败原因</a><a class="lv3" href="#sec-162" data-id="sec-162" data-parent="sec-157">9.5 拿到 Funded 之后</a><a class="lv3" href="#sec-163" data-id="sec-163" data-parent="sec-157">9.6 出金与合规（简要）</a><a class="lv3" href="#sec-164" data-id="sec-164" data-parent="sec-157">9.7 规则细节（容易踩的坑）</a><a class="lv3" href="#sec-165" data-id="sec-165" data-parent="sec-157">9.8 案例：一次完整考核过程</a><a class="lv3" href="#sec-166" data-id="sec-166" data-parent="sec-157">9.9 账户规模的现实（Al Brooks 的提醒）</a><a class="lv3" href="#sec-167" data-id="sec-167" data-parent="sec-157">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-168" data-id="sec-168" data-parent="sec-157">本章小结</a><a class="lv1 h1" href="#sec-169" data-id="sec-169">第 10 章 期权：交易的另一个维度</a><a class="lv3" href="#sec-170" data-id="sec-170" data-parent="sec-169">10.1 先建立一个直觉：期权到底在交易什么</a><a class="lv3" href="#sec-171" data-id="sec-171" data-parent="sec-169">10.2 期权是什么：从一个具体例子讲起</a><a class="lv3" href="#sec-172" data-id="sec-172" data-parent="sec-169">10.3 期权的价格由什么构成</a><a class="lv3" href="#sec-173" data-id="sec-173" data-parent="sec-169">10.4 希腊字母：别背公式，理解它们在回答什么问题</a><a class="lv3" href="#sec-174" data-id="sec-174" data-parent="sec-169">10.5 波动率（IV）：期权的灵魂，也是和你已有知识的连接点</a><a class="lv3" href="#sec-175" data-id="sec-175" data-parent="sec-169">10.6 常用策略：按"你想干什么"来学，而不是按名字背</a><a class="lv3" href="#sec-176" data-id="sec-176" data-parent="sec-169">10.7 把期权放回全书坐标</a><a class="lv3" href="#sec-177" data-id="sec-177" data-parent="sec-169">10.8 期权的陷阱，以及什么时候该碰、什么时候别碰</a><a class="lv3" href="#sec-178" data-id="sec-178" data-parent="sec-169">10.9 一个极简主义的参照：Al Brooks 怎么用期权</a><a class="lv3" href="#sec-179" data-id="sec-179" data-parent="sec-169">本章自测（答案在本节末尾）</a><a class="lv3" href="#sec-180" data-id="sec-180" data-parent="sec-169">本章小结</a><a class="lv1 h1" href="#sec-181" data-id="sec-181">附录 术语表与学习资源</a><a class="lv2" href="#sec-182" data-id="sec-182" data-parent="sec-181">A0. 素材来源对照表</a><a class="lv2" href="#sec-183" data-id="sec-183" data-parent="sec-181">A. 术语速查表</a><a class="lv3" href="#sec-184" data-id="sec-184" data-parent="sec-183">市场结构</a><a class="lv3" href="#sec-185" data-id="sec-185" data-parent="sec-183">SMC / 流动性</a><a class="lv3" href="#sec-186" data-id="sec-186" data-parent="sec-183">Wyckoff</a><a class="lv3" href="#sec-187" data-id="sec-187" data-parent="sec-183">量价分布（5.12）</a><a class="lv3" href="#sec-188" data-id="sec-188" data-parent="sec-183">信号与形态</a><a class="lv3" href="#sec-189" data-id="sec-189" data-parent="sec-183">Brooks 与量化派术语</a><a class="lv3" href="#sec-190" data-id="sec-190" data-parent="sec-183">K 线组合形态（3.8-3.9）</a><a class="lv3" href="#sec-191" data-id="sec-191" data-parent="sec-183">突破系统（QuantSystems / Ali）</a><a class="lv3" href="#sec-192" data-id="sec-192" data-parent="sec-183">市场微观结构（1.6 / 8.11）</a><a class="lv3" href="#sec-193" data-id="sec-193" data-parent="sec-183">订单流（8.11-8.12）</a><a class="lv3" href="#sec-194" data-id="sec-194" data-parent="sec-183">SMC 与 Wyckoff（第 5 章）</a><a class="lv3" href="#sec-195" data-id="sec-195" data-parent="sec-183">策略与资金管理</a><a class="lv3" href="#sec-196" data-id="sec-196" data-parent="sec-183">Prop 考核（第 9 章）</a><a class="lv3" href="#sec-197" data-id="sec-197" data-parent="sec-183">风险与计量</a><a class="lv3" href="#sec-198" data-id="sec-198" data-parent="sec-183">宏观事件与经济数据（1.8）</a><a class="lv3" href="#sec-199" data-id="sec-199" data-parent="sec-183">时间框架</a><a class="lv3" href="#sec-200" data-id="sec-200" data-parent="sec-183">期权与波动率（第 10 章）</a><a class="lv2" href="#sec-201" data-id="sec-201" data-parent="sec-181">B. 学习资源（已验证）</a><a class="lv3" href="#sec-202" data-id="sec-202" data-parent="sec-201">中文免费课</a><a class="lv3" href="#sec-203" data-id="sec-203" data-parent="sec-201">文字教程</a><a class="lv3" href="#sec-204" data-id="sec-204" data-parent="sec-201">英文免费课</a><a class="lv3" href="#sec-205" data-id="sec-205" data-parent="sec-201">公版书（合法免费）</a><a class="lv3" href="#sec-206" data-id="sec-206" data-parent="sec-201">中文正版书（微信读书）</a><a class="lv3" href="#sec-207" data-id="sec-207" data-parent="sec-201">学术（免费）</a><a class="lv3" href="#sec-208" data-id="sec-208" data-parent="sec-201">认证路线</a><a class="lv2" href="#sec-209" data-id="sec-209" data-parent="sec-181">C. 网络大 V 系统参考</a><a class="lv3" href="#sec-210" data-id="sec-210" data-parent="sec-209">C.1 先立态度：大 V 系统的真相</a><a class="lv3" href="#sec-211" data-id="sec-211" data-parent="sec-209">C.2 ICT（Michael Huddleston）——SMC 的源头</a><a class="lv3" href="#sec-212" data-id="sec-212" data-parent="sec-209">C.3 Al Brooks——价格行为的教父</a><a class="lv3" href="#sec-213" data-id="sec-213" data-parent="sec-209">C.4 Thomas Wade——标普日内价格行为</a><a class="lv3" href="#sec-214" data-id="sec-214" data-parent="sec-209">C.5 南桥价格行为——中文标普日内</a><a class="lv3" href="#sec-215" data-id="sec-215" data-parent="sec-209">C.6 大 V 系统的共性，以及怎么用</a><a class="lv3" href="#sec-216" data-id="sec-216" data-parent="sec-209">C.7 Ali Moin-Afshari——微通道与量化突破（10,000 Trades）</a><a class="lv3" href="#sec-217" data-id="sec-217" data-parent="sec-209">C.8 GRANDMA——"连奶奶都会交易"的故障安全入场（Rose）</a><a class="lv3" href="#sec-218" data-id="sec-218" data-parent="sec-209">C.9 Rose 八大主题——把 Brooks 概念拆成专题</a><a class="lv2" href="#sec-219" data-id="sec-219" data-parent="sec-181">D. 防骗提醒</a><a class="lv2" href="#sec-220" data-id="sec-220" data-parent="sec-181">结语：把书合上之前</a><a class="lv3" href="#sec-221" data-id="sec-221" data-parent="sec-220">本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。</a></div>
 <button id="backtop" title="返回顶部">↑</button>
 <button id="tocbtn">☰ 目录</button>
-<h1 id="sec-0">交易手册：价格行为 · SMC · 仓位 · 心态 · Prop 考核</h1>
+<div id="cover">
+  <div class="kicker">交易 · 投资 · 通识</div>
+  <h1>交易手册</h1>
+  <div class="sub">价格行为 · SMC · 仓位 · 心态 · Prop 考核</div>
+  <div class="rule"></div>
+  <div class="desc">一套可验证、可重复、能控制风险的交易方法论。<br>
+  市场基础 → 价格行为 → 信号 → 系统 → SMC → 仓位 → 心态 → 验证 → 应用</div>
+  <div class="meta">学习笔记 · 非出版物 · 不构成投资建议</div>
+</div>
+<h1 id="sec-0" class="booktitle">交易手册：价格行为 · SMC · 仓位 · 心态 · Prop 考核</h1>
 <blockquote>
 <p>交易手册</p>
 <p>价格行为 · SMC · 仓位 · 心态 · Prop 考核</p>
@@ -1017,7 +1071,7 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
 <li><strong>交易的第一年，你的最大成本不是亏钱，是时间</strong>——配置账户就是这段时间里"工资之外"的复利来源。</li>
 </ul>
 <p><strong>这一节的定位</strong>：本书其余部分教你"怎么把交易账户做精"，这一节教你"怎么让大部分身家稳着增值"。两条腿走路，第 7 章的概率思维才有着落——<strong>交易是为了活得更好，不是为了把生活押上桌</strong>（呼应前言立场 2：活得久比赚得快重要）。</p>
-<h3 id="sec-25">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-25" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>为什么说"外汇没有统一的真实成交量"？这决定了什么？</li>
 <li>杠杆的真相是什么？</li>
@@ -1025,7 +1079,7 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
 <li>你买入成交在哪个价（Ask/Bid）？为什么点差是"固定成本"？限价单和止损单哪个会滑点？</li>
 </ol>
 <p><strong>答案</strong>：① 外汇是 OTC 场外市场、没有中心交易所（1.2）——依赖量价的方法（Wyckoff/订单流）在期货上更正统，外汇上只能参考；② 杠杆不改变胜率，放大的是仓位误差（1.5）——同样的判断错误，低杠杆是小伤、高杠杆直接爆仓；③ T+1（1.16）——当天买的仓位当天不能卖，止损最早次日生效，所以信号周期要放大到日线以上、仓位按两天的波动来算；④ 买入成交在 Ask、卖出成交在 Bid（图 1-6）——一进一出天然亏一个点差，高频进出（剥头皮）对点差最敏感（1.6）；止损单会滑点（跳空时以更差价格成交），限价单永不滑点（1.3）。</p>
-<h3 id="sec-26">本章小结</h3>
+<h3 id="sec-26" class="sumhead">本章小结</h3>
 <p>价格是参与者行为的结果：散户行为可预测，机构需要对手盘，做市商赚点差。</p>
 <p>品种决定方法：外汇无真实量，期货量价可靠——量价方法在期货上更正统。</p>
 <p>限价单不滑点，挂单要设时效；prop 平台禁止对冲/马丁。</p>
@@ -1394,14 +1448,14 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
 <p><strong>趋势日与小幅反弹趋势日（尖峰的日线形态）</strong>：开盘起下跌趋势日——开盘后前几根棒形成当日最高点，开盘区间 &lt; 当日波幅 25%，跌破后价格持续下跌；约 20% 的交易日属此类（上涨镜像同理）。确认规则：<strong>开盘低点（或高点）在第一小时内被突破 = 趋势日失败</strong>；确立后每次反弹都是顺势入场点。<strong>小幅反弹趋势日 = 最强趋势日类型（每月约 1-2 次）</strong>：全天反弹幅度仅为日均波幅的 10-30%、反弹只持续 1-3 根、反弹棒约趋势棒的 30-50%——所有反弹都是顺势入场点，禁止逆势。趋势日逻辑呼应第 1.9 时段：欧美交易时段交界最易发生。</p>
 <p><strong>陷阱速查</strong>：单根大实体棒 ≠ 尖峰（须 2 根+跟随）；区间内急涨 ≠ 尖峰（须突破区间边界并持续）；通道内大棒 ≠ 新尖峰（须突破通道上轨并显著加速）；二次推动明显弱于第一次 = 只是通道行为；高潮后追涨 = 接最后一棒。</p>
 <p><img alt="图 2-11 尖峰识别五标准与持续时间分级（左）；买进高潮四阶段序列与尖峰后三路径概率（右）" src="images/fig_p2_spike_climax.png" /></p>
-<h3 id="sec-39">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-39" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>一根锤子线出现在上升趋势的 HL 处，另一根同样的锤子线出现在前高阻力正下方——哪根更值得关注？为什么？</li>
 <li>趋势的客观定义是什么？一段行情没有 HH/HL 有序排列，还算趋势吗？</li>
 <li>逐棒检查单（2.10）的核心价值是什么？</li>
 </ol>
 <p><strong>答案</strong>：① 出现在 HL 处的——同样的形态，位置不同天差地别（2.2），阻力正下方可能是逆势或半空信号；② 有序的 HH/HL 排列（2.3）——没有就不算趋势，那是区间或混沌，别用趋势系统；③ 把读图从"感觉"变成固定流程——每根 K 线收盘后按固定顺序问结构/方向/信号，这是第 7 章流程化的读图版。</p>
-<h3 id="sec-40">本章小结</h3>
+<h3 id="sec-40" class="sumhead">本章小结</h3>
 <p>K 线记录的不是价格，是人。实体告诉你谁赢了，影线告诉你赢得多艰难。</p>
 <p>一根 K 线的意义由位置决定：同样的锤子线，在支撑位是黄金，在半空是垃圾。</p>
 <p>趋势是钱走出来的，不是画出来的：最近的重要低点被跌破，上升趋势就在定义上被破坏——别跟结构争辩。</p>
@@ -1847,14 +1901,14 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
 <li>注意：磁力位效应是"倾向"不是"保证"——价格可能被磁力位吸引测试后直接穿过（突破模式）。</li>
 </ul>
 <p><strong>一句话记忆</strong>：反转看 40%（趋势反转、最终旗形），突破看 48%（FT），楔形破位 75%，通道突破只有 25%，区间突破 80% 失败——<strong>概率最低的三类（通道追单、末段突破、区间追突破）恰恰是新手最爱做的</strong>。</p>
-<h3 id="sec-54">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-54" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>价格冲破前高但收盘拉回前高下方，追突破做多的人全被套——这个场景叫什么？接下来大概率怎么走？</li>
 <li>假突破成立的两个"必须"是什么？</li>
 <li>信号质量 = 背景 × 位置 × 形态——"半空中一根漂亮的吞没"为什么不能做？</li>
 </ol>
 <p><strong>答案</strong>：① 假突破（3.2）——被扫止损的人被迫离场，他们的离场成为反向行情的燃料；② 收盘确认（盘中插破不算数）+ 配合量能（突破/收回放量才高质量，3.2）；③ 位置不过关，乘号上有一个零，整个信号质量就是零（3.1）——背景顺、形态漂亮都不抵位置不对。</p>
-<h3 id="sec-55">本章小结</h3>
+<h3 id="sec-55" class="sumhead">本章小结</h3>
 <p>信号质量 = 背景 × 位置 × 形态，三者相乘，缺一个就是零。先看位置，再看形态。</p>
 <p>假突破是最重要的信号——它建立在"止损被扫"这个最确定的机制上，是第 5 章 sweep 的前身。</p>
 <p>pin bar/吞没/内包线，都必须在关键位上才有意义。</p>
@@ -3008,7 +3062,7 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
 <p><img alt="图 4-5R 真实数据：突破生命周期——突破 → 回踩守住 → 深回调失败 → 第二腿（BTC 5 分钟，2026-06-29）" src="images/fig_real_btc_day.png" /></p>
 <p><em>图 4-5R 真实数据：突破生命周期（数据源：Binance BTCUSDT 5m K 线）</em></p>
 <p>对照着读五幕：① <strong>区间</strong>：08:40-11:00 价格在 58900-59700 之间来回，上沿 59700/59588 被测试两次——默认区间逻辑（4.7：85% 的时间在区间里）；② <strong>突破</strong>：11:25 大实体阳线收盘站上区间上沿 60233——突破发生，切系统一；③ <strong>回踩守住</strong>：11:35 回踩 59878 不破上沿——突破测试成功，顺势入场点，止损放回踩低点下方；④ <strong>深回调（失败）</strong>：13:10 59392 跌回区间内部——这次测试失败，突破进入假突破模式（呼应 3.2），持仓者被扫止损，但<strong>别反手</strong>：它可能是新一轮突破的起点；⑤ <strong>第二腿</strong>：14:15 反转再上 60346 新高——失败的回调本身成了新突破。<strong>每一步都等收盘确认</strong>：你在 11:25 突破时追入，13:10 会被扫；等 11:35 回踩确认再入，才有资格吃第二腿。加密 24 小时市场没有 9:30 开盘，但有同样的突破节奏：区间磨人时忍、突破时切、回踩时进、失败时走。</p>
-<h3 id="sec-91">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-91" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>状态机判定出"上升通道"，你应该用哪套系统？判定变成"区间"后呢？</li>
 <li>区间被真正突破的判据是什么？"插破边界又收回"算什么？</li>
@@ -3017,7 +3071,7 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
 <li>配对交易为什么"市场中性"？Z-score 的 &gt;2 / 回 0 / &gt;3 分别对应什么动作？</li>
 </ol>
 <p><strong>答案</strong>：① 系统一趋势回调（4.3）；状态变了就换——区间用系统二区间边界（4.4/4.7），不恋战；② 收盘站稳边界外 + 放量 + 大实体三条件（4.4）——插破收回是假突破（3.2），是区间交易者的反向入场机会；③ 背景/触发/止损/目标/仓位/过滤器（4.2）——出场是期望值的另一半（4.12），临场定目标等于把决策交给情绪；④ 状态机确认趋势日 + 收盘确认突破（4.26，窄 ORB 更佳）——收回区间是假突破，反向信号；⑤ 同时多空抵消大盘方向风险，只赚相对价差回归（4.28）——&gt;2 倍标准差反向开仓（贵的空、便宜的买）、回归均值（Z 回 0）平仓、&gt;3 或结构性脱钩止损。</p>
-<h3 id="sec-92">本章小结</h3>
+<h3 id="sec-92" class="sumhead">本章小结</h3>
 <p>会看信号≠会交易：信号只是扳机，系统才是整把枪。系统的作用是让你在情绪上头时不做蠢事。</p>
 <p>六要素写死才算系统：背景/触发/止损/目标/仓位/过滤器。</p>
 <p>系统一（趋势回调）期望值结构最好：顺势+止损紧凑+目标远，是默认选择。</p>
@@ -3359,14 +3413,14 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
 <p><strong>实操</strong>：从大周期开始自上而下定位——当前价格在获取外部还是内部流动性？获取外部流动性（扫前高/前低）后，倾向于转为获取内部流动性（回调扫次级结构点）。心中带着"当前在扫哪层池子"的图景，就不会把内部扫损误判成趋势反转。</p>
 <p><img alt="图 5-12 流动性诱导：亚盘高低点被伦敦/纽约掠夺，内外流动性层层嵌套" src="images/fig_p5_liquidity_induce.png" /></p>
 <p><strong>雷神原话（值得抄在规则书扉页）</strong>："交易时如果不了解流动性，那么你的止损就是流动性。"——你的止损单就是别人的目标池子；了解流动性，你的止损至少是结构外、有依据的（第 4.2 六要素）。</p>
-<h3 id="sec-110">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-110" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>SMC 的"sweep"本质上是什么？</li>
 <li>为什么说"你的止损就是别人的目标"？</li>
 <li>防事后叙事的第一招是什么？</li>
 </ol>
 <p><strong>答案</strong>：① 假突破换了个名字（5.3/3.2）——扫止损的机制完全相同，SMC 是价格行为的换皮（前言立场 4）；② 止损单聚集在前高前低附近，机构需要对手盘，扫掉止损才有反向燃料（5.2）——所以止损必须挂结构外、有依据的位置；③ 入场前截图 + 写下理由（5.9）——事后解释不算数，只有入场前的判断才算，这是对抗记忆重构的唯一证据。</p>
-<h3 id="sec-111">本章小结</h3>
+<h3 id="sec-111" class="sumhead">本章小结</h3>
 <p>SMC 是价格行为的换皮：假突破=sweep，支撑阻力=流动性池，结构突破=BOS/CHoCH。</p>
 <p>流动性池+sweep 是核心，OB 和 FVG 是关键位的包装。</p>
 <p>区分实证（止损确实聚集）和叙事（机构故意猎杀）——借框架，别信阴谋论。</p>
@@ -3729,7 +3783,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li><strong>只对冲你有观点的大仓位</strong>：浮盈趋势单（4.15 移动止损的仓位）才是对冲对象，短线小仓位不值得付保费；</li>
 <li><strong>与预算制分工</strong>：预算制管理"多策略同向触发"的日常极端，期权对冲管理"持仓过夜的尾部风险"——两者是组合层的两条安全带（10.7 已把期权放回全书坐标）。</li>
 </ul>
-<h3 id="sec-126">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-126" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>账户 1 万、止损距离 20 点、点值 $10/点、单笔风险 0.5%——仓位是多少手？</li>
 <li>为什么说"亏 50% 要赚 100% 才回本"？它直接推导出什么纪律？</li>
@@ -3739,7 +3793,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li>单笔风险 0.5% vs 2%（总回撤线都是 10%），犯错预算各多少次？这解释了哪条存活率规律？</li>
 </ol>
 <p><strong>答案</strong>：① 单笔风险 = 1 万 × 0.5% = $50，仓位 = $50 ÷ (20 点 × $10) = 0.25 手（6.2 公式）；② 回本不对称（6.1）——控制回撤优先于盈利，单笔风险 0.5% 就是为它服务的；③ 约 7.8%（图 7-2）——100 笔内几乎必然出现，连亏是正常分布不是系统坏了（6.3），继续按公式执行，不加仓不报复；④ 不是简单相加——先总风险封顶（名义风险 ≤ 账户 1.5-2%），同向高相关持仓（EURUSD+GBPUSD 本质是同一笔"美元走弱"）合并计算，不同逻辑的策略（趋势+均值回归）天然对冲才允许同时持（6.13）；⑤ f* = (2×0.4 − 0.6) ÷ 2 = 10%（图 6-3）——但满凯利输入不准即错、回撤极深，半凯利（5%）增长率几乎不掉而波动减半，考核期用 0.5% 更是远低于任何凯利值（6.7）；⑥ 0.5% → 10% ÷ 0.5% = 20 次；2% → 10% ÷ 2% = 5 次（图 6-4）——40% 胜率系统 100 笔里几乎必现一段 5 连亏，2% 风险的人平均每个"正常连亏"就爆仓一次，0.5% 风险的人要 4 段 5 连亏连续叠加才出局（概率极低）：风险减半，存活率呈数量级提升（6.8）。</p>
-<h3 id="sec-127">本章小结</h3>
+<h3 id="sec-127" class="sumhead">本章小结</h3>
 <p>决定长期结果的不是入场信号，是仓位管理——仓位才是真正的圣杯（Van Tharp）。</p>
 <p>回本不对称：亏 50% 要赚 100% 回本——控制回撤优先于盈利。</p>
 <p>考核期单笔风险 ≤0.5%：约束你的是"能亏几次"，重仓=加速出局。</p>
@@ -4121,14 +4175,14 @@ b = 盈亏比，p = 胜率，q = 1−p
 <li>职业化的每日动作：持续做"事后读图"（找出图表中能对应课程内容的所有信息），直到能对任何图表进行不倚靠外部协助的、细致的逐根 K 线解析；出现单次或系统性错误时，调用已学的知识自行排除。</li>
 </ul>
 <p><strong>为什么要"以交易为志业"</strong>：Tefi 借韦伯《以学术为志业》的命题提醒：如果永远受制于概率，要如何真正感到确定与踏实？答案是把交易当作一项需要长期打磨的志业，而不是赢一把就走的机会——<strong>"大概一个人能将寂寞与繁华看作没有两样，才能耐寂寞而不热衷，感繁华而不没落。"</strong>（清代文人张岱语）翻译成交易语言：连亏时不慌（寂寞），连赚时不飘（繁华）——第 7.4 的连亏/连赚纪律，最终要上升到这个境界。</p>
-<h3 id="sec-139">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-139" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>一笔按计划执行的亏损单，是好交易还是坏交易？评价标准是什么？</li>
 <li>三大必记概率锚点（7.1 速查表的三个 ★）是什么？</li>
 <li>止损单的真正作用是什么？为什么说"入场即挂止损"是心态对策而不是技术动作？</li>
 </ol>
 <p><strong>答案</strong>：① 好交易（7.1）——评价标准是"是否一致执行了正期望值系统"，不是单笔盈亏；② 区间突破约 80% 失败；一般反转尝试约 80% 失败变旗形；90% 的 K 线下一笔胜率在 40-60%（盈亏比 ≥2 是数学底线）；③ 把决策从"感觉"手里夺回来（7.2 损失厌恶/处置效应）——人在浮亏时大脑会祈祷而不是判断，止损单让机器替你做决定。</p>
-<h3 id="sec-140">本章小结</h3>
+<h3 id="sec-140" class="sumhead">本章小结</h3>
 <p>心态是最后的瓶颈——方法、仓位都对了，输给自己就全白搭。</p>
 <p>四种核心思维：频谱（状态是连续频谱非二元）、概率（趋势中多数反转失败、区间中多数突破失败）、惯性（默认延续，反转须趋势线突破+极点测试失败）、嵌套（大周期定方向、小周期定入场）。概率锚点：区间突破约 80% 失败、反转尝试约 80% 变旗形、完整 MTR 仅 35-40%（只诊断不下单）、尖峰后 60/30/10——末端三推/楔形反转时追顺势是最隐蔽的陷阱，应 wait。</p>
 <p>心理成熟三阶段：结果导向 → 规则导向 → 概率导向。好交易=按计划执行，不论盈亏。</p>
@@ -4509,7 +4563,7 @@ b = 盈亏比，p = 胜率，q = 1−p
 <p><strong>与价格行为的关系——一句话</strong>：K 线是结果，订单流是过程。订单流不替代价格行为（第 2-4 章），它只回答"为什么"——当你对一笔信号的质量不确定时，订单流给第二意见；当信号与订单流矛盾时，以价格行为为主、降低仓位或放弃（呼应 4.2 信号质量 = 背景×位置×形态）。</p>
 <p><strong>工具与入门顺序</strong>：Sierra Chart + DOM、ATAS、Exocharts（呼应 8.11）；期货量真实、外汇只有 tick 量（第 1.2），三件套在外汇上仅供参考。<strong>入门顺序：5.12 Volume Profile → 8.11 足迹图 → 本节三件套</strong>——每一步都等到上一步用熟，工具从来不是先决条件。</p>
 <p><strong>诚实的评价</strong>：三件套是"确认工具"，不是"独立系统"——它不能告诉你入场信号，只能帮你确认/否决价格行为信号。新手阶段别碰（工具复杂度超过系统复杂度 = 亏损的另一种来源）；系统验证通过、想提高执行质量时再引入。</p>
-<h3 id="sec-154">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-154" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>上真钱的门槛（验证闭环）是什么？</li>
 <li>SQN 衡量什么？得分高低分别意味着什么？</li>
@@ -4734,14 +4788,14 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>节假日效应</strong>：长假（感恩节/圣诞/春节）前成交缩量、趋势减弱（机构提前放假），假前假后常出现"方向缺失日"——状态机（4.7）会判定为区间/铁丝网，正确动作是不做；节后第一个交易日波动恢复，但跳空消化需要时间。A 股春节/国庆长假尤其明显：长假后首日大幅跳空常见，日内系统直接跳过首日或按 1.6 跳空规则处理。</li>
 <li><strong>与考核节奏的落地</strong>：日历效应唯一合理的用法是<strong>排期</strong>——1 月适合启动考核（全年大概率偏多），9 月/长假前后不是休息的理由，但适合用周效应错开"周一大行情日"的考核冲刺。统计只能改你的节奏，不改你的入场。</li>
 </ul>
-<h3 id="sec-167">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-167" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>考核期单笔风险多少？用 9.3 的数学解释为什么不能重仓？</li>
 <li>考核失败原因排前二的是什么？它们的共同点是什么？</li>
 <li>拿到 Funded 之后应该用什么节奏？为什么？</li>
 </ol>
 <p><strong>答案</strong>：① 0.5%——重仓把达标时间从 1.5 个月压缩到 1-2 周，但连亏 3 笔概率 21.6%，长期重仓必然撞线（9.3）；② 重仓冲刺、报复交易——没有一条是技术问题，全是执行层纪律问题（9.4），这就是第 7 章放在第 9 章前面的原因；③ 先按考核期节奏跑 1-2 个月、稳定出金一次再放大（9.5）——把 Funded 当第二场考核，出金记录才是真正的信用资产。</p>
-<h3 id="sec-168">本章小结</h3>
+<h3 id="sec-168" class="sumhead">本章小结</h3>
 <p>考核是三段式：Phase 1（8-10%）→ Phase 2（5%）→ Funded。</p>
 <p>先定品种再选平台，读全规则（周末/新闻/一致性）。</p>
 <p>达标数学：0.5% 风险 + RR2 + 40% 胜率 → 每笔 +0.1%，8% 约需 80 笔、1.5-2 个月。重仓提速=把淘汰变成必然。</p>
@@ -5173,14 +5227,14 @@ Phase 1 目标 8% → 理论需 80 笔
 <li><strong>ATM 行权价 = 最宽的价格区间</strong>：ATM 期权在更宽范围内跟随标的的价格行为，比 OTM 更容易获利——日内用期权尤其重要；买入略价外（OTM）只是为了凑 3:1 价差比时偶尔为之；</li>
 <li><strong>波动性缩小，利润缩小</strong>：期权快速达到目标后横盘，随着波动性缩小期权价格会更快缩水——退出以标的资产的价格为指导，不要等期权本身的价格；标的触及止损时亏损出场，头寸达到风险两倍时部分获利，期权价值翻倍时部分或全部了结。</li>
 </ul>
-<h3 id="sec-179">本章自测（答案在本节末尾）</h3>
+<h3 id="sec-179" class="quizhead">本章自测（答案在本节末尾）</h3>
 <ol>
 <li>期权和方向交易最大的区别是什么？</li>
 <li>期权买方的最大亏损是多少？卖方呢？</li>
 <li>IV 低时买还是卖？为什么？</li>
 </ol>
 <p><strong>答案</strong>：① 方向交易只有一个变量（方向），期权同时押注方向、幅度、时间三件事，三者必须同时对你才赚（10.1）；② 买方最多亏权利金（物理上限，10.2），卖方亏损理论无上限——这就是"买方风险有限、卖方风险无限"的铁律；③ 低 IV 买（便宜）、高 IV 卖（贵）——IV 是期权的灵魂，方向交易者用它评估"波动率贵不贵"（呼应 10.5 IV 与 VIX）。</p>
-<h3 id="sec-180">本章小结</h3>
+<h3 id="sec-180" class="sumhead">本章小结</h3>
 <ul>
 <li>期权让你同时押注方向、波动、时间三件事，三者必须同时对你才赚——这是它和方向交易的根本区别。</li>
 <li>买方亏损有限（最多权利金）但盈亏平衡点要往前跑一段，且受 Theta 侵蚀。</li>
@@ -6479,6 +6533,12 @@ Phase 1 目标 8% → 理论需 80 笔
       e.preventDefault();
       if (show) document.getElementById(hid).scrollIntoView({ behavior: 'smooth' });
     });
+  });
+  // 图注：斜体且以“图 N-”/“表 N-”开头 → 父 <p> 加 figcap 类（居中加粗）
+  document.querySelectorAll('p em').forEach(function (em) {
+    if (/^(图|表)\s*\d/.test(em.textContent.trim())) {
+      em.parentElement.classList.add('figcap');
+    }
   });
   // v3 移动端：悬浮按钮开合抽屉；点链接或关闭钮收起
   var tocbtn = document.getElementById('tocbtn');

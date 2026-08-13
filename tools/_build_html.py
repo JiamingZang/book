@@ -30,7 +30,8 @@ FILES = [
 ]
 
 CSS = """
-:root { --teal:#26a69a; --down:#ef5350; --dark:#263238; --gray:#90a4ae; }
+/* ElegantBook 风格：深藏青主色（参考 ai-agent-book 排版），红涨绿跌不变 */
+:root { --navy:#1e3a6b; --navy2:#2c4a7c; --down:#ef5350; --up:#26a69a; --dark:#263238; --gray:#90a4ae; --accentbg:#f2f5fa; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -38,28 +39,63 @@ body {
   color: #333; line-height: 1.75; margin: 0 auto; max-width: 900px;
   padding: 24px 28px 80px;
 }
-h1 { color: var(--dark); border-bottom: 3px solid var(--teal); padding-bottom: 8px; margin-top: 56px; font-size: 1.7em; }
-h2 { color: var(--teal); margin-top: 40px; font-size: 1.35em; border-left: 4px solid var(--teal); padding-left: 10px; }
+a { color: var(--navy); }
+/* ---- 封面（打印时独占一页） ---- */
+#cover {
+  background: linear-gradient(160deg, #0f2440 0%, #1e3a6b 55%, #2c4a7c 100%);
+  color: #fff; border-radius: 12px; padding: 70px 44px 56px; text-align: center;
+  margin: 8px 0 36px;
+}
+#cover .kicker { font-size: 0.95em; letter-spacing: 6px; color: #9db4d9; margin-bottom: 18px; }
+#cover h1 { color: #fff; border: none; padding: 0; margin: 0 0 14px; font-size: 2.6em; letter-spacing: 8px; background: none; box-shadow: none; }
+#cover .sub { font-size: 1.15em; color: #c9d8f0; letter-spacing: 2px; }
+#cover .rule { width: 64px; height: 3px; background: #4db6ac; border-radius: 2px; margin: 26px auto; }
+#cover .desc { max-width: 560px; margin: 0 auto 30px; color: #b9c8e2; font-size: 0.95em; line-height: 1.9; }
+#cover .meta { font-size: 0.82em; color: #7f95b8; letter-spacing: 1px; }
+/* ---- 标题 ---- */
+h1 {
+  color: #fff; background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  padding: 16px 22px; border-radius: 8px; margin-top: 56px; font-size: 1.6em;
+  border: none; box-shadow: 0 2px 10px rgba(30,58,107,0.25);
+}
+h1.booktitle { display: none; }
+h2 { color: var(--navy); margin-top: 40px; font-size: 1.32em; border-left: 4px solid var(--navy); padding-left: 10px; }
 h3 { color: var(--dark); margin-top: 28px; font-size: 1.15em; }
 h4 { color: #455a64; }
 h1, h2, h3 { scroll-margin-top: 14px; }
+h3.quizhead {
+  background: var(--navy); color: #fff; display: inline-block;
+  padding: 7px 18px; border-radius: 6px; font-size: 1.1em; margin-top: 36px;
+}
+h3.sumhead {
+  background: var(--accentbg); color: var(--navy); border-left: 4px solid var(--navy);
+  padding: 8px 14px; border-radius: 0 6px 6px 0;
+}
+/* ---- 表格 ---- */
 table { border-collapse: collapse; margin: 14px 0 20px; width: 100%; font-size: 0.95em; }
-th { background: #e0f2f1; color: #00695c; }
-th, td { border: 1px solid #cfd8dc; padding: 6px 10px; text-align: left; vertical-align: top; }
-tr:nth-child(even) td { background: #f8fafa; }
-img { max-width: 100%; height: auto; display: block; margin: 12px auto; border: 1px solid #eceff1; border-radius: 4px; }
+th { background: var(--navy); color: #fff; }
+th, td { border: 1px solid #c9d4e4; padding: 6px 10px; text-align: left; vertical-align: top; }
+tr:nth-child(even) td { background: #f7f9fc; }
+/* ---- 图片与图注 ---- */
+img { max-width: 100%; height: auto; display: block; margin: 12px auto; border: 1px solid #e3e9f2; border-radius: 4px; }
+p.figcap { text-align: center; font-weight: 600; color: #455a64; font-size: 0.95em; margin: -4px 0 20px; }
+/* ---- 引用块：深藏青左条（参考书 quote 样式） ---- */
 blockquote {
-  border-left: 4px solid var(--teal); background: #f1f8f7; margin: 14px 0;
+  border-left: 3px solid var(--navy); background: var(--accentbg); margin: 14px 0;
   padding: 10px 14px; color: #37474f;
 }
-code { background: #eceff1; padding: 2px 5px; border-radius: 3px; font-size: 0.9em; }
-pre { background: #263238; color: #eceff1; padding: 14px; border-radius: 6px; overflow-x: auto; }
+/* ---- 代码：浅灰底 + 深藏青左条（参考书 codebox） ---- */
+code { background: #eef1f6; padding: 2px 5px; border-radius: 3px; font-size: 0.9em; color: #1e3a6b; }
+pre {
+  background: #f7f9fc; color: #263238; padding: 14px 16px; border-radius: 6px;
+  overflow-x: auto; border: 1px solid #d8e0ec; border-left: 4px solid var(--navy);
+}
 pre code { background: none; color: inherit; padding: 0; }
 strong { color: var(--dark); }
-hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
+hr { border: none; border-top: 1px dashed #c9d4e4; margin: 28px 0; }
 /* ---- v2 阅读体验：进度条 / TOC / 返回顶部 ---- */
 #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-  background: linear-gradient(90deg, var(--teal), #4db6ac); z-index: 1000; }
+  background: linear-gradient(90deg, var(--navy), #4db6ac); z-index: 1000; }
 #toc {
   position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
   width: 230px; max-height: 78vh; overflow-y: auto;
@@ -71,21 +107,21 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
   border-bottom: 1px solid #eceff1; padding-bottom: 6px; }
 #toc a { display: block; color: #546e7a; text-decoration: none; padding: 2px 6px;
   border-radius: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-#toc a:hover { background: #e0f2f1; color: var(--teal); }
+#toc a:hover { background: var(--accentbg); color: var(--navy); }
 #toc a.lv2 { padding-left: 16px; }
 #toc a.lv3 { padding-left: 30px; font-size: 0.92em; color: #78909c; }
-#toc a.active { background: var(--teal); color: #fff; }
+#toc a.active { background: var(--navy); color: #fff; }
 #toc a.h1 { font-weight: bold; color: var(--dark); }
 #toc .tocclose { display: none; }
 @media (min-width: 1380px) { #toc { display: block; } }
 /* ---- v3 移动端：抽屉式目录 + 悬浮按钮 ---- */
 #tocbtn {
   position: fixed; right: 16px; bottom: 76px; z-index: 1001; display: none;
-  background: var(--teal); color: #fff; border: none; border-radius: 20px;
+  background: var(--navy); color: #fff; border: none; border-radius: 20px;
   padding: 9px 16px; font-size: 13px; cursor: pointer;
   box-shadow: 0 2px 10px rgba(0,0,0,0.28); font-family: inherit;
 }
-#tocbtn:hover { background: #00897b; }
+#tocbtn:hover { background: var(--navy2); }
 @media (max-width: 1379px) {
   #tocbtn { display: block; }
   #toc {
@@ -102,20 +138,29 @@ hr { border: none; border-top: 1px dashed #cfd8dc; margin: 28px 0; }
 }
 #backtop {
   position: fixed; right: 20px; bottom: 24px; width: 40px; height: 40px;
-  border-radius: 50%; background: var(--teal); color: #fff; border: none;
+  border-radius: 50%; background: var(--navy); color: #fff; border: none;
   font-size: 18px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.25);
   display: none; z-index: 1000; line-height: 40px; text-align: center;
 }
-#backtop:hover { background: #00897b; }
-/* ---- 打印版式：隐藏悬浮组件，章节分页，防图/表跨页 ---- */
+#backtop:hover { background: var(--navy2); }
+/* ---- 打印版式：隐藏悬浮组件，封面/章节分页，防图/表跨页，段首缩进 ---- */
 @media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page :first { margin: 0; }
   #toc, #progress, #backtop, #tocbtn { display: none !important; }
   body { max-width: none; padding: 0 6px; }
-  h1 { page-break-before: always; }
-  h1:first-of-type { page-break-before: avoid; }
+  #cover {
+    border-radius: 0; margin: 0; padding: 90px 40px 40px; height: 88vh;
+    page-break-after: always;
+  }
+  h1 { page-break-before: always; border-radius: 4px; }
+  h1.booktitle { page-break-before: avoid; }
+  #cover h1 { page-break-before: avoid; }
   h2, h3 { page-break-after: avoid; }
   img, table, pre, blockquote { page-break-inside: avoid; }
   a { color: inherit; text-decoration: none; }
+  p { text-indent: 2em; }
+  p.figcap, li p, td p, blockquote p { text-indent: 0; }
 }
 """
 
@@ -159,6 +204,12 @@ JS = """
       if (show) document.getElementById(hid).scrollIntoView({ behavior: 'smooth' });
     });
   });
+  // 图注：斜体且以“图 N-”/“表 N-”开头 → 父 <p> 加 figcap 类（居中加粗）
+  document.querySelectorAll('p em').forEach(function (em) {
+    if (/^(图|表)\\s*\\d/.test(em.textContent.trim())) {
+      em.parentElement.classList.add('figcap');
+    }
+  });
   // v3 移动端：悬浮按钮开合抽屉；点链接或关闭钮收起
   var tocbtn = document.getElementById('tocbtn');
   var toc = document.getElementById('toc');
@@ -177,6 +228,7 @@ def main():
     parts = []
     toc_entries = []  # (level, title, id, parent_id)
     sec = 0
+    first_h1 = [False]  # 第一个 h1 隐藏（书名由封面块承担）
     for f in FILES:
         with open(f"handbook/{f}", encoding="utf-8") as fh:
             md = fh.read()
@@ -202,7 +254,17 @@ def main():
             for lv in range(level, 3):
                 hstack[lv] = None
             toc_entries.append((level, title, hid, parent))
-            return '<h%d id="%s">%s</h%d>' % (level, hid, inner, level)
+            # 样式 class：第一个 h1 作封面书名（隐藏，锚点保留）/
+            # 自测题标题 / 小结标题（ElegantBook 风格）
+            cls = ""
+            if level == 1 and not first_h1[0]:
+                cls = ' class="booktitle"'
+                first_h1[0] = True
+            elif "自测" in title:
+                cls = ' class="quizhead"'
+            elif "小结" in title:
+                cls = ' class="sumhead"'
+            return '<h%d id="%s"%s>%s</h%d>' % (level, hid, cls, inner, level)
 
         html = re.sub(r"<h([123])>(.*?)</h\1>", tag, html, flags=re.S)
         parts.append(html)
@@ -237,6 +299,15 @@ def main():
 {"".join(toc_html)}
 <button id="backtop" title="返回顶部">↑</button>
 <button id="tocbtn">☰ 目录</button>
+<div id="cover">
+  <div class="kicker">交易 · 投资 · 通识</div>
+  <h1>交易手册</h1>
+  <div class="sub">价格行为 · SMC · 仓位 · 心态 · Prop 考核</div>
+  <div class="rule"></div>
+  <div class="desc">一套可验证、可重复、能控制风险的交易方法论。<br>
+  市场基础 → 价格行为 → 信号 → 系统 → SMC → 仓位 → 心态 → 验证 → 应用</div>
+  <div class="meta">学习笔记 · 非出版物 · 不构成投资建议</div>
+</div>
 {body}
 <p style="margin-top:60px;color:#90a4ae;font-size:0.85em;text-align:center;">
 本手册为学习笔记性质，不构成投资建议。所有规则请在模拟账户验证 100+ 笔、确认期望值为正后再实战。

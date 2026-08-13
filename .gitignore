@@ -15,11 +15,12 @@ _ref_clean/
 _ref_texts/
 __pycache__/
 
-# ===== 参考素材（PA_Agent提示词/Ali闪卡/突破研究/学委知识库）=====
+# ===== 参考素材（PA_Agent提示词/Ali闪卡/突破研究/学委知识库/AI Agent书）=====
 _pa_agent_ref/
 _ali_flashcards/
 _breakout_research/
 _xw_kb/
+_ai_agent_ref/
 
 # ===== 日志与临时文件（仅根目录层，tools/ 与 _archive/ 下的不忽略）=====
 /_*.txt
