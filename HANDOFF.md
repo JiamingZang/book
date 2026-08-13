@@ -1,7 +1,7 @@
 # 交易手册项目交接文档
 
 > 给接手者的完整说明：项目现状、标准工作流、工具清单、关键规则、剩余待办。
-> 最后更新：2026-08-13（批次 45c 完成后）
+> 最后更新：2026-08-13（批次 46 完成后）
 
 ## 1. 项目速览
 
@@ -9,8 +9,8 @@
 |---|---|
 | 仓库 | `https://github.com/JiamingZang/book.git`（main 分支） |
 | 工作目录 | `c:\Users\18315\Desktop\新建文件夹`（本地工作区，git 根目录） |
-| 产物 | `handbook/` 下 13 个 md + `images/` 112 张图 + `trading-handbook.html`（单文件阅读版）+ `trading-handbook.pdf`（打印版） |
-| 当前指标 | PDF 296 页、112 图全嵌入、书签 218 项、页脚页码；审计全绿（交叉引用悬空 0、图注 112/112 一一对应、图号连续无重复） |
+| 产物 | `handbook/` 下 13 个 md + `images/` 117 张图 + `trading-handbook.html`（单文件阅读版）+ `trading-handbook.pdf`（打印版） |
+| 当前指标 | PDF 299 页、117 图全嵌入、书签 218 项、页脚页码；审计全绿（交叉引用悬空 0、图注 117/117 一一对应、图号连续无重复） |
 | 内容 | 价格行为 · SMC · 仓位 · 心态 · Prop 考核 十 章 + 附录术语表；参考 ElegantBook 风格排版 |
 | 持续指令 | 用户要求"每做完一批 git commit + push 一次"；优化方向"最好最易读最全面"，关注**真实数据图**与**缺图/缺图注**问题 |
 
@@ -55,6 +55,8 @@ git push origin main
 ### 画图（核心）
 - `draw_handbook_figs.py` —— **画图风格基座**，导出 helper：`candle/hl_line/mark/annotate_mark/arrows/style_ax/savefig` 与配色 `UP=#26a69a(青涨)/DOWN=#ef5350(红跌)/DARK=#263238/GRAY=#90a4ae/ORANGE=#ff9800/TEAL`。新图脚本一律 `from draw_handbook_figs import ...` 复用；中文雅黑，双面板 figsize=(12, 5.9) dpi=160，输出到 `handbook/images/`。
 - `_batch45_figs.py` / `_batch45b_figs.py` / `_batch45c_figs.py` —— 批次 45 系列画图脚本（可作新图的模板）
+- `_batch46_figs.py` —— 批次 46 画图脚本（图 4-1 六要素/4-9 海龟/4-10 出场/4-12 生命周期/4-13 案例，概念图 FancyBbox 风格模板）
+- `_batch46_renum.py` —— 批次 46 图号顺延脚本（**注意**：占位符替换必须用正则 `(?!\d)` 边界，否则 `PH1` 会误伤 `PH10`~`PH15` 前缀——批次 46 踩过的坑）
 - `_real_figs.py` / `_real_figs2.py` / `_real_figs3.py` / `_real_crypto_figs.py` / `_real_paint.py` / `_micro_fig.py` / `_pair_fig.py` / `_pair_fig2.py` / `_rv_fig.py` —— 真实数据图脚本（fig_real_*.png）
 - `_find_segs.py` / `_scan_segs*.py` / `_scan_days.py` / `_ema_scan.py` / `_analyze_*.py` —— 在真实数据中挖掘典型行情段（spring/诱多/锤子线/突破等）
 - `_fetch_binance.py` —— 拉取 Binance BTCUSDT/ETHUSDT 5m 数据到 `data/`（CSV）
@@ -96,7 +98,7 @@ git push origin main
 
 ### P0 补图（直接回应"好些地方没有"）
 跑 `tools\_sec_nofig_scan.py` 找【核心】无图节，优先补：
-- 第 4 章：4.9 海龟交易法则（仓位/退出规则示意图）、4.12 出场（期望值另一面）、4.18 一笔交易完整生命周期、4.19 完整案例（可做带时间轴的双面板）、4.1/4.2 系统六要素
+- 第 4 章：4.1 信号≠系统（已补 4.2 六要素可覆盖）、4.10 两种模式、4.11 Van Tharp、4.14 分批止盈、4.16 保本时机、4.17 时间止损、4.20 状态调整（**4.9/4.12/4.18/4.19/4.2 已补，批次 46 完成**）
 - 第 6 章：6.3 连亏是必然（**已有概率图 6-4 破产，可补连亏路径示意**）、6.10 加仓、6.11 头寸心理
 - 第 7 章：7.5 交易日志（日志字段模板图）、7.8 新手错误清单（思维导图式）
 - 第 8 章：8.1~8.6 工具章六节全无图（图表/回测/日志/模拟/信息/防坑，可各补一张流程图）
@@ -124,7 +126,8 @@ git push origin main
 - 每章"本章小结"可升级为速查卡
 
 ### 批次规划记录
-- 批次 46+ 建议从 P0 补图开始，每批 3-5 张图 + 审计 + PDF + 推送；图多时拆两批（画图/审计推送）
+- 批次 46（2026-08-13）：第 4 章 P0 补图 5 张完成——图 4-1 系统六要素、图 4-9 海龟交易法则（双面板）、图 4-10 出场期望值另一半、图 4-12 交易生命周期、图 4-13 完整案例；普通图号顺延 4-2~4-20、R 图 4-1R~4-9R 不动；PDF 299 页 117 图；新增 `_batch46_figs.py`、`_batch46_renum.py`（注意：占位符替换必须用 `(?!\d)` 负向前瞻，否则 PH1 会误伤 PH10~PH15）
+- 批次 47+ 建议从 P0 补图开始，每批 3-5 张图 + 审计 + PDF + 推送；图多时拆两批（画图/审计推送）
 
 ## 6. 数据源与素材
 
