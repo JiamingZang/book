@@ -123,6 +123,7 @@
 | MDB / MDT | Micro Double Bottom / Top，微双底/顶（两根 K 线低/高点相同，2.5） |
 | MM | Measured Move，测量移动（第一腿长度投影到突破位，3.9/4.24） |
 | OCO | One Cancels Other，二选一委托（一个成交另一个自动取消） |
+| OTO | One Triggers Other，一个成交后自动挂出另一个（分批止盈自动化，1.3） |
 | ORV | Opening Range Reversal，开盘区间反转（Ali，4.27；反转后 70% 概率两波同向） |
 | SCS | Spike Counter-trend Scalp，逆尖峰刮头皮（尖峰中逆势，4.x 军规禁止） |
 | SPS | Spike Pullback Scalp，尖峰回撤刮头皮（只做回撤入场，回撤位 38.2%-50%） |
