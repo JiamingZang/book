@@ -104,7 +104,7 @@ draw_candles(ax, seg)
 # 01:45 冲高
 t1 = pd.Timestamp("2026-07-08 01:45")
 ax.axhline(64232, color=GRAY, lw=1.1, ls=":", zorder=4)
-ax.annotate("01:45 冲高 64232：\n扫掉 64000 上方追多止损（BSL）\n随后 2 小时收回 → 假突破 / 诱多",
+ax.annotate("01:45 冲高 64232：\n扫掉 64000 上方追多止损（BSL）\n2 小时内跌回 63600 下方 → 假突破 / 诱多",
             xy=(t1 + pd.Timedelta(minutes=60), 64170),
             xytext=(pd.Timestamp("2026-07-08 03:10"), 64500),
             fontsize=9.5, color=ORANGE, fontweight="bold", zorder=6,
@@ -118,15 +118,15 @@ ax.annotate("09:35 放量阴线（V=264）\n跌破早盘平台 63300\n= 突破�
             fontsize=9.5, color=RED, fontweight="bold", zorder=6,
             arrowprops=dict(arrowstyle="->", color=RED, lw=1.2))
 
-# 16:30-17:30 放量破位
-ax.annotate("16:30-17:30 放量破位（V=282/668）\n反抽 62900 失败后加速下跌\n反弹至前低下方 = 破位确认（3.2 测试）",
+# 16:05 反抽 62941 失败
+ax.annotate("16:05 反抽 62941 失败\n16:30-17:30 放量破位（V=282/668）\n反弹至前低下方 = 破位确认（3.2 测试）",
             xy=(pd.Timestamp("2026-07-08 17:30"), 62180),
             xytext=(pd.Timestamp("2026-07-08 14:00"), 63200),
             fontsize=9.5, color=DARK, fontweight="bold", zorder=6,
             arrowprops=dict(arrowstyle="->", color=DARK, lw=1.2))
 
 # 尾盘低点
-ax.annotate("23:25 尾盘低点 61545\n全天 -3.5%（64232 → 61545）\n下跌日：反弹到前低附近做空\n不抄底，等次日结构",
+ax.annotate("23:25 尾盘低点 61545\n较前收 63930 跌 -3.7%\n下跌日：反弹到前低附近做空\n不抄底，等次日结构",
             xy=(pd.Timestamp("2026-07-08 23:25"), 61545),
             xytext=(pd.Timestamp("2026-07-08 21:30"), 60900),
             fontsize=9.5, color=BLUE, fontweight="bold", zorder=6,
@@ -134,7 +134,7 @@ ax.annotate("23:25 尾盘低点 61545\n全天 -3.5%（64232 → 61545）\n下跌
             arrowprops=dict(arrowstyle="->", color=BLUE, lw=1.2))
 
 ax.set_ylim(60600, 64800)
-fmt_ax(ax, "BTC（比特币）5 分钟：凌晨冲高诱多 → 放量下跌 → 破位加速（2026-07-08 全天，-3.5%）",
+fmt_ax(ax, "BTC（比特币）5 分钟：凌晨冲高诱多 → 放量下跌 → 破位加速（2026-07-08 全天，较前收 -3.7%）",
        "数据源：Binance BTCUSDT 5m K 线 · 教学示意，不构成投资建议")
 fig.savefig("handbook/images/fig_real_fakeout.png", bbox_inches="tight", facecolor="white")
 print("saved: fig_real_fakeout.png")
@@ -149,7 +149,7 @@ draw_candles(ax, seg)
 
 # 09:10 锤子线标注（价格）
 t0 = pd.Timestamp("2026-07-01 09:10")
-ax.annotate("09:10 巨量锤子线\n开 58294 → 低 57800 → 收 58170\n下影 494 点 ≈ 4 倍实体（124）\nV = 1551：全天最大量",
+ax.annotate("09:10 巨量锤子线\n开 58294 → 低 57800 → 收 58170\n下影约 370 点 ≈ 3 倍实体（124）\nV = 1551：全天最大量",
             xy=(t0, 57800),
             xytext=(pd.Timestamp("2026-07-01 08:52"), 58800),
             fontsize=10, color=ORANGE, fontweight="bold", zorder=6,

@@ -99,116 +99,112 @@ fmt_ax(ax, "ETH（以太坊）5 分钟：两段式移动（2LD）——第一腿
 fig.savefig("handbook/images/fig_real_eth_2leg.png", bbox_inches="tight", facecolor="white")
 print("saved: fig_real_eth_2leg.png")
 
-# ============ 2. BTC 一个交易日状态机（4-2R，第4章 4.7） ============
+# ============ 2. BTC 突破生命周期（4-9R，第4章 4.29） ============
 df = pd.read_csv("data/btcusdt_5m.csv", parse_dates=["time"])
-seg = df[(df.time >= "2026-07-21 00:00") & (df.time <= "2026-07-21 23:55")].reset_index(drop=True)
+seg = df[(df.time >= "2026-06-29 08:00") & (df.time <= "2026-06-29 16:00")].reset_index(drop=True)
 
 fig, ax = plt.subplots(figsize=(13, 6.5), dpi=110)
 fig.patch.set_facecolor("white")
 ax.set_facecolor("white")
 draw_candles(ax, seg)
 
-# 阶段标注
-ax.axvspan(pd.Timestamp("2026-07-21 00:00"), pd.Timestamp("2026-07-21 13:30"),
+# 区间上下沿（08:40-11:00）
+ax.axvspan(pd.Timestamp("2026-06-29 08:40"), pd.Timestamp("2026-06-29 11:00"),
            color="#1565c0", alpha=0.06, zorder=1)
-ax.text(pd.Timestamp("2026-07-21 01:20"), 65780, "TR 交易区间（13 小时）\n高抛低吸 · 突破多为假\n约 80% 突破失败", fontsize=9.5,
-        color=BLUE, fontweight="bold", zorder=6, ha="left")
+ax.axhline(59700, color=BLUE, lw=1.2, ls="--", zorder=4)
+ax.axhline(58900, color=BLUE, lw=1.2, ls="--", zorder=4)
+ax.text(pd.Timestamp("2026-06-29 08:05"), 59800, "区间上沿 ≈ 59700\n（08:55、10:35 两次测试）", fontsize=9.5,
+        color=BLUE, fontweight="bold", zorder=6)
+ax.text(pd.Timestamp("2026-06-29 08:05"), 58750, "区间下沿 ≈ 58900\n（10:10 测试）", fontsize=9.5,
+        color=BLUE, fontweight="bold", zorder=6)
 
-# 突破点 13:45
-t1 = pd.Timestamp("2026-07-21 13:45")
-ax.axvline(t1, color=ORANGE, lw=1.2, ls=":", zorder=4)
-ax.annotate("13:45 突破：大实体阳线\n收盘站上区间高点（65743）\n跟随：14:35 续创新高 65991\n→ 状态切换 TR → TD",
-            xy=(t1 + pd.Timedelta(minutes=50), 65900),
-            xytext=(t1 + pd.Timedelta(minutes=180), 65500),
+# 突破 11:05-11:25
+ax.annotate("11:05 放量阳线突破前高（V=232）\n11:25 冲高 60233（突破后新高）\n→ 突破发生，切系统一",
+            xy=(pd.Timestamp("2026-06-29 11:25"), 60233),
+            xytext=(pd.Timestamp("2026-06-29 09:15"), 60450),
             fontsize=9.5, color=ORANGE, fontweight="bold", zorder=6,
             arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.2))
 
-# 浅回调 15:05-15:25
-ax.annotate("浅回调（3 根，约 0.2%）\n回调低点 65866 高于前低\n= H2 回调：顺势入场点\n止损放回调低点下方",
-            xy=(pd.Timestamp("2026-07-21 15:20"), 65866),
-            xytext=(pd.Timestamp("2026-07-21 15:50"), 65620),
+# 回踩守住 11:35
+ax.annotate("11:35 回踩 59878 不破上沿\n= 突破测试成功：顺势入场点\n止损放回踩低点下方",
+            xy=(pd.Timestamp("2026-06-29 11:35"), 59878),
+            xytext=(pd.Timestamp("2026-06-29 12:15"), 59520),
             fontsize=9.5, color=TEAL, fontweight="bold", zorder=6,
             arrowprops=dict(arrowstyle="->", color=TEAL, lw=1.2))
 
-# 第二腿 16:10-18:35
-t2 = pd.Timestamp("2026-07-21 16:10")
-ax.annotate("第二腿：16:10 再拉升\n18:35 触及日内高点 66421\n两段式移动（2LD）兑现",
-            xy=(t2 + pd.Timedelta(minutes=80), 66300),
-            xytext=(t2 + pd.Timedelta(minutes=200), 66520),
-            fontsize=9.5, color=TEAL, fontweight="bold", zorder=6,
-            arrowprops=dict(arrowstyle="->", color=TEAL, lw=1.2))
-
-# 尾盘回落
-ax.annotate("19:10 后回落（-0.3%）\n趋势末段：高潮后不追\n次日 7/22 开盘即跌",
-            xy=(pd.Timestamp("2026-07-21 19:10"), 66200),
-            xytext=(pd.Timestamp("2026-07-21 19:45"), 65960),
+# 深回调 13:10
+ax.annotate("13:10 深回调 59392\n跌回区间内部 = 测试失败\n持仓者被扫止损，但别反手\n它可能是新一轮突破的起点",
+            xy=(pd.Timestamp("2026-06-29 13:10"), 59392),
+            xytext=(pd.Timestamp("2026-06-29 13:45"), 58820),
             fontsize=9.5, color=RED, fontweight="bold", zorder=6,
             bbox=dict(boxstyle="round,pad=0.4", facecolor="#fff8e1", edgecolor=RED, lw=1),
             arrowprops=dict(arrowstyle="->", color=RED, lw=1.2))
 
-ax.set_ylim(65000, 66800)
-fmt_ax(ax, "BTC（比特币）5 分钟：一个交易日走一遍——TR 区间 → 突破 → 浅回调 → 第二腿 → 尾盘回落（2026-07-21）",
+# 第二腿 14:15
+ax.annotate("14:15 反转再上 60346 新高\n= 失败的回调本身成了新突破\n每一步都等收盘确认",
+            xy=(pd.Timestamp("2026-06-29 14:15"), 60346),
+            xytext=(pd.Timestamp("2026-06-29 13:55"), 60420),
+            fontsize=9.5, color=TEAL, fontweight="bold", zorder=6,
+            arrowprops=dict(arrowstyle="->", color=TEAL, lw=1.2))
+
+ax.set_ylim(58650, 60650)
+fmt_ax(ax, "BTC（比特币）5 分钟：突破生命周期——区间 → 突破 → 回踩守住 → 深回调失败 → 第二腿（2026-06-29）",
        "数据源：Binance BTCUSDT 5m K 线 · 教学示意，不构成投资建议")
 fig.savefig("handbook/images/fig_real_btc_day.png", bbox_inches="tight", facecolor="white")
 print("saved: fig_real_btc_day.png")
 
-# ============ 3. BTC 交易区间双底+突破（4-4R，第4章 4.4） ============
-df = pd.read_csv("data/btcusdt_5m.csv", parse_dates=["time"])
-seg = df[(df.time >= "2026-08-02 00:00") & (df.time <= "2026-08-04 23:55")].reset_index(drop=True)
+# ============ 3. ETH 交易区间完整生命周期（4-3R，第4章 4.4） ============
+df = pd.read_csv("data/ethusdt_5m.csv", parse_dates=["time"])
+seg = df[(df.time >= "2026-07-02 00:00") & (df.time <= "2026-07-02 23:55")].reset_index(drop=True)
 
 fig, ax = plt.subplots(figsize=(13, 6.5), dpi=110)
 fig.patch.set_facecolor("white")
 ax.set_facecolor("white")
 draw_candles(ax, seg)
 
-# 区间边界
-lo0, lo1 = 62275, 62585   # 8/2 02:30 低点 / 8/3 19:05 低点（双底）
-hi0, hi1 = 63548, 63610   # 8/2 10:05 高点 / 8/3 02:40 高点
-ax.axhline(63550, color=BLUE, lw=1.4, ls="--", zorder=4)
-ax.axhline(62400, color=BLUE, lw=1.4, ls="--", zorder=4)
-ax.text(pd.Timestamp("2026-08-02 00:10"), 63630, "区间上沿 ≈ 63550（两次测试）", fontsize=9.5, color=BLUE, fontweight="bold", zorder=6)
-ax.text(pd.Timestamp("2026-08-02 00:10"), 62280, "区间下沿 ≈ 62400（双底）", fontsize=9.5, color=BLUE, fontweight="bold", zorder=6)
+# 区间上下沿
+ax.axhline(1657, color=BLUE, lw=1.4, ls="--", zorder=4)
+ax.axhline(1614, color=BLUE, lw=1.4, ls="--", zorder=4)
+ax.text(pd.Timestamp("2026-07-02 00:10"), 1665, "区间上沿 ≈ 1657\n17:35 冲 1652、19:10 冲 1657 两次放量测试回落", fontsize=9.5,
+        color=BLUE, fontweight="bold", zorder=6)
+ax.text(pd.Timestamp("2026-07-02 00:10"), 1588, "区间下沿 ≈ 1614\n凌晨 00:50-01:05 多次测试后收回", fontsize=9.5,
+        color=BLUE, fontweight="bold", zorder=6)
 
-# 双底标注
-ax.annotate("下沿双底：8/2 低 62275\n8/3 低 62585（更高低点）\n扫掉下方止损后收回\n= 下沿假突破（3.2）",
-            xy=(pd.Timestamp("2026-08-03 19:05"), 62585),
-            xytext=(pd.Timestamp("2026-08-03 06:00"), 61600),
-            fontsize=9.5, color=TEAL, fontweight="bold", zorder=6,
-            arrowprops=dict(arrowstyle="->", color=TEAL, lw=1.2))
-
-# 上沿测试
-ax.annotate("上沿两次测试失败\n8/2 10:05 高 63548、8/3 02:40 高 63610\n→ 边界 fade：上沿做空、下沿做多",
-            xy=(pd.Timestamp("2026-08-03 02:40"), 63610),
-            xytext=(pd.Timestamp("2026-08-03 03:40"), 64400),
+# 上沿两次测试标注
+ax.annotate("17:35 放量冲高 1652（V=10881）\n19:10 再冲 1657（V=9734）\n两次都回落 = 边界 fade：上沿做空",
+            xy=(pd.Timestamp("2026-07-02 19:10"), 1657),
+            xytext=(pd.Timestamp("2026-07-02 16:30"), 1730),
             fontsize=9.5, color=ORANGE, fontweight="bold", zorder=6,
             arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.2))
 
-# 突破 8/3 21:55-22:55
-ax.annotate("8/3 21:55 突破上沿\n22:55 收盘 63967 站稳（+放量）\n→ 真突破三条件成立，切换趋势思维",
-            xy=(pd.Timestamp("2026-08-03 22:55"), 63993),
-            xytext=(pd.Timestamp("2026-08-03 23:30"), 64400),
-            fontsize=9.5, color=RED, fontweight="bold", zorder=6,
-            arrowprops=dict(arrowstyle="->", color=RED, lw=1.2))
-
-# 回踩确认
-ax.annotate("8/4 回踩 63840-63948 不破前高区域\n= 突破后的二次确认入场点\n目标：量度移动（区间高度投射）",
-            xy=(pd.Timestamp("2026-08-04 13:10"), 63840),
-            xytext=(pd.Timestamp("2026-08-04 14:30"), 63200),
+# 下沿测试标注
+ax.annotate("凌晨下沿 1614 多次测试\n扫掉下方止损后收回（3.2 假突破）",
+            xy=(pd.Timestamp("2026-07-02 00:50"), 1614),
+            xytext=(pd.Timestamp("2026-07-02 02:30"), 1570),
             fontsize=9.5, color=TEAL, fontweight="bold", zorder=6,
             arrowprops=dict(arrowstyle="->", color=TEAL, lw=1.2))
 
-# 新高
-ax.annotate("12:45 新高 64244\n区间 → 趋势：\n区间系统离场，转入系统一/三",
-            xy=(pd.Timestamp("2026-08-04 12:45"), 64244),
-            xytext=(pd.Timestamp("2026-08-04 08:30"), 64700),
-            fontsize=9.5, color=BLUE, fontweight="bold", zorder=6,
-            bbox=dict(boxstyle="round,pad=0.4", facecolor="#e8f5e9", edgecolor=BLUE, lw=1),
-            arrowprops=dict(arrowstyle="->", color=BLUE, lw=1.2))
+# 突破 20:25-21:30
+ax.annotate("20:25 放量阳线收 1663.8 站上上沿（第一根收盘站上）\n20:30 冲 1669.7 又插破收回 = 最后洗盘\n21:15-21:30 连续放量大阳站稳（1676.5 → 1706.3，V=10547）\n→ 真突破三条件齐，切趋势思维",
+            xy=(pd.Timestamp("2026-07-02 21:30"), 1706),
+            xytext=(pd.Timestamp("2026-07-02 14:00"), 1740),
+            fontsize=9.5, color=RED, fontweight="bold", zorder=6,
+            bbox=dict(boxstyle="round,pad=0.4", facecolor="#fff8e1", edgecolor=RED, lw=1),
+            arrowprops=dict(arrowstyle="->", color=RED, lw=1.2))
 
-fmt_ax(ax, "BTC（比特币）5 分钟：交易区间完整生命周期——双底下沿 → 上沿 fade → 真突破 → 回踩确认（2026-08-02 ~ 08-04）",
-       "数据源：Binance BTCUSDT 5m K 线 · 教学示意，不构成投资建议")
-fig.savefig("handbook/images/fig_real_btc_range.png", bbox_inches="tight", facecolor="white")
-print("saved: fig_real_btc_range.png")
+# 高潮 22:10
+ax.annotate("22:10 高潮 1725（+4%）\n22:20 起回落，23:05 低 1688.7\n高潮后不追",
+            xy=(pd.Timestamp("2026-07-02 22:10"), 1725),
+            xytext=(pd.Timestamp("2026-07-02 23:10"), 1770),
+            fontsize=9.5, color=DARK, fontweight="bold", zorder=6,
+            bbox=dict(boxstyle="round,pad=0.4", facecolor="#fff8e1", edgecolor=DARK, lw=1),
+            arrowprops=dict(arrowstyle="->", color=DARK, lw=1.2))
+
+ax.set_ylim(1555, 1795)
+fmt_ax(ax, "ETH（以太坊）5 分钟：交易区间完整生命周期——下沿多测 → 上沿双测 → 突破 → 高潮（2026-07-02）",
+       "数据源：Binance ETHUSDT 5m K 线 · 教学示意，不构成投资建议")
+fig.savefig("handbook/images/fig_real_eth_range.png", bbox_inches="tight", facecolor="white")
+print("saved: fig_real_eth_range.png")
 
 # ============ 4. BTC 扫流动性+CHoCH 反转日（5-1R，第5章 5.3/5.4） ============
 df = pd.read_csv("data/btcusdt_5m.csv", parse_dates=["time"])
