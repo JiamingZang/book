@@ -6,7 +6,7 @@ trading-handbook.pdf 插图还原脚本（v2 质量修复版）
 - 输出到 handbook/images/，覆盖同名 PNG，保持 markdown 引用不变
 
 v2 修复：
-- fig_p41_x187（Wyckoff）：新增成交量面板（SC 巨量 / ST 缩量 / SOS 放量），
+- fig_p5_wyckoff（Wyckoff）：新增成交量面板（SC 巨量 / ST 缩量 / SOS 放量），
   区间线对齐真实高低点，所有事件标注改用引线指向准确位置
 - fig_p23_x139（内包线）：母线高低点虚线修正到真实高低点，标注带引线
 - fig_p13_x111（K 线结构）：实体/影线比例均衡，标注全部带引线
@@ -361,7 +361,7 @@ def fig_wyckoff():
     axv.annotate("SOS 放量", xy=(14, 52), xytext=(12.2, 56),
                  fontsize=9, color=UP, va="bottom",
                  arrowprops=dict(arrowstyle="->", color=UP, lw=1.0))
-    savefig(fig, "fig_p41_x187.png")
+    savefig(fig, "fig_p5_wyckoff.png")
 
 
 # ---------------------------------------------------------------- 新增：4.5 状态机

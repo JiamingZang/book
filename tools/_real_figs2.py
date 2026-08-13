@@ -199,7 +199,7 @@ draw_candles(ax, seg)
 # 02:20 spring
 t0 = pd.Timestamp("2026-07-14 02:20")
 ax.axhline(61825, color=ORANGE, lw=1.2, ls="--", zorder=4)
-ax.annotate("02:20 探底 61825\n扫掉 61800 下方空头止损（SSL）后收回\n= spring / 诱空",
+ax.annotate("02:20 探底 61825\n跌破前低 61900（凌晨低点逐级下移）\n扫掉 61900 下方空头止损（SSL）后收回\n= spring / 诱空",
             xy=(t0, 61825),
             xytext=(t0 + pd.Timedelta(minutes=60), 61300),
             fontsize=9.5, color=ORANGE, fontweight="bold", zorder=6,
@@ -209,7 +209,7 @@ ax.annotate("02:20 探底 61825\n扫掉 61800 下方空头止损（SSL）后收�
 # 白天横盘蓄势
 ax.axvspan(pd.Timestamp("2026-07-14 12:00"), pd.Timestamp("2026-07-14 17:00"),
            color=BLUE, alpha=0.06, zorder=1)
-ax.text(pd.Timestamp("2026-07-14 11:50"), 63000, "白天横盘蓄势（12:00-17:00）\n低点抬高：62500 → 62632\n= 底部结构在形成，等突破",
+ax.text(pd.Timestamp("2026-07-14 11:50"), 63000, "白天横盘蓄势（12:00-17:00）\n62500 一线三次下探不破（15:45/16:00/16:10）\n16:30 后低点抬高到 62632\n= 底部结构在形成，等突破",
         fontsize=9, color=BLUE, fontweight="bold", zorder=6, ha="left")
 
 # 20:30 突破
@@ -269,33 +269,44 @@ axp.spines["left"].set_visible(False)
 poc_i = int(np.argmax(volprof))
 poc = centers[poc_i]
 ax.axhline(poc, color=RED, lw=1.3, ls="--", zorder=4)
-ax.text(seg["time"].iloc[3], poc + 25, "POC %.0f（最大成交量节点）" % poc,
+ax.text(seg["time"].iloc[3], poc + 25, "POC %.0f（整段最大量节点）" % poc,
         fontsize=9, color=RED, fontweight="bold", zorder=6)
 axp.axhline(poc, color=RED, lw=1.3, ls="--", zorder=3)
 
 # 找 HVN/LVN：量大于 1.4 倍中位数为 HVN，小于 0.5 倍为 LVN
 med = np.median(volprof)
-hvn = [centers[i] for i in range(n_bins) if volprof[i] > med * 1.4]
-lvn = [centers[i] for i in range(n_bins) if volprof[i] < med * 0.5 and lo + 60 < centers[i] < hi - 60]
-if hvn:
-    hvn_mid = sum(hvn) / len(hvn)
-    ax.axhspan(hvn[0] - 30, hvn[-1] + 30, color=BLUE, alpha=0.10, zorder=1)
-    ax.text(seg["time"].iloc[2], hvn[-1] + 40, "HVN 堆积区 %.0f-%.0f" % (hvn[0], hvn[-1]),
+hvn_idx = [i for i in range(n_bins) if volprof[i] > med * 1.4]
+lvn_idx = [i for i in range(n_bins) if volprof[i] < med * 0.5 and lo + 60 < centers[i] < hi - 60]
+if hvn_idx:
+    ax.axhspan(centers[hvn_idx[0]] - 30, centers[hvn_idx[-1]] + 30, color=BLUE, alpha=0.10, zorder=1)
+    ax.text(seg["time"].iloc[2], centers[hvn_idx[-1]] + 85,
+            "HVN 堆积区 %.0f-%.0f" % (centers[hvn_idx[0]], centers[hvn_idx[-1]]),
             fontsize=8.5, color=BLUE, zorder=6)
-if lvn:
-    lvn_mid = sum(lvn) / len(lvn)
-    ax.axhspan(lvn[0] - 30, lvn[-1] + 30, color=GREEN, alpha=0.10, zorder=1)
-    ax.text(seg["time"].iloc[2], lvn[0] - 60, "LVN 快速通过区 %.0f-%.0f" % (lvn[0], lvn[-1]),
-            fontsize=8.5, color=GREEN, zorder=6)
+# LVN 按连续段分别画（上方快速区 + 下方低量区）
+if lvn_idx:
+    groups = []
+    cur = [lvn_idx[0]]
+    for i in lvn_idx[1:]:
+        if i == cur[-1] + 1:
+            cur.append(i)
+        else:
+            groups.append(cur)
+            cur = [i]
+    groups.append(cur)
+    for g in groups:
+        c0, c1 = centers[g[0]], centers[g[-1]]
+        ax.axhspan(c0 - 30, c1 + 30, color=GREEN, alpha=0.10, zorder=1)
+        ax.text(seg["time"].iloc[2], c0 - 65, "LVN 快速通过区 %.0f-%.0f" % (c0, c1),
+                fontsize=8.5, color=GREEN, zorder=6)
 
 # 突破段标注
-ax.annotate("8/12 18:00 放量（V=151）突破 64100\n穿越 LVN 快速区 → 加速\n8/13 回落测试 POC 附近 63400\n= 量分布支撑/阻力的真实作用",
+ax.annotate("8/12 18:00 放量（V=151）突破 64100（POC 一线）\n→ 两小时穿过 LVN 冲 64500（逼近前高 64515）\n冲高失败 → 快速回落\n8/13 跌至 63310-63661，在 63400 重新堆积企稳\n（单日 POC 63415）",
             xy=(pd.Timestamp("2026-08-12 18:00"), 64218),
-            xytext=(pd.Timestamp("2026-08-12 09:00"), 64700),
+            xytext=(pd.Timestamp("2026-08-12 07:00"), 64800),
             fontsize=9.5, color=DARK, fontweight="bold", zorder=6,
             arrowprops=dict(arrowstyle="->", color=DARK, lw=1.2))
 
-fmt_ax(ax, "BTC（比特币）5 分钟 + Volume Profile：量按价格横向分布——HVN 堆积、LVN 快速区、POC 支撑（2026-08-11 ~ 08-13）",
+fmt_ax(ax, "BTC（比特币）5 分钟 + Volume Profile：量按价格横向分布——HVN 堆积、LVN 快速区、POC 磁力（2026-08-11 ~ 08-13）",
        "数据源：Binance BTCUSDT 5m K 线 · 教学示意，不构成投资建议")
 fig.savefig("handbook/images/fig_real_volprof.png", bbox_inches="tight", facecolor="white")
 print("saved: fig_real_volprof.png")
