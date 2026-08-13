@@ -56,14 +56,14 @@ for s0, s1 in streaks:
     ax1.axvspan(x[s0] - 0.5, x[s1] + 0.5, color=RED, alpha=0.10, zorder=1)
 
 # 最长连亏 77-81 标注
-ax1.annotate("第 77-81 笔：6 连亏（-3.7R）\n40% 胜率下的正常分布，却是心理最危险时刻\n日志价值=连亏时回看：这几笔是否都符合计划（7.4）\n符合→正常连亏，不改系统；有违规→执行问题",
-             xy=(79, -0.45), xytext=(56, -1.7),
+ax1.annotate("第 77-82 笔：6 连亏（-3.7R）\n40% 胜率下的正常分布，却是心理最危险时刻\n日志价值=连亏时回看：这几笔是否都符合计划（7.4）\n符合→正常连亏，不改系统；有违规→执行问题",
+             xy=(79.5, -0.45), xytext=(56, -1.7),
              fontsize=9.5, color=RED, fontweight="bold", zorder=6,
              bbox=dict(boxstyle="round,pad=0.4", facecolor="#fff8e1", edgecolor=RED, lw=1),
              arrowprops=dict(arrowstyle="->", color=RED, lw=1.2))
 
 # 开局 5-9 段：大赚后连亏
-ax1.annotate("第 2 笔 +2.85R（全样本最大单笔）\n随后 5 连亏回吐——连赚时最危险\n'我悟了'是概率的馈赠，不是能力（7.3）",
+ax1.annotate("第 2 笔 +2.85R（全样本最大单笔）\n随后第 6-10 笔 5 连亏，开局利润回吐大半\n连赚时最危险——'我悟了'是概率的馈赠，不是能力（7.3）",
              xy=(8, -0.5), xytext=(14, 1.35),
              fontsize=9.5, color=TEAL, fontweight="bold", zorder=6,
              arrowprops=dict(arrowstyle="->", color=TEAL, lw=1.2))
