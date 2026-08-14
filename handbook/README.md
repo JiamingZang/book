@@ -1,7 +1,7 @@
 # 交易手册（Markdown 版）
 
 > **在线阅读版**：[trading-handbook.html](trading-handbook.html)（单文件合并版，浏览器直接打开，含封面、目录导航与移动端抽屉；由 `_build_html.py` 生成）
-> **PDF 打印版**：[trading-handbook.pdf](trading-handbook.pdf)（368 页，178 图全嵌入，每章分页、全书书签 220 项、页脚页码；由 Edge headless 打印导出，内容与 md 同步）
+> **PDF 打印版**：[trading-handbook.pdf](trading-handbook.pdf)（373 页，178 图全嵌入，每章分页、全书书签 221 项、页脚页码；由 Edge headless 打印导出，内容与 md 同步）
 
 > 基于 `trading-handbook.pdf` 拆分提取，并经逐章扩写优化：机制展开、算例补全、表格化、图片代码重绘。
 > 配图全部由代码生成（135 张合成示意图 TradingView 风格 + 43 张真实行情图，共 178 张，脚本见 `draw_handbook_figs.py`、`_real_figs.py`、`_real_crypto_figs.py`、`_real_figs2.py`、`_real_figs3.py`、`_real_paint.py`、`_micro_fig.py`、`_pair_fig.py`、`_pair_fig2.py`、`_rv_fig.py`、`_batch45_figs.py`、`_batch45b_figs.py`、`_batch45c_figs.py`、`_batch46_figs.py`、`_batch47_figs.py`、`_batch48_figs.py`、`_batch67_figs.py`、`_batch67b_figs.py`、`_batch68a_figs.py`、`_batch68b_figs.py`、`_batch69a_figs.py`、`_batch69b_figs.py`、`_batch70a_figs.py`、`_batch70b_figs.py`、`_batch71a_figs.py`、`_batch71b_figs.py`、`_batch72a_figs.py`、`_batch73a_figs.py`、`_batch73b_figs.py`、`_batch74a_figs.py`、`_batch74b_figs.py`、`_batch75a_figs.py`、`_batch75b_figs.py`、`_batch76a_figs.py`、`_batch80a_figs.py`、`_fig_real_ch1_vol.py`、`_fig_real_ch1_corr.py`、`_fig_real_ch1_spike_sweep.py`、`_fig_real_ch2_spike.py`、`_fig_real_ch2_spectrum.py`、`_fig_real_ch3_doubletop.py`、`_fig_real_ch3_wedge.py`、`_fig_real_ch4_range_fbo.py`、`_fig_real_ch4_outsidebar.py`、`_fig_real_ch5_killzones.py`、`_fig_real_ch6_recover.py`、`_fig_real_ch6_risk.py`、`_fig_real_ch7_disposition.py`、`_fig_real_ch7_journal.py`、`_fig_real_ch7_streaks.py`、`_fig_real_ch8_backtest.py`、`_fig_real_ch8_samplesize.py`、`_fig_real_ch8_params.py`、`_fig_real_ch9_eval.py`、`_fig_real_ch9_days.py`、`_fig_real_ch9_passrate.py`、`_fig_real_ch10_ivrv.py`、`_fig_real_ch10_volhist.py`、`_excal_to_mpl.py`），存放在 `images/`（其中 12 张流程图由 Excalidraw 源归档 `images/_excal_src/` 经 `_excal_to_mpl.py` 重绘为全库一致风格，并补上图号图注）。真实图（图号带 R 后缀，共 43 张）数据源为 AkShare 上证指数日线、510300 ETF 5 分钟线、沪深 300/中证 500 指数日线、50ETF 期权 QVIX 隐含波动率指数，以及 Binance BTCUSDT/ETHUSDT 5 分钟 K 线（`_fetch_binance.py` 拉取，数据在 `data/`，2026-06-29 ~ 08-13）。每张真实图均用 matplotlib 教学级渲染：红涨绿跌 K 线 + 箭头/文字框标注 + 支撑压力线/结构连线/EMA 均线/Volume Profile 等，图注标注品种/日期/数据源/涨跌幅；典型行情段由 `_find_segs.py` 系列脚本在真实数据中挖掘（spring、HH/HL 趋势、诱多下跌、巨量锤子线、扫 SSL 反转、Volume Profile、两段式移动、区间突破、sweep-CHoCH、均线趋势跟踪、波动率回归、配对价差、ATR 通道、移动止损、时段活跃度、风险-回撤实证、样本量幻觉、连亏分布、预期-现实价差（IV vs RV）、考核平庸陷阱、尖峰-高潮-回调生命周期、相关性是波动的函数、参数敏感性实证、考核通过率 Monte Carlo、回本不对称、处置效应持仓时长镜像、波动率分布右偏肥尾、外包K线一成一败、Kill Zones 24h 分布、8 状态周期频谱拼图、双顶失败 vs 双底成功、上升楔形假突破、下跌趋势尖峰陷阱扫损、区间假突破失败向下破位）。
@@ -13,7 +13,7 @@
 - **分层阅读**：前言含章节地图（【核心】/【进阶】/【查阅】三级）、三条阅读路径、全书概念地图、最小可用系统（一页跑起来）。
 - **每章自测**：10 章章末均有「本章自测」，带答案解析，读完可自检。
 - **第 4 章四篇**：篇一系统（4.1-4.11）+ 篇二出场（4.12-4.20）+ 篇三高级结构（4.21-4.25）+ 篇四补充系统（4.26-4.28：ORB/均线趋势跟踪/配对交易）+ 4.29 一个交易日走一遍（状态机串讲）。
-- **进阶新增**：6.13 多策略资金分配（组合层风险预算）、8.12 订单流三件套（DOM/逐笔/Delta）、7.1 概率锚点速查表（★ 必记 3 个）。
+- **进阶新增**：6.13 多策略资金分配（组合层风险预算）、8.12 订单流三件套（DOM/逐笔/Delta）、8.13 Tick 图跳动指标（TX-Tick/CCTK/TX-D）、7.1 概率锚点速查表（★ 必记 3 个）。
 - **审计状态**：章节编号全 10 章连续无重复（x.1 起）、图号连续无重复（含 R 真实图按正文顺序编号）、交叉引用悬空 0、图片引用 178/178 完整（无缺失无未用，图注全部可见且一一对应）、md 渲染验证全部通过。
 - **排版风格**：参考《深入理解 AI Agent》（李博杰，ElegantBook 体系）——深藏青主题色 #1E3A6B、渐变封面页（打印独占一页）、章节横幅、自测题/小结标签、代码框左条、图注居中加粗、页脚页码、正文段首缩进 2em。
 
