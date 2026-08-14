@@ -10,7 +10,7 @@
 | 突破 | 突破研究白皮书及附录（QuantSystems，Ali Moin-Afshari） |
 | QuantSystems | 突破白皮书与 10+2 因子技术附录（同上） |
 | PA | PA_Agent 提示词素材库（Al Brooks 知识体系中文翻译，含逐棒检查单、二元决策、市场诊断框架、通道/区间/极速行情系列、文件 13-28） |
-| PA-N | PA_Agent 文件 N（Brooks 体系编号文件，N=13-28） |
+| PA-N | PA_Agent 文件 N（Brooks 体系编号文件，N=13-28）；**PA-30 / PA-41 例外**——不是 PA_Agent 文件，而是 Brooks 原版课程编号（30A 强势突破量化清单、41A 买入/卖出收盘、41B 强空头旗的强多头突破），出自《How to trade price action》免费手册 |
 | 诊断 | 市场诊断框架（PA_Agent 素材之一，状态判定树） |
 | Tefi | Tefi（太妃）交易本质课 PPT 系列（L01-L20） |
 | 洛氏 | 洛氏霍克交易法（Joe Ross） |
