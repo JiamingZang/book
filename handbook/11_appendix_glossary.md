@@ -109,6 +109,7 @@
 | BRN | Big Round Number，大整数关口（磁力位，价格接近时易反弹/反转） |
 | 20GB | 20 Gap Bars，20 根未触及均线的连续 K 线（强趋势特征） |
 | 1LD / 2LD | 第一腿下跌 / 两条腿下跌（Brooks 腿计数；1LD 常只是交易区间的一部分而非反转，2.3；2LD = 两段式移动，2.8） |
+| 波段 / 腿 | Swing / Leg：波段=持续 10-20 棒的小趋势（S/R 锚点）；腿=1-10 棒的小趋势，回调是最小的腿（2.8 结构尺度校准） |
 | BUBD | Big Up, Big Down，大幅上涨/下跌 K 线（关注其提供的信号） |
 | DB / DT | Disappointed Bulls / Double Top，失望的多头 / 双顶 |
 | DBBLF | Double Bottom Breakout Failure，双底突破失败（头肩顶 = MTR = DBBLF = BOM 的同构读法，3.9） |
@@ -170,6 +171,7 @@
 | TBO | Tick Gap Breakout，跳价缺口突破 |
 | ORBO | Opening Range Breakout，开盘区间突破 |
 | PW | Parabolic Wedge，抛物线楔形 |
+| 嵌套楔形（Nested Wedge） | 大楔形套小楔形，嵌套越多动能耗竭越彻底；小楔形破位别追，等大楔形收口（3.9） |
 | TRD / TTRD | Trading Range Day / Trending TRD，交易区间日 / 趋势性交易区间日 |
 | SAR | Stop And Reverse，停损反手（反转信号同时反向开仓） |
 | STC | Sell The Close，收盘卖出（与 BTC 对应） |
