@@ -106,6 +106,7 @@
 | FBO | Failed BreakOut，失败突破（突破后动能不足反转） |
 | BRN | Big Round Number，大整数关口（磁力位，价格接近时易反弹/反转） |
 | 20GB | 20 Gap Bars，20 根未触及均线的连续 K 线（强趋势特征） |
+| 1LD / 2LD | 第一腿下跌 / 两条腿下跌（Brooks 腿计数；1LD 常只是交易区间的一部分而非反转，2.3；2LD = 两段式移动，2.8） |
 | BUBD | Big Up, Big Down，大幅上涨/下跌 K 线（关注其提供的信号） |
 | DB / DT | Disappointed Bulls / Double Top，失望的多头 / 双顶 |
 | DBBLF | Double Bottom Breakout Failure，双底突破失败（头肩顶 = MTR = DBBLF = BOM 的同构读法，3.9） |
