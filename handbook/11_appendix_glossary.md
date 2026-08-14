@@ -118,6 +118,7 @@
 | EG | Exhaustion Gap，衰竭缺口（趋势末端的缺口，反转信号） |
 | EB | Entry Bar，入场 K 线（信号 K 之后的执行 K 线） |
 | FF | Final Flag，最终旗形（突破失败的旗形，反转概率约 40%） |
+| SF / Spike Flag | 尖峰旗形——尖峰中第一次整理的顺势结构，**顺向突破允许**（SPS 变体）；与 FF 相反，FF 禁止追顺势。位置决定身份：尖峰起步时 = SF，趋势末端近 MM/极值 = FF（4.23） |
 | BVT | Buy Vacuum Test，买入真空测试（强牛市 K 冲高但缺乏跟随） |
 | ATH | All Time High，历史新高 |
 | BOG | Breakout Gap，突破缺口（回调守住它 = 突破仍有效，Ali） |
