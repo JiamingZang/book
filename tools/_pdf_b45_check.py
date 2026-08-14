@@ -20,6 +20,6 @@ for t in ["图 1-3R 真实数据：BTC 与 ETH 的相关性不是常数", "图 2
           "图 9-2R 真实数据：考核的隐形杀手不是爆仓，是平庸", "图 9-3R 真实数据：考核通过率 Monte Carlo",
           "图 8-3R 真实数据：40 组 EMA 参数全部亏损",
           "图 6-1R 真实数据：回本不对称", "图 6-2R 真实数据：同样的 82 笔交易",
-          "图 6-3R 真实数据：ATR 波动率通道"]:
+          "图 7-1R 真实数据：规则系统的持仓时长"]:
     pages = [i + 1 for i in range(doc.page_count) if t in doc[i].get_text()]
     print(f"{t}: 页 {pages}")
