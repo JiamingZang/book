@@ -26,6 +26,8 @@ _ai_agent_ref/
 /_*.txt
 /_*.log
 /_*.png
+/.tmp-*
+/.*.tmp
 
 # ===== 本地编辑器配置（不入库）=====
 .obsidian/
