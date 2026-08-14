@@ -14,7 +14,7 @@
 | PA-N | PA_Agent 文件 N（Brooks 体系编号文件，N=13-28）；**PA-30 / PA-41 例外**——不是 PA_Agent 文件，而是 Brooks 原版课程编号（30A 强势突破量化清单、41A 买入/卖出收盘、41B 强空头旗的强多头突破），出自《How to trade price action》免费手册 |
 | Brooks，XX | Brooks 原版课程/文章编号（正文"（Brooks，35A）"等即此；字母=篇目，数字=序号，如 22A 低点三分之一测试、35A 缺口关闭 75% 规则、40E 高潮以 S/R 结束、42B 趋势后期高潮反转、48C 日线决定今日类型），出自《How to trade price action》系列 |
 | 诊断 | 市场诊断框架（PA_Agent 素材之一，状态判定树） |
-| Tefi | Tefi（太妃）交易本质课 PPT 系列（L01-L20） |
+| Tefi | Tefi（太妃）交易本质课 PPT 系列（L01-L20）；字母后缀为同课分讲（如 L01A/L01B 为第 1 课上下两讲，L17A 为第 17 课首讲） |
 | 洛氏 | 洛氏霍克交易法（Joe Ross） |
 | 威科夫 2.0 | 威科夫 2.0（Rubén Villahermosa）及 Wyckoff 原著 |
 | 雷神 | 雷神导师计划（订单流/供需区课程） |
