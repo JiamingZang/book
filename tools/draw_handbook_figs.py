@@ -2156,18 +2156,31 @@ def fig_p6_kelly():
 def fig_p6_ruin():
     """6.8 破产概率：左=100 笔中至少出现一段 k 连亏的概率；右=犯错预算对比"""
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14.5, 5.6), gridspec_kw={"width_ratios": [1.6, 1]})
-    # 左：P(至少一段 k 连亏) = 1 - (1 - q^k)^(N-k+1)，N=100, p=0.4
+    # 左：P(至少一段 k 连亏)，精确递推（重叠窗口不能用独立近似，会明显高估）
     N, p_, q = 100, 0.4, 0.6
+
+    def streak_prob(n, k, pw):
+        dp = [0.0] * k
+        dp[0] = 1.0
+        for _ in range(n):
+            ndp = [0.0] * k
+            for j in range(k):
+                ndp[0] += dp[j] * pw
+                if j + 1 < k:
+                    ndp[j + 1] += dp[j] * (1 - pw)
+            dp = ndp
+        return 1 - sum(dp)
+
     ks = np.arange(3, 16)
-    probs = [1 - (1 - q ** k) ** (N - k + 1) for k in ks]
+    probs = [streak_prob(N, k, p_) for k in ks]
     ax1.bar(ks, probs, color=UP, alpha=0.85, width=0.62)
     for k, pr in zip(ks, probs):
         ax1.text(k, pr + 0.02, "%.0f%%" % (pr * 100), ha="center", fontsize=9, color=DARK)
-    ax1.annotate("5 连亏 ≈ 100%：几乎必现\n→ 2% 风险（5 次预算）≈ 必爆", xy=(5, probs[2]), xytext=(6.8, 0.52),
+    ax1.annotate("5 连亏 ≈ 98%：几乎必现\n→ 2% 风险（5 次预算）≈ 必爆", xy=(5, probs[2]), xytext=(6.8, 0.52),
                  fontsize=9.5, color=DOWN, arrowprops=dict(arrowstyle="->", color=DOWN, lw=1.1))
-    ax1.annotate("10 连亏仍 ≈ 42%：风险翻 4 倍的人\n平均两轮考核就爆一次", xy=(10, probs[7]), xytext=(11.4, 0.66),
+    ax1.annotate("10 连亏仍 ≈ 20%：风险翻 4 倍的人\n平均每 5 轮考核就爆一次", xy=(10, probs[7]), xytext=(11.4, 0.66),
                  fontsize=9.5, color=ORANGE, arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.1))
-    ax1.annotate("20 连亏仅 ≈ 0.3%：0.5% 风险\n几乎不可破（4 段 5 连亏叠加）", xy=(15, probs[12]), xytext=(10.2, 0.06),
+    ax1.annotate("20 连亏仅 ≈ 0.1%：0.5% 风险\n几乎不可破（4 段 5 连亏叠加）", xy=(15, probs[12]), xytext=(10.2, 0.06),
                  fontsize=9.5, color=UP, arrowprops=dict(arrowstyle="->", color=UP, lw=1.1))
     ax1.set_xlim(2.5, 16.5)
     ax1.set_ylim(0, 1.08)

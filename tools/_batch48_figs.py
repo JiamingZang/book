@@ -88,7 +88,7 @@ def fig_p6_losing_streak():
     mark(ax1, 11.5, 99.8, "5 连亏\n（0.6^5 ≈ 7.8%）", dy=0.6, color=DOWN, fs=9.5, box=True)
     mark(ax1, 3, 103.5, "正常波动，不是系统坏了", dy=0.5, color=UP, fs=9.5, box=True)
     # 100 笔周期内几乎必然出现
-    annotate_mark(ax1, 11.5, 101.6, "100 笔里至少一段 5 连亏 ≈ 99.9%", 8.0, 104.6,
+    annotate_mark(ax1, 11.5, 101.6, "100 笔里至少一段 5 连亏 ≈ 98%", 8.0, 104.6,
                   color=ORANGE, fs=9.5, ha="left")
 
     style_ax(ax1, xlim=(-0.6, 22.6), ylim=(98.5, 105.5))
