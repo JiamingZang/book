@@ -34,3 +34,6 @@ _ai_agent_ref/
 .qoderian/
 
 # ===== 素材处理脚本（历史用途，已归档至 _archive/，不再忽略）=====
+
+# ===== 本地 Python 虚拟环境 =====
+.venv/
