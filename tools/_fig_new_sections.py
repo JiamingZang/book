@@ -471,3 +471,38 @@ if __name__ == "__main__":
     fig_sigma_time()
     fig_calendar_spread()
     print("全部新图完成")
+
+
+def fig_luo_goal_cycle():
+    """7.9 洛氏目标导向自我管理循环"""
+    fig, ax = plt.subplots(figsize=(13, 6.5))
+    style_ax(ax, xlim=(-1, 11), ylim=(-1, 9))
+    nodes = [("目标", 5, 7.2, TEAL), ("计划", 8.5, 4.5, UP), ("执行", 5, 1.8, ORANGE), ("反馈", 1.5, 4.5, DOWN)]
+    for name, x, y, c in nodes:
+        ax.add_patch(plt.Circle((x, y), 1.25, fc="white", ec=c, lw=2.2, zorder=3))
+        ax.text(x, y, name, ha="center", va="center", fontsize=14, color=c, fontweight="bold", zorder=4)
+    for (x0,y0), (x1,y1) in [((5,7.2),(8.5,4.5)), ((8.5,4.5),(5,1.8)), ((5,1.8),(1.5,4.5)), ((1.5,4.5),(5,7.2))]:
+        ax.annotate("", xy=(x1,y1), xytext=(x0,y0), arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.6, connectionstyle="arc3,rad=0.25"))
+    ax.text(5, 8.7, "目标导向的自我管理：不是“管住手”，是让每个动作都服务于一个明确目标", fontsize=12.5, color=DARK, ha="center", fontweight="bold")
+    ax.text(5, -0.4, "目标 → 计划 → 执行 → 反馈 → 修正：连亏/连赚时回到目标，而不是回到情绪", fontsize=11, color=GRAY, ha="center")
+    savefig(fig, "fig_p7_luo_goal_cycle.png")
+
+
+if __name__ == "__main__":
+    fig_forex_structure()
+    fig_verify_narrative()
+    fig_cost_erosion()
+    fig_tick_chart()
+    fig_options_coord()
+    fig_brooks_options()
+    fig_temperament()
+    fig_stock_short()
+    fig_choose_instrument()
+    fig_gap_anchor()
+    fig_stop_profit_state()
+    fig_mc_h1_length()
+    fig_put_call_parity()
+    fig_sigma_time()
+    fig_calendar_spread()
+    fig_luo_goal_cycle()
+    print("全部新图完成")
