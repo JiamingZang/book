@@ -205,3 +205,97 @@ if __name__ == "__main__":
     fig_options_coord()
     fig_brooks_options()
     print("全部新图完成")
+
+
+def fig_temperament():
+    """1.9 品种脾气：波动/时段/成本/量真假"""
+    fig, ax = plt.subplots(figsize=(13, 6.5))
+    style_ax(ax, xlim=(-1, 11), ylim=(0, 10))
+    cats = [("外汇", "点差/隔夜", "tick 量", "伦敦纽约", "波动中等"),
+            ("期货", "佣金", "真实量", "开盘/美盘", "波动大"),
+            ("股票", "佣金+税", "真实量", "9:30-16:00", "波动中"),
+            ("加密", "资金费率", "各所分散", "7×24", "波动极大"),
+            ("黄金", "点差", "OTC tick", "纽约", "波动中")]
+    for i, (name, cost, vol, sess, wav) in enumerate(cats):
+        x = 1 + i * 2
+        ax.add_patch(plt.Rectangle((x-0.7, 1.0), 1.4, 8.0, fc="#f5f7fa", ec=GRAY, lw=1.0, zorder=1))
+        ax.text(x, 8.6, name, ha="center", fontsize=13, color=DARK, fontweight="bold", zorder=3)
+        ax.text(x, 7.4, f"成本：{cost}", ha="center", fontsize=9.5, color=DOWN, zorder=3)
+        ax.text(x, 6.2, f"量：{vol}", ha="center", fontsize=9.5, color=TEAL, zorder=3)
+        ax.text(x, 5.0, f"时段：{sess}", ha="center", fontsize=9.5, color=GRAY, zorder=3)
+        ax.text(x, 3.8, f"波动：{wav}", ha="center", fontsize=9.5, color=ORANGE, zorder=3)
+    ax.text(5, 9.4, "品种脾气 = 波动尺度 × 活跃时段 × 成本结构 × 量是否真实", fontsize=13, color=DARK, ha="center", fontweight="bold")
+    ax.text(5, 0.4, "同一套价格行为，放在不同品种上执行细节完全不同——选品种是系统设计的一部分，不是随便挑一个", fontsize=11, color=GRAY, ha="center")
+    savefig(fig, "fig_p1_temperament.png")
+
+
+def fig_stock_short():
+    """1.11 股票做空限制"""
+    fig, axes = plt.subplots(1, 2, figsize=(13.5, 6.2))
+    # 左：做空流程
+    ax = axes[0]
+    style_ax(ax, xlim=(0, 10), ylim=(0, 10))
+    steps = ["借券", "卖出", "等待跌", "买回归还"]
+    for i, s in enumerate(steps):
+        x = 1 + i * 2.6
+        ax.add_patch(plt.Circle((x, 5), 0.9, fc="white", ec=TEAL, lw=1.6, zorder=3))
+        ax.text(x, 5, s, ha="center", va="center", fontsize=10.5, color=DARK, zorder=4)
+        if i < len(steps)-1:
+            ax.annotate("", xy=(x+1.6, 5), xytext=(x+0.95, 5), arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.4))
+    ax.text(5, 8.8, "做空流程：先借券才能卖——不是想卖就能卖", fontsize=11.5, color=DARK, ha="center", fontweight="bold")
+    ax.text(5, 1.5, "借不到券 = 无法做空\n这是股票和外汇/期货最大的结构性差异", fontsize=10.5, color=DOWN, ha="center", bbox=dict(boxstyle="round,pad=0.4", fc="#fff5f5", ec=DOWN, lw=1.2))
+    ax.set_title("① 做空要先借券", fontsize=12, color=DARK)
+    # 右：Rule 201
+    ax = axes[1]
+    style_ax(ax, xlim=(0, 10), ylim=(0, 10))
+    ax.add_patch(plt.Rectangle((0.6, 6.5), 8.8, 2.5, fc="#fff8e1", ec=ORANGE, lw=1.6, zorder=2))
+    ax.text(5, 8.2, "Rule 201：单日跌幅达 10% 后", fontsize=12, color=DOWN, ha="center", fontweight="bold", zorder=3)
+    ax.text(5, 7.2, "限制对该股票追加卖空——不是“价格下跌时一律不能追空”", fontsize=10.5, color=DARK, ha="center", zorder=3)
+    ax.annotate("", xy=(5, 6.5), xytext=(5, 5.4), arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.4))
+    ax.add_patch(plt.Rectangle((0.6, 2.2), 8.8, 3.0, fc="#f2fbf7", ec=UP, lw=1.6, zorder=2))
+    ax.text(5, 4.4, "触发的是“限制追加卖空”", fontsize=11, color=UP, ha="center", fontweight="bold", zorder=3)
+    ax.text(5, 3.2, "已经持有的空单不受影响\n极端行情里的流动性保护，不是做空禁令", fontsize=10, color=DARK, ha="center", zorder=3)
+    ax.text(5, 0.8, "如果你主要做空，股票不是好战场——外汇/期货做空更自由", fontsize=11, color=DARK, ha="center", fontweight="bold")
+    ax.set_title("② Rule 201 的真实含义", fontsize=12, color=DARK)
+    fig.suptitle("股票做空：借券门槛 + 触发式卖空限制——结构性约束决定它不适合做空主线", fontsize=12.5, color=DARK, y=0.99)
+    savefig(fig, "fig_p1_stock_short.png")
+
+
+def fig_choose_instrument():
+    """1.15 选品种决策树"""
+    fig, ax = plt.subplots(figsize=(13, 6.5))
+    style_ax(ax, xlim=(-1, 11), ylim=(0, 12))
+    # root
+    ax.add_patch(plt.Rectangle((3.4, 10.2), 3.2, 1.4, fc="#e8f0fe", ec=TEAL, lw=2, zorder=3))
+    ax.text(5, 10.9, "先问目标", ha="center", va="center", fontsize=12, color=DARK, fontweight="bold", zorder=4)
+    # level1
+    for x, t in [(1.2, "考期货 prop"), (5, "考外汇 prop"), (8.8, "实盘/波段")]:
+        ax.add_patch(plt.Rectangle((x-1.1, 7.4), 2.2, 1.3, fc="white", ec=GRAY, lw=1.5, zorder=3))
+        ax.text(x, 8.05, t, ha="center", va="center", fontsize=10, color=DARK, zorder=4)
+        ax.annotate("", xy=(x, 7.4), xytext=(5, 10.2), arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.2, connectionstyle="arc3,rad=0.1"))
+    # level2
+    for x, t in [(1.2, "ES / NQ"), (5, "EURUSD 等主流对"), (8.8, "股指/商品/黄金")]:
+        ax.add_patch(plt.Rectangle((x-1.1, 4.4), 2.2, 1.3, fc="#f2fbf7", ec=UP, lw=1.5, zorder=3))
+        ax.text(x, 5.05, t, ha="center", va="center", fontsize=10, color=DARK, zorder=4)
+        ax.annotate("", xy=(x, 5.7), xytext=(x, 7.4), arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.2))
+    # final
+    ax.add_patch(plt.Rectangle((2.4, 1.2), 5.2, 1.5, fc="#fff8e1", ec=ORANGE, lw=1.8, zorder=3))
+    ax.text(5, 1.95, "再匹配：周期（日内/波段）× 方法（量价/纯PA）× 波动承受", ha="center", va="center", fontsize=10.5, color=DARK, fontweight="bold", zorder=4)
+    for x in [1.2, 5, 8.8]:
+        ax.annotate("", xy=(5, 2.7), xytext=(x, 4.4), arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.0, connectionstyle="arc3,rad=0.12"))
+    ax.text(5, 11.4, "选品种决策：目标 → 周期 → 方法 → 波动承受", fontsize=13, color=DARK, ha="center", fontweight="bold")
+    ax.text(5, -0.1, "新手先聚焦单一品种：一个品种的 1000 小时，比十个品种各 100 小时有效得多", fontsize=10.5, color=GRAY, ha="center")
+    savefig(fig, "fig_p1_choose_instrument.png")
+
+
+if __name__ == "__main__":
+    fig_forex_structure()
+    fig_verify_narrative()
+    fig_cost_erosion()
+    fig_tick_chart()
+    fig_options_coord()
+    fig_brooks_options()
+    fig_temperament()
+    fig_stock_short()
+    fig_choose_instrument()
+    print("全部新图完成")
