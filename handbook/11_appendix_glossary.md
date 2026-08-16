@@ -63,6 +63,8 @@
 | POI | Point Of Interest | 兴趣点/关键位，OB、FVG、供需区等入场参考位总称（5.7） |
 | TS | Turtle Soup | 海龟汤（雷神对“扫掉海龟止损后反转”的称呼，≈sweep，5.3） |
 | X | 清扫流动性 | 雷神术语：价格插破关键位扫掉止损后反转（≈sweep/假突破，5.3） |
+| MMM / AMD | Market Maker Method / Accumulation-Manipulation-Distribution | 做市商三阶段：吸筹→操纵（猎杀止损）→派发（5.1，比 ICT 更早的系统化版本） |
+| Compressor | — | 强趋势后极窄幅、低成交量的盘整，HFT 拆单建仓期；传统 PA 当旗形，HFT-aware PA 认为应等突破（5.3） |
 
 ### Wyckoff（5.10）
 
