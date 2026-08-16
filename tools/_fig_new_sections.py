@@ -506,3 +506,90 @@ if __name__ == "__main__":
     fig_calendar_spread()
     fig_luo_goal_cycle()
     print("全部新图完成")
+
+
+def fig_txd_touch_close():
+    """8.13 TX-D 触及 vs 收盘站稳"""
+    fig, axes = plt.subplots(1, 2, figsize=(13.5, 6.2))
+    # 左：触及
+    ax = axes[0]
+    style_ax(ax, xlim=(-0.8, 4.8), ylim=(95, 109))
+    ax.axhline(103, color=DOWN, lw=1.8, ls="--")
+    ax.text(2, 103.7, "TX 极值位 103", ha="center", fontsize=10, color=DOWN, fontweight="bold")
+    candle(ax, 2, 100, 104.5, 99.2, 100.8, width=0.9)
+    ax.text(2, 107.5, "触及：冲过 103 但收盘 100.8", ha="center", fontsize=10.5, color=DOWN, fontweight="bold")
+    ax.text(2, 96.2, "极值没被市场接受\n按“插破”处理，不追", fontsize=10, color=DARK, ha="center", bbox=dict(boxstyle="round,pad=0.4", fc="#fff5f5", ec=DOWN, lw=1))
+    ax.set_title("① TX-D 触及：没站稳", fontsize=12, color=DARK)
+    # 右：收盘站稳
+    ax = axes[1]
+    style_ax(ax, xlim=(-0.8, 4.8), ylim=(95, 109))
+    ax.axhline(103, color=UP, lw=1.8, ls="--")
+    ax.text(2, 103.7, "TX 极值位 103", ha="center", fontsize=10, color=UP, fontweight="bold")
+    candle(ax, 2, 101.5, 105.5, 101, 104.2, width=0.9)
+    ax.text(2, 107.5, "收盘站稳：收盘 104.2 在 TX 上方", ha="center", fontsize=10.5, color=UP, fontweight="bold")
+    ax.text(2, 96.2, "极值被市场接受\n回调后顺势，最强 TX-D 信号", fontsize=10, color=DARK, ha="center", bbox=dict(boxstyle="round,pad=0.4", fc="#f2fbf7", ec=UP, lw=1))
+    ax.set_title("② TX-D 收盘：站稳", fontsize=12, color=DARK)
+    fig.suptitle("TX-D 触及 vs 收盘：同一根极值测试，区别在于市场接不接受——收盘站稳才是确认", fontsize=12.5, color=DARK, y=0.99)
+    savefig(fig, "fig_p8_txd_touch_close.png")
+
+
+def fig_bom_6040():
+    """4.5 突破新高后默认剧本：60% 回调 / 40% 反向"""
+    fig, ax = plt.subplots(figsize=(13, 6.2))
+    style_ax(ax, xlim=(-1, 11), ylim=(0, 10))
+    ax.add_patch(plt.Rectangle((3.6, 7.4), 2.8, 1.8, fc="#e8f0fe", ec=TEAL, lw=2, zorder=3))
+    ax.text(5, 8.3, "突破至新高", ha="center", va="center", fontsize=13, color=DARK, fontweight="bold", zorder=4)
+    ax.annotate("", xy=(3.4, 6.8), xytext=(4.3, 7.4), arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.4))
+    ax.annotate("", xy=(6.6, 6.8), xytext=(5.7, 7.4), arrowprops=dict(arrowstyle="->", color=GRAY, lw=1.4))
+    ax.add_patch(plt.Rectangle((0.6, 3.0), 5.2, 3.2, fc="#f2fbf7", ec=UP, lw=2, zorder=3))
+    ax.text(3.2, 5.4, "回调（60%）", ha="center", va="center", fontsize=14, color=UP, fontweight="bold", zorder=4)
+    ax.text(3.2, 4.3, "新高后先回调测试\n等 PB 再顺势", ha="center", va="center", fontsize=10, color=DARK, zorder=4)
+    ax.add_patch(plt.Rectangle((5.2, 3.0), 5.2, 3.2, fc="#fff5f5", ec=DOWN, lw=2, zorder=3))
+    ax.text(7.8, 5.4, "反向突破（40%）", ha="center", va="center", fontsize=14, color=DOWN, fontweight="bold", zorder=4)
+    ax.text(7.8, 4.3, "少数剧本，别默认\n突破后先别站队", ha="center", va="center", fontsize=10, color=DARK, zorder=4)
+    ax.text(5, 9.4, "突破模式新高后的默认剧本：先回调是最好结果（60%），反向突破是少数（40%）", fontsize=12.5, color=DARK, ha="center", fontweight="bold")
+    ax.text(5, 1.0, "操作含义：新高出现后先等回调测试，而不是市价追突破——回调是突破者能获得的最好结果", fontsize=11, color=GRAY, ha="center")
+    savefig(fig, "fig_p4_bom_6040.png")
+
+
+def fig_mc_rr_exception():
+    """4.6 高概率微通道盈亏比例外"""
+    fig, ax = plt.subplots(figsize=(13, 6.2))
+    style_ax(ax, xlim=(-1, 10), ylim=(0, 10))
+    cases = [("普通信号\n50%胜率 / RR 2", 0.5, GRAY), ("微通道\n90%胜率 / RR 0.8", 0.62, UP), ("低胜率低RR\n30%胜率 / RR 0.8", -0.46, DOWN)]
+    for i, (label, ev, color) in enumerate(cases):
+        x = i * 3
+        ax.bar(x, ev, width=1.4, color=color, alpha=0.9, zorder=3)
+        ax.text(x, ev + 0.06, f"EV={ev:+.2f}", ha="center", fontsize=12, color=DARK, fontweight="bold")
+        ax.text(x, 0.3, label, ha="center", va="bottom", fontsize=10, color=DARK)
+    ax.axhline(0, color=GRAY, lw=1)
+    ax.set_yticks([])
+    ax.set_xlim(-1, 7)
+    ax.set_ylim(-1.2, 1.2)
+    ax.text(3, 0.85, "90% 胜率下即使 RR < 1，期望仍为正——这是数学允许的例外", fontsize=12, color=UP, ha="center", fontweight="bold")
+    ax.text(3, -0.8, "边界：只在确认强度极高的微通道里用，不能滥用到普通低胜率信号", fontsize=10.5, color=DARK, ha="center", bbox=dict(boxstyle="round,pad=0.4", fc="#f5f7fa", ec=GRAY, lw=1))
+    ax.set_title("高概率盈亏比例外（Ali）：>90% 胜率时可接受 <1:1 回报比", fontsize=12, color=DARK)
+    savefig(fig, "fig_p4_mc_rr_exception.png")
+
+
+if __name__ == "__main__":
+    fig_forex_structure()
+    fig_verify_narrative()
+    fig_cost_erosion()
+    fig_tick_chart()
+    fig_options_coord()
+    fig_brooks_options()
+    fig_temperament()
+    fig_stock_short()
+    fig_choose_instrument()
+    fig_gap_anchor()
+    fig_stop_profit_state()
+    fig_mc_h1_length()
+    fig_put_call_parity()
+    fig_sigma_time()
+    fig_calendar_spread()
+    fig_luo_goal_cycle()
+    fig_txd_touch_close()
+    fig_bom_6040()
+    fig_mc_rr_exception()
+    print("全部新图完成")
