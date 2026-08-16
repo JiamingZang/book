@@ -7,6 +7,7 @@
 | 短标 | 对应素材 |
 | --- | --- |
 | Ali | Ali 闪卡系列（10,000Trades 高概率微通道交易系统笔记，Ali Moin-Afshari） |
+| Ali Tick 整理 | `_tmp_cards_summary.txt`：Ali 闪卡中 Tick/TX/CCTK/TX-D/CCTK-EB 等跳动体系的整理版（8.13） |
 | Ali 卡片 N | Ali 闪卡第 N 张（正文"（Ali，卡片 N）"即此；编号如 49/99/116/241-243/515/577 等，可回查原卡） |
 | 突破 | 突破研究白皮书及附录（QuantSystems，Ali Moin-Afshari） |
 | QuantSystems | 突破白皮书与 10+2 因子技术附录（同上） |
