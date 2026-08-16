@@ -299,3 +299,175 @@ if __name__ == "__main__":
     fig_stock_short()
     fig_choose_instrument()
     print("全部新图完成")
+
+
+def fig_gap_anchor():
+    """2.7 缺口锚点 K 线：哪些 K 线被突破后才是有效缺口"""
+    fig, axes = plt.subplots(1, 2, figsize=(14, 6.2))
+    # 左：四种锚点 K 线
+    ax = axes[0]
+    style_ax(ax, xlim=(-0.6, 9.6), ylim=(94, 111))
+    # 光头阴线
+    candle(ax, 0, 107, 108, 105.2, 105.2, width=0.6)  # 光头阴线：无上影，开盘即最高
+    ax.text(0, 110.2, "光头阴线", ha="center", fontsize=9.5, color=DOWN, fontweight="bold")
+    # 光脚阳线
+    candle(ax, 2.5, 102.5, 105.5, 102.5, 105.2, width=0.6)
+    ax.text(2.5, 110.2, "光脚阳线", ha="center", fontsize=9.5, color=UP, fontweight="bold")
+    # 长下影阳线
+    candle(ax, 5, 101.5, 104.5, 97.5, 104.2, width=0.6)
+    ax.text(5, 110.2, "长下影阳线", ha="center", fontsize=9.5, color=UP, fontweight="bold")
+    # 长上影阴线
+    candle(ax, 7.5, 104.5, 109.5, 103, 103.2, width=0.6)
+    ax.text(7.5, 110.2, "长上影阴线", ha="center", fontsize=9.5, color=DOWN, fontweight="bold")
+    ax.text(4.5, 95.2, "K 线越“干净”（影线越短），单边越彻底，被突破后的缺口越有效", fontsize=10.5, color=DARK, ha="center", bbox=dict(boxstyle="round,pad=0.4", fc="#f5f7fa", ec=GRAY, lw=1))
+    ax.set_title("① 锚点 K 线：被突破后形成缺口的四类干净 K 线", fontsize=11.5, color=DARK)
+    # 右：突破后回补机制
+    ax = axes[1]
+    style_ax(ax, xlim=(-0.6, 11.6), ylim=(94, 112))
+    k = [(0, 99, 101, 98.6, 100.6), (1, 100.6, 103.4, 100.2, 103), (2, 103, 104.8, 102.8, 104.4),
+         (3, 104.4, 105.8, 103, 103.8), (4, 103.8, 105, 101.8, 102.4), (5, 102.4, 103.2, 99.8, 100.4)]
+    for x, o, h, l, c in k:
+        candle(ax, x, o, h, l, c, width=0.55)
+    ax.add_patch(plt.Rectangle((1.8, 101.6), 1.2, 2.2, fill=False, ec=DOWN, lw=1.6, ls="--", zorder=2))
+    ax.text(2.4, 108.6, "被连续阳线\n突破的干净阴线", fontsize=9.5, color=DOWN, ha="center", fontweight="bold")
+    ax.text(7.5, 110.2, "价格回来 = 被套盘等解套\n缺口区 = 真实支撑/阻力", fontsize=10, color=UP, ha="center", fontweight="bold", bbox=dict(boxstyle="round,pad=0.4", fc="#f2fbf7", ec=UP, lw=1))
+    ax.text(4.5, 95.2, "缺口强度来自被套者成本区的集中度——被突破的 K 线越干净，解套压力越集中", fontsize=10.5, color=DARK, ha="center", bbox=dict(boxstyle="round,pad=0.4", fc="#f5f7fa", ec=GRAY, lw=1))
+    ax.set_title("② 缺口 = 被套者成本区", fontsize=11.5, color=DARK)
+    fig.suptitle("缺口的锚点 K 线（Z说）：不是所有空隙都值得画，先找“干净”的 K 线被突破", fontsize=12.5, color=DARK, y=0.99)
+    savefig(fig, "fig_p2_gap_anchor.png")
+
+
+def fig_stop_profit_state():
+    """4.7 用 stop 进场的一方能不能赚钱：强趋势/弱趋势/区间"""
+    fig, axes = plt.subplots(1, 3, figsize=(14, 6.2))
+    # 强趋势
+    ax = axes[0]
+    style_ax(ax, xlim=(-0.6, 9.6), ylim=(94, 109))
+    k = [(0, 98, 99.5, 97.5, 99.2), (1, 99.2, 101, 98.8, 100.8), (2, 100.8, 102.6, 100.4, 102.4), (3, 102.4, 103.6, 101.8, 103.2), (4, 103.2, 105.2, 102.8, 105)]
+    for x, o, h, l, c in k:
+        candle(ax, x, o, h, l, c, width=0.6)
+    ax.text(2.5, 107.5, "强趋势：顺势 stop 追进能赚，\n逆势 stop 抄底频繁被扫", fontsize=9.5, color=UP, ha="center", fontweight="bold")
+    ax.text(2.5, 95.2, "只顺着走的人能赚钱", fontsize=10, color=DARK, ha="center", bbox=dict(boxstyle="round,pad=0.4", fc="#f2fbf7", ec=UP, lw=1))
+    ax.set_title("① 强趋势", fontsize=11.5, color=DARK)
+    # 弱趋势/阶梯
+    ax = axes[1]
+    style_ax(ax, xlim=(-0.6, 9.6), ylim=(94, 109))
+    k = [(0, 98, 99.5, 97.5, 99.2), (1, 99.2, 101.5, 98.6, 101.2), (2, 101.2, 102, 99, 99.6), (3, 99.6, 101, 98.2, 100.6), (4, 100.6, 102.4, 99.4, 102)]
+    for x, o, h, l, c in k:
+        candle(ax, x, o, h, l, c, width=0.6)
+    ax.text(2.5, 107.5, "弱趋势/阶梯：回调够深，\n逆势 stop 也能赚到钱", fontsize=9.5, color=ORANGE, ha="center", fontweight="bold")
+    ax.text(2.5, 95.2, "“谁都能赚钱”= 拉锯，不是强趋势", fontsize=10, color=DARK, ha="center", bbox=dict(boxstyle="round,pad=0.4", fc="#fff8e1", ec=ORANGE, lw=1))
+    ax.set_title("② 弱趋势 / 阶梯", fontsize=11.5, color=DARK)
+    # 区间
+    ax = axes[2]
+    style_ax(ax, xlim=(-0.6, 9.6), ylim=(94, 109))
+    k = [(0, 98.5, 101.5, 98, 101), (1, 101, 102.5, 99.5, 100), (2, 100, 101.8, 98.8, 99.4), (3, 99.4, 101.2, 98.6, 100.8), (4, 100.8, 103, 99.8, 100.2)]
+    for x, o, h, l, c in k:
+        candle(ax, x, o, h, l, c, width=0.6)
+    ax.axhline(101.8, color=GRAY, ls=":", lw=1.2)
+    ax.axhline(98.6, color=GRAY, ls=":", lw=1.2)
+    ax.text(2.5, 107.5, "区间：顺势 stop 追突破和逆势 stop 接边界都难赚，价格来回扫", fontsize=9.5, color=DOWN, ha="center", fontweight="bold")
+    ax.text(2.5, 95.2, "双方都难赚钱 = 均衡定价", fontsize=10, color=DARK, ha="center", bbox=dict(boxstyle="round,pad=0.4", fc="#fff5f5", ec=DOWN, lw=1))
+    ax.set_title("③ 区间", fontsize=11.5, color=DARK)
+    fig.suptitle("用“stop 进场的一方能不能赚钱”客观判趋势/震荡（Z说）：趋势的本质是只有顺着它的人能赚钱", fontsize=12.5, color=DARK, y=0.99)
+    savefig(fig, "fig_p4_stop_profit.png")
+
+
+def fig_mc_h1_length():
+    """4.6 H1 微通道长度统计"""
+    fig, ax = plt.subplots(figsize=(13, 6.2))
+    style_ax(ax, xlim=(-1, 10), ylim=(0, 10))
+    bars = [("1-3\n少见", 2), ("4-5\n较少", 4), ("6-9\n常见", 8), ("10-12\n偏长", 4), ("13-18\n罕见", 1.5), ("19+\n极罕见", 0.6)]
+    for i, (label, val) in enumerate(bars):
+        x = i
+        ax.bar(x, val, width=0.62, color=UP if i in (2,) else (ORANGE if i in (3,) else GRAY), alpha=0.9, zorder=3)
+        ax.text(x, val + 0.15, f"{val}", ha="center", fontsize=10, color=DARK, fontweight="bold")
+        ax.text(x, 0.3, label, ha="center", va="bottom", fontsize=9, color=DARK)
+    ax.text(4.5, 9.3, "60 分钟图微通道的正常长度是 6-9 根 K 线", fontsize=13, color=DARK, ha="center", fontweight="bold")
+    ax.text(4.5, 0.9, "看到 H1 上 10 根以上无回调通道 = 已进低概率区，应提前减仓/停止追单\n19 根是极端——别把 5 分钟图的 12-15 根统计外推到 H1", fontsize=11, color=DARK, ha="center", bbox=dict(boxstyle="round,pad=0.4", fc="#f5f7fa", ec=GRAY, lw=1))
+    ax.set_yticks([])
+    ax.set_title("H1 微通道长度基准（Ali）：6-9 根常见，19 根非常罕见", fontsize=12, color=DARK)
+    savefig(fig, "fig_p4_mc_h1_length.png")
+
+
+def fig_put_call_parity():
+    """10.3 Put-Call Parity 三角关系"""
+    fig, ax = plt.subplots(figsize=(13, 6.5))
+    style_ax(ax, xlim=(-1, 11), ylim=(-1, 9))
+    nodes = [("Call", 5, 7.2, UP), ("Put", 1.5, 2.5, DOWN), ("标的 S", 8.5, 2.5, TEAL)]
+    for name, x, y, c in nodes:
+        ax.add_patch(plt.Circle((x, y), 1.2, fc="white", ec=c, lw=2, zorder=3))
+        ax.text(x, y, name, ha="center", va="center", fontsize=14, color=c, fontweight="bold", zorder=4)
+    for (x0,y0), (x1,y1) in [((5,7.2),(1.5,2.5)), ((5,7.2),(8.5,2.5)), ((1.5,2.5),(8.5,2.5))]:
+        ax.plot([x0,x1],[y0,y1], color=GRAY, lw=1.3, zorder=1)
+    ax.text(3.2, 5.2, "Call − Put = S − K", fontsize=14, color=DARK, ha="center", fontweight="bold", bbox=dict(boxstyle="round,pad=0.4", fc="#f5f7fa", ec=GRAY, lw=1))
+    ax.text(5, 8.7, "看跌-看涨平价：Call、Put、标的是同一件事的三种包装", fontsize=13, color=DARK, ha="center", fontweight="bold")
+    ax.text(5, -0.4, "三者价格被套利锁死 → 可检查错价、理解价差锁风险、IV 不是各自独立", fontsize=11, color=GRAY, ha="center")
+    savefig(fig, "fig_p10_put_call_parity.png")
+
+
+def fig_sigma_time():
+    """10.5 波动率平方根换算"""
+    fig, ax = plt.subplots(figsize=(13, 6.2))
+    style_ax(ax, xlim=(0, 10), ylim=(0, 10))
+    ivs = [10, 20, 30, 40, 50, 60]
+    xs = np.arange(len(ivs))
+    daily = np.array(ivs) / 16
+    weekly = np.array(ivs) / 7.2
+    monthly = np.array(ivs) / np.sqrt(12)
+    ax.bar(xs - 0.25, daily, width=0.2, color=UP, label="日 1σ ≈ IV/16", zorder=3)
+    ax.bar(xs, weekly, width=0.2, color=ORANGE, label="周 1σ ≈ IV/7.2", zorder=3)
+    ax.bar(xs + 0.25, monthly, width=0.2, color=DOWN, label="月 1σ ≈ IV/√12", zorder=3)
+    for i, x in enumerate(xs):
+        ax.text(x - 0.25, daily[i] + 0.2, f"{daily[i]:.1f}", ha="center", fontsize=8, color=UP)
+        ax.text(x, weekly[i] + 0.2, f"{weekly[i]:.1f}", ha="center", fontsize=8, color=ORANGE)
+        ax.text(x + 0.25, monthly[i] + 0.2, f"{monthly[i]:.1f}", ha="center", fontsize=8, color=DOWN)
+    ax.set_xticks(xs)
+    ax.set_xticklabels([f"IV {v}%" for v in ivs], fontsize=10)
+    ax.set_yticks([])
+    ax.set_ylim(0, 20)
+    ax.legend(fontsize=9, loc="upper left", frameon=False)
+    ax.text(4.5, 9.3, "IV 不是抽象百分比：÷√252≈16 得到日波动，÷√52≈7.2 得到周波动", fontsize=12, color=DARK, ha="center", fontweight="bold")
+    ax.text(4.5, 0.5, "IV 20 vs 40：同样的目标位从约 3σ 变成约 1.5σ——被达到的概率完全不同", fontsize=11, color=DARK, ha="center", bbox=dict(boxstyle="round,pad=0.4", fc="#f5f7fa", ec=GRAY, lw=1))
+    ax.set_title("波动率平方根换算（Natenberg）：把 IV 翻译成行情尺度", fontsize=12, color=DARK)
+    savefig(fig, "fig_p10_sigma_time.png")
+
+
+def fig_calendar_spread():
+    """10.6 日历价差 payoff"""
+    fig, ax = plt.subplots(figsize=(13, 6.2))
+    style_ax(ax, xlim=(-10, 10), ylim=(-5, 5))
+    x = np.linspace(-10, 10, 400)
+    # 简化多头日历价差到期损益：标的不动时最大盈利，两边衰减
+    y = 3.0 - np.abs(x) * 0.55
+    y = np.clip(y, -2.2, 3.0)
+    ax.plot(x, y, color=UP, lw=2.4, zorder=3)
+    ax.axhline(0, color=GRAY, lw=1.0)
+    ax.axvline(0, color=GRAY, lw=1.0, ls=":")
+    ax.text(0, 3.3, "标的不动 = 最大盈利", ha="center", fontsize=11, color=UP, fontweight="bold")
+    ax.text(-6, -3.2, "价格移动越远，近月腿的 Gamma 损耗\n吃掉时间差收益 → 亏损", fontsize=9.5, color=DOWN, ha="center")
+    ax.text(5.5, -3.2, "多头日历还受益于 IV 上升\n（远月 Vega 通常大于近月）", fontsize=9.5, color=ORANGE, ha="center")
+    ax.set_yticks([])
+    ax.set_xticks([])
+    ax.set_title("多头日历价差损益：希望标的不动 + IV 上升（Natenberg）", fontsize=12, color=DARK)
+    ax.text(0, -4.5, "场景：事件前 IV 低、预期波动率要涨但方向不明 → 多头日历；高 IV 后赌回落 → 空头日历", fontsize=10.5, color=GRAY, ha="center")
+    savefig(fig, "fig_p10_calendar_spread.png")
+
+
+if __name__ == "__main__":
+    fig_forex_structure()
+    fig_verify_narrative()
+    fig_cost_erosion()
+    fig_tick_chart()
+    fig_options_coord()
+    fig_brooks_options()
+    fig_temperament()
+    fig_stock_short()
+    fig_choose_instrument()
+    fig_gap_anchor()
+    fig_stop_profit_state()
+    fig_mc_h1_length()
+    fig_put_call_parity()
+    fig_sigma_time()
+    fig_calendar_spread()
+    print("全部新图完成")
