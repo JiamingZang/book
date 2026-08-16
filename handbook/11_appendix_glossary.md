@@ -367,6 +367,7 @@
 | IV Rank / Percentile | — | IV 相对自身历史的分位：>50 偏高（倾向卖方），<50 偏低（倾向买方） |
 | 波动率圆锥 | Volatility Cone | 用不同估计区间（2周/50周等）的波动率百分位画出的“圆锥”，展示波动率均值回复特征（10.5，Natenberg） |
 | 波动率倾斜 | Volatility Skew | 同一到期日不同行权价之间的 IV 相对关系；不是固定曲线，会随市场条件/时间/标的价格变化（10.5，Natenberg） |
+| 波动率价差 | Volatility Spread | 不赌 IV 绝对值，而赌不同行权价/到期日之间 IV 相对关系的策略（10.6 进阶，Natenberg） |
 | PCR | Put/Call Ratio，认沽/认购比 | 认沽成交量 ÷ 认购成交量；回答“谁在买保险”，不直接回答“期权贵不贵”（10.8） |
 | 0DTE | Zero Days To Expiration，当天到期 | 当天到期的期权，Gamma 极高、日内波动剧烈，新手不碰（10.8） |
 | IV crush | 波动率坍塌 | 事件落地后 IV 暴跌，买在高 IV 的期权两边一起贬值 |
