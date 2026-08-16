@@ -37,3 +37,15 @@ _ai_agent_ref/
 
 # ===== 本地 Python 虚拟环境 =====
 .venv/
+
+# ===== 集中收纳的原始参考素材（不推送）=====
+references/
+
+# ===== _archive 中新增的一次性脚本/输出（历史文件已跟踪的不受影响）=====
+_archive/_*.tmp*
+_archive/_*.txt
+_archive/_*.py
+_archive/_*.png
+_archive/_*.log
+_archive/.tmp*
+_archive/.*.tmp*
